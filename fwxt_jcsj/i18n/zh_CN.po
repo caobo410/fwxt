@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 07:56+0000\n"
-"PO-Revision-Date: 2016-09-14 15:57+0800\n"
+"POT-Creation-Date: 2016-09-18 09:15+0000\n"
+"PO-Revision-Date: 2016-09-18 17:20+0800\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,32 @@ msgstr ""
 "Plural-Forms: \n"
 "Language: zh_CN\n"
 "X-Generator: Poedit 1.8.7.1\n"
+
+#. module: fwxt_jcsj
+#: model:ir.actions.act_window,help:fwxt_jcsj.action_branch_office_info
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              Branch Office Information\n"
+"            </p>\n"
+"          "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              生产基地管理\n"
+"            </p>\n"
+"          "
+
+#. module: fwxt_jcsj
+#: model:ir.actions.act_window,help:fwxt_jcsj.action_commodity_info
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              Commodity Information\n"
+"            </p>\n"
+"          "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              商品信息\n"
+"            </p>\n"
+"          "
 
 #. module: fwxt_jcsj
 #: model:ir.actions.act_window,help:fwxt_jcsj.action_company_info
@@ -44,6 +70,32 @@ msgstr ""
 "          "
 
 #. module: fwxt_jcsj
+#: model:ir.actions.act_window,help:fwxt_jcsj.action_dict_info
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              Dict Information\n"
+"            </p>\n"
+"          "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              字典管理\n"
+"            </p>\n"
+"          "
+
+#. module: fwxt_jcsj
+#: model:ir.actions.act_window,help:fwxt_jcsj.action_materia_info
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              Materia Information\n"
+"            </p>\n"
+"          "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              原材料信息\n"
+"            </p>\n"
+"          "
+
+#. module: fwxt_jcsj
 #: model:ir.actions.act_window,help:fwxt_jcsj.action_picture_management
 msgid ""
 "<p class=\"oe_view_nocontent_create\">\n"
@@ -53,6 +105,19 @@ msgid ""
 msgstr ""
 "<p class=\"oe_view_nocontent_create\">\n"
 "              照片管理\n"
+"            </p>\n"
+"          "
+
+#. module: fwxt_jcsj
+#: model:ir.actions.act_window,help:fwxt_jcsj.action_supplier_info
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              Supplier Information\n"
+"            </p>\n"
+"          "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              供应商信息\n"
 "            </p>\n"
 "          "
 
@@ -70,6 +135,21 @@ msgstr ""
 "          "
 
 #. module: fwxt_jcsj
+#: field:supplier.info,address:0 help:supplier.info,address:0
+msgid "Address"
+msgstr "地址"
+
+#. module: fwxt_jcsj
+#: selection:supplier.info,type:0
+msgid "Agent"
+msgstr "经销商"
+
+#. module: fwxt_jcsj
+#: model:ir.ui.menu,name:fwxt_jcsj.menu_two_information
+msgid "Base Information"
+msgstr "基础信息"
+
+#. module: fwxt_jcsj
 #: model:ir.ui.menu,name:fwxt_jcsj.menu_base_management
 msgid "Base Management"
 msgstr "基础信息"
@@ -80,11 +160,47 @@ msgid "Boby"
 msgstr "页体"
 
 #. module: fwxt_jcsj
+#: view:branch.office.info:fwxt_jcsj.view_form_branch_office_info
+msgid "Branch Office"
+msgstr "生产基地"
+
+#. module: fwxt_jcsj
+#: model:ir.actions.act_window,name:fwxt_jcsj.action_branch_office_info
+#: model:ir.ui.menu,name:fwxt_jcsj.menu_three_branch_office_info
+msgid "Branch Office Information"
+msgstr "生产基地管理"
+
+#. module: fwxt_jcsj
+#: selection:commodity.info,type:0 selection:dict.info,type:0
+#: selection:supplier.info,supplier_type:0
+msgid "Cmmodity"
+msgstr "商品"
+
+#. module: fwxt_jcsj
+#: view:branch.office.info:fwxt_jcsj.view_form_branch_office_info
+#: field:branch.office.info,code:0 help:branch.office.info,code:0
+#: view:commodity.info:fwxt_jcsj.view_form_commodity_info
+#: field:commodity.info,code:0 help:commodity.info,code:0
 #: field:company.info,code:0 field:convert.info,code:0
+#: view:dict.info:fwxt_jcsj.view_form_dict_info field:dict.info,code:0
+#: help:dict.info,code:0 view:materia.info:fwxt_jcsj.view_form_materia_info
+#: field:materia.info,code:0 help:materia.info,code:0
 #: field:picture.management,code:0 help:picture.management,code:0
-#: field:video.info,code:0
+#: view:supplier.info:fwxt_jcsj.view_form_supplier_info
+#: field:supplier.info,code:0 help:supplier.info,code:0 field:video.info,code:0
 msgid "Code"
 msgstr "编号"
+
+#. module: fwxt_jcsj
+#: view:commodity.info:fwxt_jcsj.view_form_commodity_info
+msgid "Commodity Info"
+msgstr "商品信息"
+
+#. module: fwxt_jcsj
+#: model:ir.actions.act_window,name:fwxt_jcsj.action_commodity_info
+#: model:ir.ui.menu,name:fwxt_jcsj.menu_three_commodity_info
+msgid "Commodity Information"
+msgstr "商品信息"
 
 #. module: fwxt_jcsj
 #: field:company.info,company_info:0 help:company.info,company_info:0
@@ -104,6 +220,11 @@ msgid "Company Introduce"
 msgstr "企业简介"
 
 #. module: fwxt_jcsj
+#: field:supplier.info,contacts_name:0 help:supplier.info,contacts_name:0
+msgid "Contacts Name"
+msgstr "联系人"
+
+#. module: fwxt_jcsj
 #: field:convert.info,convert:0 help:convert.info,convert:0
 msgid "Convert"
 msgstr "换算"
@@ -116,25 +237,57 @@ msgid "Convert Information"
 msgstr "单位换算"
 
 #. module: fwxt_jcsj
+#: field:branch.office.info,create_uid:0 field:commodity.info,create_uid:0
 #: field:company.info,create_uid:0 field:convert.info,create_uid:0
-#: field:picture.management,create_uid:0 field:video.info,create_uid:0
+#: field:dict.info,create_uid:0 field:materia.info,create_uid:0
+#: field:picture.management,create_uid:0 field:supplier.info,create_uid:0
+#: field:video.info,create_uid:0
 msgid "Created by"
 msgstr "创建"
 
 #. module: fwxt_jcsj
+#: field:branch.office.info,create_date:0 field:commodity.info,create_date:0
 #: field:company.info,create_date:0 field:convert.info,create_date:0
-#: field:picture.management,create_date:0 field:video.info,create_date:0
+#: field:dict.info,create_date:0 field:materia.info,create_date:0
+#: field:picture.management,create_date:0 field:supplier.info,create_date:0
+#: field:video.info,create_date:0
 msgid "Created on"
 msgstr "创建"
 
 #. module: fwxt_jcsj
-#: field:company.info,date_confirm:0 help:company.info,date_confirm:0
-#: field:convert.info,date_confirm:0 help:convert.info,date_confirm:0
-#: field:picture.management,date_confirm:0
-#: help:picture.management,date_confirm:0 field:video.info,date_confirm:0
+#: field:branch.office.info,date_confirm:0
+#: help:branch.office.info,date_confirm:0 field:commodity.info,date_confirm:0
+#: help:commodity.info,date_confirm:0 field:company.info,date_confirm:0
+#: help:company.info,date_confirm:0 field:convert.info,date_confirm:0
+#: help:convert.info,date_confirm:0 field:dict.info,date_confirm:0
+#: help:dict.info,date_confirm:0 field:materia.info,date_confirm:0
+#: help:materia.info,date_confirm:0 field:picture.management,date_confirm:0
+#: help:picture.management,date_confirm:0 field:supplier.info,date_confirm:0
+#: help:supplier.info,date_confirm:0 field:video.info,date_confirm:0
 #: help:video.info,date_confirm:0
 msgid "Date"
 msgstr "日期"
+
+#. module: fwxt_jcsj
+#: field:dict.info,dict:0 help:dict.info,dict:0
+msgid "Dict"
+msgstr "字典"
+
+#. module: fwxt_jcsj
+#: view:dict.info:fwxt_jcsj.view_form_dict_info
+msgid "Dict Info"
+msgstr "字典管理"
+
+#. module: fwxt_jcsj
+#: model:ir.actions.act_window,name:fwxt_jcsj.action_dict_info
+#: model:ir.ui.menu,name:fwxt_jcsj.menu_three_dict_info
+msgid "Dict Information"
+msgstr "字典管理"
+
+#. module: fwxt_jcsj
+#: selection:supplier.info,type:0
+msgid "Express"
+msgstr "快递公司"
 
 #. module: fwxt_jcsj
 #: selection:picture.management,type:0
@@ -142,35 +295,68 @@ msgid "Heard"
 msgstr "页头"
 
 #. module: fwxt_jcsj
-#: field:company.info,id:0 field:convert.info,id:0
-#: field:picture.management,id:0 field:video.info,id:0
+#: field:branch.office.info,id:0 field:commodity.info,id:0
+#: field:company.info,id:0 field:convert.info,id:0 field:dict.info,id:0
+#: field:materia.info,id:0 field:picture.management,id:0
+#: field:supplier.info,id:0 field:video.info,id:0
 msgid "ID"
 msgstr "序号"
 
 #. module: fwxt_jcsj
+#: field:branch.office.info,write_uid:0 field:commodity.info,write_uid:0
 #: field:company.info,write_uid:0 field:convert.info,write_uid:0
-#: field:picture.management,write_uid:0 field:video.info,write_uid:0
+#: field:dict.info,write_uid:0 field:materia.info,write_uid:0
+#: field:picture.management,write_uid:0 field:supplier.info,write_uid:0
+#: field:video.info,write_uid:0
 msgid "Last Updated by"
 msgstr "Last Updated by"
 
 #. module: fwxt_jcsj
+#: field:branch.office.info,write_date:0 field:commodity.info,write_date:0
 #: field:company.info,write_date:0 field:convert.info,write_date:0
-#: field:picture.management,write_date:0 field:video.info,write_date:0
+#: field:dict.info,write_date:0 field:materia.info,write_date:0
+#: field:picture.management,write_date:0 field:supplier.info,write_date:0
+#: field:video.info,write_date:0
 msgid "Last Updated on"
 msgstr "Last Updated on"
 
 #. module: fwxt_jcsj
+#: view:materia.info:fwxt_jcsj.view_form_materia_info
+msgid "Materia Info"
+msgstr "原材料管理"
+
+#. module: fwxt_jcsj
+#: model:ir.actions.act_window,name:fwxt_jcsj.action_materia_info
+#: model:ir.ui.menu,name:fwxt_jcsj.menu_three_materia_info
+msgid "Materia Information"
+msgstr "原材料管理"
+
+#. module: fwxt_jcsj
+#: selection:commodity.info,type:0 selection:dict.info,type:0
+#: selection:supplier.info,supplier_type:0
+msgid "Material"
+msgstr "原材料"
+
+#. module: fwxt_jcsj
+#: field:branch.office.info,message:0 help:branch.office.info,message:0
+#: field:commodity.info,message:0 help:commodity.info,message:0
 #: field:company.info,message:0 help:company.info,message:0
 #: field:convert.info,message:0 help:convert.info,message:0
+#: field:materia.info,message:0 help:materia.info,message:0
 #: field:picture.management,message:0 help:picture.management,message:0
+#: field:supplier.info,message:0 help:supplier.info,message:0
 #: field:video.info,message:0 help:video.info,message:0
 msgid "Message"
 msgstr "备注"
 
 #. module: fwxt_jcsj
+#: field:branch.office.info,name:0 help:branch.office.info,name:0
+#: field:commodity.info,name:0 help:commodity.info,name:0
 #: field:company.info,name:0 help:company.info,name:0 field:convert.info,name:0
-#: help:convert.info,name:0 field:picture.management,name:0
-#: help:picture.management,name:0 field:video.info,name:0
+#: help:convert.info,name:0 field:dict.info,name:0 help:dict.info,name:0
+#: field:materia.info,name:0 help:materia.info,name:0
+#: field:picture.management,name:0 help:picture.management,name:0
+#: field:supplier.info,name:0 help:supplier.info,name:0 field:video.info,name:0
 #: help:video.info,name:0
 msgid "Name"
 msgstr "名称"
@@ -189,8 +375,11 @@ msgid "Number"
 msgstr "数量"
 
 #. module: fwxt_jcsj
+#: field:branch.office.info,user_id:0 field:commodity.info,user_id:0
 #: field:company.info,user_id:0 field:convert.info,user_id:0
-#: field:picture.management,user_id:0 field:video.info,user_id:0
+#: field:dict.info,user_id:0 field:materia.info,user_id:0
+#: field:picture.management,user_id:0 field:supplier.info,user_id:0
+#: field:video.info,user_id:0
 msgid "Operator"
 msgstr "操作人"
 
@@ -222,6 +411,11 @@ msgid "Picture Type"
 msgstr "类型"
 
 #. module: fwxt_jcsj
+#: field:supplier.info,type:0
+msgid "Product Type"
+msgstr "产品类型"
+
+#. module: fwxt_jcsj
 #: field:video.info,Search:0 help:video.info,Search:0
 msgid "Search"
 msgstr "查询"
@@ -232,9 +426,40 @@ msgid "Shop Add"
 msgstr "商店"
 
 #. module: fwxt_jcsj
-#: field:video.info,tel:0 help:video.info,tel:0
+#: selection:commodity.info,type:0 selection:dict.info,type:0
+#: selection:supplier.info,supplier_type:0 selection:supplier.info,type:0
+msgid "Supplier"
+msgstr "供应商"
+
+#. module: fwxt_jcsj
+#: view:supplier.info:fwxt_jcsj.view_form_supplier_info
+msgid "Supplier Info"
+msgstr "供应商管理"
+
+#. module: fwxt_jcsj
+#: model:ir.actions.act_window,name:fwxt_jcsj.action_supplier_info
+#: model:ir.ui.menu,name:fwxt_jcsj.menu_three_supplier_info
+msgid "Supplier Information"
+msgstr "供应商信息"
+
+#. module: fwxt_jcsj
+#: field:supplier.info,tel:0 help:supplier.info,tel:0 field:video.info,tel:0
+#: help:video.info,tel:0
 msgid "Tel"
 msgstr "电话"
+
+#. module: fwxt_jcsj
+#: field:commodity.info,type:0 help:commodity.info,type:0
+#: field:dict.info,type:0 help:dict.info,type:0
+#: field:supplier.info,supplier_type:0 help:supplier.info,supplier_type:0
+#: help:supplier.info,type:0
+msgid "Type"
+msgstr "类型"
+
+#. module: fwxt_jcsj
+#: field:branch.office.info,video_id:0
+msgid "Video Info"
+msgstr "视频管理"
 
 #. module: fwxt_jcsj
 #: model:ir.actions.act_window,name:fwxt_jcsj.action_video_info
@@ -253,8 +478,22 @@ msgid "Weixin Add"
 msgstr "微信网址"
 
 #. module: fwxt_jcsj
+#: field:materia.info,type:0
+msgid "transaction type"
+msgstr "类型"
+
+#. module: fwxt_jcsj
+#: view:branch.office.info:fwxt_jcsj.view_tree_branch_office_info
+#: view:commodity.info:fwxt_jcsj.view_tree_commodity_info
+#: view:materia.info:fwxt_jcsj.view_tree_materia_info
+#: view:supplier.info:fwxt_jcsj.view_tree_supplier_info
+msgid "tree"
+msgstr "列表"
+
+#. module: fwxt_jcsj
 #: view:company.info:fwxt_jcsj.view_tree_company_info
 #: view:convert.info:fwxt_jcsj.view_tree_convert_info
+#: view:dict.info:fwxt_jcsj.view_tree_dict_info
 #: view:picture.management:fwxt_jcsj.view_tree_picture_management
 #: view:video.info:fwxt_jcsj.view_tree_video_info
 msgid "view"

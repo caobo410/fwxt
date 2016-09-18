@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <!--  窗体事件 查询  Search  graph,gantt-->
+        <!--企业简介-->
         <record id="action_company_info" model="ir.actions.act_window">
           <field name="name">Company Information</field>
           <field name="type">ir.actions.act_window</field>
@@ -16,6 +16,7 @@
           </field>
         </record>
 
+        <!--图片管理-->
         <record id="action_picture_management" model="ir.actions.act_window">
           <field name="name">Picture Management</field>
           <field name="type">ir.actions.act_window</field>
@@ -30,6 +31,7 @@
           </field>
         </record>
 
+        <!--单位转换-->
         <record id="action_convert_info" model="ir.actions.act_window">
           <field name="name">Convert Information</field>
           <field name="type">ir.actions.act_window</field>
@@ -44,6 +46,7 @@
           </field>
         </record>
 
+        <!--视频管理-->
         <record id="action_video_info" model="ir.actions.act_window">
           <field name="name">Video Information</field>
           <field name="type">ir.actions.act_window</field>
@@ -57,6 +60,81 @@
             </p>
           </field>
         </record>
-     
+
+        <!--供应商action-->
+        <record id="action_branch_office_info" model="ir.actions.act_window">
+          <field name="name">Branch Office Information</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">branch.office.info</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <!--<field name="context">{"search_default_no_check_in":1}</field>-->
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              Branch Office Information
+            </p>
+          </field>
+        </record>
+
+        <!--字典action-->
+        <record id="action_dict_info" model="ir.actions.act_window">
+          <field name="name">Dict Information</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">dict.info</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <!--<field name="context">{"search_default_no_check_in":1}</field>-->
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              Dict Information
+            </p>
+          </field>
+        </record>
+
+        <!--原材料action-->
+        <record id="action_materia_info" model="ir.actions.act_window">
+          <field name="name">Materia Information</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">materia.info</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <!--<field name="context">{"search_default_no_check_in":1}</field>-->
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              Materia Information
+            </p>
+          </field>
+        </record>
+
+        <!--成品商品action-->
+        <record id="action_commodity_info" model="ir.actions.act_window">
+          <field name="name">Commodity Information</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">commodity.info</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <!--<field name="context">{"search_default_no_check_in":1}</field>-->
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              Commodity Information
+            </p>
+          </field>
+        </record>
+
+        <!--供应商action-->
+        <record id="action_supplier_info" model="ir.actions.act_window">
+          <field name="name">Supplier Information</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">supplier.info</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <!--<field name="context">{"search_default_no_check_in":1}</field>-->
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              Supplier Information
+            </p>
+          </field>
+        </record>
+
     </data>
 </openerp>

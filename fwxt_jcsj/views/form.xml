@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-
+        <!--公司简介form-->
         <record id="view_form_company_info" model="ir.ui.view">
             <field name="name">Company Information</field>
             <field name="model">company.info</field>
@@ -30,7 +30,8 @@
                 </form>
             </field>
         </record>
-
+        
+        <!--图片管理-->
         <record id="view_form_picture_management" model="ir.ui.view">
             <field name="name">Picture Management</field>
             <field name="model">picture.management</field>
@@ -55,7 +56,8 @@
                 </form>
             </field>
         </record>
-
+        
+        <!--单位换算-->
         <record id="view_form_convert_info" model="ir.ui.view">
             <field name="name">Convert Information</field>
             <field name="model">convert.info</field>
@@ -81,7 +83,8 @@
                 </form>
             </field>
         </record>
-
+        
+        <!--视频管理-->
         <record id="view_form_video_info" model="ir.ui.view">
             <field name="name">video_info</field>
             <field name="model">video.info</field>
@@ -104,6 +107,136 @@
                             <field name="web_add" />
                             <field name="shop_add" />
                             <field name="Search" />
+                        </group>
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--字典信息-->
+        <record id="view_form_dict_info" model="ir.ui.view">
+            <field name="name">Dict.Info</field>
+            <field name="model">dict.info</field>
+            <field name="arch" type="xml">
+                <form string="Dict Info" version="7.0">
+                <sheet>
+                    <h1>Code
+                        <field name="code" class="oe_inline"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="dict"/>
+                        </group>
+                        <group>
+                            <field name="type"/>
+                            <field name="user_id"/>
+                            <field name="date_confirm"/>
+                        </group>
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--生产基地-->
+        <record id="view_form_branch_office_info" model="ir.ui.view">
+            <field name="name">Branch.Office.Info</field>
+            <field name="model">branch.office.info</field>
+            <field name="arch" type="xml">
+                <form string="Branch Office " version="7.0">
+                <sheet>
+                    <h1>Code
+                        <field name="code" class="oe_inline"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="message"/>
+                        </group>
+                        <group>
+                            <field name="video_id"/>
+                            <field name="user_id"/>
+                            <field name="date_confirm"/>
+                        </group>
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <!--字典管理-->
+        <record id="view_form_materia_info" model="ir.ui.view">
+            <field name="name">Materia.Info</field>
+            <field name="model">materia.info</field>
+            <field name="arch" type="xml">
+                <form string="Materia Info" version="7.0">
+                <sheet>
+                    <h1>Code
+                        <field name="code" class="oe_inline"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="message"/>
+                        </group>
+                        <group>
+                            <field name="type"/>
+                            <field name="user_id"/>
+                            <field name="date_confirm"/>
+                        </group>
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--商品-->
+        <record id="view_form_commodity_info" model="ir.ui.view">
+            <field name="name">Commodity.Info</field>
+            <field name="model">commodity.info</field>
+            <field name="arch" type="xml">
+                <form string="Commodity Info" version="7.0">
+                <sheet>
+                    <h1>Code
+                        <field name="code" class="oe_inline"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="message"/>
+                        </group>
+                        <group>
+                            <field name="type"/>
+                            <field name="user_id"/>
+                            <field name="date_confirm"/>
+                        </group>
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--供应商-->
+        <record id="view_form_supplier_info" model="ir.ui.view">
+            <field name="name">Supplier.Info</field>
+            <field name="model">supplier.info</field>
+            <field name="arch" type="xml">
+                <form string="Supplier Info" version="7.0">
+                <sheet>
+                    <h1>Code
+                        <field name="code" class="oe_inline"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="message"/>
+                        </group>
+                        <group>
+                            <field name="type"/>
+                            <field name="user_id"/>
+                            <field name="date_confirm"/>
                         </group>
                     </group>
                 </sheet>
