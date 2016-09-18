@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_form_company_info" model="ir.ui.view">
+            <field name="name">Company Information</field>
+            <field name="model">company.info</field>
+            <field name="arch" type="xml">
+                <form string="Picture Introduce" version="7.0">
+                    <sheet>
+                        <h1>No.
+                            <field name="code"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="user_id"/>
+                            </group>
+                            <group>
+                                <field name="message"/>
+                                <field name="date_confirm"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Company Introduce">
+                                 <field name="company_info"/>
+                             </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_form_picture_management" model="ir.ui.view">
+            <field name="name">Picture Management</field>
+            <field name="model">picture.management</field>
+            <field name="arch" type="xml">
+                <form string="Picture Management" version="7.0">
+                <sheet>
+                    <h1>No.
+                        <field name="code" class="oe_inline" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="message" />
+                        </group>
+                        <group>
+                            <field name="type" />
+                            <field name="user_id" />
+                            <field name="date_confirm" />
+                        </group>
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_form_convert_info" model="ir.ui.view">
+            <field name="name">Convert Information</field>
+            <field name="model">convert.info</field>
+            <field name="arch" type="xml">
+                <form string="Convert Information" version="7.0">
+                <sheet>
+                    <h1>No.
+                        <field name="code" class="oe_inline" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="number" />
+                            <field name="convert" />
+                            <field name="message" />
+                        </group>
+                        <group>
+                            <field name="user_id" />
+                            <field name="date_confirm" />
+                        </group>
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_form_video_info" model="ir.ui.view">
+            <field name="name">video_info</field>
+            <field name="model">video.info</field>
+            <field name="arch" type="xml">
+                <form string="Picture Management" version="7.0">
+                <sheet>
+                    <h1>No.
+                        <field name="code" class="oe_inline" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="tel" />
+                            <field name="message" />
+                            <field name="user_id" />
+                            <field name="date_confirm" />
+                        </group>
+                        <group>
+                            <field name="weixin_add" />
+                            <field name="web_add" />
+                            <field name="shop_add" />
+                            <field name="Search" />
+                        </group>
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
