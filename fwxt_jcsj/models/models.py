@@ -142,9 +142,6 @@ class material_info(models.Model):
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
     type = fields.Selection(selection=_get_select_materia_types, string='Type', required=True)
-    # type = fields.Selection([('material', 'Material'),
-    #                          ('supplier', 'Supplier'),
-    #                          ('commodity', 'Cmmodity')], 'Type', required=True, help="Type")
     message = fields.Char(string='Message', help="Message")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
@@ -178,10 +175,7 @@ class commodity_info(models.Model):
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    # type = fields.Selection(selection=_get_select_commodity_types, string='Type', required=True)
-    type = fields.Selection([('material', 'Material'),
-                             ('supplier', 'Supplier'),
-                             ('commodity', 'Cmmodity')], 'Type', required=True, help="Type")
+    type = fields.Selection(selection=_get_select_commodity_types, string='Type', required=True)
     message = fields.Char(string='Message', help="Message")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
@@ -202,10 +196,7 @@ class supplier_info(models.Model):
                              ('agent', 'Agent'),
                              ('express', 'Express')], 'Product Type', required=True, help="Type")
 
-    # supplier_type = fields.Selection(selection=_get_select_supplier_types, string='Supplier type', required=True)
-    supplier_type = fields.Selection([('material', 'Material'),
-                                      ('supplier', 'Supplier'),
-                                      ('commodity', 'Cmmodity')], 'Type', required=True, help="Type")
+    supplier_type = fields.Selection(selection=_get_select_supplier_types, string='Supplier type', required=True)
     contacts_name = fields.Char(string='Contacts Name', help="Contacts Name")
     tel = fields.Char(string='Tel', help="Tel")
     address = fields.Char(string='Address', size=64, required=True, help="Address")

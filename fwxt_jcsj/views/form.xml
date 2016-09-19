@@ -231,10 +231,14 @@
                     <group>
                         <group>
                             <field name="name"/>
-                            <field name="message"/>
+                            <field name="contacts_name"/>
+                            <field name="tel"/>
+                            <field name="address"/>
                         </group>
                         <group>
                             <field name="type"/>
+                            <field name="supplier_type"/>
+                            <field name="message"/>
                             <field name="user_id"/>
                             <field name="date_confirm"/>
                         </group>
