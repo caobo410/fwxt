@@ -61,7 +61,7 @@
           </field>
         </record>
 
-        <!--供应商action-->
+        <!--生产基地action-->
         <record id="action_branch_office_info" model="ir.actions.act_window">
           <field name="name">Branch Office Information</field>
           <field name="type">ir.actions.act_window</field>

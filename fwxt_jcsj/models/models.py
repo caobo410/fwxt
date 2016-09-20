@@ -114,7 +114,9 @@ class dict_info(models.Model):
     name = fields.Char(string='Name', size=64, required=True, help="Name")
     type = fields.Selection([('material', 'Material'),
                              ('supplier', 'Supplier'),
-                             ('commodity', 'Cmmodity')], 'Type', required=True, help="Type")
+                             ('commodity', 'Cmmodity'),
+                             ('produce', 'Produce'),
+                             ('making', 'Making')], 'Type', required=True, help="Type")
     dict = fields.Char(string='Dict', help="Dict")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
@@ -134,14 +136,14 @@ class dict_info(models.Model):
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
-#原材料
-class material_info(models.Model):
-    _name = "materia.info"
-    _description = "materia.info"
+# 生产基地
+class branch_office_info(models.Model):
+    _name = "branch.office.info"
+    _description = "branch.office.info"
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    type = fields.Selection(selection=_get_select_materia_types, string='Type', required=True)
+    video_id = fields.Many2one('video.info', string='Video Info')
     message = fields.Char(string='Message', help="Message")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
@@ -151,14 +153,15 @@ class material_info(models.Model):
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
-# 生产基地
-class branch_office_info(models.Model):
-    _name = "branch.office.info"
-    _description = "branch.office.info"
+
+#原材料
+class material_info(models.Model):
+    _name = "materia.info"
+    _description = "materia.info"
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    video_id = fields.Many2one('video.info', string='Video Info')
+    type = fields.Selection(selection=_get_select_materia_types, string='Type', required=True)
     message = fields.Char(string='Message', help="Message")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
@@ -194,7 +197,8 @@ class supplier_info(models.Model):
     name = fields.Char(string='Name', size=64, required=True, help="Name")
     type = fields.Selection([('supplier', 'Supplier'),
                              ('agent', 'Agent'),
-                             ('express', 'Express')], 'Product Type', required=True, help="Type")
+                             ('express', 'Express'),
+                             ('check', 'Check')], 'Product Type', required=True, help="Type")
 
     supplier_type = fields.Selection(selection=_get_select_supplier_types, string='Supplier type', required=True)
     contacts_name = fields.Char(string='Contacts Name', help="Contacts Name")

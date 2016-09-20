@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* fwxt_jcsj
+# 	* fwxt_barch
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-18 09:15+0000\n"
-"PO-Revision-Date: 2016-09-18 17:20+0800\n"
+"POT-Creation-Date: 2016-09-20 09:08+0000\n"
+"PO-Revision-Date: 2016-09-20 17:09+0800\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,484 +17,308 @@ msgstr ""
 "Language: zh_CN\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#. module: fwxt_jcsj
-#: model:ir.actions.act_window,help:fwxt_jcsj.action_branch_office_info
+#. module: fwxt_barch
+#: model:ir.actions.act_window,help:fwxt_barch.action_commodity_barch
 msgid ""
 "<p class=\"oe_view_nocontent_create\">\n"
-"              Branch Office Information\n"
+"              Commodity Barch\n"
 "            </p>\n"
 "          "
 msgstr ""
 "<p class=\"oe_view_nocontent_create\">\n"
-"              生产基地管理\n"
+"              商品批次管理\n"
 "            </p>\n"
 "          "
 
-#. module: fwxt_jcsj
-#: model:ir.actions.act_window,help:fwxt_jcsj.action_commodity_info
+#. module: fwxt_barch
+#: model:ir.actions.act_window,help:fwxt_barch.action_commodity_check
 msgid ""
 "<p class=\"oe_view_nocontent_create\">\n"
-"              Commodity Information\n"
+"              Commodity Check\n"
 "            </p>\n"
 "          "
 msgstr ""
 "<p class=\"oe_view_nocontent_create\">\n"
-"              商品信息\n"
+"             商品检验\n"
 "            </p>\n"
 "          "
 
-#. module: fwxt_jcsj
-#: model:ir.actions.act_window,help:fwxt_jcsj.action_company_info
+#. module: fwxt_barch
+#: model:ir.actions.act_window,help:fwxt_barch.action_commodity_making
 msgid ""
 "<p class=\"oe_view_nocontent_create\">\n"
-"              Company Information\n"
+"              Commodity making\n"
 "            </p>\n"
 "          "
 msgstr ""
 "<p class=\"oe_view_nocontent_create\">\n"
-"             企业信息\n"
+"              商品加工n\n"
 "            </p>\n"
 "          "
 
-#. module: fwxt_jcsj
-#: model:ir.actions.act_window,help:fwxt_jcsj.action_convert_info
+#. module: fwxt_barch
+#: model:ir.actions.act_window,help:fwxt_barch.action_commodity_produce
 msgid ""
 "<p class=\"oe_view_nocontent_create\">\n"
-"              Convert Information\n"
+"              Commodity produce\n"
 "            </p>\n"
 "          "
 msgstr ""
 "<p class=\"oe_view_nocontent_create\">\n"
-"              单位换算\n"
+"              商品生产\n"
 "            </p>\n"
 "          "
 
-#. module: fwxt_jcsj
-#: model:ir.actions.act_window,help:fwxt_jcsj.action_dict_info
+#. module: fwxt_barch
+#: model:ir.actions.act_window,help:fwxt_barch.action_material_barch
 msgid ""
 "<p class=\"oe_view_nocontent_create\">\n"
-"              Dict Information\n"
+"              Material Barch\n"
 "            </p>\n"
 "          "
 msgstr ""
 "<p class=\"oe_view_nocontent_create\">\n"
-"              字典管理\n"
+"              原材料批次管理\n"
 "            </p>\n"
 "          "
 
-#. module: fwxt_jcsj
-#: model:ir.actions.act_window,help:fwxt_jcsj.action_materia_info
-msgid ""
-"<p class=\"oe_view_nocontent_create\">\n"
-"              Materia Information\n"
-"            </p>\n"
-"          "
-msgstr ""
-"<p class=\"oe_view_nocontent_create\">\n"
-"              原材料信息\n"
-"            </p>\n"
-"          "
+#. module: fwxt_barch
+#: field:commodity.barch,barch:0 help:commodity.barch,barch:0
+#: field:material.barch,barch:0 help:material.barch,barch:0
+msgid "Barch"
+msgstr "批次"
 
-#. module: fwxt_jcsj
-#: model:ir.actions.act_window,help:fwxt_jcsj.action_picture_management
-msgid ""
-"<p class=\"oe_view_nocontent_create\">\n"
-"              Picture Management\n"
-"            </p>\n"
-"          "
-msgstr ""
-"<p class=\"oe_view_nocontent_create\">\n"
-"              照片管理\n"
-"            </p>\n"
-"          "
+#. module: fwxt_barch
+#: model:ir.ui.menu,name:fwxt_barch.menu_two_barch_information
+msgid "Barch Information"
+msgstr "批次信息"
 
-#. module: fwxt_jcsj
-#: model:ir.actions.act_window,help:fwxt_jcsj.action_supplier_info
-msgid ""
-"<p class=\"oe_view_nocontent_create\">\n"
-"              Supplier Information\n"
-"            </p>\n"
-"          "
-msgstr ""
-"<p class=\"oe_view_nocontent_create\">\n"
-"              供应商信息\n"
-"            </p>\n"
-"          "
+#. module: fwxt_barch
+#: field:commodity.check,supplier_id:0
+msgid "Check Company"
+msgstr "质检公司"
 
-#. module: fwxt_jcsj
-#: model:ir.actions.act_window,help:fwxt_jcsj.action_video_info
-msgid ""
-"<p class=\"oe_view_nocontent_create\">\n"
-"              Video Information\n"
-"            </p>\n"
-"          "
-msgstr ""
-"<p class=\"oe_view_nocontent_create\">\n"
-"              视频管理\n"
-"            </p>\n"
-"          "
+#. module: fwxt_barch
+#: field:commodity.check,check_date:0 help:commodity.check,check_date:0
+msgid "Check Date"
+msgstr "检验日期"
 
-#. module: fwxt_jcsj
-#: field:supplier.info,address:0 help:supplier.info,address:0
-msgid "Address"
-msgstr "地址"
-
-#. module: fwxt_jcsj
-#: selection:supplier.info,type:0
-msgid "Agent"
-msgstr "经销商"
-
-#. module: fwxt_jcsj
-#: model:ir.ui.menu,name:fwxt_jcsj.menu_two_information
-msgid "Base Information"
-msgstr "基础信息"
-
-#. module: fwxt_jcsj
-#: model:ir.ui.menu,name:fwxt_jcsj.menu_base_management
-msgid "Base Management"
-msgstr "基础信息"
-
-#. module: fwxt_jcsj
-#: selection:picture.management,type:0
-msgid "Boby"
-msgstr "页体"
-
-#. module: fwxt_jcsj
-#: view:branch.office.info:fwxt_jcsj.view_form_branch_office_info
-msgid "Branch Office"
-msgstr "生产基地"
-
-#. module: fwxt_jcsj
-#: model:ir.actions.act_window,name:fwxt_jcsj.action_branch_office_info
-#: model:ir.ui.menu,name:fwxt_jcsj.menu_three_branch_office_info
-msgid "Branch Office Information"
-msgstr "生产基地管理"
-
-#. module: fwxt_jcsj
-#: selection:commodity.info,type:0 selection:dict.info,type:0
-#: selection:supplier.info,supplier_type:0
-msgid "Cmmodity"
-msgstr "商品"
-
-#. module: fwxt_jcsj
-#: view:branch.office.info:fwxt_jcsj.view_form_branch_office_info
-#: field:branch.office.info,code:0 help:branch.office.info,code:0
-#: view:commodity.info:fwxt_jcsj.view_form_commodity_info
-#: field:commodity.info,code:0 help:commodity.info,code:0
-#: field:company.info,code:0 field:convert.info,code:0
-#: view:dict.info:fwxt_jcsj.view_form_dict_info field:dict.info,code:0
-#: help:dict.info,code:0 view:materia.info:fwxt_jcsj.view_form_materia_info
-#: field:materia.info,code:0 help:materia.info,code:0
-#: field:picture.management,code:0 help:picture.management,code:0
-#: view:supplier.info:fwxt_jcsj.view_form_supplier_info
-#: field:supplier.info,code:0 help:supplier.info,code:0 field:video.info,code:0
+#. module: fwxt_barch
+#: field:commodity.barch,code:0 help:commodity.barch,code:0
+#: field:commodity.check,code:0 help:commodity.check,code:0
+#: field:commodity.making,code:0 help:commodity.making,code:0
+#: field:commodity.produce,code:0 help:commodity.produce,code:0
+#: field:material.barch,code:0 help:material.barch,code:0
 msgid "Code"
 msgstr "编号"
 
-#. module: fwxt_jcsj
-#: view:commodity.info:fwxt_jcsj.view_form_commodity_info
-msgid "Commodity Info"
-msgstr "商品信息"
+#. module: fwxt_barch
+#: field:commodity.barch,commodity_id:0
+msgid "Commodity"
+msgstr "商品"
 
-#. module: fwxt_jcsj
-#: model:ir.actions.act_window,name:fwxt_jcsj.action_commodity_info
-#: model:ir.ui.menu,name:fwxt_jcsj.menu_three_commodity_info
-msgid "Commodity Information"
-msgstr "商品信息"
+#. module: fwxt_barch
+#: view:commodity.barch:fwxt_barch.view_form_commodity_barch
+#: field:commodity.check,commodity_barch_id:0
+#: field:commodity.making,commodity_barch_id:0
+#: field:commodity.produce,commodity_barch_id:0
+#: model:ir.actions.act_window,name:fwxt_barch.action_commodity_barch
+#: model:ir.ui.menu,name:fwxt_barch.menu_three_commodity_barch
+#: field:material.barch,commodity_barch_id:0
+msgid "Commodity Barch"
+msgstr "商品批次"
 
-#. module: fwxt_jcsj
-#: field:company.info,company_info:0 help:company.info,company_info:0
-msgid "Company Info"
-msgstr "企业信息"
+#. module: fwxt_barch
+#: model:ir.actions.act_window,name:fwxt_barch.action_commodity_produce
+msgid "Commodity Broduce"
+msgstr "商品生产"
 
-#. module: fwxt_jcsj
-#: model:ir.actions.act_window,name:fwxt_jcsj.action_company_info
-#: model:ir.ui.menu,name:fwxt_jcsj.menu_two_company
-msgid "Company Information"
-msgstr "企业信息"
+#. module: fwxt_barch
+#: model:ir.actions.act_window,name:fwxt_barch.action_commodity_check
+#: model:ir.ui.menu,name:fwxt_barch.menu_three_commodity_check
+msgid "Commodity Check"
+msgstr "商品检验"
 
-#. module: fwxt_jcsj
-#: view:company.info:fwxt_jcsj.view_form_company_info
-#: model:ir.ui.menu,name:fwxt_jcsj.menu_three_company_info
-msgid "Company Introduce"
-msgstr "企业简介"
+#. module: fwxt_barch
+#: model:ir.actions.act_window,name:fwxt_barch.action_commodity_making
+msgid "Commodity Make"
+msgstr "商品加工"
 
-#. module: fwxt_jcsj
-#: field:supplier.info,contacts_name:0 help:supplier.info,contacts_name:0
-msgid "Contacts Name"
-msgstr "联系人"
+#. module: fwxt_barch
+#: model:ir.ui.menu,name:fwxt_barch.menu_three_commodity_making
+msgid "Commodity Making"
+msgstr "商品加工"
 
-#. module: fwxt_jcsj
-#: field:convert.info,convert:0 help:convert.info,convert:0
-msgid "Convert"
-msgstr "换算"
+#. module: fwxt_barch
+#: model:ir.ui.menu,name:fwxt_barch.menu_three_commodity_produce
+msgid "Commodity Produce"
+msgstr "商品生产"
 
-#. module: fwxt_jcsj
-#: view:convert.info:fwxt_jcsj.view_form_convert_info
-#: model:ir.actions.act_window,name:fwxt_jcsj.action_convert_info
-#: model:ir.ui.menu,name:fwxt_jcsj.menu_three_convert_info
-msgid "Convert Information"
-msgstr "单位换算"
-
-#. module: fwxt_jcsj
-#: field:branch.office.info,create_uid:0 field:commodity.info,create_uid:0
-#: field:company.info,create_uid:0 field:convert.info,create_uid:0
-#: field:dict.info,create_uid:0 field:materia.info,create_uid:0
-#: field:picture.management,create_uid:0 field:supplier.info,create_uid:0
-#: field:video.info,create_uid:0
+#. module: fwxt_barch
+#: field:commodity.barch,create_uid:0 field:commodity.check,create_uid:0
+#: field:commodity.making,create_uid:0 field:commodity.produce,create_uid:0
+#: field:material.barch,create_uid:0
 msgid "Created by"
-msgstr "创建"
+msgstr "Created by"
 
-#. module: fwxt_jcsj
-#: field:branch.office.info,create_date:0 field:commodity.info,create_date:0
-#: field:company.info,create_date:0 field:convert.info,create_date:0
-#: field:dict.info,create_date:0 field:materia.info,create_date:0
-#: field:picture.management,create_date:0 field:supplier.info,create_date:0
-#: field:video.info,create_date:0
+#. module: fwxt_barch
+#: field:commodity.barch,create_date:0 field:commodity.check,create_date:0
+#: field:commodity.making,create_date:0 field:commodity.produce,create_date:0
+#: field:material.barch,create_date:0
 msgid "Created on"
-msgstr "创建"
+msgstr "Created on"
 
-#. module: fwxt_jcsj
-#: field:branch.office.info,date_confirm:0
-#: help:branch.office.info,date_confirm:0 field:commodity.info,date_confirm:0
-#: help:commodity.info,date_confirm:0 field:company.info,date_confirm:0
-#: help:company.info,date_confirm:0 field:convert.info,date_confirm:0
-#: help:convert.info,date_confirm:0 field:dict.info,date_confirm:0
-#: help:dict.info,date_confirm:0 field:materia.info,date_confirm:0
-#: help:materia.info,date_confirm:0 field:picture.management,date_confirm:0
-#: help:picture.management,date_confirm:0 field:supplier.info,date_confirm:0
-#: help:supplier.info,date_confirm:0 field:video.info,date_confirm:0
-#: help:video.info,date_confirm:0
+#. module: fwxt_barch
+#: field:commodity.barch,date_confirm:0 help:commodity.barch,date_confirm:0
+#: field:commodity.barch,production_date:0
+#: help:commodity.barch,production_date:0 field:commodity.check,date_confirm:0
+#: help:commodity.check,date_confirm:0 field:commodity.making,date_confirm:0
+#: help:commodity.making,date_confirm:0 field:commodity.produce,date_confirm:0
+#: help:commodity.produce,date_confirm:0 field:material.barch,date_confirm:0
+#: help:material.barch,date_confirm:0 field:material.barch,production_date:0
+#: help:material.barch,production_date:0
 msgid "Date"
 msgstr "日期"
 
-#. module: fwxt_jcsj
-#: field:dict.info,dict:0 help:dict.info,dict:0
-msgid "Dict"
-msgstr "字典"
-
-#. module: fwxt_jcsj
-#: view:dict.info:fwxt_jcsj.view_form_dict_info
-msgid "Dict Info"
-msgstr "字典管理"
-
-#. module: fwxt_jcsj
-#: model:ir.actions.act_window,name:fwxt_jcsj.action_dict_info
-#: model:ir.ui.menu,name:fwxt_jcsj.menu_three_dict_info
-msgid "Dict Information"
-msgstr "字典管理"
-
-#. module: fwxt_jcsj
-#: selection:supplier.info,type:0
-msgid "Express"
-msgstr "快递公司"
-
-#. module: fwxt_jcsj
-#: selection:picture.management,type:0
-msgid "Heard"
-msgstr "页头"
-
-#. module: fwxt_jcsj
-#: field:branch.office.info,id:0 field:commodity.info,id:0
-#: field:company.info,id:0 field:convert.info,id:0 field:dict.info,id:0
-#: field:materia.info,id:0 field:picture.management,id:0
-#: field:supplier.info,id:0 field:video.info,id:0
+#. module: fwxt_barch
+#: field:commodity.barch,id:0 field:commodity.check,id:0
+#: field:commodity.making,id:0 field:commodity.produce,id:0
+#: field:material.barch,id:0
 msgid "ID"
 msgstr "序号"
 
-#. module: fwxt_jcsj
-#: field:branch.office.info,write_uid:0 field:commodity.info,write_uid:0
-#: field:company.info,write_uid:0 field:convert.info,write_uid:0
-#: field:dict.info,write_uid:0 field:materia.info,write_uid:0
-#: field:picture.management,write_uid:0 field:supplier.info,write_uid:0
-#: field:video.info,write_uid:0
+#. module: fwxt_barch
+#: field:commodity.barch,write_uid:0 field:commodity.check,write_uid:0
+#: field:commodity.making,write_uid:0 field:commodity.produce,write_uid:0
+#: field:material.barch,write_uid:0
 msgid "Last Updated by"
 msgstr "Last Updated by"
 
-#. module: fwxt_jcsj
-#: field:branch.office.info,write_date:0 field:commodity.info,write_date:0
-#: field:company.info,write_date:0 field:convert.info,write_date:0
-#: field:dict.info,write_date:0 field:materia.info,write_date:0
-#: field:picture.management,write_date:0 field:supplier.info,write_date:0
-#: field:video.info,write_date:0
+#. module: fwxt_barch
+#: field:commodity.barch,write_date:0 field:commodity.check,write_date:0
+#: field:commodity.making,write_date:0 field:commodity.produce,write_date:0
+#: field:material.barch,write_date:0
 msgid "Last Updated on"
 msgstr "Last Updated on"
 
-#. module: fwxt_jcsj
-#: view:materia.info:fwxt_jcsj.view_form_materia_info
+#. module: fwxt_barch
+#: field:commodity.check,check_messages:0 help:commodity.check,check_messages:0
+#: field:commodity.making,making_messages:0
+#: help:commodity.making,making_messages:0
+msgid "Make Messages"
+msgstr "加工信息"
+
+#. module: fwxt_barch
+#: field:material.barch,materia_id:0
 msgid "Materia Info"
-msgstr "原材料管理"
+msgstr "原材料信息"
 
-#. module: fwxt_jcsj
-#: model:ir.actions.act_window,name:fwxt_jcsj.action_materia_info
-#: model:ir.ui.menu,name:fwxt_jcsj.menu_three_materia_info
-msgid "Materia Information"
-msgstr "原材料管理"
+#. module: fwxt_barch
+#: model:ir.actions.act_window,name:fwxt_barch.action_material_barch
+#: model:ir.ui.menu,name:fwxt_barch.menu_three_materia_barch
+#: view:material.barch:fwxt_barch.view_form_material_barch
+msgid "Material Barch"
+msgstr "原材料批次"
 
-#. module: fwxt_jcsj
-#: selection:commodity.info,type:0 selection:dict.info,type:0
-#: selection:supplier.info,supplier_type:0
-msgid "Material"
-msgstr "原材料"
-
-#. module: fwxt_jcsj
-#: field:branch.office.info,message:0 help:branch.office.info,message:0
-#: field:commodity.info,message:0 help:commodity.info,message:0
-#: field:company.info,message:0 help:company.info,message:0
-#: field:convert.info,message:0 help:convert.info,message:0
-#: field:materia.info,message:0 help:materia.info,message:0
-#: field:picture.management,message:0 help:picture.management,message:0
-#: field:supplier.info,message:0 help:supplier.info,message:0
-#: field:video.info,message:0 help:video.info,message:0
-msgid "Message"
+#. module: fwxt_barch
+#: field:commodity.barch,messages:0 help:commodity.barch,messages:0
+#: field:commodity.check,messages:0 help:commodity.check,messages:0
+#: field:commodity.making,messages:0 help:commodity.making,messages:0
+#: field:commodity.produce,messages:0 help:commodity.produce,messages:0
+#: field:material.barch,messages:0 help:material.barch,messages:0
+msgid "Messages"
 msgstr "备注"
 
-#. module: fwxt_jcsj
-#: field:branch.office.info,name:0 help:branch.office.info,name:0
-#: field:commodity.info,name:0 help:commodity.info,name:0
-#: field:company.info,name:0 help:company.info,name:0 field:convert.info,name:0
-#: help:convert.info,name:0 field:dict.info,name:0 help:dict.info,name:0
-#: field:materia.info,name:0 help:materia.info,name:0
-#: field:picture.management,name:0 help:picture.management,name:0
-#: field:supplier.info,name:0 help:supplier.info,name:0 field:video.info,name:0
-#: help:video.info,name:0
+#. module: fwxt_barch
+#: field:commodity.barch,name:0 help:commodity.barch,name:0
+#: field:commodity.check,name:0 help:commodity.check,name:0
+#: field:commodity.making,name:0 help:commodity.making,name:0
+#: field:commodity.produce,name:0 help:commodity.produce,name:0
+#: field:material.barch,name:0 help:material.barch,name:0
 msgid "Name"
 msgstr "名称"
 
-#. module: fwxt_jcsj
-#: view:company.info:fwxt_jcsj.view_form_company_info help:company.info,code:0
-#: view:convert.info:fwxt_jcsj.view_form_convert_info help:convert.info,code:0
-#: view:picture.management:fwxt_jcsj.view_form_picture_management
-#: view:video.info:fwxt_jcsj.view_form_video_info help:video.info,code:0
+#. module: fwxt_barch
+#: view:commodity.barch:fwxt_barch.view_form_commodity_barch
+#: view:commodity.check:fwxt_barch.view_form_commodity_check
+#: view:commodity.making:fwxt_barch.view_form_commodity_making
+#: view:commodity.produce:fwxt_barch.view_form_commodity_produce
+#: view:material.barch:fwxt_barch.view_form_material_barch
 msgid "No."
 msgstr "序号"
 
-#. module: fwxt_jcsj
-#: field:convert.info,number:0 help:convert.info,number:0
-msgid "Number"
-msgstr "数量"
-
-#. module: fwxt_jcsj
-#: field:branch.office.info,user_id:0 field:commodity.info,user_id:0
-#: field:company.info,user_id:0 field:convert.info,user_id:0
-#: field:dict.info,user_id:0 field:materia.info,user_id:0
-#: field:picture.management,user_id:0 field:supplier.info,user_id:0
-#: field:video.info,user_id:0
+#. module: fwxt_barch
+#: field:commodity.barch,user_id:0 field:commodity.check,user_id:0
+#: field:commodity.making,user_id:0 field:commodity.produce,user_id:0
+#: field:material.barch,user_id:0
 msgid "Operator"
 msgstr "操作人"
 
-#. module: fwxt_jcsj
-#: selection:picture.management,type:0
-msgid "Other"
-msgstr "其他内容"
+#. module: fwxt_barch
+#: field:commodity.produce,produce_messages:0
+#: help:commodity.produce,produce_messages:0
+msgid "Produce Messages"
+msgstr "生产信息"
 
-#. module: fwxt_jcsj
-#: model:ir.ui.menu,name:fwxt_jcsj.menu_three_picture_info
-msgid "Picture Information"
-msgstr "图片管理"
+#. module: fwxt_barch
+#: model:ir.ui.menu,name:fwxt_barch.menu_two_production_information
+msgid "Production Information"
+msgstr "生产信息"
 
-#. module: fwxt_jcsj
-#: view:company.info:fwxt_jcsj.view_form_company_info
-msgid "Picture Introduce"
-msgstr "图片管理"
+#. module: fwxt_barch
+#: model:ir.ui.menu,name:fwxt_barch.menu_barch_management
+msgid "Production Management"
+msgstr "生产管理"
 
-#. module: fwxt_jcsj
-#: model:ir.actions.act_window,name:fwxt_jcsj.action_picture_management
-#: view:picture.management:fwxt_jcsj.view_form_picture_management
-#: view:video.info:fwxt_jcsj.view_form_video_info
-msgid "Picture Management"
-msgstr "图片管理"
-
-#. module: fwxt_jcsj
-#: field:picture.management,type:0 help:picture.management,type:0
-msgid "Picture Type"
-msgstr "类型"
-
-#. module: fwxt_jcsj
-#: field:supplier.info,type:0
-msgid "Product Type"
-msgstr "产品类型"
-
-#. module: fwxt_jcsj
-#: field:video.info,Search:0 help:video.info,Search:0
-msgid "Search"
-msgstr "查询"
-
-#. module: fwxt_jcsj
-#: field:video.info,shop_add:0 help:video.info,shop_add:0
-msgid "Shop Add"
-msgstr "商店"
-
-#. module: fwxt_jcsj
-#: selection:commodity.info,type:0 selection:dict.info,type:0
-#: selection:supplier.info,supplier_type:0 selection:supplier.info,type:0
+#. module: fwxt_barch
+#: help:material.barch,supplier_id:0
 msgid "Supplier"
 msgstr "供应商"
 
-#. module: fwxt_jcsj
-#: view:supplier.info:fwxt_jcsj.view_form_supplier_info
+#. module: fwxt_barch
+#: field:material.barch,supplier_id:0
 msgid "Supplier Info"
-msgstr "供应商管理"
-
-#. module: fwxt_jcsj
-#: model:ir.actions.act_window,name:fwxt_jcsj.action_supplier_info
-#: model:ir.ui.menu,name:fwxt_jcsj.menu_three_supplier_info
-msgid "Supplier Information"
 msgstr "供应商信息"
 
-#. module: fwxt_jcsj
-#: field:supplier.info,tel:0 help:supplier.info,tel:0 field:video.info,tel:0
-#: help:video.info,tel:0
-msgid "Tel"
-msgstr "电话"
-
-#. module: fwxt_jcsj
-#: field:commodity.info,type:0 help:commodity.info,type:0
-#: field:dict.info,type:0 help:dict.info,type:0
-#: field:supplier.info,supplier_type:0 help:supplier.info,supplier_type:0
-#: help:supplier.info,type:0
+#. module: fwxt_barch
+#: field:commodity.check,type:0 field:commodity.making,type:0
+#: field:commodity.produce,type:0
 msgid "Type"
 msgstr "类型"
 
-#. module: fwxt_jcsj
-#: field:branch.office.info,video_id:0
-msgid "Video Info"
-msgstr "视频管理"
+#. module: fwxt_barch
+#: model:ir.model,name:fwxt_barch.model_commodity_produce
+msgid "commodity.producte"
+msgstr "商品生产"
 
-#. module: fwxt_jcsj
-#: model:ir.actions.act_window,name:fwxt_jcsj.action_video_info
-#: model:ir.ui.menu,name:fwxt_jcsj.menu_three_video_info
-msgid "Video Information"
-msgstr "视频管理"
+#. module: fwxt_barch
+#: view:commodity.check:fwxt_barch.view_form_commodity_check
+#: view:commodity.making:fwxt_barch.view_form_commodity_making
+#: view:commodity.produce:fwxt_barch.view_form_commodity_produce
+msgid "form"
+msgstr "窗体"
 
-#. module: fwxt_jcsj
-#: field:video.info,web_add:0 help:video.info,web_add:0
-msgid "Web add"
-msgstr "公司网址"
+#. module: fwxt_barch
+#: field:commodity.barch,material_barch_id:0
+msgid "join"
+msgstr "关联"
 
-#. module: fwxt_jcsj
-#: field:video.info,weixin_add:0 help:video.info,weixin_add:0
-msgid "Weixin Add"
-msgstr "微信网址"
+#. module: fwxt_barch
+#: view:commodity.check:fwxt_barch.view_form_commodity_check
+#: view:commodity.making:fwxt_barch.view_form_commodity_making
+#: view:commodity.produce:fwxt_barch.view_form_commodity_produce
+msgid "messages"
+msgstr "备注"
 
-#. module: fwxt_jcsj
-#: field:materia.info,type:0
-msgid "transaction type"
-msgstr "类型"
-
-#. module: fwxt_jcsj
-#: view:branch.office.info:fwxt_jcsj.view_tree_branch_office_info
-#: view:commodity.info:fwxt_jcsj.view_tree_commodity_info
-#: view:materia.info:fwxt_jcsj.view_tree_materia_info
-#: view:supplier.info:fwxt_jcsj.view_tree_supplier_info
+#. module: fwxt_barch
+#: view:commodity.check:fwxt_barch.view_tree_commodity_check
+#: view:commodity.making:fwxt_barch.view_tree_commodity_making
+#: view:commodity.produce:fwxt_barch.view_tree_commodity_produce
 msgid "tree"
 msgstr "列表"
 
-#. module: fwxt_jcsj
-#: view:company.info:fwxt_jcsj.view_tree_company_info
-#: view:convert.info:fwxt_jcsj.view_tree_convert_info
-#: view:dict.info:fwxt_jcsj.view_tree_dict_info
-#: view:picture.management:fwxt_jcsj.view_tree_picture_management
-#: view:video.info:fwxt_jcsj.view_tree_video_info
+#. module: fwxt_barch
+#: view:commodity.barch:fwxt_barch.view_tree_commodity_barch
+#: view:material.barch:fwxt_barch.view_tree_material_barch
 msgid "view"
 msgstr "列表"

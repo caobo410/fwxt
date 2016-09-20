@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-18 09:15+0000\n"
-"PO-Revision-Date: 2016-09-18 17:20+0800\n"
+"POT-Creation-Date: 2016-09-20 09:09+0000\n"
+"PO-Revision-Date: 2016-09-20 17:10+0800\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -52,7 +52,7 @@ msgid ""
 "          "
 msgstr ""
 "<p class=\"oe_view_nocontent_create\">\n"
-"             企业信息\n"
+"              企业信息\n"
 "            </p>\n"
 "          "
 
@@ -171,8 +171,12 @@ msgid "Branch Office Information"
 msgstr "生产基地管理"
 
 #. module: fwxt_jcsj
-#: selection:commodity.info,type:0 selection:dict.info,type:0
-#: selection:supplier.info,supplier_type:0
+#: selection:supplier.info,type:0
+msgid "Check"
+msgstr "质检"
+
+#. module: fwxt_jcsj
+#: selection:dict.info,type:0
 msgid "Cmmodity"
 msgstr "商品"
 
@@ -321,6 +325,11 @@ msgid "Last Updated on"
 msgstr "Last Updated on"
 
 #. module: fwxt_jcsj
+#: selection:dict.info,type:0
+msgid "Making"
+msgstr "加工"
+
+#. module: fwxt_jcsj
 #: view:materia.info:fwxt_jcsj.view_form_materia_info
 msgid "Materia Info"
 msgstr "原材料管理"
@@ -332,8 +341,7 @@ msgid "Materia Information"
 msgstr "原材料管理"
 
 #. module: fwxt_jcsj
-#: selection:commodity.info,type:0 selection:dict.info,type:0
-#: selection:supplier.info,supplier_type:0
+#: selection:dict.info,type:0
 msgid "Material"
 msgstr "原材料"
 
@@ -411,6 +419,11 @@ msgid "Picture Type"
 msgstr "类型"
 
 #. module: fwxt_jcsj
+#: selection:dict.info,type:0
+msgid "Produce"
+msgstr "生产"
+
+#. module: fwxt_jcsj
 #: field:supplier.info,type:0
 msgid "Product Type"
 msgstr "产品类型"
@@ -426,8 +439,7 @@ msgid "Shop Add"
 msgstr "商店"
 
 #. module: fwxt_jcsj
-#: selection:commodity.info,type:0 selection:dict.info,type:0
-#: selection:supplier.info,supplier_type:0 selection:supplier.info,type:0
+#: selection:dict.info,type:0 selection:supplier.info,type:0
 msgid "Supplier"
 msgstr "供应商"
 
@@ -443,16 +455,19 @@ msgid "Supplier Information"
 msgstr "供应商信息"
 
 #. module: fwxt_jcsj
+#: field:supplier.info,supplier_type:0
+msgid "Supplier type"
+msgstr "供应商类型"
+
+#. module: fwxt_jcsj
 #: field:supplier.info,tel:0 help:supplier.info,tel:0 field:video.info,tel:0
 #: help:video.info,tel:0
 msgid "Tel"
 msgstr "电话"
 
 #. module: fwxt_jcsj
-#: field:commodity.info,type:0 help:commodity.info,type:0
-#: field:dict.info,type:0 help:dict.info,type:0
-#: field:supplier.info,supplier_type:0 help:supplier.info,supplier_type:0
-#: help:supplier.info,type:0
+#: field:commodity.info,type:0 field:dict.info,type:0 help:dict.info,type:0
+#: field:materia.info,type:0 help:supplier.info,type:0
 msgid "Type"
 msgstr "类型"
 
@@ -476,11 +491,6 @@ msgstr "公司网址"
 #: field:video.info,weixin_add:0 help:video.info,weixin_add:0
 msgid "Weixin Add"
 msgstr "微信网址"
-
-#. module: fwxt_jcsj
-#: field:materia.info,type:0
-msgid "transaction type"
-msgstr "类型"
 
 #. module: fwxt_jcsj
 #: view:branch.office.info:fwxt_jcsj.view_tree_branch_office_info

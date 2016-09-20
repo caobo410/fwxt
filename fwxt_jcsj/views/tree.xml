@@ -102,23 +102,6 @@
             </field>
         </record>
 
-        <!--生产基地-->
-        <record id="view_tree_branch_office_info" model="ir.ui.view">
-            <field name="name">branch Office Information</field>
-            <field name="model">branch.office.info</field>
-            <field name="priority">1</field>
-            <field name="arch" type="xml">
-                <tree string="tree">
-                    <field name="code"/>
-                    <field name="name"/>
-                    <field name="video_id"/>
-                    <field name="message"/>
-                    <field name="user_id"/>
-                    <field name="date_confirm"/>
-                </tree>
-            </field>
-        </record>
-
         <!--成品商品-->
         <record id="view_tree_commodity_info" model="ir.ui.view">
             <field name="name">Commodity Information</field>
@@ -129,6 +112,22 @@
                     <field name="code"/>
                     <field name="name"/>
                     <field name="type"/>
+                    <field name="message"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+        <!--生产基地-->
+        <record id="view_tree_branch_office_info" model="ir.ui.view">
+            <field name="name">branch Office Information</field>
+            <field name="model">branch.office.info</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="tree">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="video_id"/>
                     <field name="message"/>
                     <field name="user_id"/>
                     <field name="date_confirm"/>

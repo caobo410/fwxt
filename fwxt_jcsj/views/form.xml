@@ -165,8 +165,8 @@
                 </form>
             </field>
         </record>
-        
-        <!--字典管理-->
+
+        <!--原材料管理-->
         <record id="view_form_materia_info" model="ir.ui.view">
             <field name="name">Materia.Info</field>
             <field name="model">materia.info</field>

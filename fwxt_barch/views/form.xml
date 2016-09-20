@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+
         <!--原材料批次-->
         <record id="view_form_material_barch" model="ir.ui.view">
             <field name="name">Material Barch</field>
@@ -50,24 +51,149 @@
                             </group>
                             <group>
                                 <field name="barch"/>
-                                <field name="supplier_id"/>
                                 <field name="messages"/>
                                 <field name="date_confirm"/>
                             </group>
                         </group>
                         <notebook colspan="4">
                             <page string="页卡">
-                                <field name="material_barch_id">
-                                    <tree string="明细" editable="bottom">
-                                        <field name="barch" widget="handle"/>
-                                        <field name="name" widget="handle"/>
-                                        <field name="materia_id" widget="handle"/>
-                                        <field name="supplier_id" widget="handle"/>
-                                        <field name="production_date" widget="handle"/>
-                                    </tree>
-                                </field>
+                                <field name="material_barch_id"/>
                             </page>
                         </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--商品生产-->
+        <record id="view_form_commodity_produce" model="ir.ui.view">
+            <field name="name">Commodity Produce</field>
+            <field name="model">commodity.produce</field>
+            <field name="arch" type="xml">
+                <form string="form" version="7.0">
+                    <sheet>
+                        <h1>No.
+                            <field name="code" class="oe_inline"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="type"/>
+                            </group>
+                            <group>
+                                <field name="commodity_barch_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="messages">
+                                <group>
+                                    <group>
+                                        <field name="produce_messages"/>
+                                    </group>
+                                    <group>
+                                        <field name="messages"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                        <group>
+                            <group>
+                                <field name="user_id"/>
+                            </group>
+                            <group>
+                                <field name="date_confirm"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--加工流程-->
+        <record id="view_form_commodity_making" model="ir.ui.view">
+            <field name="name">Commodity Making</field>
+            <field name="model">commodity.making</field>
+            <field name="arch" type="xml">
+                <form string="form" version="7.0">
+                    <sheet>
+                        <h1>No.
+                            <field name="code" class="oe_inline"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="type"/>
+                            </group>
+                            <group>
+                                <field name="commodity_barch_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="messages">
+                                <group>
+                                    <group>
+                                        <field name="making_messages"/>
+                                    </group>
+                                    <group>
+                                        <field name="messages"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                        <group>
+                            <group>
+                                <field name="user_id"/>
+                            </group>
+                            <group>
+                                <field name="date_confirm"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--成品质检-->
+        <record id="view_form_commodity_check" model="ir.ui.view">
+            <field name="name">Commodity Check</field>
+            <field name="model">commodity.check</field>
+            <field name="arch" type="xml">
+                <form string="form" version="7.0">
+                    <sheet>
+                        <h1>No.
+                            <field name="code" class="oe_inline"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="type"/>
+                                <field name="check_date"/>
+                            </group>
+                            <group>
+                                <field name="commodity_barch_id"/>
+                                <field name="supplier_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="messages">
+                                <group>
+                                    <group>
+                                        <field name="check_messages"/>
+                                    </group>
+                                    <group>
+                                        <field name="messages"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                        <group>
+                            <group>
+                                <field name="user_id"/>
+                            </group>
+                            <group>
+                                <field name="date_confirm"/>
+                            </group>
+                        </group>
                     </sheet>
                 </form>
             </field>

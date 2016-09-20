@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+
         <!--原材料批次-->
         <record id="action_material_barch" model="ir.actions.act_window">
           <field name="name">Material Barch</field>
           <field name="type">ir.actions.act_window</field>
-          <field name="res_model">cmaterial.barch</field>
+          <field name="res_model">material.barch</field>
           <field name="view_type">form</field>
           <field name="view_mode">tree,form</field>
           <!--<field name="context">{"search_default_no_check_in":1}</field>-->
@@ -27,6 +28,51 @@
           <field name="help" type="html">
             <p class="oe_view_nocontent_create">
               Commodity Barch
+            </p>
+          </field>
+        </record>
+
+        <!--生产过程-->
+        <record id="action_commodity_produce" model="ir.actions.act_window">
+          <field name="name">Commodity Broduce</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">commodity.produce</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <!--<field name="context">{"search_default_no_check_in":1}</field>-->
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              Commodity produce
+            </p>
+          </field>
+        </record>
+
+        <!--加工过程-->
+        <record id="action_commodity_making" model="ir.actions.act_window">
+          <field name="name">Commodity Make</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">commodity.making</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <!--<field name="context">{"search_default_no_check_in":1}</field>-->
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              Commodity making
+            </p>
+          </field>
+        </record>
+
+        <!--加工过程-->
+        <record id="action_commodity_check" model="ir.actions.act_window">
+          <field name="name">Commodity Check</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">commodity.check</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <!--<field name="context">{"search_default_no_check_in":1}</field>-->
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              Commodity Check
             </p>
           </field>
         </record>

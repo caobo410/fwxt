@@ -24,12 +24,21 @@ class material_barch(models.Model):
     name = fields.Char(string='Name', size=64, required=True, help="Name")
     barch = fields.Char(string='Barch', size=64, required=True, help="Barch")
     materia_id = fields.Many2one('materia.info', string='Materia Info')
-    supplier_id = fields.Many2one('supplier.info', string='Supplier Info', domain=[('type', '=', supplier)], help="Supplier")
-    commodity_barch_id = fields.Many2one('commodity.barch', string='Operator')
+    supplier_id = fields.Many2one('supplier.info', string='Supplier Info', domain=[('type', '=', 'supplier')], help="Supplier")
+    commodity_barch_id = fields.Many2one('commodity.barch', string='Commodity Barch')
     production_date = fields.Date(string='Date', size=64, required=True, help="Date")
     messages = fields.Char(string='Messages', help="Messages")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
+
+    @api.multi
+    @api.depends('name', 'code')
+    def name_get(self):
+        result = []
+        for account in self:
+            name = account.barch + ' ' + account.name
+            result.append((account.id, name))
+        return result
 
     _defaults = {
         'production_date': date_ref,
@@ -44,13 +53,23 @@ class commodity_barch(models.Model):
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
     barch = fields.Char(string='Barch', size=64, required=True, help="Barch")
-    commodity_id = fields.Many2one('commodity.info', string='Commodity Info')
-    supplier_id = fields.Many2one('supplier.info', string='Supplier Info', domain=[('type', '=', supplier)], help="Supplier")
-    material_barch_id = fields.One2many('material.barch', 'commodity_barch_id', string='join', copy=True)
+    commodity_id = fields.Many2one('commodity.info', string='Commodity')
+    # supplier_id = fields.Many2one('supplier.info', string='Supplier Info', domain=[('type', '=', 'supplier')], help="Supplier")
+    material_barch_id = fields.One2many('material.barch', 'commodity_barch_id', string='join')
     production_date = fields.Date(string='Date', size=64, required=True, help="Date")
     messages = fields.Char(string='Messages', help="Messages")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
+
+
+    @api.multi
+    @api.depends('name', 'code')
+    def name_get(self):
+        result = []
+        for account in self:
+            name = account.barch + ' ' + account.name
+            result.append((account.id, name))
+        return result
 
     _defaults = {
         'production_date': date_ref,

@@ -3,9 +3,9 @@
     <data>
 
         <!--原材料批次-->
-        <record id="view_tree_company_info" model="ir.ui.view">
-            <field name="name">Company Information</field>
-            <field name="model">company.info</field>
+        <record id="view_tree_material_barch" model="ir.ui.view">
+            <field name="name">Material Barch</field>
+            <field name="model">material.barch</field>
             <field name="priority">1</field>
             <field name="arch" type="xml">
                 <tree string="view">
@@ -23,9 +23,9 @@
         </record>
 
         <!--生产批次-->
-        <record id="view_tree_picture_management" model="ir.ui.view">
-            <field name="name">Picture Management</field>
-            <field name="model">picture.management</field>
+        <record id="view_tree_commodity_barch" model="ir.ui.view">
+            <field name="name">Commodity Barch</field>
+            <field name="model">commodity.barch</field>
             <field name="priority">1</field>
             <field name="arch" type="xml">
                 <tree string="view">
@@ -33,8 +33,60 @@
                     <field name="name"/>
                     <field name="barch"/>
                     <field name="commodity_id"/>
-                    <field name="supplier_id"/>
                     <field name="production_date"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--商品生产-->
+        <record id="view_tree_commodity_produce" model="ir.ui.view">
+            <field name="name">Commodity Produce</field>
+            <field name="model">commodity.produce</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="tree">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="commodity_barch_id"/>
+                    <field name="type"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--生产加工-->
+        <record id="view_tree_commodity_making" model="ir.ui.view">
+            <field name="name">Commodity Making</field>
+            <field name="model">commodity.making</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="tree">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="commodity_barch_id"/>
+                    <field name="type"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--产品质检-->
+        <record id="view_tree_commodity_check" model="ir.ui.view">
+            <field name="name">Commodity Check</field>
+            <field name="model">commodity.check</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="tree">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="commodity_barch_id"/>
+                    <field name="type"/>
+                    <field name="supplier_id"/>
+                    <field name="check_date"/>
                     <field name="user_id"/>
                     <field name="date_confirm"/>
                 </tree>
