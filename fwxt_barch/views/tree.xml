@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--原材料批次-->
+        <record id="view_tree_company_info" model="ir.ui.view">
+            <field name="name">Company Information</field>
+            <field name="model">company.info</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="view">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="barch"/>
+                    <field name="materia_id"/>
+                    <field name="supplier_id"/>
+                    <field name="commodity_barch_id"/>
+                    <field name="production_date"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--生产批次-->
+        <record id="view_tree_picture_management" model="ir.ui.view">
+            <field name="name">Picture Management</field>
+            <field name="model">picture.management</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="view">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="barch"/>
+                    <field name="commodity_id"/>
+                    <field name="supplier_id"/>
+                    <field name="production_date"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
