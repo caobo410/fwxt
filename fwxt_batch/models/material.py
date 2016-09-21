@@ -16,16 +16,16 @@ from datetime import datetime
 date_ref = datetime.now().strftime('%Y-%m-%d')
 _logger = logging.getLogger(__name__)
 
-class material_barch(models.Model):
-    _name = "material.barch"
-    _description = "material.barch"
+class material_batch(models.Model):
+    _name = "material.batch"
+    _description = "material.batch"
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    barch = fields.Char(string='Barch', size=64, required=True, help="Barch")
+    batch = fields.Char(string='Batch', size=64, required=True, help="Batch")
     materia_id = fields.Many2one('materia.info', string='Materia Info')
     supplier_id = fields.Many2one('supplier.info', string='Supplier Info', domain=[('type', '=', 'supplier')], help="Supplier")
-    commodity_barch_id = fields.Many2one('commodity.barch', string='Commodity Barch')
+    commodity_batch_id = fields.Many2one('commodity.batch', string='Commodity Batch')
     production_date = fields.Date(string='Date', size=64, required=True, help="Date")
     messages = fields.Char(string='Messages', help="Messages")
     user_id = fields.Many2one('res.users', string='Operator')
@@ -36,7 +36,7 @@ class material_barch(models.Model):
     def name_get(self):
         result = []
         for account in self:
-            name = account.barch + ' ' + account.name
+            name = account.batch + ' ' + account.name
             result.append((account.id, name))
         return result
 
@@ -46,16 +46,16 @@ class material_barch(models.Model):
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
-class commodity_barch(models.Model):
-    _name = "commodity.barch"
-    _description = "commodity.barch"
+class commodity_batch(models.Model):
+    _name = "commodity.batch"
+    _description = "commodity.batch"
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    barch = fields.Char(string='Barch', size=64, required=True, help="Barch")
+    batch = fields.Char(string='Batch', size=64, required=True, help="Batch")
     commodity_id = fields.Many2one('commodity.info', string='Commodity')
     # supplier_id = fields.Many2one('supplier.info', string='Supplier Info', domain=[('type', '=', 'supplier')], help="Supplier")
-    material_barch_id = fields.One2many('material.barch', 'commodity_barch_id', string='join')
+    material_batch_id = fields.One2many('material.batch', 'commodity_batch_id', string='join')
     production_date = fields.Date(string='Date', size=64, required=True, help="Date")
     messages = fields.Char(string='Messages', help="Messages")
     user_id = fields.Many2one('res.users', string='Operator')
@@ -67,7 +67,7 @@ class commodity_barch(models.Model):
     def name_get(self):
         result = []
         for account in self:
-            name = account.barch + ' ' + account.name
+            name = account.batch + ' ' + account.name
             result.append((account.id, name))
         return result
 

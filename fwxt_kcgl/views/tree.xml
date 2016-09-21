@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--仓库设置-->
+        <record id="view_tree_warehouse_info" model="ir.ui.view">
+            <field name="name">Warehouse Info</field>
+            <field name="model">warehouse.info</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="view">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="sf_default"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--库存单据-->
+        <record id="view_tree_warehouse_doc" model="ir.ui.view">
+            <field name="name">Warehouse Doc</field>
+            <field name="model">warehouse.doc</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="view">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="batch_id"/>
+                    <field name="commodity_id"/>
+                    <field name="warehouse_id"/>
+                    <field name="unit_id"/>
+                    <field name="batch_list"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--条码列表-->
+        <record id="view_tree_batch_list" model="ir.ui.view">
+            <field name="name">Batch List</field>
+            <field name="model">batch.list</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="view">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="line_id"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>

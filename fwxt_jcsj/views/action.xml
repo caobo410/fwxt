@@ -31,6 +31,21 @@
           </field>
         </record>
 
+        <!--单位-->
+        <record id="action_base_unit" model="ir.actions.act_window">
+          <field name="name">Base Unit</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">base.unit</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <!--<field name="context">{"search_default_no_check_in":1}</field>-->
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              Unit Information
+            </p>
+          </field>
+        </record>
+
         <!--单位转换-->
         <record id="action_convert_info" model="ir.actions.act_window">
           <field name="name">Convert Information</field>

@@ -15,8 +15,9 @@
         <menuitem name="Company Information" id="menu_two_company" parent="menu_base_management" sequence="2"/>
         <menuitem name="Company Introduce" id="menu_three_company_info" parent="menu_two_company" action="action_company_info" sequence="1"/>
         <menuitem name="Picture Information" id="menu_three_picture_info" parent="menu_two_company" action="action_picture_management" sequence="2"/>
-        <menuitem name="Convert Information" id="menu_three_convert_info" parent="menu_two_company" action="action_convert_info" sequence="3"/>
-        <menuitem name="Video Information" id="menu_three_video_info" parent="menu_two_company" action="action_video_info" sequence="4"/>
+        <menuitem name="Unit Information" id="menu_three_unit_info" parent="menu_two_company" action="action_base_unit" sequence="3"/>
+        <menuitem name="Convert Information" id="menu_three_convert_info" parent="menu_two_company" action="action_convert_info" sequence="4"/>
+        <menuitem name="Video Information" id="menu_three_video_info" parent="menu_two_company" action="action_video_info" sequence="5"/>
 
     </data>
 </openerp>

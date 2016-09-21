@@ -66,6 +66,22 @@ class picture_management(models.Model):
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
+# 单位
+class base_unit(models.Model):
+    _name = "base.unit"
+    _description = "base.unit"
+
+    code = fields.Char(string='Code', size=64, required=True, help="Code")
+    name = fields.Char(string='Name', size=64, required=True, help="Name")
+    message = fields.Char(string='Message', help="Message")
+    user_id = fields.Many2one('res.users', string='Operator')
+    date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
+
+    _defaults = {
+        'date_confirm': date_ref,
+        'user_id': lambda cr, uid, id, c={}: id,
+    }
+
 #单位换算
 class convert_info(models.Model):
     _name = "convert.info"

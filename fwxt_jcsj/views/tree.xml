@@ -34,6 +34,21 @@
             </field>
         </record>
 
+        <!--单位-->
+        <record id="view_tree_base_unit" model="ir.ui.view">
+            <field name="name">Base Unit</field>
+            <field name="model">base.unit</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="view">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="message"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
         <!--单位换算-->
         <record id="view_tree_convert_info" model="ir.ui.view">
             <field name="name">Convert Information</field>
@@ -118,6 +133,7 @@
                 </tree>
             </field>
         </record>
+
         <!--生产基地-->
         <record id="view_tree_branch_office_info" model="ir.ui.view">
             <field name="name">branch Office Information</field>

@@ -3,31 +3,31 @@
     <data>
 
         <!--原材料批次-->
-        <record id="action_material_barch" model="ir.actions.act_window">
-          <field name="name">Material Barch</field>
+        <record id="action_material_batch" model="ir.actions.act_window">
+          <field name="name">Material Batch</field>
           <field name="type">ir.actions.act_window</field>
-          <field name="res_model">material.barch</field>
+          <field name="res_model">material.batch</field>
           <field name="view_type">form</field>
           <field name="view_mode">tree,form</field>
           <!--<field name="context">{"search_default_no_check_in":1}</field>-->
           <field name="help" type="html">
             <p class="oe_view_nocontent_create">
-              Material Barch
+              Material Batch
             </p>
           </field>
         </record>
 
         <!--商品批次-->
-        <record id="action_commodity_barch" model="ir.actions.act_window">
-          <field name="name">Commodity Barch</field>
+        <record id="action_commodity_batch" model="ir.actions.act_window">
+          <field name="name">Commodity Batch</field>
           <field name="type">ir.actions.act_window</field>
-          <field name="res_model">commodity.barch</field>
+          <field name="res_model">commodity.batch</field>
           <field name="view_type">form</field>
           <field name="view_mode">tree,form</field>
           <!--<field name="context">{"search_default_no_check_in":1}</field>-->
           <field name="help" type="html">
             <p class="oe_view_nocontent_create">
-              Commodity Barch
+              Commodity Batch
             </p>
           </field>
         </record>

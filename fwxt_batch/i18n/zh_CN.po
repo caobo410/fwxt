@@ -1,0 +1,319 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* fwxt_batch
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-21 05:57+0000\n"
+"PO-Revision-Date: 2016-09-21 14:02+0800\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: zh_CN\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#. module: fwxt_batch
+#: model:ir.actions.act_window,help:fwxt_batch.action_commodity_batch
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              Commodity Batch\n"
+"            </p>\n"
+"          "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              商品批次\n"
+"            </p>\n"
+"          "
+
+#. module: fwxt_batch
+#: model:ir.actions.act_window,help:fwxt_batch.action_commodity_check
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              Commodity Check\n"
+"            </p>\n"
+"          "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              商品检验\n"
+"            </p>\n"
+"          "
+
+#. module: fwxt_batch
+#: model:ir.actions.act_window,help:fwxt_batch.action_commodity_making
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              Commodity making\n"
+"            </p>\n"
+"          "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              商品加工\n"
+"            </p>\n"
+"          "
+
+#. module: fwxt_batch
+#: model:ir.actions.act_window,help:fwxt_batch.action_commodity_produce
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              Commodity produce\n"
+"            </p>\n"
+"          "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"             商品生产\n"
+"            </p>\n"
+"          "
+
+#. module: fwxt_batch
+#: model:ir.actions.act_window,help:fwxt_batch.action_material_batch
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              Material Batch\n"
+"            </p>\n"
+"          "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"             原材料批次\n"
+"            </p>\n"
+"          "
+
+#. module: fwxt_batch
+#: field:commodity.batch,batch:0 help:commodity.batch,batch:0
+#: field:material.batch,batch:0 help:material.batch,batch:0
+msgid "Batch"
+msgstr "批次"
+
+#. module: fwxt_batch
+#: model:ir.ui.menu,name:fwxt_batch.menu_two_batch_information
+msgid "Batch Information"
+msgstr "批次信息"
+
+#. module: fwxt_batch
+#: field:commodity.check,supplier_id:0
+msgid "Check Company"
+msgstr "质检公司"
+
+#. module: fwxt_batch
+#: field:commodity.check,check_date:0 help:commodity.check,check_date:0
+msgid "Check Date"
+msgstr "检验日期"
+
+#. module: fwxt_batch
+#: field:commodity.batch,code:0 help:commodity.batch,code:0
+#: field:commodity.check,code:0 help:commodity.check,code:0
+#: field:commodity.making,code:0 help:commodity.making,code:0
+#: field:commodity.produce,code:0 help:commodity.produce,code:0
+#: field:material.batch,code:0 help:material.batch,code:0
+msgid "Code"
+msgstr "编号"
+
+#. module: fwxt_batch
+#: field:commodity.batch,commodity_id:0
+msgid "Commodity"
+msgstr "商品"
+
+#. module: fwxt_batch
+#: view:commodity.batch:fwxt_batch.view_form_commodity_batch
+#: field:commodity.check,commodity_batch_id:0
+#: field:commodity.making,commodity_batch_id:0
+#: field:commodity.produce,commodity_batch_id:0
+#: model:ir.actions.act_window,name:fwxt_batch.action_commodity_batch
+#: model:ir.ui.menu,name:fwxt_batch.menu_three_commodity_batch
+#: field:material.batch,commodity_batch_id:0
+msgid "Commodity Batch"
+msgstr "商品批次"
+
+#. module: fwxt_batch
+#: model:ir.actions.act_window,name:fwxt_batch.action_commodity_produce
+msgid "Commodity Broduce"
+msgstr "商品生产"
+
+#. module: fwxt_batch
+#: model:ir.actions.act_window,name:fwxt_batch.action_commodity_check
+#: model:ir.ui.menu,name:fwxt_batch.menu_three_commodity_check
+msgid "Commodity Check"
+msgstr "商品检验"
+
+#. module: fwxt_batch
+#: model:ir.actions.act_window,name:fwxt_batch.action_commodity_making
+msgid "Commodity Make"
+msgstr "商品加工"
+
+#. module: fwxt_batch
+#: model:ir.ui.menu,name:fwxt_batch.menu_three_commodity_making
+msgid "Commodity Making"
+msgstr "商品加工"
+
+#. module: fwxt_batch
+#: model:ir.ui.menu,name:fwxt_batch.menu_three_commodity_produce
+msgid "Commodity Produce"
+msgstr "商品生产"
+
+#. module: fwxt_batch
+#: field:commodity.batch,create_uid:0 field:commodity.check,create_uid:0
+#: field:commodity.making,create_uid:0 field:commodity.produce,create_uid:0
+#: field:material.batch,create_uid:0
+msgid "Created by"
+msgstr "Created by"
+
+#. module: fwxt_batch
+#: field:commodity.batch,create_date:0 field:commodity.check,create_date:0
+#: field:commodity.making,create_date:0 field:commodity.produce,create_date:0
+#: field:material.batch,create_date:0
+msgid "Created on"
+msgstr "Created on"
+
+#. module: fwxt_batch
+#: field:commodity.batch,date_confirm:0 help:commodity.batch,date_confirm:0
+#: field:commodity.batch,production_date:0
+#: help:commodity.batch,production_date:0 field:commodity.check,date_confirm:0
+#: help:commodity.check,date_confirm:0 field:commodity.making,date_confirm:0
+#: help:commodity.making,date_confirm:0 field:commodity.produce,date_confirm:0
+#: help:commodity.produce,date_confirm:0 field:material.batch,date_confirm:0
+#: help:material.batch,date_confirm:0 field:material.batch,production_date:0
+#: help:material.batch,production_date:0
+msgid "Date"
+msgstr "日期"
+
+#. module: fwxt_batch
+#: field:commodity.batch,id:0 field:commodity.check,id:0
+#: field:commodity.making,id:0 field:commodity.produce,id:0
+#: field:material.batch,id:0
+msgid "ID"
+msgstr "序号"
+
+#. module: fwxt_batch
+#: field:commodity.batch,write_uid:0 field:commodity.check,write_uid:0
+#: field:commodity.making,write_uid:0 field:commodity.produce,write_uid:0
+#: field:material.batch,write_uid:0
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: fwxt_batch
+#: field:commodity.batch,write_date:0 field:commodity.check,write_date:0
+#: field:commodity.making,write_date:0 field:commodity.produce,write_date:0
+#: field:material.batch,write_date:0
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: fwxt_batch
+#: field:commodity.check,check_messages:0 help:commodity.check,check_messages:0
+#: field:commodity.making,making_messages:0
+#: help:commodity.making,making_messages:0
+msgid "Make Messages"
+msgstr "加工信息"
+
+#. module: fwxt_batch
+#: field:material.batch,materia_id:0
+msgid "Materia Info"
+msgstr "原材料信息"
+
+#. module: fwxt_batch
+#: model:ir.actions.act_window,name:fwxt_batch.action_material_batch
+#: model:ir.ui.menu,name:fwxt_batch.menu_three_materia_batch
+#: view:material.batch:fwxt_batch.view_form_material_batch
+msgid "Material Batch"
+msgstr "原材料批次"
+
+#. module: fwxt_batch
+#: field:commodity.batch,messages:0 help:commodity.batch,messages:0
+#: field:commodity.check,messages:0 help:commodity.check,messages:0
+#: field:commodity.making,messages:0 help:commodity.making,messages:0
+#: field:commodity.produce,messages:0 help:commodity.produce,messages:0
+#: field:material.batch,messages:0 help:material.batch,messages:0
+msgid "Messages"
+msgstr "备注"
+
+#. module: fwxt_batch
+#: field:commodity.batch,name:0 help:commodity.batch,name:0
+#: field:commodity.check,name:0 help:commodity.check,name:0
+#: field:commodity.making,name:0 help:commodity.making,name:0
+#: field:commodity.produce,name:0 help:commodity.produce,name:0
+#: field:material.batch,name:0 help:material.batch,name:0
+msgid "Name"
+msgstr "名称"
+
+#. module: fwxt_batch
+#: view:commodity.batch:fwxt_batch.view_form_commodity_batch
+#: view:commodity.check:fwxt_batch.view_form_commodity_check
+#: view:commodity.making:fwxt_batch.view_form_commodity_making
+#: view:commodity.produce:fwxt_batch.view_form_commodity_produce
+#: view:material.batch:fwxt_batch.view_form_material_batch
+msgid "No."
+msgstr "序号"
+
+#. module: fwxt_batch
+#: field:commodity.batch,user_id:0 field:commodity.check,user_id:0
+#: field:commodity.making,user_id:0 field:commodity.produce,user_id:0
+#: field:material.batch,user_id:0
+msgid "Operator"
+msgstr "操作人"
+
+#. module: fwxt_batch
+#: field:commodity.produce,produce_messages:0
+#: help:commodity.produce,produce_messages:0
+msgid "Produce Messages"
+msgstr "生产信息"
+
+#. module: fwxt_batch
+#: model:ir.ui.menu,name:fwxt_batch.menu_two_production_information
+msgid "Production Information"
+msgstr "生产信息"
+
+#. module: fwxt_batch
+#: model:ir.ui.menu,name:fwxt_batch.menu_batch_management
+msgid "Production Management"
+msgstr "生产管理"
+
+#. module: fwxt_batch
+#: help:material.batch,supplier_id:0
+msgid "Supplier"
+msgstr "供应商"
+
+#. module: fwxt_batch
+#: field:material.batch,supplier_id:0
+msgid "Supplier Info"
+msgstr "供应商信息"
+
+#. module: fwxt_batch
+#: field:commodity.check,type:0 field:commodity.making,type:0
+#: field:commodity.produce,type:0
+msgid "Type"
+msgstr "类型"
+
+#. module: fwxt_batch
+#: view:commodity.check:fwxt_batch.view_form_commodity_check
+#: view:commodity.making:fwxt_batch.view_form_commodity_making
+#: view:commodity.produce:fwxt_batch.view_form_commodity_produce
+msgid "form"
+msgstr "窗体"
+
+#. module: fwxt_batch
+#: field:commodity.batch,material_batch_id:0
+msgid "join"
+msgstr "关联"
+
+#. module: fwxt_batch
+#: view:commodity.check:fwxt_batch.view_form_commodity_check
+#: view:commodity.making:fwxt_batch.view_form_commodity_making
+#: view:commodity.produce:fwxt_batch.view_form_commodity_produce
+msgid "messages"
+msgstr "备注"
+
+#. module: fwxt_batch
+#: view:commodity.check:fwxt_batch.view_tree_commodity_check
+#: view:commodity.making:fwxt_batch.view_tree_commodity_making
+#: view:commodity.produce:fwxt_batch.view_tree_commodity_produce
+msgid "tree"
+msgstr "列表"
+
+#. module: fwxt_batch
+#: view:commodity.batch:fwxt_batch.view_tree_commodity_batch
+#: view:material.batch:fwxt_batch.view_tree_material_batch
+msgid "view"
+msgstr "列表"

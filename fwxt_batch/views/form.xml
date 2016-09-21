@@ -3,11 +3,11 @@
     <data>
 
         <!--原材料批次-->
-        <record id="view_form_material_barch" model="ir.ui.view">
-            <field name="name">Material Barch</field>
-            <field name="model">material.barch</field>
+        <record id="view_form_material_batch" model="ir.ui.view">
+            <field name="name">Material Batch</field>
+            <field name="model">material.batch</field>
             <field name="arch" type="xml">
-                <form string="Material Barch" version="7.0">
+                <form string="Material Batch" version="7.0">
                     <sheet>
                         <h1>No.
                             <field name="code"/>
@@ -16,12 +16,12 @@
                             <group>
                                 <field name="name"/>
                                 <field name="materia_id"/>
-                                <field name="commodity_barch_id"/>
+                                <field name="commodity_batch_id"/>
                                 <field name="production_date"/>
                                 <field name="user_id"/>
                             </group>
                             <group>
-                                <field name="barch"/>
+                                <field name="batch"/>
                                 <field name="supplier_id"/>
                                 <field name="messages"/>
                                 <field name="date_confirm"/>
@@ -33,11 +33,11 @@
         </record>
 
         <!--商品批次-->
-        <record id="view_form_commodity_barch" model="ir.ui.view">
-            <field name="name">Commodity Barch</field>
-            <field name="model">commodity.barch</field>
+        <record id="view_form_commodity_batch" model="ir.ui.view">
+            <field name="name">Commodity Batch</field>
+            <field name="model">commodity.batch</field>
             <field name="arch" type="xml">
-                <form string="Commodity Barch" version="7.0">
+                <form string="Commodity Batch" version="7.0">
                     <sheet>
                         <h1>No.
                             <field name="code" class="oe_inline" />
@@ -50,14 +50,14 @@
                                 <field name="user_id"/>
                             </group>
                             <group>
-                                <field name="barch"/>
+                                <field name="batch"/>
                                 <field name="messages"/>
                                 <field name="date_confirm"/>
                             </group>
                         </group>
                         <notebook colspan="4">
                             <page string="页卡">
-                                <field name="material_barch_id"/>
+                                <field name="material_batch_id"/>
                             </page>
                         </notebook>
                     </sheet>
@@ -81,7 +81,7 @@
                                 <field name="type"/>
                             </group>
                             <group>
-                                <field name="commodity_barch_id"/>
+                                <field name="commodity_batch_id"/>
                             </group>
                         </group>
                         <notebook>
@@ -125,7 +125,7 @@
                                 <field name="type"/>
                             </group>
                             <group>
-                                <field name="commodity_barch_id"/>
+                                <field name="commodity_batch_id"/>
                             </group>
                         </group>
                         <notebook>
@@ -170,7 +170,7 @@
                                 <field name="check_date"/>
                             </group>
                             <group>
-                                <field name="commodity_barch_id"/>
+                                <field name="commodity_batch_id"/>
                                 <field name="supplier_id"/>
                             </group>
                         </group>

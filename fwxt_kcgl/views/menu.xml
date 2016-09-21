@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <menuitem name="Warehouse Management" id="menu_one_warehouse_management" sequence="1"/>
+
+        <menuitem name="Warehouse Information" id="menu_two_warehouse_information" parent="menu_one_warehouse_management" sequence="1"/>
+        <menuitem name="Warehouse Information" id="menu_three_warehouse_info" parent="menu_two_warehouse_information" action="action_warehouse_info" sequence="1"/>
+        <menuitem name="Stock Information" id="menu_two_stock_information" parent="menu_one_warehouse_management" sequence="2"/>
+        <menuitem name="Stock In" id="menu_three_stock_in" parent="menu_two_stock_information" action="action_warehouse_doc_in" sequence="1"/>
+        <menuitem name="Stock Out" id="menu_three_stock_out" parent="menu_two_stock_information" action="action_warehouse_doc_out" sequence="2"/>
+        <!--<menuitem name="Supplier Information" id="menu_three_supplier_info" parent="menu_two_information" action="action_supplier_info" sequence="5"/>-->
+
+    </data>
+</openerp>
