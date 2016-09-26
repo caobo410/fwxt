@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id='report_report_stock_kcye' model='ir.ui.view'>
+            <field name='name'>report.stock.kcye.tree</field>
+            <field name='model'>report.stock.kcye</field>
+            <field name='arch' type='xml'>
+                <tree string='list'>
+                    <field name='commodity' />
+                    <field name='unit' />
+                    <field name='batch' />
+                    <field name='warehouse' />
+                    <field name='commodity_num' sum="Quantity"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id='report_stock_kcye_graph' model='ir.ui.view'>
+            <field name='name'>report.stock.kcye.graph</field>
+            <field name='model'>report.stock.kcye</field>
+            <field name='arch' type='xml'>
+                <graph type='pivot'>
+                    <field name='commodity' type='row' />
+                    <field name='commodity_id' type='col' />
+                    <field name='unit' type='col'/>
+                    <field name='commodity_num' type='measure' />
+                </graph>
+            </field>
+        </record>
+
+        <record id='report_stock_kcye_search' model='ir.ui.view'>
+            <field name='name'>report.stock.kcye.search</field>
+            <field name='model'>report.stock.kcye</field>
+            <field name='arch' type='xml'>
+                <search string='balance' >
+                    <field name='commodity' string='Commodity' filter_domain="[('commodity', 'ilike', self)]" />
+                    <field name='batch' string='Batch' filter_domain="[('batch', 'ilike', self)]" />
+                    <field name='warehouse' string='Warehouse' filter_domain="[('warehouse', 'ilike', self)]" />
+                    <field name='unit' string='Unit' filter_domain="[('unit', 'ilike', self)]" />
+
+                    <group expand="0" string="Group By">
+                        <filter string="Commodity" context="{'group_by':'commodity'}"/>
+                        <filter string="Batch" context="{'group_by': 'batch'}" />
+                        <filter string="Warehouse" context="{'group_by': 'warehouse'}"/>
+                        <filter string="Unit" context="{'group_by': 'unit'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    </data>
+</openerp>
