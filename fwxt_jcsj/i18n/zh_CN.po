@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-20 09:09+0000\n"
-"PO-Revision-Date: 2016-09-20 17:10+0800\n"
+"POT-Creation-Date: 2016-09-26 05:48+0000\n"
+"PO-Revision-Date: 2016-09-26 13:50+0800\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -122,6 +122,19 @@ msgstr ""
 "          "
 
 #. module: fwxt_jcsj
+#: model:ir.actions.act_window,help:fwxt_jcsj.action_base_unit
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              Unit Information\n"
+"            </p>\n"
+"          "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"              单位信息\n"
+"            </p>\n"
+"          "
+
+#. module: fwxt_jcsj
 #: model:ir.actions.act_window,help:fwxt_jcsj.action_video_info
 msgid ""
 "<p class=\"oe_view_nocontent_create\">\n"
@@ -155,6 +168,11 @@ msgid "Base Management"
 msgstr "基础信息"
 
 #. module: fwxt_jcsj
+#: model:ir.actions.act_window,name:fwxt_jcsj.action_base_unit
+msgid "Base Unit"
+msgstr "单位"
+
+#. module: fwxt_jcsj
 #: selection:picture.management,type:0
 msgid "Boby"
 msgstr "页体"
@@ -181,6 +199,7 @@ msgid "Cmmodity"
 msgstr "商品"
 
 #. module: fwxt_jcsj
+#: field:base.unit,code:0 help:base.unit,code:0
 #: view:branch.office.info:fwxt_jcsj.view_form_branch_office_info
 #: field:branch.office.info,code:0 help:branch.office.info,code:0
 #: view:commodity.info:fwxt_jcsj.view_form_commodity_info
@@ -241,24 +260,25 @@ msgid "Convert Information"
 msgstr "单位换算"
 
 #. module: fwxt_jcsj
-#: field:branch.office.info,create_uid:0 field:commodity.info,create_uid:0
-#: field:company.info,create_uid:0 field:convert.info,create_uid:0
-#: field:dict.info,create_uid:0 field:materia.info,create_uid:0
-#: field:picture.management,create_uid:0 field:supplier.info,create_uid:0
-#: field:video.info,create_uid:0
+#: field:base.unit,create_uid:0 field:branch.office.info,create_uid:0
+#: field:commodity.info,create_uid:0 field:company.info,create_uid:0
+#: field:convert.info,create_uid:0 field:dict.info,create_uid:0
+#: field:materia.info,create_uid:0 field:picture.management,create_uid:0
+#: field:supplier.info,create_uid:0 field:video.info,create_uid:0
 msgid "Created by"
 msgstr "创建"
 
 #. module: fwxt_jcsj
-#: field:branch.office.info,create_date:0 field:commodity.info,create_date:0
-#: field:company.info,create_date:0 field:convert.info,create_date:0
-#: field:dict.info,create_date:0 field:materia.info,create_date:0
-#: field:picture.management,create_date:0 field:supplier.info,create_date:0
-#: field:video.info,create_date:0
+#: field:base.unit,create_date:0 field:branch.office.info,create_date:0
+#: field:commodity.info,create_date:0 field:company.info,create_date:0
+#: field:convert.info,create_date:0 field:dict.info,create_date:0
+#: field:materia.info,create_date:0 field:picture.management,create_date:0
+#: field:supplier.info,create_date:0 field:video.info,create_date:0
 msgid "Created on"
 msgstr "创建"
 
 #. module: fwxt_jcsj
+#: field:base.unit,date_confirm:0 help:base.unit,date_confirm:0
 #: field:branch.office.info,date_confirm:0
 #: help:branch.office.info,date_confirm:0 field:commodity.info,date_confirm:0
 #: help:commodity.info,date_confirm:0 field:company.info,date_confirm:0
@@ -299,7 +319,7 @@ msgid "Heard"
 msgstr "页头"
 
 #. module: fwxt_jcsj
-#: field:branch.office.info,id:0 field:commodity.info,id:0
+#: field:base.unit,id:0 field:branch.office.info,id:0 field:commodity.info,id:0
 #: field:company.info,id:0 field:convert.info,id:0 field:dict.info,id:0
 #: field:materia.info,id:0 field:picture.management,id:0
 #: field:supplier.info,id:0 field:video.info,id:0
@@ -307,20 +327,20 @@ msgid "ID"
 msgstr "序号"
 
 #. module: fwxt_jcsj
-#: field:branch.office.info,write_uid:0 field:commodity.info,write_uid:0
-#: field:company.info,write_uid:0 field:convert.info,write_uid:0
-#: field:dict.info,write_uid:0 field:materia.info,write_uid:0
-#: field:picture.management,write_uid:0 field:supplier.info,write_uid:0
-#: field:video.info,write_uid:0
+#: field:base.unit,write_uid:0 field:branch.office.info,write_uid:0
+#: field:commodity.info,write_uid:0 field:company.info,write_uid:0
+#: field:convert.info,write_uid:0 field:dict.info,write_uid:0
+#: field:materia.info,write_uid:0 field:picture.management,write_uid:0
+#: field:supplier.info,write_uid:0 field:video.info,write_uid:0
 msgid "Last Updated by"
 msgstr "Last Updated by"
 
 #. module: fwxt_jcsj
-#: field:branch.office.info,write_date:0 field:commodity.info,write_date:0
-#: field:company.info,write_date:0 field:convert.info,write_date:0
-#: field:dict.info,write_date:0 field:materia.info,write_date:0
-#: field:picture.management,write_date:0 field:supplier.info,write_date:0
-#: field:video.info,write_date:0
+#: field:base.unit,write_date:0 field:branch.office.info,write_date:0
+#: field:commodity.info,write_date:0 field:company.info,write_date:0
+#: field:convert.info,write_date:0 field:dict.info,write_date:0
+#: field:materia.info,write_date:0 field:picture.management,write_date:0
+#: field:supplier.info,write_date:0 field:video.info,write_date:0
 msgid "Last Updated on"
 msgstr "Last Updated on"
 
@@ -346,6 +366,7 @@ msgid "Material"
 msgstr "原材料"
 
 #. module: fwxt_jcsj
+#: field:base.unit,message:0 help:base.unit,message:0
 #: field:branch.office.info,message:0 help:branch.office.info,message:0
 #: field:commodity.info,message:0 help:commodity.info,message:0
 #: field:company.info,message:0 help:company.info,message:0
@@ -358,18 +379,19 @@ msgid "Message"
 msgstr "备注"
 
 #. module: fwxt_jcsj
-#: field:branch.office.info,name:0 help:branch.office.info,name:0
-#: field:commodity.info,name:0 help:commodity.info,name:0
-#: field:company.info,name:0 help:company.info,name:0 field:convert.info,name:0
-#: help:convert.info,name:0 field:dict.info,name:0 help:dict.info,name:0
-#: field:materia.info,name:0 help:materia.info,name:0
-#: field:picture.management,name:0 help:picture.management,name:0
-#: field:supplier.info,name:0 help:supplier.info,name:0 field:video.info,name:0
-#: help:video.info,name:0
+#: field:base.unit,name:0 help:base.unit,name:0 field:branch.office.info,name:0
+#: help:branch.office.info,name:0 field:commodity.info,name:0
+#: help:commodity.info,name:0 field:company.info,name:0
+#: help:company.info,name:0 field:convert.info,name:0 help:convert.info,name:0
+#: field:dict.info,name:0 help:dict.info,name:0 field:materia.info,name:0
+#: help:materia.info,name:0 field:picture.management,name:0
+#: help:picture.management,name:0 field:supplier.info,name:0
+#: help:supplier.info,name:0 field:video.info,name:0 help:video.info,name:0
 msgid "Name"
 msgstr "名称"
 
 #. module: fwxt_jcsj
+#: view:base.unit:fwxt_jcsj.view_form_base_unit
 #: view:company.info:fwxt_jcsj.view_form_company_info help:company.info,code:0
 #: view:convert.info:fwxt_jcsj.view_form_convert_info help:convert.info,code:0
 #: view:picture.management:fwxt_jcsj.view_form_picture_management
@@ -383,11 +405,11 @@ msgid "Number"
 msgstr "数量"
 
 #. module: fwxt_jcsj
-#: field:branch.office.info,user_id:0 field:commodity.info,user_id:0
-#: field:company.info,user_id:0 field:convert.info,user_id:0
-#: field:dict.info,user_id:0 field:materia.info,user_id:0
-#: field:picture.management,user_id:0 field:supplier.info,user_id:0
-#: field:video.info,user_id:0
+#: field:base.unit,user_id:0 field:branch.office.info,user_id:0
+#: field:commodity.info,user_id:0 field:company.info,user_id:0
+#: field:convert.info,user_id:0 field:dict.info,user_id:0
+#: field:materia.info,user_id:0 field:picture.management,user_id:0
+#: field:supplier.info,user_id:0 field:video.info,user_id:0
 msgid "Operator"
 msgstr "操作人"
 
@@ -472,6 +494,11 @@ msgid "Type"
 msgstr "类型"
 
 #. module: fwxt_jcsj
+#: model:ir.ui.menu,name:fwxt_jcsj.menu_three_unit_info
+msgid "Unit Information"
+msgstr "单位信息"
+
+#. module: fwxt_jcsj
 #: field:branch.office.info,video_id:0
 msgid "Video Info"
 msgstr "视频管理"
@@ -501,6 +528,12 @@ msgid "tree"
 msgstr "列表"
 
 #. module: fwxt_jcsj
+#: view:base.unit:fwxt_jcsj.view_form_base_unit
+msgid "unit"
+msgstr "单位"
+
+#. module: fwxt_jcsj
+#: view:base.unit:fwxt_jcsj.view_tree_base_unit
 #: view:company.info:fwxt_jcsj.view_tree_company_info
 #: view:convert.info:fwxt_jcsj.view_tree_convert_info
 #: view:dict.info:fwxt_jcsj.view_tree_dict_info
