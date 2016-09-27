@@ -17,7 +17,7 @@ _logger = logging.getLogger(__name__)
 
 
 
-#仓库设在
+#仓库管理
 class warehouse_info(models.Model):
     _name = "warehouse.info"
     _description = "warehouse.info"

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-21 05:57+0000\n"
-"PO-Revision-Date: 2016-09-21 14:02+0800\n"
+"POT-Creation-Date: 2016-09-27 07:03+0000\n"
+"PO-Revision-Date: 2016-09-27 15:04+0800\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -83,7 +83,13 @@ msgstr ""
 "          "
 
 #. module: fwxt_batch
+#: view:commodity.check:fwxt_batch.view_filter_commodity_check
+msgid "After Check Date"
+msgstr "大于检验日期"
+
+#. module: fwxt_batch
 #: field:commodity.batch,batch:0 help:commodity.batch,batch:0
+#: view:material.batch:fwxt_batch.view_filter_material_batch
 #: field:material.batch,batch:0 help:material.batch,batch:0
 msgid "Batch"
 msgstr "批次"
@@ -104,10 +110,15 @@ msgid "Check Date"
 msgstr "检验日期"
 
 #. module: fwxt_batch
+#: view:commodity.batch:fwxt_batch.view_filter_commodity_batch
 #: field:commodity.batch,code:0 help:commodity.batch,code:0
+#: view:commodity.check:fwxt_batch.view_filter_commodity_check
 #: field:commodity.check,code:0 help:commodity.check,code:0
+#: view:commodity.making:fwxt_batch.view_filter_commodity_making
 #: field:commodity.making,code:0 help:commodity.making,code:0
+#: view:commodity.produce:fwxt_batch.view_filter_commodity_produce
 #: field:commodity.produce,code:0 help:commodity.produce,code:0
+#: view:material.batch:fwxt_batch.view_filter_material_batch
 #: field:material.batch,code:0 help:material.batch,code:0
 msgid "Code"
 msgstr "编号"
@@ -181,6 +192,15 @@ msgid "Date"
 msgstr "日期"
 
 #. module: fwxt_batch
+#: view:commodity.batch:fwxt_batch.view_filter_commodity_batch
+#: view:commodity.check:fwxt_batch.view_filter_commodity_check
+#: view:commodity.making:fwxt_batch.view_filter_commodity_making
+#: view:commodity.produce:fwxt_batch.view_filter_commodity_produce
+#: view:material.batch:fwxt_batch.view_filter_material_batch
+msgid "Group"
+msgstr "分组"
+
+#. module: fwxt_batch
 #: field:commodity.batch,id:0 field:commodity.check,id:0
 #: field:commodity.making,id:0 field:commodity.produce,id:0
 #: field:material.batch,id:0
@@ -230,10 +250,15 @@ msgid "Messages"
 msgstr "备注"
 
 #. module: fwxt_batch
+#: view:commodity.batch:fwxt_batch.view_filter_commodity_batch
 #: field:commodity.batch,name:0 help:commodity.batch,name:0
+#: view:commodity.check:fwxt_batch.view_filter_commodity_check
 #: field:commodity.check,name:0 help:commodity.check,name:0
+#: view:commodity.making:fwxt_batch.view_filter_commodity_making
 #: field:commodity.making,name:0 help:commodity.making,name:0
+#: view:commodity.produce:fwxt_batch.view_filter_commodity_produce
 #: field:commodity.produce,name:0 help:commodity.produce,name:0
+#: view:material.batch:fwxt_batch.view_filter_material_batch
 #: field:material.batch,name:0 help:material.batch,name:0
 msgid "Name"
 msgstr "名称"
@@ -287,6 +312,24 @@ msgid "Type"
 msgstr "类型"
 
 #. module: fwxt_batch
+#: view:commodity.batch:fwxt_batch.view_filter_commodity_batch
+msgid "batch"
+msgstr "批次"
+
+#. module: fwxt_batch
+#: view:commodity.check:fwxt_batch.view_filter_commodity_check
+#: view:commodity.making:fwxt_batch.view_filter_commodity_making
+#: view:commodity.produce:fwxt_batch.view_filter_commodity_produce
+#: view:material.batch:fwxt_batch.view_filter_material_batch
+msgid "commodity_batch_id"
+msgstr "商品批次"
+
+#. module: fwxt_batch
+#: view:commodity.batch:fwxt_batch.view_filter_commodity_batch
+msgid "commodity_id"
+msgstr "商品"
+
+#. module: fwxt_batch
 #: view:commodity.check:fwxt_batch.view_form_commodity_check
 #: view:commodity.making:fwxt_batch.view_form_commodity_making
 #: view:commodity.produce:fwxt_batch.view_form_commodity_produce
@@ -299,6 +342,11 @@ msgid "join"
 msgstr "关联"
 
 #. module: fwxt_batch
+#: view:material.batch:fwxt_batch.view_filter_material_batch
+msgid "materia_id"
+msgstr "原材料"
+
+#. module: fwxt_batch
 #: view:commodity.check:fwxt_batch.view_form_commodity_check
 #: view:commodity.making:fwxt_batch.view_form_commodity_making
 #: view:commodity.produce:fwxt_batch.view_form_commodity_produce
@@ -306,11 +354,33 @@ msgid "messages"
 msgstr "备注"
 
 #. module: fwxt_batch
+#: view:commodity.batch:fwxt_batch.view_filter_commodity_batch
+#: view:commodity.check:fwxt_batch.view_filter_commodity_check
+#: view:commodity.making:fwxt_batch.view_filter_commodity_making
+#: view:commodity.produce:fwxt_batch.view_filter_commodity_produce
+#: view:material.batch:fwxt_batch.view_filter_material_batch
+msgid "search"
+msgstr "查询"
+
+#. module: fwxt_batch
+#: view:commodity.check:fwxt_batch.view_filter_commodity_check
+#: view:material.batch:fwxt_batch.view_filter_material_batch
+msgid "supplier_id"
+msgstr "供应商"
+
+#. module: fwxt_batch
 #: view:commodity.check:fwxt_batch.view_tree_commodity_check
 #: view:commodity.making:fwxt_batch.view_tree_commodity_making
 #: view:commodity.produce:fwxt_batch.view_tree_commodity_produce
 msgid "tree"
 msgstr "列表"
+
+#. module: fwxt_batch
+#: view:commodity.check:fwxt_batch.view_filter_commodity_check
+#: view:commodity.making:fwxt_batch.view_filter_commodity_making
+#: view:commodity.produce:fwxt_batch.view_filter_commodity_produce
+msgid "type"
+msgstr "类型"
 
 #. module: fwxt_batch
 #: view:commodity.batch:fwxt_batch.view_tree_commodity_batch
