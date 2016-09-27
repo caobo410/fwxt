@@ -23,6 +23,7 @@
         'views/tree.xml',
         'views/action.xml',
         'views/menu.xml',
+        'views/search.xml',
         #'security/ir.model.access.csv',
     ],
     'installable': True,

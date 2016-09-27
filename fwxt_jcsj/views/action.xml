@@ -61,17 +61,32 @@
           </field>
         </record>
 
-        <!--视频管理-->
+        <!--视频-->
         <record id="action_video_info" model="ir.actions.act_window">
-          <field name="name">Video Information</field>
+          <field name="name">actions.ir.attachment</field>
           <field name="type">ir.actions.act_window</field>
-          <field name="res_model">video.info</field>
+          <field name="res_model">ir.attachment</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <field name="view_id" ref="view_tree_ir_attachment"/>
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              Video Information
+            </p>
+          </field>
+        </record>
+
+        <!--其他管理-->
+        <record id="action_other_info" model="ir.actions.act_window">
+          <field name="name">Other Information</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">other.info</field>
           <field name="view_type">form</field>
           <field name="view_mode">tree,form</field>
           <!--<field name="context">{"search_default_no_check_in":1}</field>-->
           <field name="help" type="html">
             <p class="oe_view_nocontent_create">
-              Video Information
+              Other Information
             </p>
           </field>
         </record>

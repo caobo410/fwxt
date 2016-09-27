@@ -57,6 +57,7 @@ class picture_management(models.Model):
     type = fields.Selection([('heard', 'Heard'),
                              ('boby', 'Boby'),
                              ('other', 'Other')], 'Picture Type', required=True, help="Picture Type")
+    image = fields.Binary(string='Image', help='Image')
     message = fields.Char(string='Message', help="Message")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
@@ -101,9 +102,17 @@ class convert_info(models.Model):
     }
 
 #视频管理
-class video_info(models.Model):
-    _name = "video.info"
-    _description = "video.info"
+
+
+class ir_attachment(models.Model):
+    _inherit = 'ir.attachment'
+
+    code = fields.Char(string='Code', help='Code')
+
+#其他设置
+class other_info(models.Model):
+    _name = "other.info"
+    _description = "other.info"
 
     code = fields.Char(string='Code', size=64, required=True, help="No.")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
@@ -122,6 +131,7 @@ class video_info(models.Model):
     }
 
 #字典信息
+
 class dict_info(models.Model):
     _name = "dict.info"
     _description = "dict.info"
@@ -159,7 +169,7 @@ class branch_office_info(models.Model):
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    video_id = fields.Many2one('video.info', string='Video Info')
+    other_id = fields.Many2one('ir.attachment', string='Video Info')
     message = fields.Char(string='Message', help="Message")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
