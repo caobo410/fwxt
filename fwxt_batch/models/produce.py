@@ -22,7 +22,7 @@ class commodity_produce(models.Model):
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    commodity_batch_id = fields.Many2one('commodity.batch', string='Commodity Batch')
+    commodity_batch_id = fields.Many2one('commodity.info', string='Commodity Batch')
     type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'produce')])
     produce_messages = fields.Text(string='Produce Messages', help="Produce Messages")
     messages = fields.Text(string='Messages', help="Messages")
@@ -40,7 +40,7 @@ class commodity_making(models.Model):
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    commodity_batch_id = fields.Many2one('commodity.batch', string='Commodity Batch')
+    commodity_batch_id = fields.Many2one('commodity.info', string='Commodity Batch')
     type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'making')])
     making_messages = fields.Text(string='Make Messages', help="Make Messages")
     messages = fields.Text(string='Messages', help="Messages")
@@ -58,7 +58,7 @@ class commodity_check(models.Model):
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    commodity_batch_id = fields.Many2one('commodity.batch', string='Commodity Batch')
+    commodity_batch_id = fields.Many2one('commodity.info', string='Commodity Batch')
     type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'making')])
     check_date = fields.Date(string='Check Date', size=64, required=True, help="Check Date")
     supplier_id = fields.Many2one('supplier.info', string='Check Company', domain=[('type', '=', 'check')])
