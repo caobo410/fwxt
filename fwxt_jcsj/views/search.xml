@@ -103,6 +103,54 @@
                 <search string="search">
                     <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
                     <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <group expand="0" string="Group">
+                        <filter string="type" domain="[]" context="{'group_by':'type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--经销商-->
+        <record id="view_filter_agent_info" model="ir.ui.view">
+            <field name="name">agent.info.search</field>
+            <field name="model">agent.info</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <group expand="0" string="Group">
+                        <filter string="type" domain="[]" context="{'group_by':'type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--快递信息-->
+        <record id="view_filter_express_info" model="ir.ui.view">
+            <field name="name">Express.info.search</field>
+            <field name="model">express.info</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <group expand="0" string="Group">
+                        <filter string="type" domain="[]" context="{'group_by':'type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--质检信息-->
+        <record id="view_filter_check_info" model="ir.ui.view">
+            <field name="name">check.info.search</field>
+            <field name="model">check.info</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <group expand="0" string="Group">
+                        <filter string="type" domain="[]" context="{'group_by':'type'}"/>
+                    </group>
                 </search>
             </field>
         </record>

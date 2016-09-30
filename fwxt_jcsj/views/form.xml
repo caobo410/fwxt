@@ -23,37 +23,41 @@
                         </group>
                         <notebook>
                             <page string="Company Introduce">
-                                 <field name="company_info"/>
-                             </page>
+                                <field name="company_info"/>
+                            </page>
                         </notebook>
                     </sheet>
                 </form>
             </field>
         </record>
-        
+
         <!--图片管理-->
         <record id="view_form_picture_management" model="ir.ui.view">
             <field name="name">Picture Management</field>
             <field name="model">picture.management</field>
             <field name="arch" type="xml">
                 <form string="Picture Management" version="7.0">
-                <sheet>
-                    <h1>No.
-                        <field name="code" class="oe_inline" />
-                    </h1>
-                    <group>
+                    <sheet>
                         <group>
-                            <field name="name" />
-                            <field name="message" />
+                            <group>
+                                <field name="code" class="oe_inline" />
+                                <field name="name" />
+                                <field name="type" />
+                                <field name="message" />
+                            </group>
+                            <group>
+                                <div>
+                                    <!--<field name="image_medium" widget="image" img_width="50" img_height="50"/>-->
+                                    <field name="image" widget='image' class="oe_right oe_avatar"
+                                           options='{"preview_image": "image", "size": [300, 300]}'/>
+                                </div>
+                                <br/>
+                                <div >
+                                    This field holds the image used as image for the product, limited to 300x300px!
+                                </div>
+                            </group>
                         </group>
-                        <group>
-                            <field name="type" />
-                        </group>
-                    </group>
-                    <group>
-                        <field name="image" widget="image" img_width="600" img_height="500"/>
-                    </group>
-                </sheet>
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -64,21 +68,21 @@
             <field name="model">base.unit</field>
             <field name="arch" type="xml">
                 <form string="unit" version="7.0">
-                <sheet>
-                    <h1>No.
-                        <field name="code" class="oe_inline" />
-                    </h1>
-                    <group>
+                    <sheet>
+                        <h1>No.
+                            <field name="code" class="oe_inline" />
+                        </h1>
                         <group>
-                            <field name="name" />
-                            <field name="message" />
+                            <group>
+                                <field name="name" />
+                                <field name="message" />
+                            </group>
+                            <group>
+                                <field name="user_id" />
+                                <field name="date_confirm" />
+                            </group>
                         </group>
-                        <group>
-                            <field name="user_id" />
-                            <field name="date_confirm" />
-                        </group>
-                    </group>
-                </sheet>
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -89,23 +93,23 @@
             <field name="model">convert.info</field>
             <field name="arch" type="xml">
                 <form string="Convert Information" version="7.0">
-                <sheet>
-                    <h1>No.
-                        <field name="code" class="oe_inline" />
-                    </h1>
-                    <group>
+                    <sheet>
+                        <h1>No.
+                            <field name="code" class="oe_inline" />
+                        </h1>
                         <group>
-                            <field name="name" />
-                            <field name="number" />
-                            <field name="convert" />
-                            <field name="message" />
+                            <group>
+                                <field name="name" />
+                                <field name="number" />
+                                <field name="convert" />
+                                <field name="message" />
+                            </group>
+                            <group>
+                                <field name="user_id" />
+                                <field name="date_confirm" />
+                            </group>
                         </group>
-                        <group>
-                            <field name="user_id" />
-                            <field name="date_confirm" />
-                        </group>
-                    </group>
-                </sheet>
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -121,6 +125,9 @@
                         <field name="code"/>
                     </h1>
                 </xpath>
+                <xpath expr="//field[@name='type']" position="after">
+                    <field name="video_type"/>
+                </xpath>
             </field>
         </record>
 
@@ -130,26 +137,26 @@
             <field name="model">other.info</field>
             <field name="arch" type="xml">
                 <form string="Picture Management" version="7.0">
-                <sheet>
-                    <h1>No.
-                        <field name="code" class="oe_inline" />
-                    </h1>
-                    <group>
+                    <sheet>
+                        <h1>No.
+                            <field name="code" class="oe_inline" />
+                        </h1>
                         <group>
-                            <field name="name" />
-                            <field name="tel" />
-                            <field name="message" />
-                            <field name="user_id" />
-                            <field name="date_confirm" />
+                            <group>
+                                <field name="name" />
+                                <field name="tel" />
+                                <field name="message" />
+                                <field name="user_id" />
+                                <field name="date_confirm" />
+                            </group>
+                            <group>
+                                <field name="weixin_add" />
+                                <field name="web_add" />
+                                <field name="shop_add" />
+                                <field name="Search" />
+                            </group>
                         </group>
-                        <group>
-                            <field name="weixin_add" />
-                            <field name="web_add" />
-                            <field name="shop_add" />
-                            <field name="Search" />
-                        </group>
-                    </group>
-                </sheet>
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -160,22 +167,22 @@
             <field name="model">dict.info</field>
             <field name="arch" type="xml">
                 <form string="Dict Info" version="7.0">
-                <sheet>
-                    <h1>Code
-                        <field name="code" class="oe_inline"/>
-                    </h1>
-                    <group>
+                    <sheet>
+                        <h1>Code
+                            <field name="code" class="oe_inline"/>
+                        </h1>
                         <group>
-                            <field name="name"/>
-                            <field name="dict"/>
+                            <group>
+                                <field name="name"/>
+                                <field name="dict"/>
+                            </group>
+                            <group>
+                                <field name="type"/>
+                                <field name="user_id"/>
+                                <field name="date_confirm"/>
+                            </group>
                         </group>
-                        <group>
-                            <field name="type"/>
-                            <field name="user_id"/>
-                            <field name="date_confirm"/>
-                        </group>
-                    </group>
-                </sheet>
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -186,22 +193,22 @@
             <field name="model">branch.office.info</field>
             <field name="arch" type="xml">
                 <form string="Branch Office " version="7.0">
-                <sheet>
-                    <h1>Code
-                        <field name="code" class="oe_inline"/>
-                    </h1>
-                    <group>
+                    <sheet>
+                        <h1>Code
+                            <field name="code" class="oe_inline"/>
+                        </h1>
                         <group>
-                            <field name="name"/>
-                            <field name="message"/>
+                            <group>
+                                <field name="name"/>
+                                <field name="message"/>
+                            </group>
+                            <group>
+                                <field name="other_id"/>
+                                <field name="user_id"/>
+                                <field name="date_confirm"/>
+                            </group>
                         </group>
-                        <group>
-                            <field name="other_id"/>
-                            <field name="user_id"/>
-                            <field name="date_confirm"/>
-                        </group>
-                    </group>
-                </sheet>
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -212,22 +219,22 @@
             <field name="model">materia.info</field>
             <field name="arch" type="xml">
                 <form string="Materia Info" version="7.0">
-                <sheet>
-                    <h1>Code
-                        <field name="code" class="oe_inline"/>
-                    </h1>
-                    <group>
+                    <sheet>
+                        <h1>Code
+                            <field name="code" class="oe_inline"/>
+                        </h1>
                         <group>
-                            <field name="name"/>
-                            <field name="message"/>
+                            <group>
+                                <field name="name"/>
+                                <field name="message"/>
+                            </group>
+                            <group>
+                                <field name="type"/>
+                                <field name="user_id"/>
+                                <field name="date_confirm"/>
+                            </group>
                         </group>
-                        <group>
-                            <field name="type"/>
-                            <field name="user_id"/>
-                            <field name="date_confirm"/>
-                        </group>
-                    </group>
-                </sheet>
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -238,22 +245,57 @@
             <field name="model">commodity.info</field>
             <field name="arch" type="xml">
                 <form string="Commodity Info" version="7.0">
-                <sheet>
-                    <h1>Code
-                        <field name="code" class="oe_inline"/>
-                    </h1>
-                    <group>
+                    <sheet>
+                        <h1>Code
+                            <field name="code" class="oe_inline"/>
+                        </h1>
                         <group>
-                            <field name="name"/>
-                            <field name="message"/>
+                            <group>
+                                <!--<field name="code" class="oe_inline"/>-->
+                                <field name="name"/>
+                                <field name="type"/>
+                                <field name="message"/>
+                                <field name="user_id"/>
+                                <field name="date_confirm"/>
+                            </group>
+                            <group>
+                                <div>
+                                    <!--<field name="image_medium" widget="image" img_width="50" img_height="50"/>-->
+                                    <field name="image" widget='image' class="oe_right oe_avatar"
+                                           options='{"preview_image": "image", "size": [300, 300]}'/>
+                                </div>
+                                <br/>
+                                <div >
+                                    This field holds the image used as image for the product, limited to 300x300px!
+                                </div>
+                            </group>
                         </group>
+                        <notebook colspan="4">
+                            <page string="list">
+                                <field name="line_id"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_form_commodity_line" model="ir.ui.view">
+            <field name="name">commodity.line.form</field>
+            <field name="model">commodity.line</field>
+            <field name="arch" type="xml">
+                <form string="form" version="7.0">
+                    <sheet>
                         <group>
-                            <field name="type"/>
-                            <field name="user_id"/>
-                            <field name="date_confirm"/>
+                            <group>
+                                <field name="code"/>
+                                <field name="messages"/>
+                            </group>
+                            <group>
+                                <field name="name"/>
+                            </group>
                         </group>
-                    </group>
-                </sheet>
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -264,29 +306,143 @@
             <field name="model">supplier.info</field>
             <field name="arch" type="xml">
                 <form string="Supplier Info" version="7.0">
-                <sheet>
-                    <h1>Code
-                        <field name="code" class="oe_inline"/>
-                    </h1>
-                    <group>
+                    <sheet>
+                        <h1>Code
+                            <field name="code" class="oe_inline"/>
+                        </h1>
                         <group>
-                            <field name="name"/>
-                            <field name="contacts_name"/>
-                            <field name="tel"/>
-                            <field name="address"/>
+                            <group>
+                                <field name="name"/>
+                                <field name="contacts_name"/>
+                                <field name="tel"/>
+                                <field name="address"/>
+                            </group>
+                            <group>
+                                <field name="type"/>
+                                <field name="message"/>
+                                <field name="user_id"/>
+                                <field name="date_confirm"/>
+                            </group>
                         </group>
-                        <group>
-                            <field name="type"/>
-                            <field name="supplier_type"/>
-                            <field name="message"/>
-                            <field name="user_id"/>
-                            <field name="date_confirm"/>
-                        </group>
-                    </group>
-                </sheet>
+                    </sheet>
                 </form>
             </field>
         </record>
 
+        <!--供应商-->
+        <record id="view_form_supplier_info" model="ir.ui.view">
+            <field name="name">Supplier.Info</field>
+            <field name="model">supplier.info</field>
+            <field name="arch" type="xml">
+                <form string="Supplier Info" version="7.0">
+                    <sheet>
+                        <h1>Code
+                            <field name="code" class="oe_inline"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="contacts_name"/>
+                                <field name="tel"/>
+                                <field name="address"/>
+                            </group>
+                            <group>
+                                <field name="type"/>
+                                <field name="message"/>
+                                <field name="user_id"/>
+                                <field name="date_confirm"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--供应商-->
+        <record id="view_form_agent_info" model="ir.ui.view">
+            <field name="name">Agent.Info</field>
+            <field name="model">agent.info</field>
+            <field name="arch" type="xml">
+                <form string="Supplier Info" version="7.0">
+                    <sheet>
+                        <h1>Code
+                            <field name="code" class="oe_inline"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="contacts_name"/>
+                                <field name="tel"/>
+                                <field name="address"/>
+                            </group>
+                            <group>
+                                <field name="type"/>
+                                <field name="message"/>
+                                <field name="user_id"/>
+                                <field name="date_confirm"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--快递gongs-->
+        <record id="view_form_express_info" model="ir.ui.view">
+            <field name="name">Express.Info</field>
+            <field name="model">express.info</field>
+            <field name="arch" type="xml">
+                <form string="Supplier Info" version="7.0">
+                    <sheet>
+                        <h1>Code
+                            <field name="code" class="oe_inline"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="contacts_name"/>
+                                <field name="tel"/>
+                                <field name="address"/>
+                            </group>
+                            <group>
+                                <field name="type"/>
+                                <field name="message"/>
+                                <field name="user_id"/>
+                                <field name="date_confirm"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--质检公司-->
+        <record id="view_form_check_info" model="ir.ui.view">
+            <field name="name">Check.Info</field>
+            <field name="model">check.info</field>
+            <field name="arch" type="xml">
+                <form string="Supplier Info" version="7.0">
+                    <sheet>
+                        <h1>Code
+                            <field name="code" class="oe_inline"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="contacts_name"/>
+                                <field name="tel"/>
+                                <field name="address"/>
+                            </group>
+                            <group>
+                                <field name="type"/>
+                                <field name="message"/>
+                                <field name="user_id"/>
+                                <field name="date_confirm"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
     </data>
 </openerp>
