@@ -33,8 +33,10 @@
                     <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
                     <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
                     <field name="batch" string="batch" filter_domain="[('batch','ilike',self)]"/>
+                    <field name="branch_id" string="Branch Office" filter_domain="[('branch_id','ilike',self)]"/>
                     <field name="commodity_id"/>
                     <group expand="0" string="Group">
+                        <filter string="branch_id" domain="[]" context="{'group_by':'branch_id'}"/>
                         <filter string="commodity_id" domain="[]" context="{'group_by':'commodity_id'}"/>
                     </group>
                 </search>

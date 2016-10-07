@@ -209,6 +209,7 @@ class commodity_info(models.Model):
     name = fields.Char(string='Name', size=64, required=True, help="Name")
     type = fields.Selection(selection=_get_select_commodity_types, string='Type', required=True)
     image = fields.Binary(string="Image", help="This field holds the image used as image for the product, limited to 300x300px.")
+    routing_id = fields.Many2one('base.routing', string='Routing', select=True, track_visibility='onchange')
     message = fields.Char(string='Message', help="Message")
     user_id = fields.Many2one('res.users', string='Operator')
     line_id = fields.One2many('commodity.line', 'line_id', string='join', copy=True)

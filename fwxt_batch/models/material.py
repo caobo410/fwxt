@@ -56,6 +56,7 @@ class commodity_batch(models.Model):
     commodity_id = fields.Many2one('commodity.info', string='Commodity')
     # supplier_id = fields.Many2one('supplier.info', string='Supplier Info', domain=[('type', '=', 'supplier')], help="Supplier")
     material_batch_id = fields.One2many('material.batch', 'commodity_batch_id', string='join')
+    branch_id = fields.Many2one('branch.office.info', string='Branch Office', select=True, track_visibility='onchange')
     production_date = fields.Date(string='Date', size=64, required=True, help="Date")
     messages = fields.Char(string='Messages', help="Messages")
     user_id = fields.Many2one('res.users', string='Operator')
