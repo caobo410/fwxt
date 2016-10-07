@@ -24,7 +24,7 @@ class material_batch(models.Model):
     name = fields.Char(string='Name', size=64, required=True, help="Name")
     batch = fields.Char(string='Batch', size=64, required=True, help="Batch")
     materia_id = fields.Many2one('materia.info', string='Materia Info')
-    supplier_id = fields.Many2one('supplier.info', string='Supplier Info', domain=[('type', '=', 'supplier')], help="Supplier")
+    supplier_id = fields.Many2one('supplier.info', string='Supplier Info', help="Supplier")
     commodity_batch_id = fields.Many2one('commodity.batch', string='Commodity Batch')
     production_date = fields.Date(string='Date', size=64, required=True, help="Date")
     messages = fields.Char(string='Messages', help="Messages")

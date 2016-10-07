@@ -52,10 +52,8 @@
                     <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
                     <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
                     <field name="commodity_id"/>
-                    <field name="type"/>
                     <group expand="0" string="Group">
                         <filter string="commodity_id" domain="[]" context="{'group_by':'commodity_id'}"/>
-                        <filter string="type" domain="[]" context="{'group_by':'type'}"/>
                     </group>
                 </search>
             </field>
@@ -70,10 +68,8 @@
                     <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
                     <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
                     <field name="commodity_id"/>
-                    <field name="type"/>
                     <group expand="0" string="Group">
                         <filter string="commodity_id" domain="[]" context="{'group_by':'commodity_id'}"/>
-                        <filter string="type" domain="[]" context="{'group_by':'type'}"/>
                     </group>
                 </search>
             </field>
@@ -88,13 +84,9 @@
                     <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
                     <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
                     <field name="commodity_id"/>
-                    <field name="type"/>
-                    <field name="check_date" string="After Check Date" filter_domain="[('check_date','>=',self)]"/>
                     <!--<field name="check_date" string="Before Check Date" filter_domain="[('check_date','<',self)]"/>-->
-                    <field name="supplier_id"/>
+                    <!--<field name="supplier_id"/>-->
                     <group expand="0" string="Group">
-                        <filter string="type" domain="[]" context="{'group_by':'type'}"/>
-                        <filter string="supplier_id" domain="[]" context="{'group_by':'supplier_id'}"/>
                         <filter string="commodity_id" domain="[]" context="{'group_by':'commodity_id'}"/>
                     </group>
                 </search>
