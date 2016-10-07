@@ -135,7 +135,7 @@
                     <field name="name"/>
                     <field name="type"/>
                     <field name="check_date"/>
-                    <field name="supplier_id"/>
+                    <field name="check_id"/>
                     <field name="user_id"/>
                     <field name="date_confirm"/>
                 </tree>

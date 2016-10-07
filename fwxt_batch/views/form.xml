@@ -242,7 +242,7 @@
                         <group>
                             <group>
                                 <field name="name"/>
-                                <field name="supplier_id"/>
+                                <field name="check_id"/>
                                 <field name="messages"/>
                             </group>
                             <group>
