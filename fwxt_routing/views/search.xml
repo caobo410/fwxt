@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_search_base_routing" model="ir.ui.view">
+            <field name="name">base.routing.search</field>
+            <field name="model">base.routing</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="picture_id"/>
+                    <field name="video_id"/>
+                    <separator/>
+                    <group expand="0" string="Group">
+                        <filter string="picture_id" context="{'group_by':'picture_id'}"/>
+                        <filter string="video_id" context="{'group_by':'video_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_search_base_step" model="ir.ui.view">
+            <field name="name">base.step.search</field>
+            <field name="model">base.step</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="picture_id"/>
+                    <field name="video_id"/>
+                    <separator/>
+                    <group expand="0" string="Group">
+                        <filter string="picture_id" context="{'group_by':'picture_id'}"/>
+                        <filter string="video_id" context="{'group_by':'video_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -62,7 +62,7 @@
           </field>
         </record>
 
-        <!--加工过程-->
+        <!--质检过程-->
         <record id="action_commodity_check" model="ir.actions.act_window">
           <field name="name">Commodity Check</field>
           <field name="type">ir.actions.act_window</field>

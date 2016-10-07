@@ -81,7 +81,7 @@
                                 <field name="type"/>
                             </group>
                             <group>
-                                <field name="commodity_batch_id"/>
+                                <field name="commodity_id"/>
                             </group>
                         </group>
                         <notebook>
@@ -125,7 +125,7 @@
                                 <field name="type"/>
                             </group>
                             <group>
-                                <field name="commodity_batch_id"/>
+                                <field name="commodity_id"/>
                             </group>
                         </group>
                         <notebook>
@@ -170,7 +170,7 @@
                                 <field name="check_date"/>
                             </group>
                             <group>
-                                <field name="commodity_batch_id"/>
+                                <field name="commodity_id"/>
                                 <field name="supplier_id"/>
                             </group>
                         </group>

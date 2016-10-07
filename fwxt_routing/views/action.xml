@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--工艺路线-->
+        <record id="action_base_routing" model="ir.actions.act_window">
+            <field name="name">base.routing.actions</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">base.routing</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Routing Info
+                </p>
+            </field>
+        </record>
+
+        <!--工序-->
+        <record id="action_base_step" model="ir.actions.act_window">
+            <field name="name">base.step.actions</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">base.step</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Step Info
+                </p>
+            </field>
+        </record>
+
+    </data>
+</openerp>

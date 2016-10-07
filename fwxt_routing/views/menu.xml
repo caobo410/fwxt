@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <menuitem name="Routing Management" id="menu_one_Routing" sequence="1"/>
+        <menuitem name="Routing" id="menu_two_routing" parent="menu_one_Routing" sequence="1"/>
+        <menuitem name="Routing" id="menu_three_routing" parent="menu_two_routing" action="action_base_routing" sequence="1"/>
+        <menuitem name="Step" id="menu_three_step" parent="menu_two_routing" action="action_base_step" sequence="2"/>
+
+    </data>
+</openerp>

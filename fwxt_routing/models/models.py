@@ -16,15 +16,16 @@ from datetime import datetime
 date_ref = datetime.now().strftime('%Y-%m-%d')
 _logger = logging.getLogger(__name__)
 
-class commodity_produce(models.Model):
-    _name = "commodity.produce"
-    _description = "commodity.produce"
+#工艺路线
+class base_routing(models.Model):
+    _name = "base.routing"
+    _description = "base.routing"
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    commodity_id = fields.Many2one('commodity.info', string='Commodity')
-    type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'produce')])
-    produce_messages = fields.Text(string='Produce Messages', help="Produce Messages")
+    line_id = fields.One2many('routing.line', 'line_id', string='join', copy=True)
+    picture_id = fields.Many2one('picture.management', string='Picture', select=True, track_visibility='onchange')
+    video_id = fields.Many2one('ir.attachment', string='Video', select=True, track_visibility='onchange')
     messages = fields.Text(string='Messages', help="Messages")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
@@ -34,15 +35,38 @@ class commodity_produce(models.Model):
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
-class commodity_making(models.Model):
-    _name = "commodity.making"
-    _description = "commodity.making"
+#工艺路线子项
+class routing_line(models.Model):
+    _name = "routing.line"
+    _description = "routing.line"
+
+    line_id = fields.Many2one('base.routing', string='join', select=True, track_visibility='onchange')
+    step_id = fields.Many2one('base.step', string='Step', select=True, track_visibility='onchange')
+    name = fields.Char(string='Name', size=64, required=True, help="Name")
+    messages = fields.Char(string='Messages', help="Messages")
+    user_id = fields.Many2one('res.users', string='Operator')
+    date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
+
+    @api.one
+    @api.onchange('step_id')
+    def onchange_step_id(self):
+        if self.step_id:
+            self.name = self.step_id.code + ' ' + self.step_id.name
+
+    _defaults = {
+        'date_confirm': date_ref,
+        'user_id': lambda cr, uid, id, c={}: id,
+    }
+
+#工序
+class base_step(models.Model):
+    _name = "base.step"
+    _description = "base.step"
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    commodity_id = fields.Many2one('commodity.info', string='Commodity')
-    type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'making')])
-    making_messages = fields.Text(string='Make Messages', help="Make Messages")
+    picture_id = fields.Many2one('picture.management', string='Picture', select=True, track_visibility='onchange')
+    video_id = fields.Many2one('ir.attachment', string='Video', select=True, track_visibility='onchange')
     messages = fields.Text(string='Messages', help="Messages")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
@@ -52,24 +76,4 @@ class commodity_making(models.Model):
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
-class commodity_check(models.Model):
-    _name = "commodity.check"
-    _description = "commodity.check"
-
-    code = fields.Char(string='Code', size=64, required=True, help="Code")
-    name = fields.Char(string='Name', size=64, required=True, help="Name")
-    commodity_id = fields.Many2one('commodity.info', string='Commodity')
-    type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'making')])
-    check_date = fields.Date(string='Check Date', size=64, required=True, help="Check Date")
-    supplier_id = fields.Many2one('supplier.info', string='Check Company', domain=[('type', '=', 'check')])
-    check_messages = fields.Text(string='Make Messages', help="Make Messages")
-    messages = fields.Text(string='Messages', help="Messages")
-    user_id = fields.Many2one('res.users', string='Operator')
-    date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
-
-    _defaults = {
-        'check_date': date_ref,
-        'date_confirm': date_ref,
-        'user_id': lambda cr, uid, id, c={}: id,
-    }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

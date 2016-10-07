@@ -50,7 +50,7 @@
                 <tree string="tree">
                     <field name="code"/>
                     <field name="name"/>
-                    <field name="commodity_batch_id"/>
+                    <field name="commodity_id"/>
                     <field name="type"/>
                     <field name="user_id"/>
                     <field name="date_confirm"/>
@@ -67,7 +67,7 @@
                 <tree string="tree">
                     <field name="code"/>
                     <field name="name"/>
-                    <field name="commodity_batch_id"/>
+                    <field name="commodity_id"/>
                     <field name="type"/>
                     <field name="user_id"/>
                     <field name="date_confirm"/>
@@ -84,7 +84,7 @@
                 <tree string="tree">
                     <field name="code"/>
                     <field name="name"/>
-                    <field name="commodity_batch_id"/>
+                    <field name="commodity_id"/>
                     <field name="type"/>
                     <field name="supplier_id"/>
                     <field name="check_date"/>
