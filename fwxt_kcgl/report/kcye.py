@@ -24,7 +24,7 @@ class report_stock_kcye(models.Model):
                           commodity_batch.name as batch, base_unit.name as unit, (sum(COALESCE(rk.rknum,0))-sum(COALESCE(ck.cknum,0))) as commodity_num from (
                       select id,warehouse_id,commodity_id,batch_id,unit_id,number as rknum
                                             from warehouse_doc
-                                            where type ='in' and number>0) rk
+                                            where (type ='in' or type = 'manual') and number>0) rk
                       left join
                       (select id,warehouse_id,commodity_id,batch_id,unit_id,number as cknum
                                             from warehouse_doc
