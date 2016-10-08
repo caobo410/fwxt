@@ -57,6 +57,7 @@ class picture_management(models.Model):
     type = fields.Selection([('heard', 'Heard'),
                              ('boby', 'Boby'),
                              ('other', 'Other')], 'Picture Type', required=True, help="Picture Type")
+    image = fields.Binary(string='Image', help='Image')
     message = fields.Char(string='Message', help="Message")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
@@ -100,10 +101,12 @@ class convert_info(models.Model):
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
-#视频管理
-class video_info(models.Model):
-    _name = "video.info"
-    _description = "video.info"
+
+
+#其他设置
+class other_info(models.Model):
+    _name = "other.info"
+    _description = "other.info"
 
     code = fields.Char(string='Code', size=64, required=True, help="No.")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
@@ -111,7 +114,7 @@ class video_info(models.Model):
     weixin_add = fields.Char(string='Weixin Add', help="Weixin Add")
     web_add = fields.Char(string='Web add', help="Web add")
     shop_add = fields.Char(string='Shop Add', help="Shop Add")
-    Search = fields.Char(string='Search', help="Search")
+    Search = fields.Text(string='Search', help="Search")
     message = fields.Char(string='Message', help="Message")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
@@ -130,9 +133,13 @@ class dict_info(models.Model):
     name = fields.Char(string='Name', size=64, required=True, help="Name")
     type = fields.Selection([('material', 'Material'),
                              ('supplier', 'Supplier'),
+                             ('agent', 'Agent'),
+                             ('express', 'Express'),
+                             ('check', 'Check'),
                              ('commodity', 'Cmmodity'),
                              ('produce', 'Produce'),
-                             ('making', 'Making')], 'Type', required=True, help="Type")
+                             ('making', 'Making'),
+                             ('video', 'Video')], 'Type', required=True, help="Type")
     dict = fields.Char(string='Dict', help="Dict")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
@@ -152,6 +159,12 @@ class dict_info(models.Model):
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
+#附件管理
+class ir_attachment(models.Model):
+    _inherit = 'ir.attachment'
+
+    code = fields.Char(string='Code', help='Code')
+    video_type = fields.Many2one('dict.info', string="Type", required=True, domain="[('type', '=', 'video')]")
 # 生产基地
 class branch_office_info(models.Model):
     _name = "branch.office.info"
@@ -159,7 +172,7 @@ class branch_office_info(models.Model):
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    video_id = fields.Many2one('video.info', string='Video Info')
+    other_id = fields.Many2one('ir.attachment', string='Video Info')
     message = fields.Char(string='Message', help="Message")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
@@ -195,9 +208,26 @@ class commodity_info(models.Model):
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
     type = fields.Selection(selection=_get_select_commodity_types, string='Type', required=True)
+    image = fields.Binary(string="Image", help="This field holds the image used as image for the product, limited to 300x300px.")
+    routing_id = fields.Many2one('base.routing', string='Routing', select=True, track_visibility='onchange')
     message = fields.Char(string='Message', help="Message")
     user_id = fields.Many2one('res.users', string='Operator')
+    line_id = fields.One2many('commodity.line', 'line_id', string='join', copy=True)
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
+
+    _defaults = {
+        'date_confirm': date_ref,
+        'user_id': lambda cr, uid, id, c={}: id,
+    }
+#产品说明
+class commodity_line(models.Model):
+    _name = "commodity.line"
+    _description = "commodity.line"
+
+    code = fields.Char(string='No.', size=64, required=True, help="No.")
+    name = fields.Char(string='Name', size=64, required=True, help="Name")
+    line_id = fields.Many2one('commodity.info', string='Commodity Info', select=True, track_visibility='onchange')
+    messages = fields.Text(string='Messages', help="Messages")
 
     _defaults = {
         'date_confirm': date_ref,
@@ -211,15 +241,14 @@ class supplier_info(models.Model):
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    type = fields.Selection([('supplier', 'Supplier'),
-                             ('agent', 'Agent'),
-                             ('express', 'Express'),
-                             ('check', 'Check')], 'Product Type', required=True, help="Type")
-
-    supplier_type = fields.Selection(selection=_get_select_supplier_types, string='Supplier type', required=True)
+    # type = fields.Selection([('supplier', 'Supplier'),
+    #                          ('agent', 'Agent'),
+    #                          ('express', 'Express'),
+    #                          ('check', 'Check')], 'Product Type', required=True, help="Type")
+    type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'supplier')], required=True, select=True, track_visibility='onchange')
     contacts_name = fields.Char(string='Contacts Name', help="Contacts Name")
     tel = fields.Char(string='Tel', help="Tel")
-    address = fields.Char(string='Address', size=64, required=True, help="Address")
+    address = fields.Char(string='Address', size=64, help="Address")
     message = fields.Char(string='Message', help="Message")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
@@ -227,6 +256,66 @@ class supplier_info(models.Model):
     _defaults = {
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
-        'type': 'supplier'
     }
+
+#经销商
+class agent_info(models.Model):
+    _name = "agent.info"
+    _description = "agent.info"
+
+    code = fields.Char(string='Code', size=64, required=True, help="Code")
+    name = fields.Char(string='Name', size=64, required=True, help="Name")
+    type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'agent')], required=True, select=True, track_visibility='onchange')
+    contacts_name = fields.Char(string='Contacts Name', help="Contacts Name")
+    tel = fields.Char(string='Tel', help="Tel")
+    address = fields.Char(string='Address', size=64, help="Address")
+    message = fields.Char(string='Message', help="Message")
+    user_id = fields.Many2one('res.users', string='Operator')
+    date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
+
+    _defaults = {
+        'date_confirm': date_ref,
+        'user_id': lambda cr, uid, id, c={}: id,
+    }
+
+#配送公司
+class express_info(models.Model):
+    _name = "express.info"
+    _description = "express.info"
+
+    code = fields.Char(string='Code', size=64, required=True, help="Code")
+    name = fields.Char(string='Name', size=64, required=True, help="Name")
+    type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'express')], required=True, select=True, track_visibility='onchange')
+    contacts_name = fields.Char(string='Contacts Name', help="Contacts Name")
+    tel = fields.Char(string='Tel', help="Tel")
+    address = fields.Char(string='Address', size=64, help="Address")
+    message = fields.Char(string='Message', help="Message")
+    user_id = fields.Many2one('res.users', string='Operator')
+    date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
+
+    _defaults = {
+        'date_confirm': date_ref,
+        'user_id': lambda cr, uid, id, c={}: id,
+    }
+
+#质检公司
+class check_info(models.Model):
+    _name = "check.info"
+    _description = "check.info"
+
+    code = fields.Char(string='Code', size=64, required=True, help="Code")
+    name = fields.Char(string='Name', size=64, required=True, help="Name")
+    type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'check')], required=True, select=True, track_visibility='onchange')
+    contacts_name = fields.Char(string='Contacts Name', help="Contacts Name")
+    tel = fields.Char(string='Tel', help="Tel")
+    address = fields.Char(string='Address', size=64, help="Address")
+    message = fields.Char(string='Message', help="Message")
+    user_id = fields.Many2one('res.users', string='Operator')
+    date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
+
+    _defaults = {
+        'date_confirm': date_ref,
+        'user_id': lambda cr, uid, id, c={}: id,
+    }
+
     # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

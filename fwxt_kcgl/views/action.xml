@@ -24,7 +24,7 @@
           <field name="res_model">warehouse.doc</field>
           <field name="view_type">form</field>
           <field name="view_mode">tree,form</field>
-          <field name="domain">[('type','=','in')]</field>
+          <field name="domain">[('type','in',('in','manual'))]</field>
           <field name="help" type="html">
             <p class="oe_view_nocontent_create">
               Warehouse Doc
@@ -45,6 +45,27 @@
               Warehouse Doc
             </p>
           </field>
+        </record>
+
+        <!--库存表-->
+        <record id='action_report_stock_balance' model='ir.actions.act_window' >
+            <field name='name'>Stock Balance</field>
+            <field name='res_model'>report.stock.kcye</field>
+            <field name='view_mode'>graph,tree</field>
+            <field name='view_id' ref='report_stock_kcye_graph' />
+        </record>
+
+
+        <!--手动入库-->
+        <record id='action_manual_storage' model='ir.actions.act_window' >
+            <field name='multi'>True</field>
+            <field name='key2'>client_action_multi</field>
+            <field name='name'>Manual Storage</field>
+            <field name='res_model'>manual.storage</field>
+            <field name='src_model'>warehouse.doc</field>
+            <field name='view_mode'>form</field>
+            <field name='target'>new</field>
+            <field name='view_type'>form</field>
         </record>
 
     </data>

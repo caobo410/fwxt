@@ -33,6 +33,7 @@
                     <field name="name"/>
                     <field name="batch"/>
                     <field name="commodity_id"/>
+                    <field name="material_batch_id"/>
                     <field name="production_date"/>
                     <field name="user_id"/>
                     <field name="date_confirm"/>
@@ -49,7 +50,23 @@
                 <tree string="tree">
                     <field name="code"/>
                     <field name="name"/>
-                    <field name="commodity_batch_id"/>
+                    <field name="line_id"/>
+                    <field name="commodity_id"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--商品生产line-->
+        <record id="view_tree_produce_line" model="ir.ui.view">
+            <field name="name">Produce Line</field>
+            <field name="model">produce.line</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="tree">
+                    <field name="code"/>
+                    <field name="name"/>
                     <field name="type"/>
                     <field name="user_id"/>
                     <field name="date_confirm"/>
@@ -66,7 +83,23 @@
                 <tree string="tree">
                     <field name="code"/>
                     <field name="name"/>
-                    <field name="commodity_batch_id"/>
+                    <field name="line_id"/>
+                    <field name="commodity_id"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--商品加工line-->
+        <record id="view_tree_making_line" model="ir.ui.view">
+            <field name="name">making Line</field>
+            <field name="model">making.line</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="tree">
+                    <field name="code"/>
+                    <field name="name"/>
                     <field name="type"/>
                     <field name="user_id"/>
                     <field name="date_confirm"/>
@@ -83,15 +116,30 @@
                 <tree string="tree">
                     <field name="code"/>
                     <field name="name"/>
-                    <field name="commodity_batch_id"/>
-                    <field name="type"/>
-                    <field name="supplier_id"/>
-                    <field name="check_date"/>
+                    <field name="line_id"/>
+                    <field name="commodity_id"/>
                     <field name="user_id"/>
                     <field name="date_confirm"/>
                 </tree>
             </field>
         </record>
 
+        <!--质检line-->
+        <record id="view_tree_check_line" model="ir.ui.view">
+            <field name="name">Check Line</field>
+            <field name="model">check.line</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="tree">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="check_date"/>
+                    <field name="check_id"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
     </data>
 </openerp>

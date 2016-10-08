@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--仓库管理-->
+        <record id="view_filter_warehouse_info" model="ir.ui.view">
+            <field name="name">warehouse.info.search</field>
+            <field name="model">warehouse.info</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!--入库管理-->
+        <record id="view_filter_warehouse_doc" model="ir.ui.view">
+            <field name="name">warehouse.doc.search</field>
+            <field name="model">warehouse.doc</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <field name="batch_id"/>
+                    <field name="type"/>
+                    <field name="unit_id"/>
+                    <field name="number" string="Number" filter_domain="[('number','>=',self)]"/>
+                    <group expand="0" string="Group">
+                        <filter string="batch_id" domain="[]" context="{'group_by':'batch_id'}"/>
+                        <filter string="commodity_id" domain="[]" context="{'group_by':'commodity_id'}"/>
+                        <filter string="warehouse_id" domain="[]" context="{'group_by':'warehouse_id'}"/>
+                        <filter string="unit_id" domain="[]" context="{'group_by':'unit_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</openerp>

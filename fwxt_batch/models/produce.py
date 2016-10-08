@@ -16,15 +16,32 @@ from datetime import datetime
 date_ref = datetime.now().strftime('%Y-%m-%d')
 _logger = logging.getLogger(__name__)
 
+#商品生产
 class commodity_produce(models.Model):
     _name = "commodity.produce"
     _description = "commodity.produce"
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    commodity_batch_id = fields.Many2one('commodity.batch', string='Commodity Batch')
+    commodity_id = fields.Many2one('commodity.info', string='Commodity')
+    line_id = fields.One2many('produce.line', 'line_id', string='list', copy=True)
+    messages = fields.Char(string='Messages', help="Messages")
+    user_id = fields.Many2one('res.users', string='Operator')
+    date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
+
+    _defaults = {
+        'date_confirm': date_ref,
+        'user_id': lambda cr, uid, id, c={}: id,
+    }
+
+class produce_line(models.Model):
+    _name = "produce.line"
+    _description = "produce.line"
+
+    code = fields.Char(string='Code', size=64, required=True, help="Code")
+    name = fields.Char(string='Name', size=64, required=True, help="Name")
+    line_id = fields.Many2one('commodity.produce', string='Commodity Produce', select=True, track_visibility='onchange')
     type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'produce')])
-    produce_messages = fields.Text(string='Produce Messages', help="Produce Messages")
     messages = fields.Text(string='Messages', help="Messages")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
@@ -34,15 +51,15 @@ class commodity_produce(models.Model):
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
+#商品加工
 class commodity_making(models.Model):
     _name = "commodity.making"
     _description = "commodity.making"
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    commodity_batch_id = fields.Many2one('commodity.batch', string='Commodity Batch')
-    type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'making')])
-    making_messages = fields.Text(string='Make Messages', help="Make Messages")
+    commodity_id = fields.Many2one('commodity.info', string='Commodity')
+    line_id = fields.One2many('making.line', 'line_id', string='list', copy=True)
     messages = fields.Text(string='Messages', help="Messages")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
@@ -52,17 +69,48 @@ class commodity_making(models.Model):
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
+class making_line(models.Model):
+    _name = "making.line"
+    _description = "making.line"
+
+    code = fields.Char(string='Code', size=64, required=True, help="Code")
+    name = fields.Char(string='Name', size=64, required=True, help="Name")
+    line_id = fields.Many2one('commodity.making', string='Commodity Making', select=True, track_visibility='onchange')
+    type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'making')])
+    messages = fields.Text(string='Messages', help="Messages")
+    user_id = fields.Many2one('res.users', string='Operator')
+    date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
+
+    _defaults = {
+        'date_confirm': date_ref,
+        'user_id': lambda cr, uid, id, c={}: id,
+    }
+
+#商品质检
 class commodity_check(models.Model):
     _name = "commodity.check"
     _description = "commodity.check"
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    commodity_batch_id = fields.Many2one('commodity.batch', string='Commodity Batch')
+    commodity_id = fields.Many2one('commodity.info', string='Commodity')
+    line_id = fields.One2many('check.line', 'line_id', string='list', copy=True)
+    messages = fields.Text(string='Messages', help="Messages")
+    user_id = fields.Many2one('res.users', string='Operator')
+    date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
+
+
+class check_line(models.Model):
+    _name = "check.line"
+    _description = "check.line"
+
+    code = fields.Char(string='Code', size=64, required=True, help="Code")
+    name = fields.Char(string='Name', size=64, required=True, help="Name")
+    line_id = fields.Many2one('commodity.check', string='Commodity Check', select=True, track_visibility='onchange')
     type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'making')])
     check_date = fields.Date(string='Check Date', size=64, required=True, help="Check Date")
-    supplier_id = fields.Many2one('supplier.info', string='Check Company', domain=[('type', '=', 'check')])
-    check_messages = fields.Text(string='Make Messages', help="Make Messages")
+    check_id = fields.Many2one('check.info', string='Check Company')
+    user_id = fields.Many2one('res.users', string='制单人', select=True, track_visibility='onchange')
     messages = fields.Text(string='Messages', help="Messages")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")

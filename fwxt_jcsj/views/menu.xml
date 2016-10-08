@@ -9,7 +9,11 @@
         <menuitem name="Materia Information" id="menu_three_materia_info" parent="menu_two_information" action="action_materia_info" sequence="2"/>
         <menuitem name="Branch Office Information" id="menu_three_branch_office_info" parent="menu_two_information" action="action_branch_office_info" sequence="3"/>
         <menuitem name="Commodity Information" id="menu_three_commodity_info" parent="menu_two_information" action="action_commodity_info" sequence="4"/>
-        <menuitem name="Supplier Information" id="menu_three_supplier_info" parent="menu_two_information" action="action_supplier_info" sequence="5"/>
+        <menuitem name="Current Company" id="menu_two_current_company" parent="menu_base_management" sequence="1"/>
+        <menuitem name="Supplier Company" id="menu_three_supplier_info" parent="menu_two_current_company" action="action_supplier_info" sequence="1"/>
+        <menuitem name="Agent Company" id="menu_three_agent_info" parent="menu_two_current_company" action="action_agent_info" sequence="2"/>
+        <menuitem name="Express Company" id="menu_three_express_info" parent="menu_two_current_company" action="action_express_info" sequence="3"/>
+        <menuitem name="Check Company" id="menu_three_check_info" parent="menu_two_current_company" action="action_check_info" sequence="4"/>
 
 
         <menuitem name="Company Information" id="menu_two_company" parent="menu_base_management" sequence="2"/>
@@ -18,6 +22,7 @@
         <menuitem name="Unit Information" id="menu_three_unit_info" parent="menu_two_company" action="action_base_unit" sequence="3"/>
         <menuitem name="Convert Information" id="menu_three_convert_info" parent="menu_two_company" action="action_convert_info" sequence="4"/>
         <menuitem name="Video Information" id="menu_three_video_info" parent="menu_two_company" action="action_video_info" sequence="5"/>
+        <menuitem name="Other Information" id="menu_three_other_info" parent="menu_two_company" action="action_other_info" sequence="6"/>
 
     </data>
 </openerp>

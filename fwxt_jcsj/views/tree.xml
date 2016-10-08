@@ -67,9 +67,9 @@
         </record>
 
         <!--视频管理-->
-        <record id="view_tree_video_info" model="ir.ui.view">
-            <field name="name">Video Information</field>
-            <field name="model">video.info</field>
+        <record id="view_tree_other_info" model="ir.ui.view">
+            <field name="name">Other Information</field>
+            <field name="model">other.info</field>
             <field name="priority">1</field>
             <field name="arch" type="xml">
                 <tree string="view">
@@ -79,6 +79,22 @@
                     <field name="message"/>
                     <field name="user_id"/>
                     <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--视频列表base.view_attachment_form-->
+        <record id="view_tree_ir_attachment" model="ir.ui.view">
+            <field name="name">ir.attachment.tree</field>
+            <field name="model">ir.attachment</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="list">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="video_type"/>
+                    <field name="create_date"/>
+                    <field name="write_date"/>
                 </tree>
             </field>
         </record>
@@ -134,6 +150,20 @@
             </field>
         </record>
 
+        <!--成品商品子表-->
+        <record id="view_tree_commodity_line" model="ir.ui.view">
+            <field name="name">Commodity Line</field>
+            <field name="model">commodity.line</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="tree">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="messages"/>
+                </tree>
+            </field>
+        </record>
+
         <!--生产基地-->
         <record id="view_tree_branch_office_info" model="ir.ui.view">
             <field name="name">branch Office Information</field>
@@ -143,7 +173,7 @@
                 <tree string="tree">
                     <field name="code"/>
                     <field name="name"/>
-                    <field name="video_id"/>
+                    <field name="other_id"/>
                     <field name="message"/>
                     <field name="user_id"/>
                     <field name="date_confirm"/>
@@ -161,7 +191,7 @@
                     <field name="code"/>
                     <field name="name"/>
                     <field name="type"/>
-                    <field name="supplier_type"/>
+                    <!--<field name="supplier_type"/>-->
                     <field name="contacts_name"/>
                     <field name="tel"/>
                     <field name="address"/>
@@ -172,5 +202,67 @@
             </field>
         </record>
 
+        <!--经销商-->
+        <record id="view_tree_agent_info" model="ir.ui.view">
+            <field name="name">Agent Information</field>
+            <field name="model">agent.info</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="tree">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="type"/>
+                    <!--<field name="supplier_type"/>-->
+                    <field name="contacts_name"/>
+                    <field name="tel"/>
+                    <field name="address"/>
+                    <field name="message"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--快递公司-->
+        <record id="view_tree_express_info" model="ir.ui.view">
+            <field name="name">Express Information</field>
+            <field name="model">express.info</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="tree">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="type"/>
+                    <!--<field name="supplier_type"/>-->
+                    <field name="contacts_name"/>
+                    <field name="tel"/>
+                    <field name="address"/>
+                    <field name="message"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--质检公司-->
+        <record id="view_tree_check_info" model="ir.ui.view">
+            <field name="name">Check Information</field>
+            <field name="model">check.info</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="tree">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="type"/>
+                    <!--<field name="supplier_type"/>-->
+                    <field name="contacts_name"/>
+                    <field name="tel"/>
+                    <field name="address"/>
+                    <field name="message"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
     </data>
 </openerp>

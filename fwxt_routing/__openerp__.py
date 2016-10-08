@@ -10,20 +10,19 @@
 # 日期：2015-12-18
 # &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 {
-    'name': 'fwxt kcgl ',
+    'name': 'fwxt routing',
     'summary': '描述',
     'version': '1.0',
     'category': 'Tools',
     'sequence': 0,
     'author': 'caobo',
     'website': 'http://www.golerp.com',
-    'depends': ['base', 'decimal_precision'],
+    'depends': ['base',],
     'data': [
         'views/form.xml',
         'views/tree.xml',
         'views/action.xml',
         'views/menu.xml',
-        'report/kcye_view.xml',
         'views/search.xml',
         #'security/ir.model.access.csv',
     ],
@@ -41,4 +40,7 @@ zzzzz
 """,
 }
 
+
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

@@ -30,7 +30,7 @@
                     <field name="type"/>
                     <field name="batch_id"/>
                     <field name="commodity_id"/>
-                    <field name="number"/>
+                    <field name="number"  sum="Total"/>
                     <field name="warehouse_id"/>
                     <field name="unit_id"/>
                     <field name="batch_list"/>

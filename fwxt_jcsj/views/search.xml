@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--字典管理-->
+        <record id="view_filter_dict_info" model="ir.ui.view">
+            <field name="name">dict.info.search</field>
+            <field name="model">dict.info</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <separator/>
+                    <group expand="0" string="Group">
+                        <filter string="type" domain="[]" context="{'group_by':'type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--原材料管理-->
+        <record id="view_filter_materia_info" model="ir.ui.view">
+            <field name="name">materia.info.search</field>
+            <field name="model">materia.info</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <separator/>
+                    <group expand="0" string="Group">
+                        <filter string="type" domain="[]" context="{'group_by':'type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--生产基地-->
+        <record id="view_filter_branch_office_info" model="ir.ui.view">
+            <field name="name">branch.office.info.search</field>
+            <field name="model">branch.office.info</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!--商品信息-->
+        <record id="view_filter_commodity_info" model="ir.ui.view">
+            <field name="name">commodity.info.search</field>
+            <field name="model">commodity.info</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <separator/>
+                    <group expand="0" string="Group">
+                        <filter string="type" domain="[]" context="{'group_by':'type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--供应商信息-->
+        <record id="view_filter_supplier_info" model="ir.ui.view">
+            <field name="name">supplier.info.search</field>
+            <field name="model">supplier.info</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <separator/>
+                    <group expand="0" string="Group">
+                        <filter string="type" domain="[]" context="{'group_by':'type'}"/>
+                        <filter string="supplier_type" domain="[]" context="{'group_by':'supplier_type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--图片管理-->
+        <record id="view_filter_picture_management" model="ir.ui.view">
+            <field name="name">picture.management.search</field>
+            <field name="model">picture.management</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <separator/>
+                    <group expand="0" string="Group">
+                        <filter string="type" domain="[]" context="{'group_by':'type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--供应商信息-->
+        <record id="view_filter_base_unit" model="ir.ui.view">
+            <field name="name">base.unit.search</field>
+            <field name="model">base.unit</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <group expand="0" string="Group">
+                        <filter string="type" domain="[]" context="{'group_by':'type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--经销商-->
+        <record id="view_filter_agent_info" model="ir.ui.view">
+            <field name="name">agent.info.search</field>
+            <field name="model">agent.info</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <group expand="0" string="Group">
+                        <filter string="type" domain="[]" context="{'group_by':'type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--快递信息-->
+        <record id="view_filter_express_info" model="ir.ui.view">
+            <field name="name">Express.info.search</field>
+            <field name="model">express.info</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <group expand="0" string="Group">
+                        <filter string="type" domain="[]" context="{'group_by':'type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--质检信息-->
+        <record id="view_filter_check_info" model="ir.ui.view">
+            <field name="name">check.info.search</field>
+            <field name="model">check.info</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <group expand="0" string="Group">
+                        <filter string="type" domain="[]" context="{'group_by':'type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--视频管理-->
+        <record id="view_filter_ir_attachment" model="ir.ui.view">
+            <field name="name">ir.attachment.search</field>
+            <field name="model">ir.attachment</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</openerp>

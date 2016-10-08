@@ -9,6 +9,11 @@
         <menuitem name="Stock Information" id="menu_two_stock_information" parent="menu_one_warehouse_management" sequence="2"/>
         <menuitem name="Stock In" id="menu_three_stock_in" parent="menu_two_stock_information" action="action_warehouse_doc_in" sequence="1"/>
         <menuitem name="Stock Out" id="menu_three_stock_out" parent="menu_two_stock_information" action="action_warehouse_doc_out" sequence="2"/>
+        <menuitem name="Manual Stock" id="menu_three_manual_stock" parent="menu_two_stock_information" action="action_manual_storage" sequence="3"/>
+
+        <menuitem name="Report Stock Query" id="menu_two_stock_query" parent="menu_one_warehouse_management" sequence="3"/>
+        <menuitem name="Report Stock Balance" id="menu_three_stock_balance" parent="menu_two_stock_query" action="action_report_stock_balance" sequence="1"/>
+        <!--<menuitem name="Stock Out" id="menu_three_stock_out" parent="menu_two_stock_information" action="action_warehouse_doc_out" sequence="2"/>-->
         <!--<menuitem name="Supplier Information" id="menu_three_supplier_info" parent="menu_two_information" action="action_supplier_info" sequence="5"/>-->
 
     </data>

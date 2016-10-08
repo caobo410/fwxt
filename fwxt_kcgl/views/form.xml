@@ -62,42 +62,7 @@
                 </form>
             </field>
         </record>
-        
-        <!--&lt;!&ndash;出库单据&ndash;&gt;-->
-        <!--<record id="view_form_warehouse_doc_out" model="ir.ui.view">-->
-            <!--<field name="name">Warehouse Doc</field>-->
-            <!--<field name="model">warehouse.doc</field>-->
-            <!--<field name="arch" type="xml">-->
-                <!--<form string="Convert Information" version="7.0">-->
-                <!--<sheet>-->
-                    <!--<h1>No.-->
-                        <!--<field name="code" class="oe_inline" />-->
-                    <!--</h1>-->
-                    <!--<group>-->
-                        <!--<group>-->
-                            <!--<field name="name" />-->
-                            <!--<field name="batch_id" />-->
-                            <!--<field name="commodity_id" />-->
-                            <!--<field name="unit_id" />-->
-                            <!--<field name="message" />-->
-                        <!--</group>-->
-                        <!--<group>-->
-                            <!--<field name="type" />-->
-                            <!--<field name="warehouse_id" />-->
-                            <!--<field name="name" />-->
-                            <!--<field name="user_id" />-->
-                            <!--<field name="date_confirm" />-->
-                        <!--</group>-->
-                    <!--</group>-->
-                    <!--<notebook colspan="4">-->
-                        <!--<page string="Batch">-->
-                            <!--<field name="batch_list"/>-->
-                        <!--</page>-->
-                    <!--</notebook>-->
-                <!--</sheet>-->
-                <!--</form>-->
-            <!--</field>-->
-        <!--</record>-->
+
         
         <!--捆绑条码-->
         <record id="view_form_batch_list" model="ir.ui.view">
@@ -125,7 +90,49 @@
             </field>
         </record>
 
-
+        <!--批量入库-->
+        <record id="view_form_manual_storage" model="ir.ui.view">
+            <field name="name">manual.storage.form</field>
+            <field name="model">manual.storage</field>
+            <field name="arch" type="xml">
+                <form string="Manual Storage" version="7.0">
+                    <h1>No.
+                        <field name="code" class="oe_inline" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="commodity_id" />
+                            <field name="batch_id" />
+                        </group>
+                        <group>
+                            <field name="warehouse_id" />
+                            <field name="unit_id" />
+                            <field name="number" />
+                        </group>
+                    </group>
+                    <label for="contact_name"/>
+                    <div>
+                        From<field name="from_batch" style="width: 30%%"/>
+                        To <field name="to_batch" style="width: 30%%" />
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_id"/>
+                        </group>
+                        <group>
+                            <field name="date_confirm"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Manual Storage" name="manual_storage" type="object" default_focus="1" class="oe_highlight"/>
+                        <!--<button string="Manual Storage" class="oe_link" special="cancel"/>-->
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
 
     </data>
 </openerp>

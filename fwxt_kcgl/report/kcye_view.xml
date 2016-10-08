@@ -6,51 +6,43 @@
             <field name='model'>report.stock.kcye</field>
             <field name='arch' type='xml'>
                 <tree string='list'>
-                    <field name='goods' />
-                    <field name='lot' groups='goods.batch_groups' />
-                    <field name='attribute_id' groups='goods.multi_attrs_groups' />
-                    <field name='uom' />
-                    <field name='uos' groups='goods.auxiliary_unit_groups' />
-                    <field name='warehouse' groups='warehouse.multi_warehouse_groups' />
-                    <field name='goods_uos_qty' groups='goods.auxiliary_unit_groups' sum='辅助数量合计' />
-                    <field name='goods_qty' sum='数量合计' />
-                    <field name='cost' sum='成本合计' />
+                    <field name='commodity' />
+                    <field name='unit' />
+                    <field name='batch' />
+                    <field name='warehouse' />
+                    <field name='commodity_num' sum="Quantity"/>
                 </tree>
             </field>
         </record>
 
-        <record id='report_stock_balance_graph' model='ir.ui.view'>
-            <field name='name'>report.stock.balance.graph</field>
-            <field name='model'>report.stock.balance</field>
+        <record id='report_stock_kcye_graph' model='ir.ui.view'>
+            <field name='name'>report.stock.kcye.graph</field>
+            <field name='model'>report.stock.kcye</field>
             <field name='arch' type='xml'>
                 <graph type='pivot'>
-                    <field name='goods' type='row' />
-                    <field name='attribute_id' type='col' groups='goods.multi_attrs_groups' />
-                    <field name='warehouse' type='col' groups='warehouse.multi_warehouse_groups' />
-                    <field name='goods_qty' type='measure' />
-                    <field name='goods_uos_qty' type='measure' groups='goods.auxiliary_unit_groups' />
-                    <field name='cost' type='measure' groups='goods.view_cost_groups'/>
+                    <field name='commodity' type='row' />
+                    <field name='commodity_id' type='col' />
+                    <field name='unit' type='col'/>
+                    <field name='commodity_num' type='measure' />
                 </graph>
             </field>
         </record>
 
-        <record id='report_stock_balance_search' model='ir.ui.view'>
-            <field name='name'>report.stock.balance.search</field>
-            <field name='model'>report.stock.balance</field>
+        <record id='report_stock_kcye_search' model='ir.ui.view'>
+            <field name='name'>report.stock.kcye.search</field>
+            <field name='model'>report.stock.kcye</field>
             <field name='arch' type='xml'>
-                <search string='商品库存余额表' >
-                    <field name='goods' string='产品' filter_domain="[('goods', 'ilike', self)]" />
-                    <field name='lot' string='批号' filter_domain="[('lot', 'ilike', self)]" groups='goods.batch_groups' />
-                    <field name='warehouse' string='仓库' filter_domain="[('warehouse', 'ilike', self)]" groups='warehouse.multi_warehouse_groups' />
-                    <field name='uom' string='单位' filter_domain="[('uom', 'ilike', self)]" />
-                    <field name='uos' string='辅助单位' filter_domain="[('uos', 'ilike', self)]" groups='goods.auxiliary_unit_groups' />
+                <search string='balance' >
+                    <field name='commodity' string='Commodity' filter_domain="[('commodity', 'ilike', self)]" />
+                    <field name='batch' string='Batch' filter_domain="[('batch', 'ilike', self)]" />
+                    <field name='warehouse' string='Warehouse' filter_domain="[('warehouse', 'ilike', self)]" />
+                    <field name='unit' string='Unit' filter_domain="[('unit', 'ilike', self)]" />
 
                     <group expand="0" string="Group By">
-                        <filter string="产品" context="{'group_by':'goods'}"/>
-                        <filter string="批号" context="{'group_by': 'lot'}" groups='goods.batch_groups'/>
-                        <filter string="仓库" context="{'group_by': 'warehouse'}" groups='warehouse.multi_warehouse_groups'/>
-                        <filter string="单位" context="{'group_by': 'uom'}"/>
-                        <filter string="辅助单位" context="{'group_by': 'uos'}" groups='goods.auxiliary_unit_groups'/>
+                        <filter string="Commodity" context="{'group_by':'commodity'}"/>
+                        <filter string="Batch" context="{'group_by': 'batch'}" />
+                        <filter string="Warehouse" context="{'group_by': 'warehouse'}"/>
+                        <filter string="Unit" context="{'group_by': 'unit'}"/>
                     </group>
                 </search>
             </field>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--原材料批次-->
+        <record id="view_filter_material_batch" model="ir.ui.view">
+            <field name="name">material.batch.search</field>
+            <field name="model">material.batch</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <field name="batch" string="Batch" filter_domain="[('batch','ilike',self)]"/>
+                    <field name="materia_id" />
+                    <field name="supplier_id" />
+                    <field name="commodity_batch_id"/>
+                    <group expand="0" string="Group">
+                        <filter string="materia_id" domain="[]" context="{'group_by':'materia_id'}"/>
+                        <filter string="supplier_id" domain="[]" context="{'group_by':'supplier_id'}"/>
+                        <filter string="commodity_batch_id" domain="[]" context="{'group_by':'commodity_batch_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <!--商品批次-->
+        <record id="view_filter_commodity_batch" model="ir.ui.view">
+            <field name="name">commodity.batch.search</field>
+            <field name="model">commodity.batch</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <field name="batch" string="batch" filter_domain="[('batch','ilike',self)]"/>
+                    <field name="branch_id" string="Branch Office" filter_domain="[('branch_id','ilike',self)]"/>
+                    <field name="commodity_id"/>
+                    <group expand="0" string="Group">
+                        <filter string="branch_id" domain="[]" context="{'group_by':'branch_id'}"/>
+                        <filter string="commodity_id" domain="[]" context="{'group_by':'commodity_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--商品生产-->
+        <record id="view_filter_commodity_produce" model="ir.ui.view">
+            <field name="name">commodity.produce.search</field>
+            <field name="model">commodity.produce</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <field name="commodity_id"/>
+                    <group expand="0" string="Group">
+                        <filter string="commodity_id" domain="[]" context="{'group_by':'commodity_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--商品加工-->
+        <record id="view_filter_commodity_making" model="ir.ui.view">
+            <field name="name">commodity.making.search</field>
+            <field name="model">commodity.making</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <field name="commodity_id"/>
+                    <group expand="0" string="Group">
+                        <filter string="commodity_id" domain="[]" context="{'group_by':'commodity_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--商品质检-->
+        <record id="view_filter_commodity_check" model="ir.ui.view">
+            <field name="name">commodity.check.search</field>
+            <field name="model">commodity.check</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <field name="commodity_id"/>
+                    <!--<field name="check_date" string="Before Check Date" filter_domain="[('check_date','<',self)]"/>-->
+                    <!--<field name="supplier_id"/>-->
+                    <group expand="0" string="Group">
+                        <filter string="commodity_id" domain="[]" context="{'group_by':'commodity_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</openerp>

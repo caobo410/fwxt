@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_tree_base_routing" model="ir.ui.view">
+            <field name="name">base.routing.tree</field>
+            <field name="model">base.routing</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="list">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="picture_id"/>
+                    <field name="video_id"/>
+                    <field name="line_id"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_tree_routing_line" model="ir.ui.view">
+            <field name="name">routing.line.tree</field>
+            <field name="model">routing.line</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="list">
+                    <field name="name"/>
+                    <field name="line_id"/>
+                    <field name="step_id"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_tree_base_step" model="ir.ui.view">
+            <field name="name">base.step.tree</field>
+            <field name="model">base.step</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="list">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="picture_id"/>
+                    <field name="video_id"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
