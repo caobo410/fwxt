@@ -50,6 +50,7 @@ class warehouse_doc(models.Model):
     warehouse_id = fields.Many2one('warehouse.info', string='Warehouse', help="Warehouse")
     unit_id = fields.Many2one('base.unit', string='Unit')
     batch_list = fields.One2many('batch.list', 'line_id', string='明细', copy=True)
+    number = fields.Float(string='Num', help='Num')
     messages = fields.Char(string='Messages', help="Messages")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
