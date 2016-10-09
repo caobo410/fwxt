@@ -1,0 +1,196 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* fwxt_routing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-09 08:31+0000\n"
+"PO-Revision-Date: 2016-10-09 16:34+0800\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: zh_CN\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#. module: fwxt_routing
+#: model:ir.actions.act_window,help:fwxt_routing.action_base_routing
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                    Routing Info\n"
+"                </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                    工艺信息\n"
+"                </p>\n"
+"            "
+
+#. module: fwxt_routing
+#: model:ir.actions.act_window,help:fwxt_routing.action_base_step
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                    Step Info\n"
+"                </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                    工序信息\n"
+"                </p>\n"
+"            "
+
+#. module: fwxt_routing
+#: field:base.routing,code:0 help:base.routing,code:0 field:base.step,code:0
+#: help:base.step,code:0
+msgid "Code"
+msgstr "编号"
+
+#. module: fwxt_routing
+#: field:base.routing,create_uid:0 field:base.step,create_uid:0
+#: field:routing.line,create_uid:0
+msgid "Created by"
+msgstr "Created by"
+
+#. module: fwxt_routing
+#: field:base.routing,create_date:0 field:base.step,create_date:0
+#: field:routing.line,create_date:0
+msgid "Created on"
+msgstr "Created on"
+
+#. module: fwxt_routing
+#: field:base.routing,date_confirm:0 help:base.routing,date_confirm:0
+#: field:base.step,date_confirm:0 help:base.step,date_confirm:0
+#: field:routing.line,date_confirm:0 help:routing.line,date_confirm:0
+msgid "Date"
+msgstr "日期"
+
+#. module: fwxt_routing
+#: view:base.routing:fwxt_routing.view_search_base_routing
+#: view:base.step:fwxt_routing.view_search_base_step
+msgid "Group"
+msgstr "分组"
+
+#. module: fwxt_routing
+#: field:base.routing,id:0 field:base.step,id:0 field:routing.line,id:0
+msgid "ID"
+msgstr "No."
+
+#. module: fwxt_routing
+#: field:base.routing,write_uid:0 field:base.step,write_uid:0
+#: field:routing.line,write_uid:0
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: fwxt_routing
+#: field:base.routing,write_date:0 field:base.step,write_date:0
+#: field:routing.line,write_date:0
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: fwxt_routing
+#: field:base.routing,messages:0 help:base.routing,messages:0
+#: field:base.step,messages:0 help:base.step,messages:0
+#: field:routing.line,messages:0 help:routing.line,messages:0
+msgid "Messages"
+msgstr "信息"
+
+#. module: fwxt_routing
+#: field:base.routing,name:0 help:base.routing,name:0 field:base.step,name:0
+#: help:base.step,name:0 field:routing.line,name:0 help:routing.line,name:0
+msgid "Name"
+msgstr "名称"
+
+#. module: fwxt_routing
+#: view:base.routing:fwxt_routing.view_form_base_routing
+#: view:base.step:fwxt_routing.view_form_base_step
+msgid "No."
+msgstr "No."
+
+#. module: fwxt_routing
+#: field:base.routing,user_id:0 field:base.step,user_id:0
+#: field:routing.line,user_id:0
+msgid "Operator"
+msgstr "操作人"
+
+#. module: fwxt_routing
+#: field:base.routing,picture_id:0 field:base.step,picture_id:0
+msgid "Picture"
+msgstr "图片"
+
+#. module: fwxt_routing
+#: model:ir.ui.menu,name:fwxt_routing.menu_three_routing
+#: model:ir.ui.menu,name:fwxt_routing.menu_two_routing
+msgid "Routing"
+msgstr "工艺"
+
+#. module: fwxt_routing
+#: model:ir.ui.menu,name:fwxt_routing.menu_one_Routing
+msgid "Routing Management"
+msgstr "工艺信息"
+
+#. module: fwxt_routing
+#: model:ir.ui.menu,name:fwxt_routing.menu_three_step
+#: field:routing.line,step_id:0
+msgid "Step"
+msgstr "工序"
+
+#. module: fwxt_routing
+#: field:base.routing,video_id:0 field:base.step,video_id:0
+msgid "Video"
+msgstr "图片"
+
+#. module: fwxt_routing
+#: model:ir.actions.act_window,name:fwxt_routing.action_base_routing
+msgid "base.routing.actions"
+msgstr "工艺信息"
+
+#. module: fwxt_routing
+#: model:ir.actions.act_window,name:fwxt_routing.action_base_step
+msgid "base.step.actions"
+msgstr "工序信息"
+
+#. module: fwxt_routing
+#: view:base.routing:fwxt_routing.view_form_base_routing
+#: view:base.step:fwxt_routing.view_form_base_step
+msgid "form"
+msgstr "窗体"
+
+#. module: fwxt_routing
+#: field:base.routing,line_id:0 field:routing.line,line_id:0
+msgid "join"
+msgstr "关联"
+
+#. module: fwxt_routing
+#: view:base.routing:fwxt_routing.view_form_base_routing
+#: view:base.routing:fwxt_routing.view_tree_base_routing
+#: view:base.step:fwxt_routing.view_tree_base_step
+#: view:routing.line:fwxt_routing.view_tree_routing_line
+msgid "list"
+msgstr "列表"
+
+#. module: fwxt_routing
+#: view:base.routing:fwxt_routing.view_form_base_routing
+msgid "page"
+msgstr "页"
+
+#. module: fwxt_routing
+#: view:base.routing:fwxt_routing.view_search_base_routing
+#: view:base.step:fwxt_routing.view_search_base_step
+msgid "picture_id"
+msgstr "图片"
+
+#. module: fwxt_routing
+#: view:base.routing:fwxt_routing.view_search_base_routing
+#: view:base.step:fwxt_routing.view_search_base_step
+msgid "search"
+msgstr "查询"
+
+#. module: fwxt_routing
+#: view:base.routing:fwxt_routing.view_search_base_routing
+#: view:base.step:fwxt_routing.view_search_base_step
+msgid "video_id"
+msgstr "视频"
