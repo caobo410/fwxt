@@ -21,9 +21,9 @@
     'data': [
         'views/form.xml',
         'views/tree.xml',
+        'report/kcye_view.xml',
         'views/action.xml',
         'views/menu.xml',
-        'report/kcye_view.xml',
         'views/search.xml',
         #'security/ir.model.access.csv',
     ],
