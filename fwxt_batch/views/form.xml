@@ -79,10 +79,12 @@
                         <group>
                             <group>
                                 <field name="name"/>
+                                <field name="picture_id"/>
                                 <field name="messages"/>
                             </group>
                             <group>
                                 <field name="commodity_id"/>
+                                <field name="video_id"/>
                             </group>
                         </group>
                         <notebook colspan="4">
@@ -116,10 +118,12 @@
                         <group>
                             <group>
                                 <field name="name"/>
+                                <field name="picture_id"/>
                                 <field name="messages"/>
                             </group>
                             <group>
                                 <field name="type"/>
+                                <field name="video_id"/>
                                 <field name="user_id"/>
                                 <field name="date_confirm"/>
                             </group>
@@ -142,10 +146,12 @@
                         <group>
                             <group>
                                 <field name="name"/>
+                                <field name="picture_id"/>
                                 <field name="messages"/>
                             </group>
                             <group>
                                 <field name="commodity_id"/>
+                                <field name="video_id"/>
                             </group>
                         </group>
                         <notebook colspan="4">
@@ -179,10 +185,12 @@
                         <group>
                             <group>
                                 <field name="name"/>
+                                <field name="picture_id"/>
                                 <field name="messages"/>
                             </group>
                             <group>
                                 <field name="type"/>
+                                <field name="video_id"/>
                                 <field name="user_id"/>
                                 <field name="date_confirm"/>
                             </group>
@@ -209,6 +217,7 @@
                             </group>
                             <group>
                                 <field name="commodity_id"/>
+                                <field name="picture_id"/>
                             </group>
                         </group>
                         <notebook colspan="4">
@@ -243,6 +252,7 @@
                             <group>
                                 <field name="name"/>
                                 <field name="check_id"/>
+                                <field name="picture_id"/>
                                 <field name="messages"/>
                             </group>
                             <group>

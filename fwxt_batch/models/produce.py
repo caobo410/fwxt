@@ -25,6 +25,8 @@ class commodity_produce(models.Model):
     name = fields.Char(string='Name', size=64, required=True, help="Name")
     commodity_id = fields.Many2one('commodity.info', string='Commodity')
     line_id = fields.One2many('produce.line', 'line_id', string='list', copy=True)
+    picture_id = fields.Many2one('picture.management', string='Picture')
+    video_id = fields.Many2one('ir.attachment', string='Video')
     messages = fields.Char(string='Messages', help="Messages")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
@@ -40,6 +42,8 @@ class produce_line(models.Model):
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
+    picture_id = fields.Many2one('picture.management', string='Picture')
+    video_id = fields.Many2one('ir.attachment', string='Video')
     line_id = fields.Many2one('commodity.produce', string='Commodity Produce', select=True, track_visibility='onchange')
     type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'produce')])
     messages = fields.Text(string='Messages', help="Messages")
@@ -58,6 +62,8 @@ class commodity_making(models.Model):
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
+    picture_id = fields.Many2one('picture.management', string='Picture')
+    video_id = fields.Many2one('ir.attachment', string='Video')
     commodity_id = fields.Many2one('commodity.info', string='Commodity')
     line_id = fields.One2many('making.line', 'line_id', string='list', copy=True)
     messages = fields.Text(string='Messages', help="Messages")
@@ -75,6 +81,8 @@ class making_line(models.Model):
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
+    picture_id = fields.Many2one('picture.management', string='Picture')
+    video_id = fields.Many2one('ir.attachment', string='Video')
     line_id = fields.Many2one('commodity.making', string='Commodity Making', select=True, track_visibility='onchange')
     type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'making')])
     messages = fields.Text(string='Messages', help="Messages")
@@ -93,6 +101,7 @@ class commodity_check(models.Model):
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
+    picture_id = fields.Many2one('picture.management', string='Picture')
     commodity_id = fields.Many2one('commodity.info', string='Commodity')
     line_id = fields.One2many('check.line', 'line_id', string='list', copy=True)
     messages = fields.Text(string='Messages', help="Messages")
@@ -106,11 +115,12 @@ class check_line(models.Model):
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
+    picture_id = fields.Many2one('picture.management', string='Picture')
     line_id = fields.Many2one('commodity.check', string='Commodity Check', select=True, track_visibility='onchange')
     type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'making')])
     check_date = fields.Date(string='Check Date', size=64, required=True, help="Check Date")
     check_id = fields.Many2one('check.info', string='Check Company')
-    user_id = fields.Many2one('res.users', string='制单人', select=True, track_visibility='onchange')
+    user_id = fields.Many2one('res.users', string='Operator', select=True, track_visibility='onchange')
     messages = fields.Text(string='Messages', help="Messages")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
