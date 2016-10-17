@@ -9,12 +9,11 @@ def authorize(f):
     @functools.wraps(f)
     def wrap(controller, **kwargs):
         try:
-            env = rest.check_token('fwxt', 'admin', '1')
+            env = rest.check_token(kwargs['database'], kwargs['login'], kwargs['password'])
             if not env:
                 return rest.unauthorized()
             else:
                 controller.current_env = env
-                print '123'
             return f(controller, **kwargs)
         except OperationalError, e:
             return rest.bad_request(str(e))

@@ -54,7 +54,7 @@ class picture_management(models.Model):
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    type = fields.Selection([('heard', 'Heard'),
+    type = fields.Selection([('head', 'Head'),
                              ('boby', 'Boby'),
                              ('other', 'Other')], 'Picture Type', required=True, help="Picture Type")
     image = fields.Binary(string='Image', help='Image')

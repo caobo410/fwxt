@@ -2,4 +2,3 @@
 import rest
 import authorizer
 import controllers
-import controllers_wei
