@@ -1,0 +1,373 @@
+1、获取图片
+    测试链接：http://localhost:8069/api/jcsj/get_picture/type
+    接口类型：post
+    参数： type:类型（head，boby,other） 
+          type=head  获取表头
+	  type=boby  获取表体
+	  type=other  获取其他
+    输出
+      错误输出：
+    	{
+	  "status": "no",
+	  "data": [type],
+	  "message": ""
+	}
+      正确输出
+       {
+	  "status": "yes",
+	  "message": "",
+	  "data": [
+	    {
+	      "id": 1
+	      "code": "1001",
+	      "name": "城堡"，
+	      "image":以二进制存储，太长了就部落列了
+	    },
+	    {
+              "id": 2
+	      "code": "1002",
+	      "name": "图片1"，
+	      "image":以二进制存储，太长了就部落列了
+	    },
+	    {
+              "id": 3
+	      "code": "1003",
+	      "name": "图片2"，
+ 	      "image":以二进制存储，太长了就部落列了
+	    }
+	  ]
+	}
+    说明
+	参数：
+           state 状态 获取成功为yes,数据不存在no或其他
+           message:备注
+           data：[{
+		      "id": 主键,
+		      "code": 编号,
+		      "name": 名称,
+		      "image":以二进制存储，太长了就部落列了
+		    },
+		    {
+		      "id": 主键,
+		      "code": 编号,
+		      "name": 名称
+		      "image":以二进制存储，太长了就部落列了
+		    },
+			......
+		}]
+2、联系我们/公司
+    测试链接：http://localhost:8069/api/jcsj/get_company/type
+    接口类型：post
+    参数： type:类型（head，boby,other） 
+          type=head  获取表头
+	  type=boby  获取表体
+	  type=other  获取其他
+    输出
+      错误输出：
+    	{
+	  "status": "no",
+	  "data": [],
+	  "message": "type"
+	}
+      正确输出
+       {
+	  "status": "yes",
+	  "message": "type",
+	  "data": [
+	    {
+	      "province": 省,
+	      "city": 市,
+	      "fax": 传真,
+	      "name": 公司名称,
+	      "phone": 电话,
+	      "street": 街道,
+	      "email": "info@yourcompany.example.com"
+	    }
+	  ]
+	}
+    说明
+	参数：
+           state 状态 获取成功为yes,数据不存在no或其他
+           message:备注
+           data：[{
+	              "name": 公司名称,
+		      "province": 省,
+		      "city": 市,
+		      "fax": 传真,
+		      "phone": 电话,
+		      "street": 街道,
+		      "email": "info@yourcompany.example.com"
+		    }]
+3、商品明细及说明
+    测试链接：http://localhost:8069/api/jcsj/get_commodity_list/get_commodity_list
+    接口类型：post
+    参数：get_commodity_list
+    输出
+      错误输出：
+    	{
+	  "status": "no",
+	  "data": get_commodity_list,
+	  "message": ""
+	}
+      正确输出
+       {
+	  "status": "yes",
+	  "message": "123",
+	  "data": [
+		    {
+		      "list": [
+			{
+			  "name": "净含量:500ml"
+			},
+			{
+			  "name": "原材料:大米，小麦，酒精"
+			},
+			{
+			  "name": "酒精:38%"
+			}
+		      ],
+		      "name": "34%趵突泉"
+		      "image":图片二进制
+		    },
+		    {
+		      "list": [
+			{
+			  "name": "原材料:大米，小麦，水"
+			},
+			{
+			  "name": "净含量:500ml"
+			},
+			{
+			  "name": "酒精度:36%"
+			}
+		      ],
+		      "name": "36%趵突泉"
+		      "image":图片二进制
+		    },
+			......
+		  ]
+		}
+    说明
+	参数：
+           state 状态 获取成功为yes,数据不存在no或其他
+           message:备注
+           data：[{
+		      "list": [
+			{
+			  "name": 商品明细1
+			},
+			{
+			  "name": 商品明细2
+			},
+			{
+			  "name": 商品明细3
+			}
+		      ],
+		      "name": 商品名称"
+		      "image":图片二进制
+		    }]
+4、获取商品批次信息
+    测试链接：http://localhost:8069/api/kcgl/get_batch_list/code
+    接口类型：post
+    参数： code  扫码获取的批次号
+    输出
+      错误输出：
+    	{
+	  "status": "no",
+	  "data": [],
+	  "message": "type"
+	}
+      正确输出
+       {
+	  "status": "yes",
+	  "message": "10010001",
+	  "data": {
+	    "code": "SPPC1001001",
+	    "name": "9月16日生产34%趵突泉",
+	    "commodity": "34%趵突泉",
+	    "batch": "20160910001"
+	  }
+	}
+    说明
+	参数：
+           state 状态 获取成功为yes,数据不存在no或其他
+           message:备注
+           data：[{
+	    "code": "SPPC1001001",  	# 批次编号
+	    "name": "9月16日生产34%趵突泉", 	#批次名称
+	    "commodity": "34%趵突泉",  		#商品名称
+	    "batch": "20160910001"	#批次号
+	  }]
+5、获取本次商品的原材料信息
+    测试链接：http://localhost:8069/api/kcgl/get_material_batch/code
+    接口类型：post
+    参数： code  扫码获取的批次号
+    输出
+      错误输出：
+    	{
+	  "status": "no",
+	  "data": [],
+	  "message": "type"
+	}
+      正确输出
+       {
+	  "status": "yes",
+	  "message": "10010001",
+	  "data": [
+	    {
+	      "supplier": "济南粮食局",
+	      "materia": "东北大麦",
+	      "code": "YCLPC1001001",
+	      "name": "9月东北大麦",
+	      "batch": "1001001"
+	    },
+	    {
+	      "supplier": "济南粮食局",
+	      "materia": "西北大麦",
+	      "code": "YCLPC1001002",
+	      "name": "8月份大麦",
+	      "batch": "1001002"
+	    },
+	    {
+	      "supplier": "济南粮食局",
+	      "materia": "东北大麦",
+	      "code": "YCLPC1001003",
+	      "name": "7月份大麦",
+	      "batch": "1001003"
+	    }
+	  ]
+	}
+    说明
+	参数：
+           state 状态 获取成功为yes,数据不存在no或其他
+           message:备注
+           data：[{
+	    "supplier": "济南粮食局",    #供应商
+	      "materia": "东北大麦",     #原材料
+	      "code": "YCLPC1001003",   #原材料编号
+	      "name": "7月份大麦"   	#原材料批次名称
+		"batch": "1001003"      #原材料批次  
+	  }]
+6、获取商品加工过程
+    测试链接：http://localhost:8069/api/kcgl/get_commodity_making/code
+    接口类型：post
+    参数： code  扫码获取的批次号
+    输出
+      错误输出：
+    	{
+	  "status": "no",
+	  "data": [],
+	  "message": "type"
+	}
+      正确输出
+       {
+	  "status": "yes",
+	  "message": "10010001",
+	  "data": [
+	    {
+	      "messages": false,
+	      "code": "10010001",
+	      "type": "开箱",
+	      "name": "加工1"
+	    },
+	    {
+	      "messages": false,
+	      "code": "10010002",
+	      "type": "包装",
+	      "name": "加工2"
+	    }
+	  ]
+	}
+    说明
+	参数：
+           state 状态 获取成功为yes,数据不存在no或其他
+           message:备注
+           data：[{
+	    	"messages": false,   #加工说明
+	     	"code": "10010001",  #加工编号
+	        "type": "开箱",      #加工类型
+	        "name": "加工1"      #加工名称
+	  }]
+7、获取商品生产过程
+    测试链接：http://localhost:8069/api/kcgl/get_commodity_produce/code
+    接口类型：post
+    参数： code  扫码获取的批次号
+    输出
+      错误输出：
+    	{
+	  "status": "no",
+	  "data": [],
+	  "message": "type"
+	}
+      正确输出
+       {
+	  "status": "yes",
+	  "message": "10010001",
+	  "data": [
+	    {
+	      "messages": false,
+	      "code": "10010001",
+	      "type": "酿酒",
+	      "name": "生产加工1"
+	    },
+	    {
+	      "messages": false,
+	      "code": "10010002",
+	      "type": "包装",
+	      "name": "生产加工2"
+	    }
+	  ]
+	}
+    说明
+	参数：
+           state 状态 获取成功为yes,数据不存在no或其他
+           message:备注
+           data：[{
+	    	"messages": false,   #生产加工说明
+	     	"code": "10010001",  #生产加工编号
+	        "type": "包装",      #生产加工类型
+	        "name": "生产加工1"      #生产加工名称
+	  }]
+8、获取质检报告
+    测试链接：http://localhost:8069/api/kcgl/get_commodity_check/code
+    接口类型：post
+    参数： code  扫码获取的批次号
+    输出
+      错误输出：
+    	{
+	  "status": "no",
+	  "data": [],
+	  "message": "type"
+	}
+      正确输出
+       {
+	  "status": "yes",
+	  "message": "10010001",
+	  "data": [
+	    {
+	      "comany": "质检公司2",
+	      "messages": "质检1",
+	      "code": "001",
+	      "type": "开箱",
+	      "name": "质检公司2"
+	    },
+	    {
+	      "comany": "质检公司2",
+	      "messages": "质检公司1",
+	      "code": "002",
+	      "type": "包装",
+	      "name": "质检公司1"
+	    }
+	  ]
+	}
+    说明
+	参数：
+           state 状态 获取成功为yes,数据不存在no或其他
+           message:备注
+           data：[{
+	    	"comany": "质检公司2",  #质检公司
+	      "messages": "质检公司1",  #质检说明
+	      "code": "002",          #编号
+	      "type": "包装",         #类型
+	      "name": "质检公司1"     #名称
+	  }]

@@ -1,0 +1,299 @@
+1、获取单位
+    测试链接：http://localhost:8069/api/jcsj/get_unit/unit
+    接口类型：post
+    输出
+      错误输出：
+    	{
+	  "status": "no",
+	  "data": [
+	  		],
+	  "message": ""
+	}
+      正确输出
+       {
+	  "status": "yes",
+	  "message": "",
+	  "data": [
+	    {
+	      "id": 1
+	      "code": "DW1001001",
+	      "name": "瓶"
+	    },
+	    {
+              "id": 2
+	      "code": "DW1001002",
+	      "name": "箱"
+	    },
+	    {
+              "id": 3
+	      "code": "DW1001003",
+	      "name": "提"
+	    }
+	  ]
+	}
+    说明
+	参数：
+           state 状态 获取成功为yes,数据不存在no或其他
+           message:备注
+           data：[{
+		      "id": 主键,
+		      "code": 编号,
+		      "name": 名称
+		    },
+		    {
+		      "id": 主键,
+		      "code": 编号,
+		      "name": 名称
+		    },
+			......
+		}]
+2、获取商品列表
+    测试链接：http://localhost:8069/api/jcsj/get_commdity/commdity
+    接口类型：post
+    输出
+      错误输出：
+    	{
+	  "status": "no",
+	  "data": [],
+	  "message": ""
+	}
+      正确输出
+      {
+	  "status": "yes",
+	  "message": "",
+	  "data": [
+	    {
+              "id": 1
+	      "code": "SP1001001",
+	      "name": "34%趵突泉"
+	    },
+	    {
+              "id": 2
+	      "code": "SP1001002",
+	      "name": "36%趵突泉"
+	    },
+	    {
+              "id": 3
+	      "code": "SP1001003",
+	      "name": "38%趵突泉"
+	    },
+	    {
+              "id": 4
+	      "code": "123",
+	      "name": "123"
+	    }
+	  ]
+	}
+    说明
+	参数：
+           state 状态 获取成功为yes,数据不存在no或其他
+           message:备注
+           data：[{
+		      "id": 主键,
+		      "code": 编号,
+		      "name": 名称
+		    },
+		    {
+		      "id": 主键,
+		      "code": 编号,
+		      "name": 名称
+		    },
+			......
+		}]
+3、获取经销商列表
+    测试链接：http://localhost:8069/api/jcsj/get_agent_info/agent
+    接口类型：post
+    输出
+      错误输出：
+    	{
+	  "status": "no",
+	  "data": [],
+	  "message": ""
+	}
+      正确输出
+      {
+	  "status": "yes",
+	  "message": "",
+	  "data": [
+	    {
+              "id": 1
+	      "code": "1001",
+	      "name": "河南经销商"
+	    },
+	    {
+              "id": 2
+	      "code": "1002",
+	      "name": "河北经销商"
+	    }
+	  ]
+	}
+    说明
+	参数：
+           state 状态 获取成功为yes,数据不存在no或其他
+           message:备注
+           data：[{
+		      "id": 主键,
+		      "code": 编号,
+		      "name": 名称
+		    },
+		    {
+		      "id": 主键,
+		      "code": 编号,
+		      "name": 名称
+		    },
+			......
+		}]
+4、获取快递列表
+    测试链接：http://localhost:8069/api/jcsj/get_express_info/express
+    接口类型：post
+    输出
+      错误输出：
+    	{
+	  "status": "no",
+	  "data": [],
+	  "message": ""
+	}
+      正确输出
+      {
+	  "status": "yes",
+	  "message": "",
+	  "data": [
+	    {
+              "id": 1
+	      "code": "1001",
+	      "name": "顺丰"
+	    },
+	    {
+              "id": 2
+	      "code": "1002",
+	      "name": "申通"
+	    },
+	    {
+              "id": 3
+	      "code": "1003",
+	      "name": "韵达"
+	    }
+	  ]
+	}
+    说明
+	参数：
+           state 状态 获取成功为yes,数据不存在no或其他
+           message:备注
+           data：[{
+		      "id": 主键,
+		      "code": 编号,
+		      "name": 名称
+		    },
+		    {
+		      "id": 主键,
+		      "code": 编号,
+		      "name": 名称
+		    },
+			......
+		}]
+5、获取商品列表
+    测试链接：http://localhost:8069/api/jcsj/get_commdity/commdity
+    接口类型：post
+    输出
+      错误输出：
+    	{
+	  "status": "no",
+	  "data": [],
+	  "message": ""
+	}
+      正确输出
+      {
+	  "status": "yes",
+	  "message": "",
+	  "data": [
+	    {	
+	      "id": 1,
+	      "code": "SP1001001",
+	      "name": "34%趵突泉"
+	    },
+	    {
+	      "id": 2,
+	      "code": "SP1001002",
+	      "name": "36%趵突泉"
+	    },
+	    {
+	      "id": 3,
+	      "code": "SP1001003",
+	      "name": "38%趵突泉"
+	    },
+	    {
+              "id": 4,
+	      "code": "123",
+	      "name": "123"
+	    }
+	  ]
+	}
+    说明
+	参数：
+           state 状态 获取成功为yes,数据不存在no或其他
+           message:备注
+           data：[{
+		      "id": 主键,
+		      "code": 编号,
+		      "name": 名称
+		    },
+		    {
+		      "id": 主键,
+		      "code": 编号,
+		      "name": 名称
+		    },
+			......
+		}]
+6、获取商品批次列表
+    测试链接：http://localhost:8069/api/batch/get_commdity_batch/batch
+    接口类型：post
+    输出
+      错误输出：
+    	{
+	  "status": "no",
+	  "data": [],
+	  "message": ""
+	}
+      正确输出
+      {
+	  "status": "no",
+	  "message": "",
+	  "data": [
+	    {
+	      "code": "SPPC1001001",
+	      "id": 1,
+	      "name": "9月16日生产34%趵突泉"
+	    },
+	    {
+	      "code": "SPPC1001002",
+	      "id": 2,
+	      "name": "9月15日生产34%趵突泉"
+	    },
+	    {
+	      "code": "SPPC1001003",
+	      "id": 3,
+	      "name": "9月16日生产36%趵突泉"
+	    },
+	    {
+	      "code": "SPPC1001005",
+	      "id": 4,
+	      "name": "9月16日生产38%趵突泉"
+	    }
+	  ]
+	}
+    说明
+	参数：
+           state 状态 获取成功为yes,数据不存在no或其他
+           message:备注
+           data：[{
+		      "id": 主键,
+		      "code": 编号,
+		      "name": 名称
+		    },
+		    {
+		      "id": 主键,
+		      "code": 编号,
+		      "name": 名称
+		    },
+			......
+		}]
