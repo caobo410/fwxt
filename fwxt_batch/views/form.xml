@@ -17,12 +17,14 @@
                                 <field name="name"/>
                                 <field name="materia_id"/>
                                 <field name="commodity_batch_id"/>
+                                <field name="picture_id"/>
                                 <field name="production_date"/>
                                 <field name="user_id"/>
                             </group>
                             <group>
                                 <field name="batch"/>
                                 <field name="supplier_id"/>
+                                <field name="file_id"/>
                                 <field name="messages"/>
                                 <field name="date_confirm"/>
                             </group>

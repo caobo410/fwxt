@@ -23,6 +23,8 @@ class material_batch(models.Model):
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
     batch = fields.Char(string='Batch', size=64, required=True, help="Batch")
+    picture_id = fields.Many2one('picture.management', string='Picture')
+    file_id = fields.Many2one('ir.attachment', string='File')
     materia_id = fields.Many2one('materia.info', string='Materia Info')
     supplier_id = fields.Many2one('supplier.info', string='Supplier Info', help="Supplier")
     commodity_batch_id = fields.Many2one('commodity.batch', string='Commodity Batch')
