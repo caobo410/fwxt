@@ -26,7 +26,7 @@ class OrderController(http.Controller):
         unit_lists=[]
         for unit_obj in unit_objs:
             unit_list = {}
-            unit_list['id'] = unit_list.id
+            unit_list['id'] = unit_obj.id
             unit_list['code'] = unit_obj.code
             unit_list['name'] = unit_obj.name
             unit_lists.append(unit_list)
@@ -42,7 +42,7 @@ class OrderController(http.Controller):
         commodity_lists=[]
         for commodity_obj in commodity_objs:
             commodity_list={}
-            commodity_list['id'] = commodity_list.id
+            commodity_list['id'] = commodity_obj.id
             commodity_list['code'] = commodity_obj.code
             commodity_list['name'] = commodity_obj.name
             commodity_lists.append(commodity_list)
