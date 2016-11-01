@@ -15,6 +15,17 @@ date_ref = datetime.now().strftime('%Y-%m-%d')
 # _logger = logging.getLogger(__name__)
 
 class OrderController(http.Controller):
+     # 登录验证
+    #/api/jcsj/login_in/ERP?login=admin&password=1
+    #@authorizer.authorize
+    @http.route('/api/jcsj/login_in/<database>', type='http', auth='none', methods=['GET'])
+    def login_in(self, database, login, password):
+        print '234'
+        uid = http.request.session.authenticate(database, login, password)
+        print uid
+        if not uid:
+            return rest.render_json({"status": "yes", "message": "", "data": 'Password error'})
+        return rest.render_json({"status": "yes", "message": "", "data": 'Welcome'})
     # 获取单位
     #http://localhost:8069/api/jcsj/get_unit/unit
     @authorizer.authorize
