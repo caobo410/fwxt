@@ -29,7 +29,7 @@ class OrderController(http.Controller):
     # 获取单位
     #http://localhost:8069/api/jcsj/get_unit/unit
     @authorizer.authorize
-    @http.route('/api/jcsj/get_unit/<code>', type='http', auth='none', methods=['POST'])
+    @http.route('/api/jcsj/get_unit/<code>', type='http', auth='none', methods=['GET'])
     def get_unit(self, code):
         unit_objs = self.current_env['base.unit'].search([])
         if not unit_objs:
@@ -45,7 +45,7 @@ class OrderController(http.Controller):
     # 获取商品
     #http://localhost:8069/api/jcsj/get_unit/unit
     @authorizer.authorize
-    @http.route('/api/jcsj/get_commodity/<commodity>', type='http', auth='none', methods=['POST'])
+    @http.route('/api/jcsj/get_commodity/<commodity>', type='http', auth='none', methods=['GET'])
     def get_commodity(self, commodity):
         commodity_objs = self.current_env['commodity.info'].search([])
         if not commodity_objs:
@@ -61,7 +61,7 @@ class OrderController(http.Controller):
     # 获取快递
     #http://localhost:8069/api/jcsj/get_unit/unit
     @authorizer.authorize
-    @http.route('/api/jcsj/get_express_info/<express>', type='http', auth='none', methods=['POST'])
+    @http.route('/api/jcsj/get_express_info/<express>', type='http', auth='none', methods=['GET'])
     def get_express_info(self, express):
         express_objs = self.current_env['express.info'].search([])
         if not express_objs:
@@ -77,7 +77,7 @@ class OrderController(http.Controller):
     # 获取经销商
     #http://localhost:8069/api/jcsj/get_agent_info/unit
     @authorizer.authorize
-    @http.route('/api/jcsj/get_agent_info/<commodity>', type='http', auth='none', methods=['POST'])
+    @http.route('/api/jcsj/get_agent_info/<commodity>', type='http', auth='none', methods=['GET'])
     def get_agent_info(self, commodity):
         agent_objs = self.current_env['agent.info'].search([])
         if not agent_objs:

@@ -18,7 +18,7 @@ class OrderController(http.Controller):
     # 获取单位
     #http://localhost:8069/api/jcsj/get_batch/batch
     @authorizer.authorize
-    @http.route('/api/batch/get_commodity_batch/<batch>', type='http', auth='none', methods=['POST'])
+    @http.route('/api/batch/get_commodity_batch/<batch>', type='http', auth='none', methods=['GET'])
     def get_commodity_batch(self, batch):
         batch_objs = self.current_env['commodity.batch'].search([])
         if not batch_objs:

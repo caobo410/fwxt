@@ -17,7 +17,7 @@ date_ref = datetime.now().strftime('%Y-%m-%d')
 class OrderController(http.Controller):
     #商品批次信息
     @authorizer.authorize
-    @http.route('/api/kcgl/get_batch_list/<code>', type='http', auth='none', methods=['POST'])
+    @http.route('/api/kcgl/get_batch_list/<code>', type='http', auth='none', methods=['GET'])
     def get_batch_list(self, code):
         commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
         if not commodity_obj:
@@ -30,7 +30,7 @@ class OrderController(http.Controller):
         return rest.render_json({"status": "yes", "message": code, "data": commodity_list})
     #原材料批次信息
     @authorizer.authorize
-    @http.route('/api/kcgl/get_material_batch/<code>', type='http', auth='none', methods=['POST'])
+    @http.route('/api/kcgl/get_material_batch/<code>', type='http', auth='none', methods=['GET'])
     def get_material_batch(self, code):
         commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
         if not commodity_obj:
@@ -49,7 +49,7 @@ class OrderController(http.Controller):
 
     #加工过程
     @authorizer.authorize
-    @http.route('/api/kcgl/get_commodity_making/<code>', type='http', auth='none', methods=['POST'])
+    @http.route('/api/kcgl/get_commodity_making/<code>', type='http', auth='none', methods=['GET'])
     def get_commodity_making(self, code):
         commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
         if not commodity_obj:
@@ -71,7 +71,7 @@ class OrderController(http.Controller):
 
     #生产过程
     @authorizer.authorize
-    @http.route('/api/kcgl/get_commodity_produce/<code>', type='http', auth='none', methods=['POST'])
+    @http.route('/api/kcgl/get_commodity_produce/<code>', type='http', auth='none', methods=['GET'])
     def get_commodity_produce(self, code):
         commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
         if not commodity_obj:
@@ -93,7 +93,7 @@ class OrderController(http.Controller):
 
     #质检公司
     @authorizer.authorize
-    @http.route('/api/kcgl/get_commodity_check/<code>', type='http', auth='none', methods=['POST'])
+    @http.route('/api/kcgl/get_commodity_check/<code>', type='http', auth='none', methods=['GET'])
     def get_commodity_check(self, code):
         commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
         if not commodity_obj:
