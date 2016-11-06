@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from openerp import http
 from openerp import http, fields
 import authorizer
 import rest
 from datetime import datetime
+import random
 
 try:
     import cStringIO as StringIO
@@ -113,3 +113,69 @@ class OrderController(http.Controller):
             check_list['messages'] = check_list_obj.messages
             check_lists.append(check_list)
         return rest.render_json({"status": "yes", "message": code, "data": check_lists})
+    #扫码入库
+    @authorizer.authorize
+    @http.route('/api/kcgl/get_kcrk/<unit_id>', type='http', auth='none', methods=['GET'])
+    def get_kcrk(self, unit_id, goods_id, batch_id, code_lists):
+        code = 'RKD' + date_ref[:4] + date_ref[5:7] + str(random.randint(100, 999))
+        rkd_obj = self.current_env['warehouse.doc']
+        values = []
+        values = {
+            'code': code,
+            'name': code,
+            'type': 'in',
+            'batch_id': int(batch_id),
+            'commodity_id': int(goods_id),
+            'unit_id': int(unit_id),
+        }
+        rkd_obj_id = rkd_obj.create(values)
+        list_obj = self.current_env['batch.list']
+        batch_lists = eval(code_lists)
+        j = 1
+        for batch_list in batch_lists:
+            num = int(batch_list[1])
+            code = int(batch_list[0])-1
+            for n in  range(1, num):
+                values = {
+                    'code': str(code+n),
+                    'name': str(code+n),
+                    'line_id': str(rkd_obj_id.id),
+                }
+                list_obj.create(values)
+                j = j + 1
+        rkd_obj_id.update({'number': j})
+        return rest.render_json({"status": "yes", "message": code, "data": code_lists})
+    #扫码出库
+    @authorizer.authorize
+    @http.route('/api/kcgl/get_kcck/<unit_id>', type='http', auth='none', methods=['GET'])
+    def get_kcck(self, unit_id, goods_id, batch_id, agent_id, express_id,code_lists):
+        code = 'RKD' + date_ref[:4] + date_ref[5:7] + str(random.randint(100, 999))
+        rkd_obj = self.current_env['warehouse.doc']
+        values = []
+        values = {
+            'code': code,
+            'name': code,
+            'type': 'out',
+            'batch_id': int(batch_id),
+            'agent_id': int(agent_id),
+            'express_id': int(express_id),
+            'commodity_id': int(goods_id),
+            'unit_id': int(unit_id),
+        }
+        rkd_obj_id = rkd_obj.create(values)
+        list_obj = self.current_env['batch.list']
+        batch_lists = eval(code_lists)
+        j = 0
+        for batch_list in batch_lists:
+            num = int(batch_list[1])
+            code = int(batch_list[0])-1
+            for n in range(1, num):
+                values = {
+                    'code': str(code+n),
+                    'name': str(code+n),
+                    'line_id': str(rkd_obj_id.id),
+                }
+                list_obj.create(values)
+                j = j + 1
+        rkd_obj_id.update({'number': j})
+        return rest.render_json({"status": "yes", "message": code, "data": code_lists})

@@ -17,7 +17,7 @@ date_ref = datetime.now().strftime('%Y-%m-%d')
 class OrderController(http.Controller):
     # 获取图片
     @authorizer.authorize
-    @http.route('/api/jcsj/get_picture/<type>', type='http', auth='none', methods=['POST'])
+    @http.route('/api/jcsj/get_picture/<type>', type='http', auth='none', methods=['GET'])
     def get_picture(self, type):
         if type == 'head':
             picture_objs = self.current_env['picture.management'].search([('type', '=', 'head')])
@@ -40,7 +40,7 @@ class OrderController(http.Controller):
         return rest.render_json({"status": "yes", "message": type, "data": picture_lists})
     # 联系我们
     @authorizer.authorize
-    @http.route('/api/jcsj/get_company/<company>', type='http', auth='none', methods=['POST'])
+    @http.route('/api/jcsj/get_company/<company>', type='http', auth='none', methods=['GET'])
     def get_company(self, company):
         company_objs = self.current_env['res.company'].search([])
         if not company_objs:
@@ -59,7 +59,7 @@ class OrderController(http.Controller):
         return rest.render_json({"status": "yes", "message": company, "data": company_lists})
     #商品信息
     @authorizer.authorize
-    @http.route('/api/jcsj/get_commodity_list/<commodity>', type='http', auth='none', methods=['POST'])
+    @http.route('/api/jcsj/get_commodity_list/<commodity>', type='http', auth='none', methods=['GET'])
     def get_commodity_list(self, commodity):
         commodity_objs = self.current_env['commodity.info'].search([])
         if not commodity_objs:

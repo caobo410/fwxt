@@ -51,6 +51,8 @@ class warehouse_doc(models.Model):
     warehouse_id = fields.Many2one('warehouse.info', string='Warehouse', help="Warehouse")
     unit_id = fields.Many2one('base.unit', string='Unit')
     batch_list = fields.One2many('batch.list', 'line_id', string='明细', copy=True)
+    agent_id = fields.Many2one('agent.info', string='Agent', help="Agent")
+    express_id = fields.Many2one('express.info', string='Express', help="Express")
     number = fields.Float(string='Num', help='Num')
     messages = fields.Char(string='Messages', help="Messages")
     user_id = fields.Many2one('res.users', string='Operator')
@@ -112,10 +114,7 @@ class manual_storage(models.Model):
             'unit_id': str(self.unit_id.id),
             'number': self.number,
              }
-        print values
         rk_obj_id = self.env['warehouse.doc'].create(values)
-        print rk_obj_id
-        print rk_obj_id.id
         if rk_obj_id:
             i = 0
             for j in range(int(self.from_batch), int(self.to_batch)):
@@ -130,8 +129,6 @@ class manual_storage(models.Model):
                 }
                 print values
                 self.env['batch.list'].create(values)
-        print self.from_batch
-        print self.to_batch
         return {'type': 'ir.actions.act_window_close'}
 
 

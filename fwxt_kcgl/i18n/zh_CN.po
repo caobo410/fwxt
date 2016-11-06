@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-08 06:26+0000\n"
-"PO-Revision-Date: 2016-10-08 14:41+0800\n"
+"POT-Creation-Date: 2016-11-06 01:52+0000\n"
+"PO-Revision-Date: 2016-11-06 09:53+0800\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -45,9 +45,15 @@ msgstr ""
 "          "
 
 #. module: fwxt_kcgl
+#: field:warehouse.doc,agent_id:0 help:warehouse.doc,agent_id:0
+msgid "Agent"
+msgstr "经销商"
+
+#. module: fwxt_kcgl
 #: view:report.stock.kcye:fwxt_kcgl.report_stock_kcye_search
 #: field:report.stock.kcye,batch:0 help:report.stock.kcye,batch:0
 #: view:warehouse.doc:fwxt_kcgl.view_form_warehouse_doc
+#: view:warehouse.doc:fwxt_kcgl.view_form_warehouse_doc_ck
 msgid "Batch"
 msgstr "批次"
 
@@ -113,8 +119,14 @@ msgstr "默认"
 
 #. module: fwxt_kcgl
 #: view:warehouse.doc:fwxt_kcgl.view_form_warehouse_doc
+#: view:warehouse.doc:fwxt_kcgl.view_form_warehouse_doc_ck
 msgid "Doc"
 msgstr "单据"
+
+#. module: fwxt_kcgl
+#: field:warehouse.doc,express_id:0 help:warehouse.doc,express_id:0
+msgid "Express"
+msgstr "快递"
 
 #. module: fwxt_kcgl
 #: view:manual.storage:fwxt_kcgl.view_form_manual_storage
@@ -202,6 +214,7 @@ msgstr "名称"
 #: view:batch.list:fwxt_kcgl.view_form_batch_list
 #: view:manual.storage:fwxt_kcgl.view_form_manual_storage
 #: view:warehouse.doc:fwxt_kcgl.view_form_warehouse_doc
+#: view:warehouse.doc:fwxt_kcgl.view_form_warehouse_doc_ck
 #: view:warehouse.info:fwxt_kcgl.view_form_warehouse_info
 msgid "No."
 msgstr "编号"
