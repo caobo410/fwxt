@@ -20,9 +20,13 @@ class OrderController(http.Controller):
     @http.route('/api/kcgl/get_batch_list/<code>', type='http', auth='none', methods=['GET'])
     def get_batch_list(self, code):
         commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
+        print commodity_obj
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_list = {}
+        print commodity_obj.line_id
+        print commodity_obj.line_id.batch_id
+        print commodity_obj.line_id.batch_id.code
         commodity_list['code'] = commodity_obj.line_id.batch_id.code
         commodity_list['name'] = commodity_obj.line_id.batch_id.name
         commodity_list['batch'] = commodity_obj.line_id.batch_id.batch
@@ -141,8 +145,10 @@ class OrderController(http.Controller):
                     'name': str(code+n),
                     'line_id': str(rkd_obj_id.id),
                 }
-                list_obj.create(values)
-                j = j + 1
+                list_obj.search([('name', '=', str(code+n))])
+                if not list_obj:
+                    list_obj.create(values)
+                    j = j + 1
         rkd_obj_id.update({'number': j})
         return rest.render_json({"status": "yes", "message": code, "data": code_lists})
     #扫码出库
@@ -175,7 +181,9 @@ class OrderController(http.Controller):
                     'name': str(code+n),
                     'line_id': str(rkd_obj_id.id),
                 }
-                list_obj.create(values)
-                j = j + 1
+                list_obj.search([('name', '=', str(code+n))])
+                if not list_obj:
+                    list_obj.create(values)
+                    j = j + 1
         rkd_obj_id.update({'number': j})
         return rest.render_json({"status": "yes", "message": code, "data": code_lists})
