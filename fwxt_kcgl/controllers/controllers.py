@@ -202,5 +202,5 @@ class OrderController(http.Controller):
         else:
             messages = '您所查询的是公司的产品,但经过多次查询，请及时联系客服验证真假！'
             number = int(batch_list_obj.messages)+1
-            batch_list_obj.update({'messages': str(number) + str(date_ref)})
+            batch_list_obj.update({'messages': str(number)})
         return rest.render_json({"status": "yes", "message": code, "data": messages})
