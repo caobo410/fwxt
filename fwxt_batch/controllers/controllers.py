@@ -34,8 +34,15 @@ class OrderController(http.Controller):
     # 视频
     @authorizer.authorize
     @http.route('/api/batch/get_video/<code>', type='http', auth='none', methods=['GET'])
-    def get_video(self, code):
-        batch_obj = self.current_env['commodity.produce'].search([('commodity_id', '=', int(code))])
+    def get_video(self, code, type):
+        if type =='sc':
+            batch_obj = self.current_env['commodity.produce'].search([('commodity_id', '=', int(code))])
+        elif type =='jg':
+            batch_obj = self.current_env['commodity.making'].search([('commodity_id', '=', int(code))])
+        elif type =='zj':
+            batch_obj = self.current_env['commodity.check'].search([('commodity_id', '=', int(code))])
+        else:
+            return rest.render_json({"status": "No", "message": code, "data": ''})
         if not batch_obj:
             return rest.render_json({"status": "No", "message": code, "data": ''})
         return rest.render_json({"status": "yes", "message": code, "data": batch_obj.video_id.description})

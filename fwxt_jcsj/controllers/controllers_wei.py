@@ -86,13 +86,20 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/jcsj/get_agent_list/<password>', type='http', auth='none', methods=['GET'])
     def get_agent_list(self, password, code):
-        print code,password
         password_objs = self.current_env['other.info'].search([('password', '=', password)])
-        print password_objs
         if not password_objs:
             return rest.render_json({"status": "no", "message": password, "data": 'Password Error!'})
         batch_objs = self.current_env['batch.list'].search([('code', '=', code)])
-        print batch_objs
         agent_name = batch_objs.line_id.agent_id.name
-        return rest.render_json({"status": "no", "message": password, "data": agent_name})
+        return rest.render_json({"status": "Yes", "message": password, "data": agent_name})
+    #企业介绍
+    @authorizer.authorize
+    @http.route('/api/jcsj/get_company_list/<code>', type='http', auth='none', methods=['GET'])
+    def get_company_list(self, code):
+        company_objs = self.current_env['company.info'].search([])
+        if not company_objs:
+            return rest.render_json({"status": "no", "message": code, "data": 'Password Error!'})
+        for company_obj in company_objs:
+            company_list = company_obj.company_info
+        return rest.render_json({"status": "Yes", "message": code, "data": company_list})
 
