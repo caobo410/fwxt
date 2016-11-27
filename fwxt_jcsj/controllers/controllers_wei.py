@@ -101,5 +101,5 @@ class OrderController(http.Controller):
             return rest.render_json({"status": "no", "message": code, "data": 'Password Error!'})
         for company_obj in company_objs:
             company_list = company_obj.company_info
-        return rest.render_json({"status": "Yes", "message": code, "data": company_list})
+        return rest.render_json({"status": "yes", "message": code, "data": company_list})
 
