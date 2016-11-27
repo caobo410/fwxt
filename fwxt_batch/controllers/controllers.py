@@ -32,17 +32,24 @@ class OrderController(http.Controller):
             batch_lists.append(batch_list)
         return rest.render_json({"status": "yes", "message": "", "data": batch_lists})
     # 视频
-    @authorizer.authorize
-    @http.route('/api/batch/get_video/<code>', type='http', auth='none', methods=['GET'])
-    def get_video(self, code, type):
-        if type =='sc':
-            batch_obj = self.current_env['commodity.produce'].search([('commodity_id', '=', int(code))])
-        elif type =='jg':
-            batch_obj = self.current_env['commodity.making'].search([('commodity_id', '=', int(code))])
-        elif type =='zj':
-            batch_obj = self.current_env['commodity.check'].search([('commodity_id', '=', int(code))])
-        else:
-            return rest.render_json({"status": "No", "message": code, "data": ''})
-        if not batch_obj:
-            return rest.render_json({"status": "No", "message": code, "data": ''})
-        return rest.render_json({"status": "yes", "message": code, "data": batch_obj.video_id.description})
+    # @authorizer.authorize
+    # @http.route('/api/batch/get_video/<code>', type='http', auth='none', methods=['GET'])
+    # def get_video(self, code, type):
+    #     commodity_obj = self.current_env['commodity.produce'].search([('commodity_id', '=', int(code))])
+    #     if type =='sc':
+    #         batch_obj = self.current_env['commodity.produce'].search([('commodity_id', '=', int(code))])
+    #         video_message = batch_obj.video_id.description
+    #     elif type =='jg':
+    #         batch_obj = self.current_env['commodity.making'].search([('commodity_id', '=', int(code))])
+    #         video_message = batch_obj.video_id.description
+    #     elif type =='zj':
+    #         batch_obj = self.current_env['commodity.check'].search([('commodity_id', '=', int(code))])
+    #         video_message = batch_obj.video_id.description
+    #     elif type =='ycl':
+    #         batch_obj = self.current_env['batch.list'].search([('code', '=', int(code))])
+    #         video_message = batch_obj.line_id.batch_id.file_id.description
+    #     else:
+    #         return rest.render_json({"status": "No", "message": code, "data": ''})
+    #     if not batch_obj:
+    #         return rest.render_json({"status": "No", "message": code, "data": ''})
+    #     return rest.render_json({"status": "yes", "message": code, "data": video_message})
