@@ -150,7 +150,8 @@
                                 <field name="date_confirm" />
                             </group>
                             <group>
-                                <field name="weixin_add" />
+                                <field name="password" />
+                                <!--<field name="weixin_add" />-->
                                 <field name="web_add" />
                                 <field name="shop_add" />
                                 <field name="Search" />

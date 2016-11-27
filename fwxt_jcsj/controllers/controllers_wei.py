@@ -57,6 +57,7 @@ class OrderController(http.Controller):
             company_list['street'] = company_obj.street
             company_lists.append(company_list)
         return rest.render_json({"status": "yes", "message": company, "data": company_lists})
+
     #商品信息
     @authorizer.authorize
     @http.route('/api/jcsj/get_commodity_list/<commodity>', type='http', auth='none', methods=['GET'])
@@ -80,4 +81,18 @@ class OrderController(http.Controller):
                 commodity_list['list'] = {}
             commodity_lists.append(commodity_list)
         return rest.render_json({"status": "yes", "message": commodity, "data": commodity_lists})
+
+    #生产基地
+    @authorizer.authorize
+    @http.route('/api/jcsj/get_agent_list/<password>', type='http', auth='none', methods=['GET'])
+    def get_agent_list(self, password, code):
+        print code,password
+        password_objs = self.current_env['other.info'].search([('password', '=', password)])
+        print password_objs
+        if not password_objs:
+            return rest.render_json({"status": "no", "message": password, "data": 'Password Error!'})
+        batch_objs = self.current_env['batch.list'].search([('code', '=', code)])
+        print batch_objs
+        agent_name = batch_objs.line_id.agent_id.name
+        return rest.render_json({"status": "no", "message": password, "data": agent_name})
 

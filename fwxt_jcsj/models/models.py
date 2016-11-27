@@ -111,7 +111,7 @@ class other_info(models.Model):
     code = fields.Char(string='Code', size=64, required=True, help="No.")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
     tel = fields.Char(string='Tel', help="Tel")
-    weixin_add = fields.Char(string='Weixin Add', help="Weixin Add")
+    password = fields.Char(string='Check Password', help="Check Password")
     web_add = fields.Char(string='Web add', help="Web add")
     shop_add = fields.Char(string='Shop Add', help="Shop Add")
     Search = fields.Text(string='Search', help="Search")

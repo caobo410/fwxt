@@ -31,3 +31,11 @@ class OrderController(http.Controller):
             batch_list['name'] = batch_obj.name
             batch_lists.append(batch_list)
         return rest.render_json({"status": "yes", "message": "", "data": batch_lists})
+    # 视频
+    @authorizer.authorize
+    @http.route('/api/batch/get_video/<code>', type='http', auth='none', methods=['GET'])
+    def get_video(self, code):
+        batch_obj = self.current_env['commodity.produce'].search([('commodity_id', '=', int(code))])
+        if not batch_obj:
+            return rest.render_json({"status": "No", "message": code, "data": ''})
+        return rest.render_json({"status": "yes", "message": code, "data": batch_obj.video_id.description})
