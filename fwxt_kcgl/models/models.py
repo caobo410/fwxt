@@ -63,13 +63,29 @@ class warehouse_doc(models.Model):
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
+class warehouse_line(models.Model):
+    _name = "warehouse.line"
+    _description = "warehouse.line"
+
+    code = fields.Char(string='Code', size=64, help="Code")
+    name = fields.Char(string='Name', size=64, help="Name")
+    line_id = fields.Many2one('warehouse.doc', string='Warehouse Doc')
+    number = fields.Float(string='Number')
+    user_id = fields.Many2one('res.users', string='Operator')
+    date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
+
+    _defaults = {
+        'date_confirm': date_ref,
+        'user_id': lambda cr, uid, id, c={}: id,
+    }
+
 class batch_list(models.Model):
     _name = "batch.list"
     _description = "batch.list"
 
-    code = fields.Char(string='Code', size=64, required=True, help="Code")
-    name = fields.Char(string='Batch Code', size=64, required=True, help="Batch Code")
-    line_id = fields.Many2one('warehouse.doc', string='Warehouse Doc')
+    code = fields.Char(string='Code', size=64, help="Code")
+    name = fields.Char(string='Batch Code', size=64, help="Batch Code")
+    line_id = fields.Char(string='Line', size=64, help="Line")
     messages = fields.Char(string='Messages', help="Messages")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")

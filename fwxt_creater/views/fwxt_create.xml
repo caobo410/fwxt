@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_form_fwxt_create" model="ir.ui.view">
+            <field name="name">fwxt.create.form</field>
+            <field name="model">fwxt.create</field>
+            <field name="arch" type="xml">
+                <form string="Form" version="7.0">
+                    <sheet>
+                        <h1>
+                            编号<field name="code"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="random_number"/>
+                                <field name="fixed_value"/>
+                                <field name="end_code"/>
+                            </group>
+                            <group>
+                                <field name="company_id"/>
+                                <field name="company_code"/>
+                                <field name="price_unit"/>
+                                <field name="messages"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="create_file"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="user_id"/>
+                            </group>
+                            <group>
+                                <field name="date_confirm"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_tree_fwxt_create" model="ir.ui.view">
+            <field name="name">fwxt.create.tree</field>
+            <field name="model">fwxt.create</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="company_code"/>
+                    <field name="end_code"/>
+                    <field name="random_number"/>
+                    <field name="fixed_value"/>
+                    <field name="price_unit"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_search_fwxt_create" model="ir.ui.view">
+            <field name="name">fwxt.create.search</field>
+            <field name="model">fwxt.create</field>
+            <field name="arch" type="xml">
+                <search string="查询">
+                    <field name="company_id"/>
+                    <field name="company_code"/>
+                    <group expand="0" string="分组">
+                        <filter string="客户名称" context="{'group_by':'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <!--  窗体事件 查询  Search  graph,gantt-->
+        <record id="action_fwxt_create" model="ir.actions.act_window">
+            <field name="name">fwxt.create.actions</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">fwxt.create</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    条码二维码生成工具
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="加密算法" id="menu_one_create" sequence="7"/>
+        <menuitem name="加密算法" id="menu_two_create" parent="menu_one_create" sequence="1"/>
+        <menuitem name="加密算法" id="menu_three_create" parent="menu_two_create" action="action_fwxt_create" sequence="1"/>
+
+
+    </data>
+</openerp>

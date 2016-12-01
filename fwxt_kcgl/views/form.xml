@@ -101,10 +101,36 @@
             </field>
         </record>
 
-        <!--捆绑条码-->
+        <!--出入库明细-->
+        <record id="view_form_warehouse_list" model="ir.ui.view">
+            <field name="name">Warehouse Line</field>
+            <field name="model">warehouse.line</field>
+            <field name="arch" type="xml">
+                <form string="Picture Management" version="7.0">
+                <sheet>
+                    <h1>No.
+                        <field name="code" class="oe_inline" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="number" />
+                            <field name="user_id" />
+                        </group>
+                        <group>
+                            <field name="line_id" />
+                            <field name="date_confirm" />
+                        </group>
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--条码明细表-->
         <record id="view_form_batch_list" model="ir.ui.view">
-            <field name="name">Batch List</field>
-            <field name="model">batch.list</field>
+            <field name="name">Batch Line</field>
+            <field name="model">Batch.line</field>
             <field name="arch" type="xml">
                 <form string="Picture Management" version="7.0">
                 <sheet>
@@ -115,10 +141,9 @@
                         <group>
                             <field name="name" />
                             <field name="messages" />
-                            <field name="user_id" />
                         </group>
                         <group>
-                            <field name="line_id" />
+                            <field name="user_id" />
                             <field name="date_confirm" />
                         </group>
                     </group>

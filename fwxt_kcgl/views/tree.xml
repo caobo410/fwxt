@@ -40,6 +40,23 @@
             </field>
         </record>
 
+        <!--入库明细表-->
+        <record id="view_tree_warehouse_list" model="ir.ui.view">
+            <field name="name">Warehouse List</field>
+            <field name="model">warehouse.list</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="view">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="number"/>
+                    <field name="line_id"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
         <!--条码列表-->
         <record id="view_tree_batch_list" model="ir.ui.view">
             <field name="name">Batch List</field>
@@ -49,7 +66,6 @@
                 <tree string="view">
                     <field name="code"/>
                     <field name="name"/>
-                    <field name="line_id"/>
                     <field name="user_id"/>
                     <field name="date_confirm"/>
                 </tree>
