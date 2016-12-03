@@ -20,7 +20,8 @@
     'depends': ['base',],
     'data': [
         'views/fwxt_create.xml',
-        'views/fwxt_company.xml'
+        'views/fwxt_company.xml',
+        'views/fwxt_decrypt.xml'
         #'security/ir.model.access.csv',
     ],
     'installable': True,

@@ -13,19 +13,24 @@
                         <group>
                             <group>
                                 <field name="name"/>
-                                <field name="random_number"/>
                                 <field name="fixed_value"/>
-                                <field name="end_code"/>
+                                <field name="end_code1"/>
+                                <field name="end_code2"/>
+                                <field name="end_code3"/>
                             </group>
                             <group>
                                 <field name="company_id"/>
                                 <field name="company_code"/>
-                                <field name="price_unit"/>
+                                <field name="fixed_value"/>
+                                <field name="number"/>
                                 <field name="messages"/>
                             </group>
                         </group>
                         <group>
-                            <field name="create_file"/>
+                            <field width="200" name="create_file"/>
+                        </group>
+                        <group>
+                            <button string="生成数据" name="btn_create" type="object" default_focus="1" class="oe_highlight"/>
                         </group>
                         <group>
                             <group>
@@ -50,10 +55,11 @@
                     <field name="name"/>
                     <field name="company_id"/>
                     <field name="company_code"/>
-                    <field name="end_code"/>
-                    <field name="random_number"/>
                     <field name="fixed_value"/>
-                    <field name="price_unit"/>
+                    <field name="number"/>
+                    <field name="end_code1"/>
+                    <field name="end_code2"/>
+                    <field name="end_code3"/>
                 </tree>
             </field>
         </record>
@@ -90,7 +96,6 @@
         <menuitem name="加密算法" id="menu_one_create" sequence="7"/>
         <menuitem name="加密算法" id="menu_two_create" parent="menu_one_create" sequence="1"/>
         <menuitem name="加密算法" id="menu_three_create" parent="menu_two_create" action="action_fwxt_create" sequence="1"/>
-
 
     </data>
 </openerp>
