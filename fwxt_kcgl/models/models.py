@@ -50,7 +50,7 @@ class warehouse_doc(models.Model):
     commodity_id = fields.Many2one('commodity.info', string='Commodity', help="Commodity")
     warehouse_id = fields.Many2one('warehouse.info', string='Warehouse', help="Warehouse")
     unit_id = fields.Many2one('base.unit', string='Unit')
-    batch_list = fields.One2many('batch.list', 'line_id', string='明细', copy=True)
+    line_id = fields.One2many('warehouse.line', 'line_id', string='明细', copy=True)
     agent_id = fields.Many2one('agent.info', string='Agent', help="Agent")
     express_id = fields.Many2one('express.info', string='Express', help="Express")
     number = fields.Float(string='Num', help='Num')
@@ -85,7 +85,8 @@ class batch_list(models.Model):
 
     code = fields.Char(string='Code', size=64, help="Code")
     name = fields.Char(string='Batch Code', size=64, help="Batch Code")
-    line_id = fields.Char(string='Line', size=64, help="Line")
+    line_id = fields.Many2one('warehouse.doc', string='Warehouse Doc')
+    number = fields.Float(string='number')
     messages = fields.Char(string='Messages', help="Messages")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")

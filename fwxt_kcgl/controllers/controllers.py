@@ -141,27 +141,40 @@ class OrderController(http.Controller):
         }
         rkd_obj_id = rkd_obj.create(values)
         list_obj = self.current_env['batch.list']
+        warehouse_obj = self.current_env['warehouse.line']
         batch_lists = eval(code_lists)
-        j = 1
+        j = 0
         for batch_list in batch_lists:
-            num = int(batch_list[1])
-            code = int(batch_list[0])-1
-            for n in  range(1, num):
+            num = int(batch_list['number'])
+            code = int(batch_list['name'])-1
+            values = {
+                    'code': str(batch_list['name']),
+                    'name': str(batch_list['name']),
+                    'line_id': str(rkd_obj_id.id),
+                    'number': int(batch_list['number']),
+                }
+            warehouse_line_obj = list_obj.search([('name', '=', str(batch_list['name']))])
+            if not warehouse_line_obj:
+                warehouse_obj.create(values)
+                j = j + num
+            for n in range(1, num):
                 values = {
                     'code': str(code+n),
                     'name': str(code+n),
                     'line_id': str(rkd_obj_id.id),
+                    'number': 0,
                 }
-                list_obj.search([('name', '=', str(code+n))])
-                if not list_obj:
+                batch_obj = list_obj.search([('name', '=', str(code+n))])
+                if not batch_obj:
                     list_obj.create(values)
-                    j = j + 1
         rkd_obj_id.update({'number': j})
         return rest.render_json({"status": "yes", "message": code, "data": code_lists})
     #扫码出库
     @authorizer.authorize
     @http.route('/api/kcgl/get_kcck/<unit_id>', type='http', auth='none', methods=['GET'])
     def get_kcck(self, unit_id, goods_id, batch_id, agent_id, express_id,code_lists):
+        print code_lists
+        print '***********'
         code = 'RKD' + date_ref[:4] + date_ref[5:7] + str(random.randint(100, 999))
         rkd_obj = self.current_env['warehouse.doc']
         values = []
@@ -176,20 +189,31 @@ class OrderController(http.Controller):
             'unit_id': int(unit_id),
         }
         rkd_obj_id = rkd_obj.create(values)
+        warehouse_obj = self.current_env['warehouse.line']
         list_obj = self.current_env['batch.list']
         batch_lists = eval(code_lists)
         j = 0
         for batch_list in batch_lists:
-            num = int(batch_list[1])
-            code = int(batch_list[0])-1
+            num = int(batch_list['number'])
+            code = int(batch_list['name'])-1
+            values = {
+                    'code': str(batch_list['name']),
+                    'name': str(batch_list['name']),
+                    'line_id': str(rkd_obj_id.id),
+                    'number': int(batch_list['number']),
+                }
+            warehouse_line_obj = list_obj.search([('name', '=', str(batch_list['name']))])
+            if not warehouse_line_obj:
+                warehouse_obj.create(values)
+                j = j + num
             for n in range(1, num):
                 values = {
                     'code': str(code+n),
                     'name': str(code+n),
                     'line_id': str(rkd_obj_id.id),
                 }
-                list_obj.search([('name', '=', str(code+n))])
-                if not list_obj:
+                batch_obj = list_obj.search([('name', '=', str(code+n))])
+                if not batch_obj:
                     list_obj.create(values)
                     j = j + 1
         rkd_obj_id.update({'number': j})
@@ -200,7 +224,6 @@ class OrderController(http.Controller):
     def get_search(self, code):
         batch_obj = self.current_env['batch.list']
         batch_list_obj = batch_obj.search([('name', '=', code)])
-        messages = '@@@'
         if not batch_list_obj:
             messages = '该产品不是本公司产品请联系公司'
         if batch_list_obj.messages == ' ':
@@ -211,20 +234,20 @@ class OrderController(http.Controller):
             number = int(batch_list_obj.messages)+1
             batch_list_obj.update({'messages': str(number)})
         return rest.render_json({"status": "yes", "message": code, "data": messages})
-    #扫码出库
-    @authorizer.authorize
-    @http.route('/api/kcgl/get_search/<code>', type='http', auth='none', methods=['GET'])
-    def get_search(self, code):
-        batch_obj = self.current_env['batch.list']
-        batch_list_obj = batch_obj.search([('name', '=', code)])
-        messages = '@@@'
-        if not batch_list_obj:
-            messages = '该产品不是本公司产品请联系公司'
-        if batch_list_obj.messages == ' ':
-            batch_list_obj.update({'messages': '1'})
-            messages = '这是第一次查询,您所查询的是公司的产品,是正品,谢谢使用。'
-        else:
-            messages = '您所查询的是公司的产品,但经过多次查询，请及时联系客服验证真假！'
-            number = int(batch_list_obj.messages)+1
-            batch_list_obj.update({'messages': str(number)})
-        return rest.render_json({"status": "yes", "message": code, "data": messages})
+    # #扫码出库
+    # @authorizer.authorize
+    # @http.route('/api/kcgl/get_search/<code>', type='http', auth='none', methods=['GET'])
+    # def get_search(self, code):
+    #     batch_obj = self.current_env['batch.list']
+    #     batch_list_obj = batch_obj.search([('name', '=', code)])
+    #     messages = '@@@'
+    #     if not batch_list_obj:
+    #         messages = '该产品不是本公司产品请联系公司'
+    #     if batch_list_obj.messages == ' ':
+    #         batch_list_obj.update({'messages': '1'})
+    #         messages = '这是第一次查询,您所查询的是公司的产品,是正品,谢谢使用。'
+    #     else:
+    #         messages = '您所查询的是公司的产品,但经过多次查询，请及时联系客服验证真假！'
+    #         number = int(batch_list_obj.messages)+1
+    #         batch_list_obj.update({'messages': str(number)})
+    #     return rest.render_json({"status": "yes", "message": code, "data": messages})

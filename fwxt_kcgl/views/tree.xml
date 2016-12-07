@@ -33,7 +33,7 @@
                     <field name="number"  sum="Total"/>
                     <field name="warehouse_id"/>
                     <field name="unit_id"/>
-                    <field name="batch_list"/>
+                    <field name="line_id"/>
                     <field name="user_id"/>
                     <field name="date_confirm"/>
                 </tree>
@@ -41,9 +41,9 @@
         </record>
 
         <!--入库明细表-->
-        <record id="view_tree_warehouse_list" model="ir.ui.view">
-            <field name="name">Warehouse List</field>
-            <field name="model">warehouse.list</field>
+        <record id="view_tree_warehouse_line" model="ir.ui.view">
+            <field name="name">Warehouse Line</field>
+            <field name="model">warehouse.line</field>
             <field name="priority">1</field>
             <field name="arch" type="xml">
                 <tree string="view">

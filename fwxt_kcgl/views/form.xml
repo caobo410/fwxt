@@ -55,7 +55,7 @@
                     </group>
                     <notebook colspan="4">
                         <page string="Batch">
-                            <field name="batch_list"/>
+                            <field name="line_id"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -93,7 +93,7 @@
                     </group>
                     <notebook colspan="4">
                         <page string="Batch">
-                            <field name="batch_list"/>
+                            <field name="line_id"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -129,8 +129,8 @@
 
         <!--条码明细表-->
         <record id="view_form_batch_list" model="ir.ui.view">
-            <field name="name">Batch Line</field>
-            <field name="model">Batch.line</field>
+            <field name="name">Batch List</field>
+            <field name="model">batch.list</field>
             <field name="arch" type="xml">
                 <form string="Picture Management" version="7.0">
                 <sheet>

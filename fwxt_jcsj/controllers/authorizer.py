@@ -14,7 +14,6 @@ def authorize(f):
                 return rest.unauthorized()
             else:
                 controller.current_env = env
-                print '123'
             return f(controller, **kwargs)
         except OperationalError, e:
             return rest.bad_request(str(e))
