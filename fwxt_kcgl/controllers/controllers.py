@@ -24,9 +24,6 @@ class OrderController(http.Controller):
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_list = {}
-        print commodity_obj.line_id
-        print commodity_obj.line_id.batch_id
-        print commodity_obj.line_id.batch_id.code
         commodity_list['code'] = commodity_obj.line_id.batch_id.code
         commodity_list['name'] = commodity_obj.line_id.batch_id.name
         commodity_list['batch'] = commodity_obj.line_id.batch_id.batch

@@ -233,7 +233,6 @@ class commodity_line(models.Model):
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
-
 #供应商
 class supplier_info(models.Model):
     _name = "supplier.info"
