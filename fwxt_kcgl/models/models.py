@@ -12,6 +12,7 @@
 import logging
 from openerp import fields,models,api
 from datetime import datetime
+import random
 date_ref = datetime.now().strftime('%Y-%m-%d')
 _logger = logging.getLogger(__name__)
 
@@ -30,6 +31,7 @@ class warehouse_info(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'warehouse.info'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
         'sf_default': False
@@ -59,6 +61,7 @@ class warehouse_doc(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'warehouse.doc'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -75,6 +78,7 @@ class warehouse_line(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'warehouse.line'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -92,6 +96,7 @@ class batch_list(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'batch.list'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -106,8 +111,7 @@ class manual_storage(models.Model):
     commodity_id = fields.Many2one('commodity.info', string='Commodity', help="Commodity")
     warehouse_id = fields.Many2one('warehouse.info', string='Warehouse', help="Warehouse")
     unit_id = fields.Many2one('base.unit', string='Unit')
-    from_batch = fields.Char(string='From Batch', digits=(16, 1), required=True, help="From Batch")
-    to_batch = fields.Float(string='To Batch', digits=(16, 0), required=True, help="To Batch")
+    fixed_code = fields.Float(string='Fixed Code', digits=(16, 0), required=True, help="Fixed Code")
     number = fields.Float(string='Num', digits=(16, 0), help='Number')
     messages = fields.Char(string='Messages', help="Messages")
     user_id = fields.Many2one('res.users', string='Operator')
@@ -131,29 +135,68 @@ class manual_storage(models.Model):
             'unit_id': str(self.unit_id.id),
             'number': self.number,
              }
+        fixed_code = self.fixed_code
+        num = int(self.number)
         rk_obj_id = self.env['warehouse.doc'].create(values)
+        company_objs = self.env['company.info'].search([])
+        if company_objs:
+            for company_obj in company_objs:
+                company_code = company_obj.company_code
         if rk_obj_id:
             i = 0
-            for j in range(int(self.from_batch), int(self.to_batch)):
+            for j in range(0, num):
                 i = i + 1
+                code = get_code(self, company_code, fixed_code, num, i)
                 values = {
-                    'code': str(i),
-                    'name': str(j),
+                    'code': code,
+                    'name': code,
                     'line_id': str(rk_obj_id.id),
+                    'number': 0,
                     'messages': ' ',
-                    # 'user_id': str(self.user_id.id),
-                    # 'date_confirm': self.date_confirm,
                 }
-                print values
                 self.env['batch.list'].create(values)
         return {'type': 'ir.actions.act_window_close'}
 
-
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'manual.storage'),
         'number': 1,
         'to_batch': 0,
         'from_batch': 0,
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
+def get_code(self, get_kh, get_gd, get_num,get_i):
+        kh = str(get_kh)
+        gd = int(get_gd)
+        num = int(get_num)
+        i = int(get_i)
+        str_bs = '000000000000000000'
+        str_num = '100000000000000000000'
+        ws = gd/2 - 1
+        min_str = str_num[:ws]
+        max_str = str_num[:ws+1]
+        min_num = int(min_str) + num
+        max_num = int(max_str) - 1
+        all_the_text = ''
+        #随机取两位数
+        one = random.randint(10, 99)
+        #被10除求商和玉树
+        int_one = one // 10
+        int_two = one % 10
+        sj = random.randint(min_num, max_num)
+        str1 = str(sj)
+        code = (str_bs+str(i))
+        cd = 0-(ws - len(str(kh)))
+        str2 = str(kh)+code[cd:]
+        str3 = ''
+        for j in range(0, gd/2-1):
+            if int_one % 2 == 0:
+                str3 = str3 + str1[j] + str2[j]
+            else:
+                str3 = str3 + str2[j] + str1[j]
+        int_end = int_two - gd + 2
+        str3 = str3[int_end:] + str3[:int_two]
+        str4 = str(one) + str3
+        all_the_text = all_the_text + str4
+        return all_the_text
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -31,6 +31,7 @@ class base_routing(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'base.routing'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -54,6 +55,7 @@ class routing_line(models.Model):
             self.name = self.step_id.code + ' ' + self.step_id.name
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'routing.line'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -72,6 +74,7 @@ class base_step(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'base.step'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }

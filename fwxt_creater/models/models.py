@@ -14,6 +14,7 @@ import logging
 from openerp import fields,models,api
 from datetime import datetime
 import random
+import os
 date_ref = datetime.now().strftime('%Y-%m-%d')
 _logger = logging.getLogger(__name__)
 class fwxt_company(models.Model):
@@ -28,6 +29,7 @@ class fwxt_company(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="录入日期")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'fwxt.company'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -72,20 +74,27 @@ class fwxt_create(models.Model):
         max_num = int(max_str) - 1
         all_the_text = ''
         for i in range(1, num + 1):
+            #随机取两位数
             one = random.randint(10, 99)
+            #求10的商和余数
             int_one = one // 10
             int_two = one % 10
+            #随机取8位数
             sj = random.randint(min_num, max_num)
+            #转换程字符床
             str1 = str(sj)
+            #加上客户数字 凑齐8位 不够的中间补0
             code = (str_bs+str(i))
             cd = 0-(ws - len(str(kh)))
             str2 = str(kh)+code[cd:]
             str3 = ''
+            #根据随机的二位树 第一位是奇数还是偶数
             for j in range(0, gd/2-1):
                 if int_one % 2 == 0:
                     str3 = str3 + str1[j] + str2[j]
                 else:
                     str3 = str3 + str2[j] + str1[j]
+            #根据随机的二位数，惊醒左右转换
             int_end = int_two - gd + 2
             str3 = str3[int_end:] + str3[:int_two]
             str4 = str(one) + str3
@@ -98,11 +107,12 @@ class fwxt_create(models.Model):
                 all_the_text = ''
                 num = 0
         if num > 0:
-            file_object = open('d://'+ comany + date_ref + '.txt', 'a')
+            file_object = open('d://' + comany + date_ref + '.txt', 'a')
             file_object.write(all_the_text)
             file_object.close()
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'fwxt.create'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c = {}: id,
     }

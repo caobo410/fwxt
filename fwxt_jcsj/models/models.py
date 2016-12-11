@@ -37,12 +37,14 @@ class company_info(models.Model):
 
     code = fields.Char(string='Code', size=64, required=True, help="No.")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
+    company_code = fields.Char(string='Company Code', size=64, required=True, help="Company Code")
     company_info = fields.Text(string='Company Info', help="Company Info")
     message = fields.Char(string='Message', help="Message")
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'company.info'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -63,6 +65,7 @@ class picture_management(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'picture.management'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -79,6 +82,7 @@ class base_unit(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'base.unit'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -97,6 +101,7 @@ class convert_info(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'convert.info'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -120,6 +125,7 @@ class other_info(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'other.info'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -155,6 +161,7 @@ class dict_info(models.Model):
         return ret_list
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'dict.info'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -178,6 +185,7 @@ class branch_office_info(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'branch.office.info'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -196,6 +204,7 @@ class material_info(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'materia.info'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -216,6 +225,7 @@ class commodity_info(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'commodity.info'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -230,6 +240,7 @@ class commodity_line(models.Model):
     messages = fields.Text(string='Messages', help="Messages")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'commodity.line'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -253,6 +264,7 @@ class supplier_info(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'supplier.info'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -273,6 +285,7 @@ class agent_info(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'agent.info'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -293,6 +306,7 @@ class express_info(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'express.info'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -313,6 +327,7 @@ class check_info(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'check.info'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }

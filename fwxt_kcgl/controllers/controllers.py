@@ -264,7 +264,7 @@ class OrderController(http.Controller):
             batch_list_obj.update({'messages': str(number)})
         return rest.render_json({"status": "yes", "message": tm_code, "data": messages})
 def def_decrypt(code):
-    code = code
+    code = str(code)
     str_one = code[:2]
     str_len = 2 - len(code)
     str_code = code[str_len:]

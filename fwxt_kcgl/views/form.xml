@@ -175,8 +175,7 @@
                     </group>
                     <label for="contact_name"/>
                     <div>
-                        From<field name="from_batch" style="width: 30%%"/>
-                        To <field name="to_batch" style="width: 30%%" />
+                        Fixed Code<field name="fixed_code" style="width: 30%%"/>
                     </div>
                     <group>
                         <group>

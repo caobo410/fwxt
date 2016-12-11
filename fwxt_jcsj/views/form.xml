@@ -17,6 +17,7 @@
                                 <field name="user_id"/>
                             </group>
                             <group>
+                                <field name="company_code"/>
                                 <field name="message"/>
                                 <field name="date_confirm"/>
                             </group>
