@@ -17,21 +17,21 @@ date_ref = datetime.now().strftime('%Y-%m-%d')
 _logger = logging.getLogger(__name__)
 
 class material_batch(models.Model):
-    _name = "material.batch"
-    _description = "material.batch"
+    _name = 'material.batch'
+    _description = 'material.batch'
 
-    code = fields.Char(string='Code', size=64, required=True, help="Code")
-    name = fields.Char(string='Name', size=64, required=True, help="Name")
-    batch = fields.Char(string='Batch', size=64, required=True, help="Batch")
+    code = fields.Char(string='Code', size=64, required=True, help='Code')
+    name = fields.Char(string='Name', size=64, required=True, help='Name')
+    batch = fields.Char(string='Batch', size=64, required=True, help='Batch')
     picture_id = fields.Many2one('picture.management', string='Picture')
     file_id = fields.Many2one('ir.attachment', string='File')
     materia_id = fields.Many2one('materia.info', string='Materia Info')
-    supplier_id = fields.Many2one('supplier.info', string='Supplier Info', help="Supplier")
-    commodity_batch_id = fields.Many2one('commodity.batch', string='Commodity Batch')
-    production_date = fields.Date(string='Date', size=64, required=True, help="Date")
-    messages = fields.Char(string='Messages', help="Messages")
+    supplier_id = fields.Many2one('supplier.info', string='Supplier Info', help='Supplier')
+    # material_batch_id = fields.Many2one('commodity.batch', string='Commodity Batch', help='Supplier')
+    production_date = fields.Date(string='Date', size=64, required=True, help='Date')
+    messages = fields.Char(string='Messages', help='Messages')
     user_id = fields.Many2one('res.users', string='Operator')
-    date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
+    date_confirm = fields.Date(string='Date', size=64, required=True, help='Date')
 
     @api.multi
     @api.depends('name', 'code')
@@ -49,21 +49,19 @@ class material_batch(models.Model):
     }
 
 class commodity_batch(models.Model):
-    _name = "commodity.batch"
-    _description = "commodity.batch"
+    _name = 'commodity.batch'
+    _description = 'commodity.batch'
 
-    code = fields.Char(string='Code', size=64, required=True, help="Code")
-    name = fields.Char(string='Name', size=64, required=True, help="Name")
-    batch = fields.Char(string='Batch', size=64, required=True, help="Batch")
+    code = fields.Char(string='Code', size=64, required=True, help='Code')
+    name = fields.Char(string='Name', size=64, required=True, help='Name')
+    batch = fields.Char(string='Batch', size=64, required=True, help='Batch')
     commodity_id = fields.Many2one('commodity.info', string='Commodity')
-    # supplier_id = fields.Many2one('supplier.info', string='Supplier Info', domain=[('type', '=', 'supplier')], help="Supplier")
-    material_batch_id = fields.One2many('material.batch', 'commodity_batch_id', string='join')
+    line_id = fields.One2many('commodity.batch.line', 'line_id', string='join', copy=True)
     branch_id = fields.Many2one('branch.office.info', string='Branch Office', select=True, track_visibility='onchange')
-    production_date = fields.Date(string='Date', size=64, required=True, help="Date")
-    messages = fields.Char(string='Messages', help="Messages")
+    production_date = fields.Date(string='Date', size=64, required=True, help='Date')
+    messages = fields.Char(string='Messages', help='Messages')
     user_id = fields.Many2one('res.users', string='Operator')
-    date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
-
+    date_confirm = fields.Date(string='Date', size=64, required=True, help='Date')
 
     @api.multi
     @api.depends('name', 'code')
@@ -79,5 +77,28 @@ class commodity_batch(models.Model):
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
+class commodity_batch_line(models.Model):
+    _name = 'commodity.batch.line'
+    _description = 'commodity.batch.line'
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+    line_id = fields.Many2one('commodity.batch', string='Commodity Batch', select=True, track_visibility='onchange')
+    material_batch_id = fields.Many2one('material.batch', string='Batch', select=True, track_visibility='onchange')
+    name = fields.Char(string='Name', size=64, required=True, help='Name')
+    messages = fields.Char(string='Messages', help='Messages')
+    user_id = fields.Many2one('res.users', string='Operator')
+    date_confirm = fields.Date(string='Date', size=64, required=True, help='Date')
+
+    @api.one
+    @api.onchange('material_batch_id')
+    def onchange_material_batch_id(self):
+        self.name = self.material_batch_id.name
+
+    _defaults = {
+        'date_confirm': date_ref,
+        'user_id': lambda cr, uid, id, c={}: id,
+    }
+
+
+
+
+    # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

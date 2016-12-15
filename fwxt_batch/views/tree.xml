@@ -14,7 +14,6 @@
                     <field name="batch"/>
                     <field name="materia_id"/>
                     <field name="supplier_id"/>
-                    <field name="commodity_batch_id"/>
                     <field name="production_date"/>
                     <field name="user_id"/>
                     <field name="date_confirm"/>
@@ -33,7 +32,7 @@
                     <field name="name"/>
                     <field name="batch"/>
                     <field name="commodity_id"/>
-                    <field name="material_batch_id"/>
+                    <field name="line_id"/>
                     <field name="production_date"/>
                     <field name="user_id"/>
                     <field name="date_confirm"/>
@@ -52,6 +51,21 @@
                     <field name="name"/>
                     <field name="line_id"/>
                     <field name="commodity_id"/>
+                    <field name="user_id"/>
+                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_tree_commodity_batch_line" model="ir.ui.view">
+            <field name="name">Commodity batch Line</field>
+            <field name="model">commodity.batch.line</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="tree">
+                    <field name="material_batch_id"/>
+                    <field name="name"/>
+                    <field name="line_id"/>
                     <field name="user_id"/>
                     <field name="date_confirm"/>
                 </tree>

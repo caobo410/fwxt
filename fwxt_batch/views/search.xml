@@ -13,11 +13,11 @@
                     <field name="batch" string="Batch" filter_domain="[('batch','ilike',self)]"/>
                     <field name="materia_id" />
                     <field name="supplier_id" />
-                    <field name="commodity_batch_id"/>
+                    <!--<field name="commodity_batch_id"/>-->
                     <group expand="0" string="Group">
                         <filter string="materia_id" domain="[]" context="{'group_by':'materia_id'}"/>
                         <filter string="supplier_id" domain="[]" context="{'group_by':'supplier_id'}"/>
-                        <filter string="commodity_batch_id" domain="[]" context="{'group_by':'commodity_batch_id'}"/>
+                        <!--<filter string="commodity_batch_id" domain="[]" context="{'group_by':'commodity_batch_id'}"/>-->
                     </group>
                 </search>
             </field>

@@ -24,8 +24,8 @@
             <field name="res_model">warehouse.doc</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
+            <field name="domain">[('type','=', 'in')]</field>
             <field name="view_id" ref="view_form_warehouse_doc"/>
-            <field name="domain">[('type','in',('in','manual'))]</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
                     Warehouse Doc
@@ -40,8 +40,8 @@
             <field name="res_model">warehouse.doc</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="view_form_warehouse_doc_ck"/>
             <field name="domain">[('type','=','out')]</field>
+            <field name="view_id" ref="view_form_warehouse_doc_ck"/>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
                     Warehouse Doc
