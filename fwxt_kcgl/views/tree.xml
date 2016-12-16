@@ -61,13 +61,10 @@
         <record id="view_tree_batch_list" model="ir.ui.view">
             <field name="name">Batch List</field>
             <field name="model">batch.list</field>
-            <field name="priority">1</field>
             <field name="arch" type="xml">
                 <tree string="view">
                     <field name="code"/>
                     <field name="name"/>
-                    <field name="user_id"/>
-                    <field name="date_confirm"/>
                 </tree>
             </field>
         </record>

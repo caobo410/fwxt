@@ -14,6 +14,18 @@
             </field>
         </record>
 
+        <!--批次列表-->
+        <record id="view_filter_batch_list" model="ir.ui.view">
+            <field name="name">batch.list.search</field>
+            <field name="model">batch.list</field>
+            <field name="arch" type="xml">
+                <search string="search">
+                    <field name="code" string="Code" filter_domain="[('code','ilike',self)]"/>
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                </search>
+            </field>
+        </record>
+
         <!--入库管理-->
         <record id="view_filter_warehouse_doc" model="ir.ui.view">
             <field name="name">warehouse.doc.search</field>

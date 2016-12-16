@@ -16,16 +16,17 @@
                             <group>
                                 <field name="name"/>
                                 <field name="materia_id"/>
-                                <!--<field name="commodity_batch_id"/>-->
+                                <field name="number"/>
+                                <field name="unit_id"/>
                                 <field name="picture_id"/>
                                 <field name="production_date"/>
-                                <field name="user_id"/>
                             </group>
                             <group>
                                 <field name="batch"/>
                                 <field name="supplier_id"/>
                                 <field name="file_id"/>
                                 <field name="messages"/>
+                                <field name="user_id"/>
                                 <field name="date_confirm"/>
                             </group>
                         </group>
@@ -222,10 +223,8 @@
                                 <field name="messages"/>
                             </group>
                             <group>
-                                <field name="picture_id"/>
                                 <field name="commodity_id" widget="many2one_list">
                                     <tree string="" editable="bottom">
-                                        <field name="commodity_info_id"/>
                                         <field name="name"/>
                                     </tree>
                                 </field>
@@ -263,14 +262,18 @@
                             <group>
                                 <field name="name"/>
                                 <field name="check_id"/>
-                                <field name="picture_id"/>
                                 <field name="messages"/>
+                                <field name="user_id"/>
+                                <field name="date_confirm"/>
                             </group>
                             <group>
                                 <field name="type"/>
                                 <field name="check_date"/>
-                                <field name="user_id"/>
-                                <field name="date_confirm"/>
+                                <field name="picture_id" widget="many2one_list">
+                                    <tree string="" editable="bottom">
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
                             </group>
                         </group>
                     </sheet>

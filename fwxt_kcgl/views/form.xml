@@ -46,7 +46,7 @@
                             <field name="messages" />
                         </group>
                         <group>
-                            <field name="type" eval="in"/>
+                            <!--<field name="type"/>-->
                             <field name="warehouse_id"/>
                             <field name="number"/>
                             <field name="user_id" />
@@ -83,10 +83,11 @@
                             <field name="messages" />
                         </group>
                         <group>
-                            <field name="type" eval="in"/>
+                            <!--<field name="type"/>-->
                             <field name="warehouse_id" />
                             <field name="number"/>
                             <field name="express_id"/>
+                            <field name="express_code"/>
                             <field name="user_id" />
                             <field name="date_confirm" />
                         </group>

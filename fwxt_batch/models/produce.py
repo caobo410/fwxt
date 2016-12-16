@@ -124,7 +124,8 @@ class check_line(models.Model):
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    picture_id = fields.Many2one('picture.management', string='Picture')
+    picture_id = fields.One2many('check.line.picture', 'picture_id', string='Picture', copy=True)
+    # commodity_id = fields.One2many('commodity.check.line', 'commodity_id', string='list', copy=True)
     line_id = fields.Many2one('commodity.check', string='Commodity Check', select=True, track_visibility='onchange')
     type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'making')])
     check_date = fields.Date(string='Check Date', size=64, required=True, help="Check Date")
@@ -140,16 +141,18 @@ class check_line(models.Model):
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
+class check_line_picture(models.Model):
+    _name = "check.line.picture"
+    _description = "commodity.check.line"
+
+    name = fields.Many2one('picture.management', string='Picture', select=True, track_visibility='onchange')
+    picture_id = fields.Many2one('check.line', string='Commodity', select=True, track_visibility='onchange')
+
 class commodity_check_line(models.Model):
     _name = "commodity.check.line"
     _description = "commodity.check.line"
 
-    commodity_info_id = fields.Many2one('commodity.info', string='Commodity', select=True, track_visibility='onchange')
-    name = fields.Char(string='Commodity Code', size=64, help="Commodity Code")
+    name = fields.Many2one('commodity.info', string='Commodity', select=True, track_visibility='onchange')
     commodity_id = fields.Many2one('commodity.check', string='Commodity', select=True, track_visibility='onchange')
 
-    @api.one
-    @api.onchange('commodity_info_id')
-    def onchange_step_id(self):
-        self.name = self.commodity_info_id.code
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

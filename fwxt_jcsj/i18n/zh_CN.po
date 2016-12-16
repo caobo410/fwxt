@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-08 06:30+0000\n"
-"PO-Revision-Date: 2016-10-08 14:35+0800\n"
+"POT-Creation-Date: 2016-12-16 13:03+0000\n"
+"PO-Revision-Date: 2016-12-16 21:04+0800\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 "Language: zh_CN\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.10\n"
 
 #. module: fwxt_jcsj
 #: model:ir.actions.act_window,help:fwxt_jcsj.action_agent_info
@@ -223,6 +223,11 @@ msgid "Agent Information"
 msgstr "经销商"
 
 #. module: fwxt_jcsj
+#: field:supplier.info,type:0
+msgid "Area"
+msgstr "区域"
+
+#. module: fwxt_jcsj
 #: model:ir.ui.menu,name:fwxt_jcsj.menu_two_information
 msgid "Base Information"
 msgstr "基础信息"
@@ -267,6 +272,11 @@ msgstr "检验公司"
 #: model:ir.actions.act_window,name:fwxt_jcsj.action_check_info
 msgid "Check Information"
 msgstr "检验信息"
+
+#. module: fwxt_jcsj
+#: field:other.info,password:0 help:other.info,password:0
+msgid "Check Password"
+msgstr "查询密码"
 
 #. module: fwxt_jcsj
 #: selection:dict.info,type:0
@@ -317,6 +327,11 @@ msgstr "商品信息"
 #: model:ir.ui.menu,name:fwxt_jcsj.menu_three_commodity_info
 msgid "Commodity Information"
 msgstr "商品信息"
+
+#. module: fwxt_jcsj
+#: field:company.info,company_code:0 help:company.info,company_code:0
+msgid "Company Code"
+msgstr "公司编码"
 
 #. module: fwxt_jcsj
 #: field:company.info,company_info:0 help:company.info,company_info:0
@@ -446,7 +461,7 @@ msgstr "分组"
 
 #. module: fwxt_jcsj
 #: selection:picture.management,type:0
-msgid "Heard"
+msgid "Head"
 msgstr "页头"
 
 #. module: fwxt_jcsj
@@ -680,7 +695,6 @@ msgstr "该字段作为商品形象，限于300x300px！"
 #: field:agent.info,type:0 field:check.info,type:0 field:commodity.info,type:0
 #: field:dict.info,type:0 help:dict.info,type:0 field:express.info,type:0
 #: field:ir.attachment,video_type:0 field:materia.info,type:0
-#: field:supplier.info,type:0
 msgid "Type"
 msgstr "类型"
 
@@ -708,11 +722,6 @@ msgstr "视频管理"
 #: field:other.info,web_add:0 help:other.info,web_add:0
 msgid "Web add"
 msgstr "公司网址"
-
-#. module: fwxt_jcsj
-#: field:other.info,weixin_add:0 help:other.info,weixin_add:0
-msgid "Weixin Add"
-msgstr "微信网址"
 
 #. module: fwxt_jcsj
 #: model:ir.actions.act_window,name:fwxt_jcsj.action_video_info

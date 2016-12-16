@@ -25,6 +25,7 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[('type','=', 'in')]</field>
+            <field name="context">{"type":'in'}</field>
             <field name="view_id" ref="view_form_warehouse_doc"/>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
@@ -41,6 +42,7 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[('type','=','out')]</field>
+            <field name="context">{"type":'out'}</field>
             <field name="view_id" ref="view_form_warehouse_doc_ck"/>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
@@ -57,7 +59,6 @@
             <field name='view_id' ref='report_stock_kcye_graph' />
         </record>
 
-
         <!--手动入库-->
         <record id='action_manual_storage' model='ir.actions.act_window' >
             <field name='multi'>True</field>
@@ -68,6 +69,20 @@
             <field name='view_mode'>form</field>
             <field name='target'>new</field>
             <field name='view_type'>form</field>
+        </record>
+
+        <!--批次信息-->
+        <record id="action_batch_list" model="ir.actions.act_window">
+            <field name="name">Batch List</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">batch.list</field>
+            <field name="view_type">tree</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Batch List
+                </p>
+            </field>
         </record>
 
     </data>

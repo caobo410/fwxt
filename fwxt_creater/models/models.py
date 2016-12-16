@@ -49,7 +49,7 @@ class fwxt_create(models.Model):
     create_file = fields.Binary(string='附件')
     messages = fields.Char(string='备注', help='备注')
     user_id = fields.Many2one('res.users', string='录入人')
-    date_confirm = fields.Date(string='Date', size=64, required=True, help='录入日期')
+    date_confirm = fields.Date(string='录入日期', size=64, required=True, help='录入日期')
 
     @api.one
     @api.onchange('company_id')
@@ -123,9 +123,9 @@ class fwxt_decrypt(models.Model):
     name = fields.Char(string='条形码', size=64, help="条形码")
     decrypt_code = fields.Char(string='解密', size=64, help="解密")
     company_id = fields.Many2one('fwxt.company', string='客户名称')
-    messages = fields.Char(string='Messages', help="Messages")
-    user_id = fields.Many2one('res.users', string='Operator')
-    date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
+    messages = fields.Char(string='备注', help="备注")
+    user_id = fields.Many2one('res.users', string='操作人')
+    date_confirm = fields.Date(string='录入日期', size=64, required=True, help="录入日期")
 
     @api.one
     def btn_decrypt(self):
