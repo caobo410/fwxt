@@ -116,7 +116,11 @@ class OrderController(http.Controller):
             file_obj = self.current_env['making.line'].search([('id', '=', int(code))])
             video_obj = file_obj.video_obj
         path = video_obj.store_fname
-        filepath = '/usr/lhd/.local/share/Odoo/filestore/fwxt/' +path
+        path = path.replace('/', '\\')
+        filepath = 'D:\\odoo-8.0\\project\\fwxt\datafile\\filestore\\fwxt\\' +path
+        print filepath
+        # filepath = '/usr/lhd/.local/share/Odoo/filestore/fwxt/' +path
         filename = video_obj.datas_fname
+        print filename
         return rest.sendfile(filepath, filename)
 
