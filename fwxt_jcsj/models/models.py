@@ -251,10 +251,6 @@ class supplier_info(models.Model):
 
     code = fields.Char(string='Code', size=64, required=True, help="Code")
     name = fields.Char(string='Name', size=64, required=True, help="Name")
-    # type = fields.Selection([('supplier', 'Supplier'),
-    #                          ('agent', 'Agent'),
-    #                          ('express', 'Express'),
-    #                          ('check', 'Check')], 'Product Type', required=True, help="Type")
     type = fields.Many2one('dict.info', string='Area', domain=[('type', '=', 'supplier')], required=True, select=True, track_visibility='onchange')
     contacts_name = fields.Char(string='Contacts Name', help="Contacts Name")
     tel = fields.Char(string='Tel', help="Tel")

@@ -40,13 +40,12 @@ class OrderController(http.Controller):
         batch_lists = []
         for batch_obj in batch_objs:
             batch_list = {}
-            batch_list['code'] = batch_obj.code
+            batch_list['code'] = batch_obj.id
             batch_list['name'] = batch_obj.name
             batch_list['batch'] = batch_obj.batch
             batch_list['materia'] = batch_obj.materia_id.name
             batch_list['supplier'] = batch_obj.supplier_id.name
             batch_list['picture'] = batch_obj.picture_id.image
-            batch_list['video'] = batch_obj.file_id.description
             batch_lists.append(batch_list)
         return rest.render_json({"status": "yes", "message": code, "data": batch_lists})
 
@@ -65,12 +64,11 @@ class OrderController(http.Controller):
         making_lists = []
         for making_list_obj in making_list_objs:
             making_list = {}
-            making_list['code'] = making_list_obj.code
+            making_list['code'] = making_list_obj.id
             making_list['name'] = making_list_obj.name
             making_list['type'] = making_list_obj.type.name
             making_list['messages'] = making_list_obj.messages
             making_list['picture'] = making_list_obj.picture_id.image
-            making_list['video'] = making_list_obj.video_id.description
             making_lists.append(making_list)
         return rest.render_json({"status": "yes", "message": code, "data": making_lists})
 
@@ -89,12 +87,11 @@ class OrderController(http.Controller):
         produce_lists = []
         for produce_list_obj in produce_list_objs:
             produce_list = {}
-            produce_list['code'] = produce_list_obj.code
+            produce_list['code'] = produce_list_obj.id
             produce_list['name'] = produce_list_obj.name
             produce_list['type'] = produce_list_obj.type.name
             produce_list['messages'] = produce_list_obj.messages
             produce_list['picture'] = produce_list_obj.picture_id.image
-            produce_list['video'] = produce_list_obj.video_id.description
             produce_lists.append(produce_list)
         return rest.render_json({"status": "yes", "message": code, "data": produce_lists})
 
@@ -118,7 +115,13 @@ class OrderController(http.Controller):
             check_list['comany'] = check_list_obj.check_id.name
             check_list['type'] = check_list_obj.type.name
             check_list['messages'] = check_list_obj.messages
-            check_list['picture'] = check_list_obj.picture_id.image
+            picture_lists = []
+            picture_objs = self.current_env['check.line.picture'].search([('picture_id', '=', check_list_obj.picture_id)])
+            for picture_obj in picture_objs:
+                picture_list = {}
+                picture_list['picture'] = picture_obj.name.image
+                picture_lists.append(picture_list)
+            check_list['picture'] = picture_lists
             check_lists.append(check_list)
         return rest.render_json({"status": "yes", "message": code, "data": check_lists})
     #扫码入库
