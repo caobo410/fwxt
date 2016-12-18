@@ -39,7 +39,7 @@ def not_found(msg="Resource not found"):
                          headers=[('Content-Type', 'application/json; charset=utf-8')],
                          status=404)
 
-def sendfile(filepath_or_fp, filename="110.NC"):
+def sendfile(filepath_or_fp, filename):
     print("*"*100)
     return http.send_file(filepath_or_fp, mimetype=None, as_attachment=True, filename=filename)
 

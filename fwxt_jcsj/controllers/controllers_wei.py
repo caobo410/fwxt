@@ -102,4 +102,21 @@ class OrderController(http.Controller):
         for company_obj in company_objs:
             company_list = company_obj.company_info
         return rest.render_json({"status": "yes", "message": code, "data": company_list})
+    #企业介绍
+    @authorizer.authorize
+    @http.route('/api/jcsj/get_mp4/<type>', type='http', auth='none', methods=['GET'])
+    def get_company_list(self, type, code):
+        if type =='ycl':
+            file_obj = self.current_env['material.batch'].search([('id', '=', int(code))])
+            video_obj = file_obj.file_id
+        elif type =='sc':
+            file_obj = self.current_env['produce.line'].search([('id', '=', int(code))])
+            video_obj = file_obj.video_obj
+        elif type =='jg':
+            file_obj = self.current_env['making.line'].search([('id', '=', int(code))])
+            video_obj = file_obj.video_obj
+        path = video_obj.store_fname
+        filepath = '/usr/lhd/.local/share/Odoo/filestore/fwxt/' +path
+        filename = video_obj.datas_fname
+        return rest.sendfile(filepath, filename)
 
