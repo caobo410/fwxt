@@ -19,7 +19,7 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/kcgl/get_batch_list/<code>', type='http', auth='none', methods=['GET'])
     def get_batch_list(self, code):
-        commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
+        commodity_obj = self.current_env['warehouse.line'].search([('name', '=', code)])
         print commodity_obj
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
@@ -33,7 +33,7 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/kcgl/get_material_batch/<code>', type='http', auth='none', methods=['GET'])
     def get_material_batch(self, code):
-        commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
+        commodity_obj = self.current_env['warehouse.line'].search([('name', '=', code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         batch_objs = commodity_obj.line_id.batch_id.material_batch_id
@@ -53,7 +53,7 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/kcgl/get_commodity_making/<code>', type='http', auth='none', methods=['GET'])
     def get_commodity_making(self, code):
-        commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
+        commodity_obj = self.current_env['warehouse.line'].search([('name', '=', code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_id = commodity_obj.line_id.commodity_id.id
@@ -76,7 +76,7 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/kcgl/get_commodity_produce/<code>', type='http', auth='none', methods=['GET'])
     def get_commodity_produce(self, code):
-        commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
+        commodity_obj = self.current_env['warehouse.line'].search([('name', '=', code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_id = commodity_obj.line_id.commodity_id.id
@@ -99,7 +99,7 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/kcgl/get_commodity_check/<code>', type='http', auth='none', methods=['GET'])
     def get_commodity_check(self, code):
-        commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
+        commodity_obj = self.current_env['warehouse.line'].search([('name', '=', code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_id = commodity_obj.line_id.commodity_id.id
