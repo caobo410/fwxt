@@ -127,7 +127,7 @@ class check_line(models.Model):
     picture_id = fields.One2many('check.line.picture', 'picture_id', string='Picture', copy=True)
     # commodity_id = fields.One2many('commodity.check.line', 'commodity_id', string='list', copy=True)
     line_id = fields.Many2one('commodity.check', string='Commodity Check', select=True, track_visibility='onchange')
-    type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'making')])
+    type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'check')])
     check_date = fields.Date(string='Check Date', size=64, required=True, help="Check Date")
     check_id = fields.Many2one('check.info', string='Check Company')
     user_id = fields.Many2one('res.users', string='Operator', select=True, track_visibility='onchange')
