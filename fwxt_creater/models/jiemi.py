@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-code = '9224360006079812'
+import random
+code = '9152734099298481'
+code = str(code)
 str_one = code[:2]
 str_len = 2 - len(code)
 str_code = code[str_len:]
@@ -14,6 +16,7 @@ if int_one % 2 == 0:
 else:
     for i in range(0, len(code)-2, 2):
         b1 = b1 + str_code[i]
+print b1
 
 
-        # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

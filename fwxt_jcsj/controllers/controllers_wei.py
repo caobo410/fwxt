@@ -102,7 +102,7 @@ class OrderController(http.Controller):
         for company_obj in company_objs:
             company_list = company_obj.company_info
         return rest.render_json({"status": "yes", "message": code, "data": company_list})
-    #企业介绍
+    #视频
     @authorizer.authorize
     @http.route('/api/jcsj/get_mp4/<type>', type='http', auth='none', methods=['GET'])
     def get_company_list(self, type, code):
