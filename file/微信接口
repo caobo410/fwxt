@@ -329,7 +329,45 @@
 	        "name": "生产加工1"      #生产加工名称
 	  }]
 8、获取质检报告
-    测试链接：http://localhost:8069/api/kcgl/get_commodity_check/code+
+    测试链接：http://localhost:8069/api/kcgl/get_/code
+    接口类型：post
+    参数： code  扫码获取的批次号
+    输出
+      错误输出：
+    	{
+	  "status": "no",
+	  "data": [],
+	  "message": "type"
+	}
+      正确输出
+       {
+	  "status": "yes",
+	  "message": "10010001",
+	  "data": [
+	    {
+	      "messages": false,
+	      "code": "10010001",
+	      "type": "酿酒",
+	      "name": "生产加工1"
+	    },
+	    {
+	      "messages": false,
+	      "code": "10010002",
+	      "type": "包装",
+	      "name": "生产加工2"
+	    }
+	  ]
+	}
+    说明
+	参数：
+           state 状态 获取成功为yes,数据不存在no或其他
+           message:备注
+           data：[{
+	    	"messages": false,   #生产加工说明
+	     	"code": "10010001",  #生产加工编号
+	        "type": "包装",      #生产加工类型
+	        "name": "生产加工1"      #生产加工名称
+	  }]
 
 
 

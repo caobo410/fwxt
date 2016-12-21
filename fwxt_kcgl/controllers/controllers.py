@@ -15,114 +15,6 @@ date_ref = datetime.now().strftime('%Y-%m-%d')
 # _logger = logging.getLogger(__name__)
 
 class OrderController(http.Controller):
-    #商品批次信息
-    @authorizer.authorize
-    @http.route('/api/kcgl/get_batch_list/<code>', type='http', auth='none', methods=['GET'])
-    def get_batch_list(self, code):
-        commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
-        if not commodity_obj:
-            return rest.render_json({"status": "no", "message": code, "data": ''})
-        commodity_list = {}
-        commodity_list['code'] = commodity_obj.line_id.batch_id.code
-        commodity_list['name'] = commodity_obj.line_id.batch_id.name
-        commodity_list['batch'] = commodity_obj.line_id.batch_id.batch
-        commodity_list['commodity'] = commodity_obj.line_id.commodity_id.name
-        return rest.render_json({"status": "yes", "message": code, "data": commodity_list})
-    #原材料批次信息
-    @authorizer.authorize
-    @http.route('/api/kcgl/get_material_batch/<code>', type='http', auth='none', methods=['GET'])
-    def get_material_batch(self, code):
-        commodity_obj = self.current_env['batch.list'].search([('code', '=', code)])
-        if not commodity_obj:
-            return rest.render_json({"status": "no", "message": code, "data": ''})
-        batch_objs = commodity_obj.line_id.batch_id.material_batch_id
-        batch_lists = []
-        for batch_obj in batch_objs:
-            batch_list = {}
-            batch_list['code'] = batch_obj.id
-            batch_list['name'] = batch_obj.name
-            batch_list['batch'] = batch_obj.batch
-            batch_list['materia'] = batch_obj.materia_id.name
-            batch_list['supplier'] = batch_obj.supplier_id.name
-            batch_list['picture'] = batch_obj.picture_id.image
-            batch_lists.append(batch_list)
-        return rest.render_json({"status": "yes", "message": code, "data": batch_lists})
-
-    #加工过程
-    @authorizer.authorize
-    @http.route('/api/kcgl/get_commodity_making/<code>', type='http', auth='none', methods=['GET'])
-    def get_commodity_making(self, code):
-        commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
-        if not commodity_obj:
-            return rest.render_json({"status": "no", "message": code, "data": ''})
-        commodity_id = commodity_obj.line_id.commodity_id.id
-        making_obj = self.current_env['commodity.making'].search([('commodity_id', '=', commodity_id)])
-        making_list_objs = making_obj.line_id
-        if not making_list_objs:
-            return rest.render_json({"status": "no", "message": code, "data": ''})
-        making_lists = []
-        for making_list_obj in making_list_objs:
-            making_list = {}
-            making_list['code'] = making_list_obj.id
-            making_list['name'] = making_list_obj.name
-            making_list['type'] = making_list_obj.type.name
-            making_list['messages'] = making_list_obj.messages
-            making_list['picture'] = making_list_obj.picture_id.image
-            making_lists.append(making_list)
-        return rest.render_json({"status": "yes", "message": code, "data": making_lists})
-
-    #生产过程
-    @authorizer.authorize
-    @http.route('/api/kcgl/get_commodity_produce/<code>', type='http', auth='none', methods=['GET'])
-    def get_commodity_produce(self, code):
-        commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
-        if not commodity_obj:
-            return rest.render_json({"status": "no", "message": code, "data": ''})
-        commodity_id = commodity_obj.line_id.commodity_id.id
-        produce_obj = self.current_env['commodity.produce'].search([('commodity_id', '=', commodity_id)])
-        produce_list_objs = produce_obj.line_id
-        if not produce_list_objs:
-            return rest.render_json({"status": "no", "message": code, "data": ''})
-        produce_lists = []
-        for produce_list_obj in produce_list_objs:
-            produce_list = {}
-            produce_list['code'] = produce_list_obj.id
-            produce_list['name'] = produce_list_obj.name
-            produce_list['type'] = produce_list_obj.type.name
-            produce_list['messages'] = produce_list_obj.messages
-            produce_list['picture'] = produce_list_obj.picture_id.image
-            produce_lists.append(produce_list)
-        return rest.render_json({"status": "yes", "message": code, "data": produce_lists})
-
-    #质检公司
-    @authorizer.authorize
-    @http.route('/api/kcgl/get_commodity_check/<code>', type='http', auth='none', methods=['GET'])
-    def get_commodity_check(self, code):
-        commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
-        if not commodity_obj:
-            return rest.render_json({"status": "no", "message": code, "data": ''})
-        commodity_id = commodity_obj.line_id.commodity_id.id
-        check_obj = self.current_env['commodity.check'].search([('commodity_id', '=', commodity_id)])
-        check_list_objs = check_obj.line_id
-        if not check_list_objs:
-            return rest.render_json({"status": "no", "message": code, "data": ''})
-        check_lists = []
-        for check_list_obj in check_list_objs:
-            check_list = {}
-            check_list['code'] = check_list_obj.code
-            check_list['name'] = check_list_obj.name
-            check_list['comany'] = check_list_obj.check_id.name
-            check_list['type'] = check_list_obj.type.name
-            check_list['messages'] = check_list_obj.messages
-            picture_lists = []
-            picture_objs = self.current_env['check.line.picture'].search([('picture_id', '=', check_list_obj.picture_id)])
-            for picture_obj in picture_objs:
-                picture_list = {}
-                picture_list['picture'] = picture_obj.name.image
-                picture_lists.append(picture_list)
-            check_list['picture'] = picture_lists
-            check_lists.append(check_list)
-        return rest.render_json({"status": "yes", "message": code, "data": check_lists})
     #扫码入库
     @authorizer.authorize
     @http.route('/api/kcgl/get_kcrk/<unit_id>', type='http', auth='none', methods=['GET'])
@@ -166,7 +58,9 @@ class OrderController(http.Controller):
                 warehouse_obj.create(values)
                 j = j + num
             for n in range(1, num):
+                print code ,n , kh
                 ym_code = def_encryption(code, n, kh)
+                print ym_code
                 values = {
                     'code': str(code+n),
                     'name': str(ym_code),
@@ -259,8 +153,8 @@ class OrderController(http.Controller):
         messages = ''
         if not batch_list_obj:
             messages = '该产品不是本公司产品请联系公司'
-        if batch_list_obj.messages == ' ':
-            batch_list_obj.update({'messages': '1'})
+        if batch_list_obj.number == 0:
+            batch_list_obj.update({'number': batch_list_obj.number + 1})
             messages = '这是第一次查询,您所查询的是公司的产品,是正品,谢谢使用。'
         else:
             messages = '您所查询的是公司的产品,但经过多次查询，请及时联系客服验证真假！'
@@ -308,13 +202,13 @@ def def_encryption(code, num, kh):
     str2 = str(kh)+str_code[cd:]
     str3 = ''
     #根据随机的二位树 第一位是奇数还是偶数
-    for j in range(0, gd-1):
+    for j in range(0, gd):
         if int_one % 2 == 0:
             str3 = str3 + str1[j] + str2[j]
         else:
             str3 = str3 + str2[j] + str1[j]
     #根据随机的二位数，惊醒左右转换
-    int_end = int_two - gd*2 + 2
+    int_end = int_two - gd*2
     str3 = str3[int_end:] + str3[:int_two]
     str4 = str(one) + str3
     return str4

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import random
-gd = len(str('1230994'))
-num = 8
+code='1230000'
+num = 1
 kh ='123'
+gd = len(str(code))
 str_bs = '000000000000000000'
 str_num = '100000000000000000000'
 ws = gd
@@ -21,23 +22,20 @@ sj = random.randint(min_num, max_num)
 str1 = str(sj)
 #加上客户数字 凑齐8位 不够的中间补0
 str_code = (str_bs+str(num))
-print str_code
 cd = 0-(ws - len(str(kh)))
 str2 = str(kh)+str_code[cd:]
 str3 = ''
-print cd,str2,str3
 #根据随机的二位树 第一位是奇数还是偶数
-for j in range(0, gd-1):
+for j in range(0, gd):
     if int_one % 2 == 0:
         str3 = str3 + str1[j] + str2[j]
     else:
         str3 = str3 + str2[j] + str1[j]
-        print str3
-#根据随机的二位数，根据左右转换
-int_end = int_two - gd*2 + 2
+#根据随机的二位数，惊醒左右转换
+int_end = int_two - gd*2
 str3 = str3[int_end:] + str3[:int_two]
-print str3
 str4 = str(one) + str3
+print '98 0102 1327 3906'
 print str4
 
 # code = str('97403841428370')
