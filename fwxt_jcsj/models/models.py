@@ -119,6 +119,7 @@ class other_info(models.Model):
     password = fields.Char(string='Check Password', help="Check Password")
     web_add = fields.Char(string='Web add', help="Web add")
     shop_add = fields.Char(string='Shop Add', help="Shop Add")
+    wechat_account =fields.Char(string='Wechat Account', help="Wechat Account")
     Search = fields.Text(string='Search', help="Search")
     message = fields.Char(string='Message', help="Message")
     user_id = fields.Many2one('res.users', string='Operator')

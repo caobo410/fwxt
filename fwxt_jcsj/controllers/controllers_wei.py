@@ -102,10 +102,20 @@ class OrderController(http.Controller):
         for company_obj in company_objs:
             company_list = company_obj.company_info
         return rest.render_json({"status": "yes", "message": code, "data": company_list})
+    #获取公众号
+    @authorizer.authorize
+    @http.route('/api/jcsj/get_wechat/<wechat>', type='http', auth='none', methods=['GET'])
+    def get_wechat(self, wechat):
+        wechat_objs = self.current_env['other.info'].search([])
+        if not wechat_objs:
+            return rest.render_json({"status": "no", "message": wechat, "data": '请维护其他信息中心的微信公众号!'})
+        for wechat_obj in wechat_objs:
+            wechar_account = wechat_obj.wechat_account
+        return rest.render_json({"status": "yes", "message": wechat, "data": wechar_account})
     #视频
     @authorizer.authorize
     @http.route('/api/jcsj/get_mp4/<type>', type='http', auth='none', methods=['GET'])
-    def get_company_list(self, type, code):
+    def get_mp4(self, type, code):
         if type =='ycl':
             file_obj = self.current_env['material.batch'].search([('id', '=', int(code))])
             video_obj = file_obj.file_id
