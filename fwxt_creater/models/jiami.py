@@ -35,7 +35,7 @@ for j in range(0, gd):
 int_end = int_two - gd*2
 str3 = str3[int_end:] + str3[:int_two]
 str4 = str(one) + str3
-print '98 0102 1327 3906'
+print '9323 7090 0021 4112'
 print str4
 
 # code = str('97403841428370')

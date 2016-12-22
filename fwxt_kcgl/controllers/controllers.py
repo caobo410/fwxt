@@ -58,9 +58,7 @@ class OrderController(http.Controller):
                 warehouse_obj.create(values)
                 j = j + num
             for n in range(1, num):
-                print code ,n , kh
                 ym_code = def_encryption(code, n, kh)
-                print ym_code
                 values = {
                     'code': str(code+n),
                     'name': str(ym_code),
@@ -149,7 +147,7 @@ class OrderController(http.Controller):
                 messages = '请在公司简介中维护公司信息及公司编码！'
                 return rest.render_json({"status": "yes", "message": tm_code, "data": messages})
         batch_list_obj = self.current_env['batch.list'].search([('code', '=', code)])
-        print batch_list_obj,batch_list_obj.id,code,tm_code
+        # print batch_list_obj,batch_list_obj.id,code,tm_code
         messages = ''
         if not batch_list_obj:
             messages = '该产品不是本公司产品请联系公司'
