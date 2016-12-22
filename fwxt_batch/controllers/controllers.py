@@ -15,7 +15,7 @@ date_ref = datetime.now().strftime('%Y-%m-%d')
 # _logger = logging.getLogger(__name__)
 
 class OrderController(http.Controller):
-    # 获取单位
+    # 获取批次
     #http://localhost:8069/api/jcsj/get_batch/batch
     @authorizer.authorize
     @http.route('/api/batch/get_commodity_batch/<batch>', type='http', auth='none', methods=['GET'])

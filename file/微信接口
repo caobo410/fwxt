@@ -341,33 +341,55 @@
 	}
       正确输出
        {
-	  "status": "yes",
-	  "message": "10010001",
-	  "data": [
-	    {
-	      "messages": false,
-	      "code": "10010001",
-	      "type": "酿酒",
-	      "name": "生产加工1"
-	    },
-	    {
-	      "messages": false,
-	      "code": "10010002",
-	      "type": "包装",
-	      "name": "生产加工2"
-	    }
-	  ]
-	}
+  "status": "yes",
+  "message": "2705080828102432",
+  "data": [
+    { "code": "ZJ0001",
+      "name": "区质检",
+      "messages": false,
+      "comany": "历城区质检",
+      "type": "质检"
+      "picture": [
+        {
+          "picture":  图片
+          },
+        {
+          "picture":  图片
+         },
+         ...]
+    },
+    { "code": "ZJ0001",
+      "name": "区质检",
+      "messages": false,
+      "comany": "历城区质检",
+      "type": "质检"
+      "picture": [
+        {
+          "picture":  图片
+          },
+        {
+          "picture":  图片
+         },
+         ......]
+    }
+    ......
+    ]
+    }
     说明
 	参数：
            state 状态 获取成功为yes,数据不存在no或其他
            message:备注
-           data：[{
-	    	"messages": false,   #生产加工说明
-	     	"code": "10010001",  #生产加工编号
-	        "type": "包装",      #生产加工类型
-	        "name": "生产加工1"      #生产加工名称
-	  }]
+           data：[
+                    {
+                    code： 编号
+                    name：质检名称
+                    type：类型
+                    messages：备注
+                    picture：图片集合 分好几个图片
+                    },
+                    {},
+                    {},
+           ]
 
 
 

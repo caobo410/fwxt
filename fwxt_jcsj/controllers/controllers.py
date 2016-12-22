@@ -15,7 +15,7 @@ date_ref = datetime.now().strftime('%Y-%m-%d')
 # _logger = logging.getLogger(__name__)
 
 class OrderController(http.Controller):
-     # 登录验证
+    # 登录验证
     #/api/jcsj/login_in/ERP?login=admin&password=1
     #@authorizer.authorize
     @http.route('/api/jcsj/login_in/<database>', type='http', auth='none', methods=['GET'])
