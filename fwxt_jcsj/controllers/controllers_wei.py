@@ -89,7 +89,7 @@ class OrderController(http.Controller):
         password_objs = self.current_env['other.info'].search([('password', '=', password)])
         if not password_objs:
             return rest.render_json({"status": "no", "message": password, "data": 'Password Error!'})
-        batch_objs = self.current_env['batch.list'].search([('code', '=', code)])
+        batch_objs = self.current_env['batch.list'].search([('name', '=', code)])
         agent_list = {}
         agent_list['name'] = batch_objs.out_id.agent_id.name
         agent_list['contacts_name'] = batch_objs.out_id.agent_id.contacts_name

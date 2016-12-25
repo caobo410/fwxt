@@ -172,7 +172,7 @@ class ir_attachment(models.Model):
     _inherit = 'ir.attachment'
 
     code = fields.Char(string='Code', help='Code')
-    video_type = fields.Many2one('dict.info', string="Type", required=True, domain="[('type', '=', 'video')]")
+    video_type = fields.Many2one('dict.info', string="Type", domain="[('type', '=', 'video')]")
 # 生产基地
 class branch_office_info(models.Model):
     _name = "branch.office.info"
