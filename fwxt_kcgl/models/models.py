@@ -96,6 +96,7 @@ class batch_list(models.Model):
     code = fields.Char(string='Code', size=64, help='Code')
     name = fields.Char(string='Batch Code', size=64, help='Batch Code')
     line_id = fields.Many2one('warehouse.doc', string='Warehouse Doc')
+    out_id = fields.Many2one('warehouse.doc', string='Warehouse Doc')
     number = fields.Float(string='number')
     messages = fields.Char(string='Messages', help='Messages')
     user_id = fields.Many2one('res.users', string='Operator')

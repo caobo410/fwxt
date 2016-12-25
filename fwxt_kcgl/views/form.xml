@@ -116,10 +116,9 @@
                         <group>
                             <field name="name" />
                             <field name="number" />
-                            <field name="user_id" />
                         </group>
                         <group>
-                            <field name="line_id" />
+                            <field name="user_id" />
                             <field name="date_confirm" />
                         </group>
                     </group>

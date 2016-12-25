@@ -82,7 +82,7 @@ class OrderController(http.Controller):
             commodity_lists.append(commodity_list)
         return rest.render_json({"status": "yes", "message": commodity, "data": commodity_lists})
 
-    #生产追溯
+    #查看经销商信息
     @authorizer.authorize
     @http.route('/api/jcsj/get_agent_list/<password>', type='http', auth='none', methods=['GET'])
     def get_agent_list(self, password, code):
@@ -91,10 +91,10 @@ class OrderController(http.Controller):
             return rest.render_json({"status": "no", "message": password, "data": 'Password Error!'})
         batch_objs = self.current_env['batch.list'].search([('code', '=', code)])
         agent_list = {}
-        agent_list['name'] = batch_objs.line_id.agent_id.name
-        agent_list['contacts_name'] = batch_objs.line_id.agent_id.contacts_name
-        agent_list['tel'] = batch_objs.line_id.agent_id.tel
-        agent_list['address'] = batch_objs.line_id.agent_id.address
+        agent_list['name'] = batch_objs.out_id.agent_id.name
+        agent_list['contacts_name'] = batch_objs.out_id.agent_id.contacts_name
+        agent_list['tel'] = batch_objs.out_id.agent_id.tel
+        agent_list['address'] = batch_objs.out_id.agent_id.address
         return rest.render_json({"status": "yes", "message": password, "data": agent_list})
     #企业介绍
     @authorizer.authorize
@@ -120,17 +120,17 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/jcsj/get_mp4/<type>', type='http', auth='none', methods=['GET'])
     def get_mp4(self, type, code):
-        if type =='ycl':
+        if type == 'ycl':
             file_obj = self.current_env['material.batch'].search([('id', '=', int(code))])
             if not file_obj:
                 return rest.render_json({"status": "no", "message": code, "data": 'code参数有问题，请联系管理员'})
             video_obj = file_obj.file_id
-        elif type =='sc':
+        elif type == 'sc':
             file_obj = self.current_env['produce.line'].search([('id', '=', int(code))])
             if not file_obj:
                 return rest.render_json({"status": "no", "message": code, "data": 'code参数有问题，请联系管理员'})
             video_obj = file_obj.video_id
-        elif type =='jg':
+        elif type == 'jg':
             file_obj = self.current_env['making.line'].search([('id', '=', int(code))])
             if not file_obj:
                 return rest.render_json({"status": "no", "message": code, "data": 'code参数有问题，请联系管理员'})

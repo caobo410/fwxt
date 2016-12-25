@@ -114,15 +114,16 @@ class OrderController(http.Controller):
                 values = {
                     'code': str(code+n),
                     'name': str(code+n),
-                    'line_id': str(rkd_obj_id.id),
+                    'out_id': str(rkd_obj_id.id),
                 }
                 batch_obj = list_obj.search([('name', '=', str(code+n))])
-                if not batch_obj:
+                if batch_obj:
+                    batch_obj.update({'out_id': str(rkd_obj_id.id)})
+                else:
                     list_obj.create(values)
-                    j = j + 1
         rkd_obj_id.update({'number': j})
         return rest.render_json({"status": "yes", "message": code, "data": code_lists})
-    #扫码出库
+    #查询
     @authorizer.authorize
     @http.route('/api/kcgl/get_search/<tm_code>', type='http', auth='none', methods=['GET'])
     def get_search(self, tm_code):

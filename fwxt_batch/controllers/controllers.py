@@ -51,16 +51,16 @@ class OrderController(http.Controller):
         commodity_obj = self.current_env['batch.list'].search([('code', '=', code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
-        batch_objs = commodity_obj.line_id.batch_id.material_batch_id
+        batch_objs = commodity_obj.line_id.batch_id.line_id
         batch_lists = []
         for batch_obj in batch_objs:
             batch_list = {}
-            batch_list['code'] = batch_obj.id
-            batch_list['name'] = batch_obj.name
-            batch_list['batch'] = batch_obj.batch
-            batch_list['materia'] = batch_obj.materia_id.name
-            batch_list['supplier'] = batch_obj.supplier_id.name
-            batch_list['picture'] = batch_obj.picture_id.image
+            batch_list['code'] = batch_obj.material_batch_id.id
+            batch_list['name'] = batch_obj.material_batch_id.name
+            batch_list['batch'] = batch_obj.material_batch_id.batch
+            batch_list['materia'] = batch_obj.material_batch_id.materia_id.name
+            batch_list['supplier'] = batch_obj.material_batch_id.supplier_id.name
+            batch_list['picture'] = batch_obj.material_batch_id.picture_id.image
             batch_lists.append(batch_list)
         return rest.render_json({"status": "yes", "message": code, "data": batch_lists})
 
@@ -118,8 +118,8 @@ class OrderController(http.Controller):
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_id = commodity_obj.line_id.commodity_id.id
-        check_obj = self.current_env['commodity.check'].search([('commodity_id', '=', commodity_id)])
-        check_list_objs = check_obj.line_id
+        check_obj = self.current_env['commodity.check.line'].search([('name', '=', commodity_id)])
+        check_list_objs = check_obj.commodity_id.line_id
         if not check_list_objs:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         check_lists = []

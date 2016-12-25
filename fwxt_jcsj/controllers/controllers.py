@@ -20,9 +20,7 @@ class OrderController(http.Controller):
     #@authorizer.authorize
     @http.route('/api/jcsj/login_in/<database>', type='http', auth='none', methods=['GET'])
     def login_in(self, database, login, password):
-        print '234'
         uid = http.request.session.authenticate(database, login, password)
-        print uid
         if not uid:
             return rest.render_json({"status": "yes", "message": "", "data": 'Password error'})
         return rest.render_json({"status": "yes", "message": "", "data": 'Welcome'})
