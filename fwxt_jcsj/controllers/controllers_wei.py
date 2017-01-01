@@ -78,19 +78,22 @@ class OrderController(http.Controller):
             commodity_lists.append(commodity_list)
         return rest.render_json({"status": "yes", "message": commodity, "data": commodity_lists})
 
-    #查看经销商信息
+    #查看出入库信息
     @authorizer.authorize
     @http.route('/api/jcsj/get_agent_list/<password>', type='http', auth='none', methods=['GET'])
     def get_agent_list(self, password, code):
         password_objs = self.current_env['other.info'].search([('password', '=', password)])
+        jm_code = def_decrypt(code)
+        rk_obj = self.current_env['warehouse.line'].search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
+        ck_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not password_objs:
             return rest.render_json({"status": "no", "message": password, "data": 'Password Error!'})
         batch_objs = self.current_env['batch.list'].search([('name', '=', code)])
         agent_list = {}
-        agent_list['name'] = batch_objs.out_id.agent_id.name
-        agent_list['contacts_name'] = batch_objs.out_id.agent_id.contacts_name
-        agent_list['tel'] = batch_objs.out_id.agent_id.tel
-        agent_list['address'] = batch_objs.out_id.agent_id.address
+        agent_list['rk_code'] = rk_obj.line_id.code
+        agent_list['rk_date'] = rk_obj.line_id.date_confirm
+        agent_list['ck_code'] = ck_obj.line_id.code
+        agent_list['ck_date'] = ck_obj.line_id.date_confirm
         return rest.render_json({"status": "yes", "message": password, "data": agent_list})
     #企业介绍
     @authorizer.authorize
@@ -138,4 +141,22 @@ class OrderController(http.Controller):
         filepath = '/usr/lhd/.local/share/Odoo/filestore/fwxt/' +path
         filename = video_obj.datas_fname
         return rest.sendfile(filepath, filename)
+
+def def_decrypt(code):
+    code = str(code)
+    str_one = code[:2]
+    str_len = 2 - len(code)
+    str_code = code[str_len:]
+    int_one = int(str_one) // 10
+    int_two = int(str_one) % 10
+    int_end = len(code) - int_two
+    b1 = ''
+    str_code = str_code[0-int_two:] + str_code[:int_end]
+    if int_one % 2 == 0:
+        for i in range(1, len(code)-2, 2):
+            b1 = b1 + str_code[i]
+    else:
+        for i in range(0, len(code)-2, 2):
+            b1 = b1 + str_code[i]
+    return b1
 

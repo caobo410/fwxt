@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-16 13:03+0000\n"
-"PO-Revision-Date: 2016-12-16 21:04+0800\n"
+"POT-Creation-Date: 2017-01-01 11:48+0000\n"
+"PO-Revision-Date: 2017-01-01 19:54+0800\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
-"Language: zh_CN\n"
-"X-Generator: Poedit 1.8.10\n"
+"Language: zh\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #. module: fwxt_jcsj
 #: model:ir.actions.act_window,help:fwxt_jcsj.action_agent_info
@@ -351,6 +351,11 @@ msgid "Company Introduce"
 msgstr "企业简介"
 
 #. module: fwxt_jcsj
+#: field:company.info,contacts_people:0 help:company.info,contacts_people:0
+msgid "Contacts"
+msgstr "联系人"
+
+#. module: fwxt_jcsj
 #: field:agent.info,contacts_name:0 help:agent.info,contacts_name:0
 #: field:check.info,contacts_name:0 help:check.info,contacts_name:0
 #: field:express.info,contacts_name:0 help:express.info,contacts_name:0
@@ -645,6 +650,11 @@ msgid "Search"
 msgstr "查询"
 
 #. module: fwxt_jcsj
+#: field:other.info,search_two:0 help:other.info,search_two:0
+msgid "Search Two"
+msgstr "多次查询"
+
+#. module: fwxt_jcsj
 #: field:other.info,shop_add:0 help:other.info,shop_add:0
 msgid "Shop Add"
 msgstr "电商地址"
@@ -674,9 +684,9 @@ msgstr "供应商信息"
 
 #. module: fwxt_jcsj
 #: field:agent.info,tel:0 help:agent.info,tel:0 field:check.info,tel:0
-#: help:check.info,tel:0 field:express.info,tel:0 help:express.info,tel:0
-#: field:other.info,tel:0 help:other.info,tel:0 field:supplier.info,tel:0
-#: help:supplier.info,tel:0
+#: help:check.info,tel:0 field:company.info,tel:0 help:company.info,tel:0
+#: field:express.info,tel:0 help:express.info,tel:0 field:other.info,tel:0
+#: help:other.info,tel:0 field:supplier.info,tel:0 help:supplier.info,tel:0
 msgid "Tel"
 msgstr "电话"
 
@@ -722,6 +732,16 @@ msgstr "视频管理"
 #: field:other.info,web_add:0 help:other.info,web_add:0
 msgid "Web add"
 msgstr "公司网址"
+
+#. module: fwxt_jcsj
+#: field:other.info,wechat_account:0 help:other.info,wechat_account:0
+msgid "Wechat Account"
+msgstr "微信公众号"
+
+#. module: fwxt_jcsj
+#: field:company.info,wetch:0 help:company.info,wetch:0
+msgid "Wetch"
+msgstr "微信"
 
 #. module: fwxt_jcsj
 #: model:ir.actions.act_window,name:fwxt_jcsj.action_video_info
