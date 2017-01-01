@@ -79,6 +79,12 @@ class warehouse_line(models.Model):
     code = fields.Char(string='Code', size=64, help='Code')
     name = fields.Char(string='Name', size=64, help='Name')
     line_id = fields.Many2one('warehouse.doc', string='Warehouse Doc')
+    start_code = fields.Char(string='Code', size=64, help='Code')
+    end_code = fields.Char(string='Code', size=64, help='Code')
+    type = fields.Selection([('in', 'In'),
+                             ('out', 'Out'),
+                             ('move', 'Move'),
+                             ('manual', 'Manual')], 'Type', required=True, help='type')
     number = fields.Float(string='Number')
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help='Date')
@@ -87,6 +93,7 @@ class warehouse_line(models.Model):
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'warehouse.line'),
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
+        'type': lambda obj, cr, uid, context: context['type'],
     }
 
 class batch_list(models.Model):
@@ -98,6 +105,7 @@ class batch_list(models.Model):
     line_id = fields.Many2one('warehouse.doc', string='Warehouse Doc')
     out_id = fields.Many2one('warehouse.doc', string='Warehouse Doc')
     number = fields.Float(string='number')
+    first_date = fields.Date(string='Date', size=64, help='Date')
     messages = fields.Char(string='Messages', help='Messages')
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help='Date')
@@ -105,6 +113,7 @@ class batch_list(models.Model):
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'batch.list'),
         'date_confirm': date_ref,
+        'first_date': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
 

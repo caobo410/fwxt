@@ -42,19 +42,15 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/jcsj/get_company/<company>', type='http', auth='none', methods=['GET'])
     def get_company(self, company):
-        company_objs = self.current_env['res.company'].search([])
+        company_objs = self.current_env['company.info'].search([])
         if not company_objs:
             return rest.render_json({"status": "no", "message": company, "data": ''})
         company_lists = []
         for company_obj in company_objs:
             company_list = {}
-            company_list['name'] = company_obj.name
-            company_list['phone'] = company_obj.phone
-            company_list['fax'] = company_obj.fax
-            company_list['email'] = company_obj.email
-            company_list['province'] = company_obj.state_id.name
-            company_list['city'] = company_obj.city
-            company_list['street'] = company_obj.street
+            company_list['name'] = company_obj.contacts_people
+            company_list['phone'] = company_obj.tel
+            company_list['wetch'] = company_obj.wetch
             company_lists.append(company_list)
         return rest.render_json({"status": "yes", "message": company, "data": company_lists})
 

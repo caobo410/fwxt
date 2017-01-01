@@ -14,12 +14,13 @@
                         <group>
                             <group>
                                 <field name="name"/>
-                                <field name="user_id"/>
+                                <field name="contacts_people"/>
+                                <field name="wetch"/>
                             </group>
                             <group>
                                 <field name="company_code"/>
+                                <field name="tel"/>
                                 <field name="message"/>
-                                <field name="date_confirm"/>
                             </group>
                         </group>
                         <notebook>
@@ -147,15 +148,21 @@
                                 <field name="name" />
                                 <field name="tel" />
                                 <field name="message" />
-                                <field name="user_id" />
-                                <field name="date_confirm" />
+                                <field name="Search" />
                             </group>
                             <group>
                                 <field name="password" />
                                 <field name="wechat_account" />
                                 <field name="web_add" />
-                                <field name="shop_add" />
-                                <field name="Search" />
+                                <field name="search_two" />
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="user_id" />
+                            </group>
+                            <group>
+                                <field name="date_confirm" />
                             </group>
                         </group>
                     </sheet>

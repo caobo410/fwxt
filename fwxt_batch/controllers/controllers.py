@@ -35,7 +35,8 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/kcgl/get_batch_list/<code>', type='http', auth='none', methods=['GET'])
     def get_batch_list(self, code):
-        commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
+        jm_code = def_decrypt(code)
+        commodity_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_list = {}
@@ -48,7 +49,8 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/kcgl/get_material_batch/<code>', type='http', auth='none', methods=['GET'])
     def get_material_batch(self, code):
-        commodity_obj = self.current_env['batch.list'].search([('code', '=', code)])
+        jm_code = def_decrypt(code)
+        commodity_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         batch_objs = commodity_obj.line_id.batch_id.line_id
@@ -68,7 +70,8 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/kcgl/get_commodity_making/<code>', type='http', auth='none', methods=['GET'])
     def get_commodity_making(self, code):
-        commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
+        jm_code = def_decrypt(code)
+        commodity_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_id = commodity_obj.line_id.commodity_id.id
@@ -91,7 +94,8 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/kcgl/get_commodity_produce/<code>', type='http', auth='none', methods=['GET'])
     def get_commodity_produce(self, code):
-        commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
+        jm_code = def_decrypt(code)
+        commodity_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_id = commodity_obj.line_id.commodity_id.id
@@ -114,7 +118,8 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/kcgl/get_commodity_check/<code>', type='http', auth='none', methods=['GET'])
     def get_commodity_check(self, code):
-        commodity_obj = self.current_env['batch.list'].search([('name', '=', code)])
+        jm_code = def_decrypt(code)
+        commodity_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_id = commodity_obj.line_id.commodity_id.id
@@ -139,3 +144,20 @@ class OrderController(http.Controller):
             check_list['picture'] = picture_lists
             check_lists.append(check_list)
         return rest.render_json({"status": "yes", "message": code, "data": check_lists})
+def def_decrypt(code):
+    code = str(code)
+    str_one = code[:2]
+    str_len = 2 - len(code)
+    str_code = code[str_len:]
+    int_one = int(str_one) // 10
+    int_two = int(str_one) % 10
+    int_end = len(code) - int_two
+    b1 = ''
+    str_code = str_code[0-int_two:] + str_code[:int_end]
+    if int_one % 2 == 0:
+        for i in range(1, len(code)-2, 2):
+            b1 = b1 + str_code[i]
+    else:
+        for i in range(0, len(code)-2, 2):
+            b1 = b1 + str_code[i]
+    return b1

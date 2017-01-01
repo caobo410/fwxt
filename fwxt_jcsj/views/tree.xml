@@ -12,8 +12,9 @@
                     <field name="code"/>
                     <field name="name"/>
                     <field name="company_info"/>
-                    <field name="user_id"/>
-                    <field name="date_confirm"/>
+                    <field name="contacts_people"/>
+                    <field name="tel"/>
+                    <field name="wetch"/>
                 </tree>
             </field>
         </record>
