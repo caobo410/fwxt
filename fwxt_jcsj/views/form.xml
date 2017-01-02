@@ -16,11 +16,13 @@
                                 <field name="name"/>
                                 <field name="contacts_people"/>
                                 <field name="wetch"/>
+                                <field name="address"/>
                             </group>
                             <group>
                                 <field name="company_code"/>
                                 <field name="tel"/>
-                                <field name="message"/>
+                                <field name="qq"/>
+                                <field name="website"/>
                             </group>
                         </group>
                         <notebook>

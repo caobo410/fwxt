@@ -51,6 +51,9 @@ class OrderController(http.Controller):
             company_list['name'] = company_obj.contacts_people
             company_list['phone'] = company_obj.tel
             company_list['wetch'] = company_obj.wetch
+            company_list['address'] = company_obj.address
+            company_list['qq'] = company_obj.qq
+            company_list['web'] = company_obj.websize
             company_lists.append(company_list)
         return rest.render_json({"status": "yes", "message": company, "data": company_lists})
 
