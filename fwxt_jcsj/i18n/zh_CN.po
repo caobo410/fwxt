@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-01 11:48+0000\n"
-"PO-Revision-Date: 2017-01-01 19:54+0800\n"
+"POT-Creation-Date: 2017-01-04 12:45+0000\n"
+"PO-Revision-Date: 2017-01-04 20:47+0800\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -202,6 +202,7 @@ msgstr ""
 #. module: fwxt_jcsj
 #: field:agent.info,address:0 help:agent.info,address:0
 #: field:check.info,address:0 help:check.info,address:0
+#: field:company.info,address:0 help:company.info,address:0
 #: field:express.info,address:0 help:express.info,address:0
 #: field:supplier.info,address:0 help:supplier.info,address:0
 msgid "Address"
@@ -640,6 +641,11 @@ msgid "Produce"
 msgstr "生产"
 
 #. module: fwxt_jcsj
+#: field:company.info,qq:0 help:company.info,qq:0
+msgid "QQ"
+msgstr "QQ"
+
+#. module: fwxt_jcsj
 #: field:commodity.info,routing_id:0
 msgid "Routing"
 msgstr "工艺"
@@ -734,6 +740,11 @@ msgid "Web add"
 msgstr "公司网址"
 
 #. module: fwxt_jcsj
+#: field:company.info,website:0 help:company.info,website:0
+msgid "WebSite"
+msgstr "官网"
+
+#. module: fwxt_jcsj
 #: field:other.info,wechat_account:0 help:other.info,wechat_account:0
 msgid "Wechat Account"
 msgstr "微信公众号"
@@ -747,6 +758,11 @@ msgstr "微信"
 #: model:ir.actions.act_window,name:fwxt_jcsj.action_video_info
 msgid "actions.ir.attachment"
 msgstr "附件"
+
+#. module: fwxt_jcsj
+#: field:agent.info,area:0 help:agent.info,area:0
+msgid "area"
+msgstr "区域"
 
 #. module: fwxt_jcsj
 #: view:commodity.line:fwxt_jcsj.view_form_commodity_line
