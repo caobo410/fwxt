@@ -101,13 +101,13 @@ class fwxt_create(models.Model):
             num = num + 1
             all_the_text = all_the_text + str4 +'\n'
             if num == 100:
-                file_object = open('d://' + comany + date_ref + '.txt', 'a')
+                file_object = open('c://' + comany + date_ref + '.txt', 'a')
                 file_object.write(all_the_text)
                 file_object.close()
                 all_the_text = ''
                 num = 0
         if num > 0:
-            file_object = open('d://' + comany + date_ref + '.txt', 'a')
+            file_object = open('c://' + comany + date_ref + '.txt', 'a')
             file_object.write(all_the_text)
             file_object.close()
 
