@@ -283,6 +283,7 @@ class agent_info(models.Model):
     type = fields.Many2one('dict.info', string='Type', domain=[('type', '=', 'agent')], required=True, select=True, track_visibility='onchange')
     contacts_name = fields.Char(string='Contacts Name', help="Contacts Name")
     tel = fields.Char(string='Tel', help="Tel")
+    area = fields.Char(string='area', help="area")
     address = fields.Char(string='Address', size=64, help="Address")
     message = fields.Char(string='Message', help="Message")
     user_id = fields.Many2one('res.users', string='Operator')

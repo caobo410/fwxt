@@ -362,9 +362,8 @@
                             </group>
                             <group>
                                 <field name="type"/>
+                                <field name="area"/>
                                 <field name="message"/>
-                                <field name="user_id"/>
-                                <field name="date_confirm"/>
                             </group>
                         </group>
                     </sheet>

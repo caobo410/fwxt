@@ -97,6 +97,10 @@ class OrderController(http.Controller):
         agent_list['rk_date'] = rk_obj.line_id.date_confirm
         agent_list['ck_code'] = ck_obj.line_id.code
         agent_list['ck_date'] = ck_obj.line_id.date_confirm
+        agent_list['area'] = ck_obj.line_id.agent_id.area
+        agent_list['agent'] = ck_obj.line_id.agent_id.name
+        agent_list['express'] = ck_obj.line_id.express_id.name
+        agent_list['express_code'] = ck_obj.line_id.express_code
         return rest.render_json({"status": "yes", "message": password, "data": agent_list})
     #企业介绍
     @authorizer.authorize
