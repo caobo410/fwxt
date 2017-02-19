@@ -13,6 +13,7 @@ import logging
 from openerp import fields,models,api
 from datetime import datetime
 import random
+import jiami
 date_ref = datetime.now().strftime('%Y-%m-%d')
 _logger = logging.getLogger(__name__)
 
@@ -181,38 +182,4 @@ class manual_storage(models.Model):
         'date_confirm': date_ref,
         'user_id': lambda cr, uid, id, c={}: id,
     }
-def get_code(self, get_kh, get_gd, get_num,get_i):
-    kh = str(get_kh)
-    gd = int(get_gd)
-    num = int(get_num)
-    i = int(get_i)
-    str_bs = '000000000000000000'
-    str_num = '100000000000000000000'
-    ws = gd/2 - 1
-    min_str = str_num[:ws]
-    max_str = str_num[:ws+1]
-    min_num = int(min_str) + num
-    max_num = int(max_str) - 1
-    all_the_text = ''
-    #随机取两位数
-    one = random.randint(10, 99)
-    #被10除求商和玉树
-    int_one = one // 10
-    int_two = one % 10
-    sj = random.randint(min_num, max_num)
-    str1 = str(sj)
-    code = (str_bs+str(i))
-    cd = 0-(ws - len(str(kh)))
-    str2 = str(kh)+code[cd:]
-    str3 = ''
-    for j in range(0, gd/2-1):
-        if int_one % 2 == 0:
-            str3 = str3 + str1[j] + str2[j]
-        else:
-            str3 = str3 + str2[j] + str1[j]
-    int_end = int_two - gd + 2
-    str3 = str3[int_end:] + str3[:int_two]
-    str4 = str(one) + str3
-    all_the_text = all_the_text + str4
-    return all_the_text
     # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

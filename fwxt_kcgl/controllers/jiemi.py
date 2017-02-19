@@ -9,7 +9,7 @@ def def_jiemi(str_code):
     str_code = code[str_len:]
     int_one = int(str_one) // 10
     int_two = int(str_one) % 10
-    int_end = len(code)- 2 - int_two
+    int_end = len(code) - 2 - int_two
     b1 = ''
     # print str_code, int_one , int_two, int_end
     str_code = str_code[0-int_two:] + str_code[:int_end]

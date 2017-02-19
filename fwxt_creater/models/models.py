@@ -14,6 +14,8 @@ import logging
 from openerp import fields,models,api
 from datetime import datetime
 import random
+import jiami
+import jiemi
 import os
 date_ref = datetime.now().strftime('%Y-%m-%d')
 _logger = logging.getLogger(__name__)
@@ -24,6 +26,7 @@ class fwxt_company(models.Model):
     code = fields.Char(string='编号', size=64, help="编号")
     name = fields.Char(string='客户名称', help="客户名称")
     company_code = fields.Char(string='客户数字', help="客户数字")
+    state_number = fields.Integer(string='当前序号', help="当前序号")
     messages = fields.Char(string='备注', help="备注")
     user_id = fields.Many2one('res.users', string='录入人')
     date_confirm = fields.Date(string='Date', size=64, required=True, help="录入日期")
@@ -31,6 +34,7 @@ class fwxt_company(models.Model):
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'fwxt.company'),
         'date_confirm': date_ref,
+        'state_number': 1,
         'user_id': lambda cr, uid, id, c={}: id,
     }
 class fwxt_create(models.Model):
@@ -41,6 +45,7 @@ class fwxt_create(models.Model):
     name = fields.Char(string='名称', size=64, help='名称')
     company_id = fields.Many2one('fwxt.company', required=True, string='客户名称')
     company_code = fields.Char(string='客户数字', size=64, help='客户数字')
+    state_number = fields.Char(string='开始序号', size=64, help='开始序号')
     end_code1 = fields.Integer(string='尾数1', size=64, help='尾数1')
     end_code2 = fields.Integer(string='尾数2', size=64, help='尾数2')
     end_code3 = fields.Integer(string='尾数3', size=64, help='尾数3')
@@ -55,61 +60,36 @@ class fwxt_create(models.Model):
     @api.onchange('company_id')
     def onchange(self):
         self.company_code = self.company_id.company_code
+        self.state_number = self.company_id.state_number
     @api.one
     def btn_create(self):
         #加密算发
         comany = self.company_id.name
-        file_object = open('d://' + comany + date_ref + '.txt', 'w')
+        save = 'D:\\' + comany + date_ref + '.txt'
+        file_object = open(save, 'w')
         file_object.write('')
         file_object.close()
         kh = self.company_code
-        gd = self.fixed_value
         num = self.number
-        str_bs = '000000000000000000'
-        str_num = '100000000000000000000'
-        ws = gd/2 - 1
-        min_str = str_num[:ws]
-        max_str = str_num[:ws+1]
-        min_num = int(min_str) + num
-        max_num = int(max_str) - 1
         all_the_text = ''
         for i in range(1, num + 1):
-            #随机取两位数
-            one = random.randint(10, 99)
-            #求10的商和余数
-            int_one = one // 10
-            int_two = one % 10
-            #随机取8位数
-            sj = random.randint(min_num, max_num)
-            #转换程字符床
-            str1 = str(sj)
-            #加上客户数字 凑齐8位 不够的中间补0
-            code = (str_bs+str(i))
-            cd = 0-(ws - len(str(kh)))
-            str2 = str(kh)+code[cd:]
-            str3 = ''
-            #根据随机的二位树 第一位是奇数还是偶数
-            for j in range(0, gd/2-1):
-                if int_one % 2 == 0:
-                    str3 = str3 + str1[j] + str2[j]
-                else:
-                    str3 = str3 + str2[j] + str1[j]
-            #根据随机的二位数，惊醒左右转换
-            int_end = int_two - gd + 2
-            str3 = str3[int_end:] + str3[:int_two]
-            str4 = str(one) + str3
+            str4 = jiami.def_jiami(i, kh)
             num = num + 1
-            all_the_text = all_the_text + str4 +'\n'
-            if num == 100:
-                file_object = open('c://' + comany + date_ref + '.txt', 'a')
+            all_the_text = all_the_text + str4 + '\n'
+            if num == 1000:
+                file_object = open(save, 'a')
                 file_object.write(all_the_text)
                 file_object.close()
                 all_the_text = ''
                 num = 0
         if num > 0:
-            file_object = open('c://' + comany + date_ref + '.txt', 'a')
+            file_object = open(save, 'a')
             file_object.write(all_the_text)
             file_object.close()
+            comany_objs = self.env['fwxt.company']
+            comany_obj = comany_objs.search([('id', '=', self.company_id)])
+            if comany_obj:
+                comany_obj.update({'state_number': self.state_number + num})
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'fwxt.create'),
@@ -130,20 +110,7 @@ class fwxt_decrypt(models.Model):
     @api.one
     def btn_decrypt(self):
         code = self.name
-        str_one = code[:2]
-        str_len = 2 - len(code)
-        str_code = code[str_len:]
-        int_one = int(str_one) // 10
-        int_two = int(str_one) % 10
-        int_end = len(code) - int_two
-        b1 = ''
-        str_code = str_code[0-int_two:] + str_code[:int_end]
-        if int_one % 2 == 0:
-            for i in range(1, len(code)-2, 2):
-                b1 = b1 + str_code[i]
-        else:
-            for i in range(0, len(code)-2, 2):
-                b1 = b1 + str_code[i]
+        b1 = jiemi.def_jiemi(code)
         self.decrypt_code = b1
     _defaults = {
         'date_confirm': date_ref,
