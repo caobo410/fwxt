@@ -3,6 +3,7 @@ from openerp import http
 from openerp import http, fields
 import authorizer
 import rest
+import jiemi
 from datetime import datetime
 
 try:
@@ -86,7 +87,7 @@ class OrderController(http.Controller):
     @http.route('/api/jcsj/get_agent_list/<password>', type='http', auth='none', methods=['GET'])
     def get_agent_list(self, password, code):
         password_objs = self.current_env['other.info'].search([('password', '=', password)])
-        jm_code = def_decrypt(code)
+        jm_code = jiemi.def_jiemi(code)
         rk_obj = self.current_env['warehouse.line'].search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         ck_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not password_objs:
@@ -149,21 +150,21 @@ class OrderController(http.Controller):
         filename = video_obj.datas_fname
         return rest.sendfile(filepath, filename)
 
-def def_decrypt(code):
-    code = str(code)
-    str_one = code[:2]
-    str_len = 2 - len(code)
-    str_code = code[str_len:]
-    int_one = int(str_one) // 10
-    int_two = int(str_one) % 10
-    int_end = len(code) - int_two
-    b1 = ''
-    str_code = str_code[0-int_two:] + str_code[:int_end]
-    if int_one % 2 == 0:
-        for i in range(1, len(code)-2, 2):
-            b1 = b1 + str_code[i]
-    else:
-        for i in range(0, len(code)-2, 2):
-            b1 = b1 + str_code[i]
-    return b1
+# def def_decrypt(code):
+#     code = str(code)
+#     str_one = code[:2]
+#     str_len = 2 - len(code)
+#     str_code = code[str_len:]
+#     int_one = int(str_one) // 10
+#     int_two = int(str_one) % 10
+#     int_end = len(code) - int_two
+#     b1 = ''
+#     str_code = str_code[0-int_two:] + str_code[:int_end]
+#     if int_one % 2 == 0:
+#         for i in range(1, len(code)-2, 2):
+#             b1 = b1 + str_code[i]
+#     else:
+#         for i in range(0, len(code)-2, 2):
+#             b1 = b1 + str_code[i]
+#     return b1
 

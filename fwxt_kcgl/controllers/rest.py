@@ -40,7 +40,7 @@ def not_found(msg="Resource not found"):
                          status=404)
 
 def sendfile(filepath_or_fp, filename="110.NC"):
-    print("*"*100)
+    # print("*"*100)
     return http.send_file(filepath_or_fp, mimetype=None, as_attachment=True, filename=filename)
 
 def bad_request(msg="Bad request"):

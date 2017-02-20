@@ -20,7 +20,7 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/kcgl/get_kcrk/<unit_id>', type='http', auth='none', methods=['GET'])
     def get_kcrk(self, unit_id, goods_id, batch_id, code_lists):
-        print code_lists
+        # print code_lists
         code = 'RKD' + date_ref[:4] + date_ref[5:7] + str(random.randint(100, 999))
         rkd_obj = self.current_env['warehouse.doc']
         company_objs = self.current_env['company.info'].search([])
@@ -36,18 +36,21 @@ class OrderController(http.Controller):
             'commodity_id': int(goods_id),
             'unit_id': int(unit_id),
         }
-        print values
+        # print values
         rkd_obj_id = rkd_obj.create(values)
         warehouse_obj = self.current_env['warehouse.line']
+        # print code_lists
+        # print type(code_lists)
         batch_lists = eval(code_lists)
+        # print batch_lists
         j = 0
         for batch_list in batch_lists:
             start_code = ''
             end_code = ''
             num = int(batch_list['number'])
             try:
+                # print batch_list['name']
                 start_code = str(jiemi.def_jiemi(batch_list['name']))
-                len = len(start_code)
                 end_code = '0000000000000'+str(int(start_code)-1 + num)
                 end_code = end_code[0-len(start_code):]
             except:
@@ -62,15 +65,17 @@ class OrderController(http.Controller):
                 'line_id': str(rkd_obj_id.id),
                 'number': num,
             }
-            print values
             batch_obj = warehouse_obj.search([('start_code', '<=', start_code), ('end_code', '>=', start_code)])
             if batch_obj:
                 messages = '该条码已经入库过，请检查入库单号为' + batch_obj.line_id.code + '的单据!'
+                # print messages
                 return rest.render_json({'status': 'no', "message": messages, "data": messages})
             else:
+                # print values
                 warehouse_obj.create(values)
-                rkd_obj_id.update({'number': rkd_obj_id.number + num})
+                rkd_obj_id.update({'number': int(rkd_obj_id.number) + num})
         return rest.render_json({"status": "yes", "message": code, "data": code_lists})
+
     #扫码出库
     @authorizer.authorize
     @http.route('/api/kcgl/get_kcck/<unit_id>', type='http', auth='none', methods=['GET'])
@@ -98,8 +103,9 @@ class OrderController(http.Controller):
             num = int(batch_list['number'])
             try:
                 start_code = str(jiemi.def_jiemi(batch_list['name']))
-                end_code = str(int(start_code)-1 + num)
-                print start_code,end_code
+                end_code = '0000000000000' + str(int(start_code) - 1 + num)
+                end_code = end_code[0 - len(start_code):]
+                # print start_code,end_code
             except:
                 messages = '非法条码，不能进行扫码出库，请联系管理员！'
                 return rest.render_json({'status': 'no', "message": messages, "data": messages})
@@ -139,8 +145,8 @@ class OrderController(http.Controller):
             if company_objs:
                 for company_obj in company_objs:
                     company_code = company_obj.company_code
-                len_code = len(company_code)
-                if company_code != code[:len_code]:
+                len_code = jiemi.def_company(tm_code)
+                if company_code != len_code:
                     messages = '该产品不是本公司产品请联系公司！'
                     return rest.render_json({'status': 'no', "message": tm_code, "data": messages})
             else:
