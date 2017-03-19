@@ -45,12 +45,10 @@ class fwxt_create(models.Model):
     name = fields.Char(string='名称', size=64, help='名称')
     company_id = fields.Many2one('fwxt.company', required=True, string='客户名称')
     company_code = fields.Char(string='客户数字', size=64, help='客户数字')
-    state_number = fields.Char(string='开始序号', size=64, help='开始序号')
-    end_code1 = fields.Integer(string='尾数1', size=64, help='尾数1')
-    end_code2 = fields.Integer(string='尾数2', size=64, help='尾数2')
-    end_code3 = fields.Integer(string='尾数3', size=64, help='尾数3')
-    fixed_value = fields.Integer(string='固定位数')
+    state_number = fields.Integer(string='开始序号', size=64, help='开始序号')
     number = fields.Integer(string='数量')
+    sf_taobiao = fields.Boolean(string='是否套标')
+    tb_number = fields.Integer(string='套标个数')
     create_file = fields.Binary(string='附件')
     messages = fields.Char(string='备注', help='备注')
     user_id = fields.Many2one('res.users', string='录入人')
@@ -58,24 +56,36 @@ class fwxt_create(models.Model):
 
     @api.one
     @api.onchange('company_id')
-    def onchange(self):
+    def onchange_company_id(self):
         self.company_code = self.company_id.company_code
-        self.state_number = self.company_id.state_number
+        self.state_number = self.company_id.state_number + 1
     @api.one
     def btn_create(self):
         #加密算发
         comany = self.company_id.name
+        # save = 'F:\\' + comany + date_ref + '.txt'
         save = '/home/ftp' + comany + date_ref + '.txt'
         file_object = open(save, 'w')
         file_object.write('')
         file_object.close()
         kh = self.company_code
-        num = self.number
+        num = self.number + self.state_number
+        state_number = self.state_number
+        sf_taobiao = self.sf_taobiao
+        tb_number = self.tb_number
         all_the_text = ''
-        for i in range(1, num + 1):
+        print num, state_number
+        for i in range(state_number, num + 1):
+            print i
             str4 = jiami.def_jiami(i, kh)
             num = num + 1
-            all_the_text = all_the_text + str4 + '\n'
+            if sf_taobiao is True:
+                for j in range(1, tb_number + 1):
+                    str_j = '00' + str(j)
+                    all_the_text = all_the_text + str4 + str_j[-2:] + '\n'
+                all_the_text = all_the_text + '\n'
+            else:
+                all_the_text = all_the_text + str4 + '\n'
             if num == 1000:
                 file_object = open(save, 'a')
                 file_object.write(all_the_text)
@@ -89,7 +99,7 @@ class fwxt_create(models.Model):
             comany_objs = self.env['fwxt.company']
             comany_obj = comany_objs.search([('id', '=', self.company_id.id)])
             if comany_obj:
-                comany_obj.update({'state_number': self.state_number + num})
+                comany_obj.update({'state_number': num})
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'fwxt.create'),
