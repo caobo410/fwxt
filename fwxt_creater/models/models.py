@@ -65,7 +65,7 @@ class fwxt_create(models.Model):
     def btn_create(self):
         #加密算发
         comany = self.company_id.name
-        save = 'D:\\' + comany + date_ref + '.txt'
+        save = '/home/ftp' + comany + date_ref + '.txt'
         file_object = open(save, 'w')
         file_object.write('')
         file_object.close()
@@ -87,7 +87,7 @@ class fwxt_create(models.Model):
             file_object.write(all_the_text)
             file_object.close()
             comany_objs = self.env['fwxt.company']
-            comany_obj = comany_objs.search([('id', '=', self.company_id)])
+            comany_obj = comany_objs.search([('id', '=', self.company_id.id)])
             if comany_obj:
                 comany_obj.update({'state_number': self.state_number + num})
 

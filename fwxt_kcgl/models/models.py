@@ -13,7 +13,7 @@ import logging
 from openerp import fields,models,api
 from datetime import datetime
 import random
-import jiami
+import jiemi
 date_ref = datetime.now().strftime('%Y-%m-%d')
 _logger = logging.getLogger(__name__)
 
@@ -122,17 +122,17 @@ class manual_storage(models.Model):
     _name = 'manual.storage'
     _description = 'manual.storage'
 
-    code = fields.Char(string='Code', size=64, required=True, help='Code')
-    name = fields.Char(string='Name', size=64, required=True, help='Name')
-    batch_id = fields.Many2one('commodity.batch', string='Commodity Batch', help='Commodity Batch')
-    commodity_id = fields.Many2one('commodity.info', string='Commodity', help='Commodity')
-    warehouse_id = fields.Many2one('warehouse.info', string='Warehouse', help='Warehouse')
-    unit_id = fields.Many2one('base.unit', string='Unit')
-    fixed_code = fields.Float(string='Fixed Code', digits=(16, 0), required=True, help='Fixed Code')
-    number = fields.Float(string='Num', digits=(16, 0), help='Number')
-    messages = fields.Char(string='Messages', help='Messages')
-    user_id = fields.Many2one('res.users', string='Operator')
-    date_confirm = fields.Date(string='Date', size=64, required=True, help='Date')
+    code = fields.Char(string='编号', size=64, required=True, help='编号')
+    name = fields.Char(string='名称', size=64, required=True, help='名称')
+    state_code = fields.Char(string='起始号', size=64, required=True, help='起始号')
+    batch_id = fields.Many2one('commodity.batch', string='商品批次', help='商品批次')
+    commodity_id = fields.Many2one('commodity.info', string='商品', help='商品')
+    warehouse_id = fields.Many2one('warehouse.info', string='仓库', help='仓库')
+    unit_id = fields.Many2one('base.unit', string='单位')
+    number = fields.Float(string='Num', digits=(16, 0), help='数量')
+    messages = fields.Char(string='备注', help='备注')
+    user_id = fields.Many2one('res.users', string='操作人')
+    date_confirm = fields.Date(string='Date', size=64, required=True, help='日期')
 
     @api.one
     @api.onchange('from_batch')
@@ -145,33 +145,30 @@ class manual_storage(models.Model):
         values = {
             'code': self.code,
             'name': self.name,
-            'type': 'manual',
+            'type': 'in',
             'batch_id': str(self.batch_id.id),
             'commodity_id': str(self.commodity_id.id),
             'warehouse_id': str(self.warehouse_id.id),
             'unit_id': str(self.unit_id.id),
             'number': self.number,
+            'messages': u'手动入库',
         }
-        fixed_code = self.fixed_code
         num = int(self.number)
         rk_obj_id = self.env['warehouse.doc'].create(values)
-        company_objs = self.env['company.info'].search([])
-        if company_objs:
-            for company_obj in company_objs:
-                company_code = company_obj.company_code
-        if rk_obj_id:
-            i = 0
-            for j in range(0, num):
-                i = i + 1
-                code = get_code(self, company_code, fixed_code, num, i)
-                values = {
-                    'code': code,
-                    'name': code,
-                    'line_id': str(rk_obj_id.id),
-                    'number': 0,
-                    'messages': ' ',
-                }
-                self.env['batch.list'].create(values)
+        state_code = self.state_code
+        state_number = jiemi.def_jiemi(state_code)
+        str_code = '000000000000000000000' + str(int(state_number) + num - 1)
+        end_number = str_code[0-len(state_number):]
+        values = {
+            'code': state_code,
+            'name': state_code,
+            'type': 'in',
+            'start_code': state_number,
+            'end_code': end_number,
+            'line_id': str(rk_obj_id.id),
+            'number': num,
+        }
+        id = self.env['warehouse.line'].create(values)
         return {'type': 'ir.actions.act_window_close'}
 
     _defaults = {

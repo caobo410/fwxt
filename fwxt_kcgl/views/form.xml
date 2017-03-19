@@ -170,18 +170,15 @@
                         <group>
                             <field name="warehouse_id" />
                             <field name="unit_id" />
-                            <field name="number" />
                         </group>
                     </group>
-                    <label for="contact_name"/>
-                    <div>
-                        Fixed Code<field name="fixed_code" style="width: 30%%"/>
-                    </div>
                     <group>
                         <group>
+                            <field name="state_code" style="width: 30%"/>
                             <field name="user_id"/>
                         </group>
                         <group>
+                            <field name="number" />
                             <field name="date_confirm"/>
                         </group>
                     </group>
