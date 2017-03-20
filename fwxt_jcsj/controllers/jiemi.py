@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import random
 def def_jiemi(str_code):
-    code = str_code
-    code = str(code)
+    code = str(str_code)
+    code = code[:20]
     str_one = code[:2]
     # print str_one
     str_len = 2 - len(code)
