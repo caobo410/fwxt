@@ -23,13 +23,13 @@ class fwxt_company(models.Model):
     _name = "fwxt.company"
     _description = "fwxt.company"
 
-    code = fields.Char(string='编号', size=64, help="编号")
-    name = fields.Char(string='客户名称', help="客户名称")
-    company_code = fields.Char(string='客户数字', help="客户数字")
-    state_number = fields.Integer(string='当前序号', help="当前序号")
-    messages = fields.Char(string='备注', help="备注")
-    user_id = fields.Many2one('res.users', string='录入人')
-    date_confirm = fields.Date(string='Date', size=64, required=True, help="录入日期")
+    code = fields.Char(string=u'编号', size=64, help=u"编号")
+    name = fields.Char(string=u'客户名称', help=u"客户名称")
+    company_code = fields.Char(string=u'客户数字', help=u"客户数字")
+    state_number = fields.Integer(string=u'当前序号', help=u"当前序号")
+    messages = fields.Char(string='备注', help=u"备注")
+    user_id = fields.Many2one('res.users', string=u'录入人')
+    date_confirm = fields.Date(string=u'录入日期', size=64, required=True, help=u"录入日期")
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'fwxt.company'),
@@ -41,18 +41,18 @@ class fwxt_create(models.Model):
     _name = 'fwxt.create'
     _description = 'fwxt.create'
 
-    code = fields.Char(string='编号', size=64, help='编号')
-    name = fields.Char(string='名称', size=64, help='名称')
-    company_id = fields.Many2one('fwxt.company', required=True, string='客户名称')
-    company_code = fields.Char(string='客户数字', size=64, help='客户数字')
-    state_number = fields.Integer(string='开始序号', size=64, help='开始序号')
-    number = fields.Integer(string='数量')
-    sf_taobiao = fields.Boolean(string='是否套标')
-    tb_number = fields.Integer(string='套标个数')
-    create_file = fields.Binary(string='附件')
-    messages = fields.Char(string='备注', help='备注')
-    user_id = fields.Many2one('res.users', string='录入人')
-    date_confirm = fields.Date(string='录入日期', size=64, required=True, help='录入日期')
+    code = fields.Char(string=u'编号', size=64, help=u'编号')
+    name = fields.Char(string=u'名称', size=64, help=u'名称')
+    company_id = fields.Many2one('fwxt.company', required=True, string=u'客户名称')
+    company_code = fields.Char(string=u'客户数字', size=64, help=u'客户数字')
+    state_number = fields.Integer(string=u'开始序号', size=64, help=u'开始序号')
+    number = fields.Integer(string=u'数量')
+    sf_taobiao = fields.Boolean(string=u'是否套标')
+    tb_number = fields.Integer(string=u'套标个数')
+    create_file = fields.Binary(string=u'附件')
+    messages = fields.Char(string=u'备注', help=u'备注')
+    user_id = fields.Many2one('res.users', string=u'录入人')
+    date_confirm = fields.Date(string=u'录入日期', size=64, required=True, help=u'录入日期')
 
     @api.one
     @api.onchange('company_id')
@@ -110,12 +110,12 @@ class fwxt_decrypt(models.Model):
     _name = "fwxt.decrypt"
     _description = "fwxt.decrypt"
 
-    name = fields.Char(string='条形码', size=64, help="条形码")
-    decrypt_code = fields.Char(string='解密', size=64, help="解密")
-    company_id = fields.Many2one('fwxt.company', string='客户名称')
-    messages = fields.Char(string='备注', help="备注")
-    user_id = fields.Many2one('res.users', string='操作人')
-    date_confirm = fields.Date(string='录入日期', size=64, required=True, help="录入日期")
+    name = fields.Char(string=u'条形码', size=64, help=u"条形码")
+    decrypt_code = fields.Char(string=u'解密', size=64, help=u"解密")
+    company_id = fields.Many2one('fwxt.company', string=u'客户名称')
+    messages = fields.Char(string=u'备注', help=u"备注")
+    user_id = fields.Many2one('res.users', string=u'操作人')
+    date_confirm = fields.Date(string=u'录入日期', size=64, required=True, help=u"录入日期")
 
     @api.one
     def btn_decrypt(self):

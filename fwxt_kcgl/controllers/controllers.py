@@ -57,7 +57,7 @@ class OrderController(http.Controller):
                 end_code = '0000000000000'+str(int(start_code)-1 + num)
                 end_code = end_code[0-len(start_code):]
             except:
-                messages = '非法条码，不能进行扫码入库，请联系管理员！'
+                messages = u'非法条码，不能进行扫码入库，请联系管理员！'
                 return rest.render_json({'status': 'no', "message": messages, "data": messages})
             values = {
                 'code': str(batch_code),
@@ -70,7 +70,7 @@ class OrderController(http.Controller):
             }
             batch_obj = warehouse_obj.search([('start_code', '<=', start_code), ('end_code', '>=', start_code)])
             if batch_obj:
-                messages = '该条码已经入库过，请检查入库单号为' + batch_obj.line_id.code + '的单据!'
+                messages = u'该条码已经入库过，请检查入库单号为' + batch_obj.line_id.code + u'的单据!'
                 # print messages
                 return rest.render_json({'status': 'no', "message": messages, "data": messages})
             else:
@@ -113,7 +113,7 @@ class OrderController(http.Controller):
                 end_code = end_code[0 - len(start_code):]
                 # print start_code,end_code
             except:
-                messages = '非法条码，不能进行扫码出库，请联系管理员！'
+                messages = u'非法条码，不能进行扫码出库，请联系管理员！'
                 return rest.render_json({'status': 'no', "message": messages, "data": messages})
             values = {
                 'code': str(batch_code),
@@ -140,8 +140,8 @@ class OrderController(http.Controller):
         messages_two = ''
         ewm_code = str(tm_code)
         if not ewm_code:
-            messages = '二维码损坏，无法正确获取到条码信息！'
-            return rest.render_json({"status": "yes", "message": ewm_code, "data": messages})
+            messages = u'二维码损坏，无法正确获取到条码信息！'
+            return rest.render_json({"status": "no", "message": ewm_code, "data": messages})
         else:
             try:
                 if len(ewm_code) == 22:
@@ -149,12 +149,13 @@ class OrderController(http.Controller):
                 elif len(ewm_code) == 20:
                     ewm_code = ewm_code
                 else:
-                    messages = '该产品不是本公司产品请联系公司'
+                    messages = u'该产品不是本公司产品请联系公司'
                     return rest.render_json({'status': 'no', "message": ewm_code, "data": messages})
                 # print tm_code
                 code = jiemi.def_jiemi(ewm_code)
+                # print '123'
             except:
-                messages = '该产品不是本公司产品请联系公司!'
+                messages = u'该产品不是本公司产品请联系公司!'
                 return rest.render_json({'status': 'no', "message": ewm_code, "data": messages})
             company_objs = self.current_env['company.info'].search([])
             if company_objs:
@@ -162,10 +163,10 @@ class OrderController(http.Controller):
                     company_code = company_obj.company_code
                 len_code = jiemi.def_company(ewm_code)
                 if company_code != len_code:
-                    messages = '该产品不是本公司产品，请联系公司！'
+                    messages = u'该产品不是本公司产品，请联系公司！'
                     return rest.render_json({'status': 'no', "message": ewm_code, "data": messages})
             else:
-                messages = '请在公司简介中维护公司信息及公司编码！'
+                messages = u'请在公司简介中维护公司信息及公司编码！'
                 return rest.render_json({"status": "yes", "message": ewm_code, "data": messages})
             other_objs = self.current_env['other.info'].search([])
             if other_objs:
@@ -173,8 +174,8 @@ class OrderController(http.Controller):
                     messages_one = other_obj.Search
                     messages_two = other_obj.search_two
             else:
-                messages = '请在其他信息中维护查询内容及二次查询内容！'
-                return rest.render_json({"status": "yes", "message": ewm_code, "data": messages})
+                messages = u'请在其他信息中维护查询内容及二次查询内容！'
+                return rest.render_json({"status": "no", "message": ewm_code, "data": messages})
         warehouse_line_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', code), ('end_code', '>=', code)])
         if warehouse_line_obj:
             batch_list_obj = self.current_env['batch.list'].search([('code', '=', code)])
@@ -195,5 +196,5 @@ class OrderController(http.Controller):
                 messages = messages.replace('n', str(number))
                 batch_list_obj.update({'number': batch_list_obj.number + 1})
         else:
-            messages = '该产品不是本公司产品请联系公司！'
+            messages = u'该产品不是本公司产品请联系公司！'
         return rest.render_json({"status": "yes", "message": ewm_code, "data": messages})

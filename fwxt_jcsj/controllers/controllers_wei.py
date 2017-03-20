@@ -119,7 +119,7 @@ class OrderController(http.Controller):
     def get_wechat(self, wechat):
         wechat_objs = self.current_env['other.info'].search([])
         if not wechat_objs:
-            return rest.render_json({"status": "no", "message": wechat, "data": '请维护其他信息中心的微信公众号!'})
+            return rest.render_json({"status": "no", "message": wechat, "data": u'请维护其他信息中心的微信公众号!'})
         for wechat_obj in wechat_objs:
             wechar_account = wechat_obj.wechat_account
         return rest.render_json({"status": "yes", "message": wechat, "data": wechar_account})
@@ -130,20 +130,20 @@ class OrderController(http.Controller):
         if type == 'ycl':
             file_obj = self.current_env['material.batch'].search([('id', '=', int(code))])
             if not file_obj:
-                return rest.render_json({"status": "no", "message": code, "data": 'code参数有问题，请联系管理员'})
+                return rest.render_json({"status": "no", "message": code, "data": u'code参数有问题，请联系管理员'})
             video_obj = file_obj.file_id
         elif type == 'sc':
             file_obj = self.current_env['produce.line'].search([('id', '=', int(code))])
             if not file_obj:
-                return rest.render_json({"status": "no", "message": code, "data": 'code参数有问题，请联系管理员'})
+                return rest.render_json({"status": "no", "message": code, "data": u'code参数有问题，请联系管理员'})
             video_obj = file_obj.video_id
         elif type == 'jg':
             file_obj = self.current_env['making.line'].search([('id', '=', int(code))])
             if not file_obj:
-                return rest.render_json({"status": "no", "message": code, "data": 'code参数有问题，请联系管理员'})
+                return rest.render_json({"status": "no", "message": code, "data": u'code参数有问题，请联系管理员'})
             video_obj = file_obj.video_id
         if not video_obj:
-            return rest.render_json({"status": "no", "message": code, "data": 'code的单据没有维护视频信息，请联系管理员'})
+            return rest.render_json({"status": "no", "message": code, "data": u'code的单据没有维护视频信息，请联系管理员'})
         path = video_obj.store_fname
         # filepath = '/home/xinyi/.local/share/Odoo/filestore/fwxt/' +path
         filepath = '/usr/lhd/.local/share/Odoo/filestore/fwxt/' +path
