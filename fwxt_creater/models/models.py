@@ -64,7 +64,7 @@ class fwxt_create(models.Model):
         #加密算发
         comany = self.company_id.name
         # save = 'F:\\' + comany + date_ref + '.txt'
-        save = '/home/ftp' + comany + date_ref + '.txt'
+        save = u'/home/ftp/' + comany + date_ref + u'.txt'
         file_object = open(save, 'w')
         file_object.write('')
         file_object.close()
