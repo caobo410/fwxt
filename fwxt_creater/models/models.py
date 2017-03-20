@@ -18,6 +18,7 @@ import jiami
 import jiemi
 import os
 date_ref = datetime.now().strftime('%Y-%m-%d')
+date_time = datetime.now().strftime('%Y%m%d%H%M%S')
 _logger = logging.getLogger(__name__)
 class fwxt_company(models.Model):
     _name = "fwxt.company"
@@ -63,8 +64,8 @@ class fwxt_create(models.Model):
     def btn_create(self):
         #加密算发
         comany = self.company_id.name
-        # save = 'F:\\' + comany + date_ref + '.txt'
-        save = u'/home/ftp/' + comany + date_ref + u'.txt'
+        # save = u'F:\\' + comany + date_time + u'.txt'
+        save = u'/home/ftp/' + comany + date_time + u'.txt'
         file_object = open(save, 'w')
         file_object.write('')
         file_object.close()
@@ -74,9 +75,7 @@ class fwxt_create(models.Model):
         sf_taobiao = self.sf_taobiao
         tb_number = self.tb_number
         all_the_text = ''
-        print num, state_number
         for i in range(state_number, num + 1):
-            print i
             str4 = jiami.def_jiami(i, kh)
             num = num + 1
             if sf_taobiao is True:
