@@ -139,11 +139,7 @@ class OrderController(http.Controller):
             return rest.render_json({"status": "no", "message": ewm_code, "data": messages})
         else:
             try:
-                if len(ewm_code) == 22:
-                    ewm_code = ewm_code[:20]
-                elif len(ewm_code) == 20:
-                    ewm_code = ewm_code
-                else:
+                if len(ewm_code) != 23 and len(ewm_code) !=25:
                     messages = u'该产品不是本公司产品请联系公司'
                     return rest.render_json({'status': 'no', "message": ewm_code, "data": messages})
                 # print tm_code
@@ -152,17 +148,17 @@ class OrderController(http.Controller):
             except:
                 messages = u'该产品不是本公司产品请联系公司!'
                 return rest.render_json({'status': 'no', "message": ewm_code, "data": messages})
-            company_objs = self.current_env['company.info'].search([])
-            if company_objs:
-                for company_obj in company_objs:
-                    company_code = company_obj.company_code
-                len_code = jiemi.def_company(ewm_code)
-                if company_code != len_code:
-                    messages = u'该产品不是本公司产品，请联系公司！'
-                    return rest.render_json({'status': 'no', "message": ewm_code, "data": messages})
-            else:
-                messages = u'请在公司简介中维护公司信息及公司编码！'
-                return rest.render_json({"status": "yes", "message": ewm_code, "data": messages})
+            # company_objs = self.current_env['company.info'].search([])
+            # if company_objs:
+            #     for company_obj in company_objs:
+            #         company_code = company_obj.company_code
+            #     len_code = jiemi.def_company(ewm_code)
+            #     if company_code != len_code:
+            #         messages = u'该产品不是本公司产品，请联系公司！'
+            #         return rest.render_json({'status': 'no', "message": ewm_code, "data": messages})
+            # else:
+            #     messages = u'请在公司简介中维护公司信息及公司编码！'
+            #     return rest.render_json({"status": "yes", "message": ewm_code, "data": messages})
             other_objs = self.current_env['other.info'].search([])
             if other_objs:
                 for other_obj in other_objs:
