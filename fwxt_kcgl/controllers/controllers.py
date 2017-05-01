@@ -39,10 +39,7 @@ class OrderController(http.Controller):
         # print values
         rkd_obj_id = rkd_obj.create(values)
         warehouse_obj = self.current_env['warehouse.line']
-        # print code_lists
-        # print type(code_lists)
         batch_lists = eval(code_lists)
-        # print batch_lists
         j = 0
         for batch_list in batch_lists:
             start_code = ''
@@ -106,10 +103,8 @@ class OrderController(http.Controller):
             num = int(batch_list['number'])
             try:
                 batch_code = str(batch_list['name'])
-                if len(batch_code) == 22:
-                    batch_code = batch_code[:20]
                 start_code = str(jiemi.def_jiemi(batch_code))
-                end_code = '0000000000000' + str(int(start_code) - 1 + num)
+                end_code = str(int(start_code) - 1 + num)
                 end_code = end_code[0 - len(start_code):]
                 # print start_code,end_code
             except:
@@ -196,5 +191,5 @@ class OrderController(http.Controller):
                 messages = messages.replace('n', str(number))
                 batch_list_obj.update({'number': batch_list_obj.number + 1})
         else:
-            messages = u'该产品不是本公司产品请联系公司！'
+            messages = u'你查询的是本公司产品数码，但是没有发生出入库！'
         return rest.render_json({"status": "yes", "message": ewm_code, "data": messages})

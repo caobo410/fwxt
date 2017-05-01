@@ -1,38 +1,53 @@
 # -*- coding: utf-8 -*-
+import time
 import random
-def def_jiami(int_num,str_kh):
-    code = '0000000000000000'+str(int_num)
-    code = code[-8:]
-    num = int(int_num)
-    kh =str_kh
-    gd = len(str(code))
-    #随机取两位数
-    one = random.randint(10, 99)
-    #求10的商和余数
-    int_one = one // 10
-    int_two = one % 10
-    #随机取8位数
-    sj = random.randint(10000000, 99999999)
-    #转换程字符床
-    str1 = str(sj)
-    #加上客户数字 凑齐8位 不够的中间补0
-    str2 = code
-    str3 = ''
-    #根据随机的二位树 第一位是奇数还是偶数
-    for j in range(0, gd):
-        if int_one % 2 == 0:
-            str3 = str3 + str1[j] + str2[j]
-        else:
-            str3 = str3 + str2[j] + str1[j]
-    #根据随机的二位数，惊醒左右转换
-    str3 = str(kh) + str3
-    int_end = int_two - len(str3)
-    # print int_two,int_end,str3
-    str3 = str3[int_end:] + str3[:int_two]
-    str4 = str(one) + str3
-    return str4
-# int_num = 101
-# str_kh = 22
-# str = def_jiami(int_num, str_kh)
-# print str
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+code = [[0] * 10] * 5
+code[0] = ['7', '8', '6', '2', '4', '3', '5', '1', '0', '9']
+code[1] = ['3', '9', '4', '1', '5', '8', '0', '6', '7', '2']
+code[2] = ['9', '7', '2', '0', '5', '8', '1', '3', '4', '6']
+code[3] = ['7', '3', '9', '1', '0', '6', '5', '2', '4', '8']
+code[4] = ['6', '7', '0', '9', '3', '2', '1', '4', '8', '5']
+#str_num :最大位数的自负成如：00001， int_time 当前时间 转换成 int
+def def_jiami(str_num, int_time):
+    num = str_num
+    a = int_time
+    bit = len(str(num))
+    oct_str = str(oct(a))
+    # oct_str = oct_str[:len(oct_str)]
+    if len(str_num) == 6 :
+        len_num = 21 - bit
+    else:
+        len_num = 23 - bit
+    n = 1
+    while n < len_num:
+        ran = random.randint(0, len(oct_str) - 1)
+        oct_str = oct_str[:ran] + '9' + oct_str[ran-len(oct_str):]
+        n = len(oct_str)
+    out = str(bit) + oct_str + str(num)
+    out_len = len(out)
+    i = 0
+    sum = 0
+    while i <= out_len - 1:
+        sum = sum + int(out[i])
+        i = i + 1
+    out = str(sum % 10) + out
+    out = out[10-len(out):] + out[:10]
+    print_out = ''
+    len_out = len(out)
+    for i in range(0, 5):
+        for j in range(0, 5):
+            index = i * 5 + j
+            if index > len_out - 1:
+                return print_out
+            flag_int = int(out[index])
+            print_out = print_out + code[i][flag_int]
+    return print_out
+#
+# a = def_jiami('000001', 1493563337)
+# print a
+
+# 8299962169999975687397556
+# 82912 26933 99748 78318 765
+# 92912 69333 99791 78313 657
+# 99129 69333 99777 04731 75679
+

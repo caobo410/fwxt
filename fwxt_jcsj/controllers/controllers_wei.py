@@ -88,6 +88,8 @@ class OrderController(http.Controller):
     def get_agent_list(self, password, code):
         password_objs = self.current_env['other.info'].search([('password', '=', password)])
         jm_code = jiemi.def_jiemi(code)
+        if jm_code == '0000':
+            return rest.render_json({"status": "no", "message": code, "data": ''})
         rk_obj = self.current_env['warehouse.line'].search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         ck_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not password_objs:

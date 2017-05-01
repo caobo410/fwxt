@@ -36,6 +36,8 @@ class OrderController(http.Controller):
     @http.route('/api/kcgl/get_batch_list/<code>', type='http', auth='none', methods=['GET'])
     def get_batch_list(self, code):
         jm_code = jiemi.def_jiemi(code)
+        if jm_code == '0000':
+            return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
@@ -50,6 +52,8 @@ class OrderController(http.Controller):
     @http.route('/api/kcgl/get_material_batch/<code>', type='http', auth='none', methods=['GET'])
     def get_material_batch(self, code):
         jm_code = jiemi.def_jiemi(code)
+        if jm_code == '0000':
+            return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
@@ -71,6 +75,8 @@ class OrderController(http.Controller):
     @http.route('/api/kcgl/get_commodity_making/<code>', type='http', auth='none', methods=['GET'])
     def get_commodity_making(self, code):
         jm_code = jiemi.def_jiemi(code)
+        if jm_code == '0000':
+            return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
@@ -95,6 +101,8 @@ class OrderController(http.Controller):
     @http.route('/api/kcgl/get_commodity_produce/<code>', type='http', auth='none', methods=['GET'])
     def get_commodity_produce(self, code):
         jm_code = jiemi.def_jiemi(code)
+        if jm_code == '0000':
+            return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
@@ -119,6 +127,8 @@ class OrderController(http.Controller):
     @http.route('/api/kcgl/get_commodity_check/<code>', type='http', auth='none', methods=['GET'])
     def get_commodity_check(self, code):
         jm_code = jiemi.def_jiemi(code)
+        if jm_code == '0000':
+            return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})

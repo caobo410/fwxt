@@ -14,6 +14,7 @@ import logging
 from openerp import fields,models,api
 from datetime import datetime
 import random
+import time
 import jiami
 import jiemi
 import os
@@ -64,26 +65,34 @@ class fwxt_create(models.Model):
     def btn_create(self):
         #加密算发
         comany = self.company_id.name
-        # save = u'F:\\' + comany + date_time + u'.txt'
-        save = u'/home/ftp/' + comany + date_time + u'.txt'
+        save = u'F:\\' + comany + date_time + u'.txt'
+        # save = u'/home/ftp/' + comany + date_time + u'.txt'
         file_object = open(save, 'w')
         file_object.write('')
         file_object.close()
         kh = self.company_code
-        num = self.number + self.state_number
+        num = self.number
         state_number = self.state_number
         sf_taobiao = self.sf_taobiao
         tb_number = self.tb_number
         all_the_text = ''
+        int_time = int(time.time()*100)
+        max_len = len(str(num+state_number))
         for i in range(state_number, num + 1):
-            str4 = jiami.def_jiami(i, kh)
-            num = num + 1
             if sf_taobiao is True:
                 for j in range(1, tb_number + 1):
                     str_j = '00' + str(j)
-                    all_the_text = all_the_text + str4 + str_j[-2:] + '\n'
+                    str_num = '00000000' + str(i) + str_j[-2:]
+                    str_num = str_num[0-max_len-2:]
+                    str4 = jiami.def_jiami(str_num, int_time)
+                    all_the_text = all_the_text + str4 + '\n'
+                num = num + 1
                 all_the_text = all_the_text + '\n'
             else:
+                str_num = '00000000' + str(i)
+                str_num = str_num[0-max_len:]
+                str4 = jiami.def_jiami(str_num, int_time)
+                num = num + 1
                 all_the_text = all_the_text + str4 + '\n'
             if num == 1000:
                 file_object = open(save, 'a')
