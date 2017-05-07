@@ -13,27 +13,36 @@ code[4] = ['6', '7', '0', '9', '3', '2', '1', '4', '8', '5']
 # 5963858221907991188860796
 def def_jiemi(str_num):
     print_out = ''
+    len_out = len(str_num)
     for i in range(0, 5):
             for j in range(0, 5):
                 index = i * 5 + j
-                print_out = print_out + str(code[i].index(str_num[index]))
-    out = print_out[-10:] + print_out[:15]
+                if index > len_out -1:
+                    j = 5
+                else:
+                    print_out = print_out + str(code[i].index(str_num[index]))
+    out = print_out[-10:] + print_out[:len_out-10]
     i = 1
     sum = 0
-    while i <= 24:
+    while i <= len_out -1:
         sum = sum + int(out[i])
         i = i + 1
     if out[0] != str(sum % 10):
         return '0000'
     len_num = int(out[1])
     code_num = out[0-len_num:]
-    code_time = out[2:25-len_num]
+    code_time = out[2:len_out-len_num]
     code_time = code_time.replace('9', '')
     fw_time = str(int(code_time, 8))
     if fw_time[:3] != '149':
         return '0000'
     return fw_time + str(code_num)
-# a = def_jiemi('5963858221907991188860796')
+# a = def_jiemi('21291993339972178381767')
 # print a
 
+# 013101373711
+# 26091931013739711000001
+# 37397110000012609193101
+# 1493563337
+# 21291 99333 99721 78381 767
 

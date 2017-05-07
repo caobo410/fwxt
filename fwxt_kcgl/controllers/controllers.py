@@ -25,6 +25,7 @@ class OrderController(http.Controller):
         rkd_obj = self.current_env['warehouse.doc']
         company_objs = self.current_env['company.info'].search([])
         kh = ''
+        # print '123'
         for company_obj in company_objs:
             kh = company_obj.company_code
         values = []
@@ -48,11 +49,9 @@ class OrderController(http.Controller):
             try:
                 # print batch_list['name']
                 batch_code = str(batch_list['name'])
-                if len(batch_code) == 22:
-                    batch_code = batch_code[:20]
                 start_code = str(jiemi.def_jiemi(batch_code))
-                end_code = '0000000000000'+str(int(start_code)-1 + num)
-                end_code = end_code[0-len(start_code):]
+                end_code = str(int(start_code)-1 + num)
+                # end_code = end_code[0-len(start_code):]
             except:
                 messages = u'非法条码，不能进行扫码入库，请联系管理员！'
                 return rest.render_json({'status': 'no', "message": messages, "data": messages})
@@ -105,7 +104,6 @@ class OrderController(http.Controller):
                 batch_code = str(batch_list['name'])
                 start_code = str(jiemi.def_jiemi(batch_code))
                 end_code = str(int(start_code) - 1 + num)
-                end_code = end_code[0 - len(start_code):]
                 # print start_code,end_code
             except:
                 messages = u'非法条码，不能进行扫码出库，请联系管理员！'
