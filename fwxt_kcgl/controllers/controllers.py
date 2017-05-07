@@ -129,17 +129,17 @@ class OrderController(http.Controller):
         return rest.render_json({"status": "yes", "message": code, "data": code_lists})
     #查询
     @authorizer.authorize
-    @http.route('/api/kcgl/get_search/<tm_code>', type='http', auth='none', methods=['GET'])
-    def get_search(self, tm_code):
+    @http.route('/api/kcgl/get_search/<code>', type='http', auth='none', methods=['GET'])
+    def get_search(self, code):
         messages_one = ''
         messages_two = ''
-        ewm_code = str(tm_code)
+        ewm_code = str(code)
         if not ewm_code:
             messages = u'二维码损坏，无法正确获取到条码信息！'
             return rest.render_json({"status": "no", "message": ewm_code, "data": messages})
         else:
             try:
-                if len(ewm_code) != 23 and len(ewm_code) !=25:
+                if len(ewm_code) != 23 and len(ewm_code) != 25:
                     messages = u'该产品不是本公司产品请联系公司'
                     return rest.render_json({'status': 'no', "message": ewm_code, "data": messages})
                 # print tm_code
