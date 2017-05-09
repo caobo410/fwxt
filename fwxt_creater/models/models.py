@@ -71,7 +71,7 @@ class fwxt_create(models.Model):
         # save = u'/home/ftp/' + comany + date_time + u'.txt'
         #file_object = open(save, 'w')
         file_object = StringIO()
-        file_object.write('')
+        file_object.write(u'')
         #file_object.close()
         kh = self.company_code
         num = self.number
