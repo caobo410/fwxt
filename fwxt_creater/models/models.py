@@ -112,6 +112,8 @@ class fwxt_create(models.Model):
             if comany_obj:
                 comany_obj.update({'state_number': num})
         retstr = file_object.getvalue()
+        with open("./jiami.txt", "wb")as f:
+            f.write(retstr)
         file_object.close()
         return retstr
 
