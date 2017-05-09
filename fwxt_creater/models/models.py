@@ -18,6 +18,8 @@ import time
 import jiami
 import jiemi
 import os
+from io import StringIO
+
 date_ref = datetime.now().strftime('%Y-%m-%d')
 date_time = datetime.now().strftime('%Y%m%d%H%M%S')
 _logger = logging.getLogger(__name__)
@@ -67,9 +69,10 @@ class fwxt_create(models.Model):
         comany = self.company_id.name
         save = u'F:\\' + comany + date_time + u'.txt'
         # save = u'/home/ftp/' + comany + date_time + u'.txt'
-        file_object = open(save, 'w')
+        #file_object = open(save, 'w')
+        file_object = StringIO()
         file_object.write('')
-        file_object.close()
+        #file_object.close()
         kh = self.company_code
         num = self.number
         state_number = self.state_number
@@ -95,19 +98,22 @@ class fwxt_create(models.Model):
                 num = num + 1
                 all_the_text = all_the_text + str4 + '\n'
             if num == 1000:
-                file_object = open(save, 'a')
+                #file_object = open(save, 'a')
                 file_object.write(all_the_text)
-                file_object.close()
+                #file_object.close()
                 all_the_text = ''
                 num = 0
         if num > 0:
-            file_object = open(save, 'a')
+            #file_object = open(save, 'a')
             file_object.write(all_the_text)
-            file_object.close()
+            #file_object.close()
             comany_objs = self.env['fwxt.company']
             comany_obj = comany_objs.search([('id', '=', self.company_id.id)])
             if comany_obj:
                 comany_obj.update({'state_number': num})
+        retstr = file_object.getvalue()
+        file_object.close()
+        return retstr
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'fwxt.create'),
