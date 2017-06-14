@@ -78,8 +78,12 @@ class fwxt_create(models.Model):
         all_the_text = ''
         int_time = int(time.time()*100)
         max_len = len(str(num+state_number))
-        for i in range(state_number, num + 1):
+        for i in range(state_number, state_number+num + 1):
             if sf_taobiao is True:
+                str_num = '0000000000' + str(i)
+                str_num = str_num[-6:]
+                str4 = jiami.def_jiami(str_num, int_time)
+                all_the_text = all_the_text + str4 + '\n'
                 for j in range(1, tb_number + 1):
                     str_j = '00' + str(j)
                     str_num = '00000000' + str(i) + str_j[-2:]
