@@ -15,6 +15,7 @@ from datetime import datetime
 import random
 import jiemi
 date_ref = datetime.now().strftime('%Y-%m-%d')
+date_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 _logger = logging.getLogger(__name__)
 
 
@@ -106,7 +107,7 @@ class batch_list(models.Model):
     line_id = fields.Many2one('warehouse.doc', string='Warehouse Doc')
     out_id = fields.Many2one('warehouse.doc', string='Warehouse Doc')
     number = fields.Float(string='number')
-    first_date = fields.Date(string='Date', size=64, help='Date')
+    first_date = fields.Datetime(string='Date', size=64, help='Date')
     messages = fields.Char(string='Messages', help='Messages')
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help='Date')
@@ -114,7 +115,7 @@ class batch_list(models.Model):
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'batch.list'),
         'date_confirm': date_ref,
-        'first_date': date_ref,
+        'first_date': date_time,
         'user_id': lambda cr, uid, id, c={}: id,
     }
 

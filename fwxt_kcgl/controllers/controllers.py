@@ -3,6 +3,7 @@ from openerp import http, fields
 import authorizer
 import rest
 from datetime import datetime
+# import timedelta
 import random
 import jiemi
 
@@ -13,6 +14,7 @@ except ImportError:
 
 
 date_ref = datetime.now().strftime('%Y-%m-%d')
+date_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 # _logger = logging.getLogger(__name__)
 
 class OrderController(http.Controller):
@@ -132,6 +134,7 @@ class OrderController(http.Controller):
         messages_one = ''
         messages_two = ''
         ewm_code = str(code)
+        print date_time
         if not ewm_code:
             messages = u'二维码损坏，无法正确获取到条码信息！'
             return rest.render_json({"status": "no", "message": ewm_code, "data": messages})
@@ -165,6 +168,7 @@ class OrderController(http.Controller):
             else:
                 messages = u'请在其他信息中维护查询内容及二次查询内容！'
                 return rest.render_json({"status": "no", "message": ewm_code, "data": messages})
+        print code
         warehouse_line_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', code), ('end_code', '>=', code)])
         if warehouse_line_obj:
             batch_list_obj = self.current_env['batch.list'].search([('code', '=', code)])
@@ -175,14 +179,16 @@ class OrderController(http.Controller):
                     'code': code,
                     'name': code,
                     'number': 1,
-                    'first_date': date_ref,
+                    'first_date': date_time,
                 }
                 batch_list_obj.create(values)
                 messages = messages_one
             else:
-                messages = messages_two + str(batch_list_obj.first_date)
+                messages = messages_two
                 number = int(batch_list_obj.number + 1)
+                messages = messages.replace('code', str(ewm_code))
                 messages = messages.replace('n', str(number))
+                messages = messages.replace('d', str(batch_list_obj.first_date))
                 batch_list_obj.update({'number': batch_list_obj.number + 1})
         else:
             messages = u'你查询的是本公司产品数码，但是没有发生出入库！'

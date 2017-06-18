@@ -49,7 +49,8 @@ class OrderController(http.Controller):
         company_lists = []
         for company_obj in company_objs:
             company_list = {}
-            company_list['name'] = company_obj.contacts_people
+            company_list['name'] = company_obj.name
+            company_list['people'] = company_obj.contacts_people
             company_list['phone'] = company_obj.tel
             company_list['wetch'] = company_obj.wetch
             company_list['address'] = company_obj.address
