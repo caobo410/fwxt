@@ -28,7 +28,23 @@ class OrderController(http.Controller):
             batch_list = {}
             batch_list['id'] = batch_obj.id
             batch_list['code'] = batch_obj.code
-            batch_list['name'] = batch_obj.name
+            batch_list['name'] = batch_obj.batch
+            batch_lists.append(batch_list)
+        return rest.render_json({"status": "yes", "message": "", "data": batch_lists})
+    # 获取批次
+    #http://localhost:8069/api/jcsj/get_batch/batch
+    @authorizer.authorize
+    @http.route('/api/batch/get_commodity_batch_search/<batch>', type='http', auth='none', methods=['GET'])
+    def get_commodity_batch_search(self, batch):
+        batch_objs = self.current_env['commodity.batch'].search(['name', 'like', batch])
+        if not batch_objs:
+            return rest.render_json({"status": "no", "message": "", "data": ''})
+        batch_lists = []
+        for batch_obj in batch_objs:
+            batch_list = {}
+            batch_list['id'] = batch_obj.id
+            batch_list['code'] = batch_obj.code
+            batch_list['name'] = batch_obj.batch
             batch_lists.append(batch_list)
         return rest.render_json({"status": "yes", "message": "", "data": batch_lists})
     #商品批次信息

@@ -80,7 +80,7 @@ class OrderController(http.Controller):
     #扫码出库
     @authorizer.authorize
     @http.route('/api/kcgl/get_kcck/<unit_id>', type='http', auth='none', methods=['GET'])
-    def get_kcck(self, unit_id, goods_id, batch_id, agent_id, express_id, code_lists):
+    def get_kcck(self, unit_id, goods_id, batch_id, agent_id, express_id, express_code,code_lists):
         code = 'RKD' + date_ref[:4] + date_ref[5:7] + str(random.randint(100, 999))
         rkd_obj = self.current_env['warehouse.doc']
         values = []
@@ -91,6 +91,7 @@ class OrderController(http.Controller):
             'batch_id': int(batch_id),
             'agent_id': int(agent_id),
             'express_id': int(express_id),
+            'express_code': str(express_code),
             'commodity_id': int(goods_id),
             'unit_id': int(unit_id),
         }
@@ -134,7 +135,6 @@ class OrderController(http.Controller):
         messages_one = ''
         messages_two = ''
         ewm_code = str(code)
-        print date_time
         if not ewm_code:
             messages = u'二维码损坏，无法正确获取到条码信息！'
             return rest.render_json({"status": "no", "message": ewm_code, "data": messages})
