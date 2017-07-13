@@ -76,7 +76,18 @@ class OrderController(http.Controller):
                 warehouse_obj.create(values)
                 rkd_obj_id.update({'number': int(rkd_obj_id.number) + num})
         return rest.render_json({"status": "yes", "message": code, "data": code_lists})
-
+    #删除扫码入库
+    @authorizer.authorize
+    @http.route('/api/kcgl/del_kcrk/<code>', type='http', auth='none', methods=['GET'])
+    def del_kcrk(self, code):
+        warehouse_obj = self.current_env['warehouse.line'].search([('code', '=', code)])
+        if not warehouse_obj:
+            messages = u'该条码没有入库，不用删除，请直接入库！'
+            return rest.render_json({"status": "no", "message": code, "data": messages})
+        self.current_env.cr.execute("delete from warehouse_line where code = '%s' " % code)
+        messages = u'已经删除除！'
+        return rest.render_json({"status": "yes", "message": code, "data": messages})
+        # self.current_env.cr.execute('delete from ckgl_dddy;delete from dddy_line')
     #扫码出库
     @authorizer.authorize
     @http.route('/api/kcgl/get_kcck/<unit_id>', type='http', auth='none', methods=['GET'])
@@ -128,6 +139,7 @@ class OrderController(http.Controller):
                 warehouse_obj.create(values)
                 rkd_obj_id.update({'number': rkd_obj_id.number + num})
         return rest.render_json({"status": "yes", "message": code, "data": code_lists})
+
     #查询
     @authorizer.authorize
     @http.route('/api/kcgl/get_search/<code>', type='http', auth='none', methods=['GET'])
