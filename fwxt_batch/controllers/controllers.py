@@ -36,7 +36,7 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/batch/get_commodity_batch_search/<batch>', type='http', auth='none', methods=['GET'])
     def get_commodity_batch_search(self, batch):
-        batch_objs = self.current_env['commodity.batch'].search(['name', 'like', batch])
+        batch_objs = self.current_env['commodity.batch'].search([('name', 'like', batch)])
         if not batch_objs:
             return rest.render_json({"status": "no", "message": "", "data": ''})
         batch_lists = []
