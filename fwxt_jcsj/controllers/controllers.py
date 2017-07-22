@@ -59,7 +59,7 @@ class OrderController(http.Controller):
     # 获取商品
     #http://localhost:8069/api/jcsj/get_unit/unit
     @authorizer.authorize
-    @http.route('/api/jcsj/get_commodity<commodity>', type='http', auth='none', methods=['GET'])
+    @http.route('/api/jcsj/get_commodity/<commodity>', type='http', auth='none', methods=['GET'])
     def get_commodity(self, commodity):
         commodity_objs = self.current_env['commodity.info'].search([])
         if not commodity_objs:
