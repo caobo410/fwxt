@@ -98,6 +98,43 @@ class warehouse_line(models.Model):
         'type': lambda obj, cr, uid, context: context['type'],
     }
 
+class warehouse_one(models.Model):
+    _name = 'warehouse.one'
+    _description = 'warehouse.one'
+
+    name = fields.Char(string='托盘编号', size=64, help='托盘编号')
+    line_id = fields.Many2one('warehouse.doc', string='入库编号')
+    start_code = fields.Char(string='开始编号', size=64, help='开始编号')
+    end_code = fields.Char(string='结束编号', size=64, help='结束编号')
+    type = fields.Selection([('in', 'In'),
+                             ('out', 'Out'),
+                             ('move', 'Move'),
+                             ('manual', 'Manual')], 'Type', required=True, help='type')
+    number = fields.Float(string='数量')
+
+    _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'warehouse.one'),
+        'type': lambda obj, cr, uid, context: context['type'],
+    }
+class warehouse_two(models.Model):
+    _name = 'warehouse.two'
+    _description = 'warehouse.two'
+
+    name = fields.Char(string='箱编号', size=64, help='箱编号')
+    line_id = fields.Many2one('warehouse.doc', string='入库编号')
+    start_code = fields.Char(string='开始编号', size=64, help='开始编号')
+    end_code = fields.Char(string='结束编号', size=64, help='结束编号')
+    type = fields.Selection([('in', 'In'),
+                             ('out', 'Out'),
+                             ('move', 'Move'),
+                             ('manual', 'Manual')], '类型', required=True, help='type')
+    number = fields.Float(string='数量')
+
+    _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'warehouse.two'),
+        'type': lambda obj, cr, uid, context: context['type'],
+    }
+
 class batch_list(models.Model):
     _name = 'batch.list'
     _description = 'batch.list'

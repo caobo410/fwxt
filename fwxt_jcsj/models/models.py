@@ -98,13 +98,15 @@ class convert_info(models.Model):
     _name = "convert.info"
     _description = "convert.info"
 
-    code = fields.Char(string='Code', size=64, required=True, help="No.")
-    name = fields.Char(string='Name', size=64, required=True, help="Name")
-    number = fields.Float(string='Number', help="Number")
-    convert = fields.Float(string='Convert', help="Convert")
-    message = fields.Char(string='Message', help="Message")
-    user_id = fields.Many2one('res.users', string='Operator')
-    date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
+    code = fields.Char(string='编号', size=64, required=True, help="No.")
+    name = fields.Char(string='名称', size=64, required=True, help="名称")
+    one_unit = fields.Many2one('base.unit', string='主计量', select=True, track_visibility='onchange')
+    two_unit = fields.Many2one('base.unit', string='辅计量', select=True, track_visibility='onchange')
+    number = fields.Float(string='数量', help="数量")
+    convert = fields.Float(string='转换系数', help="转换系数")
+    message = fields.Char(string='备注', help="备注")
+    user_id = fields.Many2one('res.users', string='制单人')
+    date_confirm = fields.Date(string='日期', size=64, required=True, help="日期")
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'convert.info'),

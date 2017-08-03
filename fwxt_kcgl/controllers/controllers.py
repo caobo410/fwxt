@@ -22,7 +22,7 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/kcgl/get_kcrk/<unit_id>', type='http', auth='none', methods=['GET'])
     def get_kcrk(self, unit_id, goods_id, batch_id, code_lists):
-        # print code_lists
+        print code_lists
         code = 'RKD' + date_ref[:4] + date_ref[5:7] + str(random.randint(100, 999))
         rkd_obj = self.current_env['warehouse.doc']
         company_objs = self.current_env['company.info'].search([])
@@ -49,32 +49,75 @@ class OrderController(http.Controller):
             end_code = ''
             num = int(batch_list['number'])
             try:
-                # print batch_list['name']
                 batch_code = str(batch_list['name'])
-                start_code = str(jiemi.def_jiemi(batch_code))
-                end_code = str(int(start_code)-1 + num)
-                # end_code = end_code[0-len(start_code):]
+                # batch_code = str(jiemi.def_jiemi(batch_code))
             except:
                 messages = u'非法条码，不能进行扫码入库，请联系管理员！'
                 return rest.render_json({'status': 'no', "message": messages, "data": messages})
-            values = {
-                'code': str(batch_code),
-                'name': str(batch_code),
-                'type': 'in',
-                'start_code': start_code,
-                'end_code': end_code,
-                'line_id': str(rkd_obj_id.id),
-                'number': num,
-            }
-            batch_obj = warehouse_obj.search([('start_code', '<=', start_code), ('end_code', '>=', start_code)])
+            batch_obj = warehouse_obj.search([('start_code', '<=', batch_code), ('end_code', '>=', batch_code)])
             if batch_obj:
                 messages = u'该条码已经入库过，请检查入库单号为' + batch_obj.line_id.code + u'的单据!'
                 # print messages
                 return rest.render_json({'status': 'no', "message": messages, "data": messages})
-            else:
+            #判断code的9-12位置是否000，如果为000 ，需要存储托盘
+            # print type(batch_code)
+            if batch_code[9:12] == '000':
+                warehouse_one_obj = self.current_env['warehouse.one']
+                unit_obj = self.current_env['convert.info']
+                unit_one_obj = unit_obj.search([('one_unit', '=', int(unit_id))])
+                if not unit_one_obj:
+                    messages = u'请先维护计量单位换算！'
+                    return rest.render_json({'status': 'no', "message": messages, "data": messages})
+                num_one = unit_one_obj.convert
+                unit_two_obj = unit_obj.search([('two_unit', '=', int(unit_one_obj.one_unit.id))])
+                num_two = unit_two_obj.convert
+                end_code = '00000'+str(int(batch_code[12:-2])+int(num)-1)
+                #插入托盘表
+                values={
+                    'name': str(batch_code),
+                    'type': 'in',
+                    'start_code': batch_code,
+                    'end_code': batch_code,
+                    'line_id': str(rkd_obj_id.id),
+                    'number': 1,
+                }
+                warehouse_one_obj.create(values)
+                bs_code = '000'+str(int(num_one))
+                bs_code =bs_code[-3:]
+                start_code = batch_code[:9] + '001' + batch_code[12:]
+                end_code = batch_code[:9] + bs_code + batch_code[12:]
+                values ={
+                    'name': str(batch_code),
+                    'type': 'in',
+                    'start_code': start_code,
+                    'end_code': end_code,
+                    'line_id': str(rkd_obj_id.id),
+                    'number': num_one,
+                }
+                #插入箱表
+                warehouse_two_obj = self.current_env['warehouse.two']
+                warehouse_two_obj.create(values)
+                #插入箱号
+                for i in range(1, int(num_one)):
+                    bs_code = '000'+str(i)
+                    bs_code = bs_code[-3:]
+                    end_str ='000'+str(int(num_two))
+                    xh_code = batch_code[:9] + bs_code + batch_code[12:-2] + '00'
+                    start_code = batch_code[:9] + bs_code + batch_code[12:-2] + '01'
+                    end_code = batch_code[:9] + bs_code + batch_code[12:-2] + end_str[-2:]
+                    values = {
+                        'name': str(xh_code),
+                        'type': 'in',
+                        'start_code': start_code,
+                        'end_code': end_code,
+                        'line_id': str(rkd_obj_id.id),
+                        'number': num,
+                        }
+                    print values
+                    batch_list_obj = self.current_env['warehouse.line']
+                    batch_list_obj.create(values)
                 # print values
-                warehouse_obj.create(values)
-                rkd_obj_id.update({'number': int(rkd_obj_id.number) + num})
+                rkd_obj_id.update({'number': int(rkd_obj_id.number) + 1})
         return rest.render_json({"status": "yes", "message": code, "data": code_lists})
     #删除扫码入库
     @authorizer.authorize
@@ -161,17 +204,6 @@ class OrderController(http.Controller):
             except:
                 messages = u'该产品不是本公司产品请联系公司!'
                 return rest.render_json({'status': 'no', "message": ewm_code, "data": messages})
-            # company_objs = self.current_env['company.info'].search([])
-            # if company_objs:
-            #     for company_obj in company_objs:
-            #         company_code = company_obj.company_code
-            #     len_code = jiemi.def_company(ewm_code)
-            #     if company_code != len_code:
-            #         messages = u'该产品不是本公司产品，请联系公司！'
-            #         return rest.render_json({'status': 'no', "message": ewm_code, "data": messages})
-            # else:
-            #     messages = u'请在公司简介中维护公司信息及公司编码！'
-            #     return rest.render_json({"status": "yes", "message": ewm_code, "data": messages})
             other_objs = self.current_env['other.info'].search([])
             if other_objs:
                 for other_obj in other_objs:
@@ -180,7 +212,7 @@ class OrderController(http.Controller):
             else:
                 messages = u'请在其他信息中维护查询内容及二次查询内容！'
                 return rest.render_json({"status": "no", "message": ewm_code, "data": messages})
-        print code
+        # print code
         warehouse_line_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', code), ('end_code', '>=', code)])
         if warehouse_line_obj:
             batch_list_obj = self.current_env['batch.list'].search([('code', '=', code)])
