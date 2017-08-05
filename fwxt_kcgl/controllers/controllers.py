@@ -374,7 +374,7 @@ class OrderController(http.Controller):
             return rest.render_json({"status": "no", "message": ewm_code, "data": messages})
         else:
             try:
-                if len(ewm_code) != 20:
+                if len(ewm_code) != 25:
                     messages = u'该产品不是本公司产品请联系公司'
                     return rest.render_json({'status': 'no', "message": ewm_code, "data": messages})
                 code = jiemi.def_jiemi(ewm_code)
