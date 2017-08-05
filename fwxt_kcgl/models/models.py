@@ -81,6 +81,7 @@ class warehouse_line(models.Model):
     code = fields.Char(string='Code', size=64, help='Code')
     name = fields.Char(string='Name', size=64, help='Name')
     line_id = fields.Many2one('warehouse.doc', string='Warehouse Doc')
+    warehouse_two_id = fields.Many2one('warehouse.two', string='箱号id')
     start_code = fields.Char(string='Code', size=64, help='Code')
     end_code = fields.Char(string='Code', size=64, help='Code')
     type = fields.Selection([('in', 'In'),
@@ -122,6 +123,7 @@ class warehouse_two(models.Model):
 
     name = fields.Char(string='箱编号', size=64, help='箱编号')
     line_id = fields.Many2one('warehouse.doc', string='入库编号')
+    warehouse_one_id = fields.Many2one('warehouse.one', string='托盘id')
     start_code = fields.Char(string='开始编号', size=64, help='开始编号')
     end_code = fields.Char(string='结束编号', size=64, help='结束编号')
     type = fields.Selection([('in', 'In'),
