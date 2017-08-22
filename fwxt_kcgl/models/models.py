@@ -147,6 +147,7 @@ class batch_list(models.Model):
     out_id = fields.Many2one('warehouse.doc', string='Warehouse Doc')
     number = fields.Float(string='number')
     first_date = fields.Datetime(string='Date', size=64, help='Date')
+    new_date = fields.Datetime(string='最近时间', size=64, help='最近时间')
     messages = fields.Char(string='Messages', help='Messages')
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help='Date')

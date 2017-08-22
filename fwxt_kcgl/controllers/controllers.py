@@ -402,25 +402,28 @@ class OrderController(http.Controller):
             warehouse_line_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', code), ('end_code', '>=', code)])
         if warehouse_line_obj:
             batch_list_obj = self.current_env['batch.list'].search([('code', '=', code)])
+            now = datetime.datetime.now()
             if not batch_list_obj:
-                now = datetime.datetime.now()
-                date_hours = now + datetime.timedelta(hours=8)
-                date_time = date_hours.strftime('%Y-%m-%d %H:%M:%S')
+                # date_hours = now + datetime.timedelta(hours=8)
+                date_time = now.strftime('%Y-%m-%d %H:%M:%S')
                 values = {
                     'code': code,
                     'name': code,
                     'number': 1,
                     'first_date': date_time,
+                    'new_date': date_time,
                 }
                 batch_list_obj.create(values)
                 messages = messages_one
             else:
                 messages = messages_two
-                number = int(batch_list_obj.number + 1)
+                number = int(batch_list_obj.number)
                 messages = messages.replace('code', str(ewm_code))
-                messages = messages.replace('n', str(number))
                 messages = messages.replace('d', str(batch_list_obj.first_date))
-                batch_list_obj.update({'number': batch_list_obj.number + 1})
+                if (now-datetime.datetime.strptime(str(batch_list_obj.new_date)[:19], '%Y-%m-%d %H:%M:%S')).seconds > 120:
+                    batch_list_obj.update({'number': batch_list_obj.number + 1, 'new_date': now})
+                    number = number + 1
+                messages = messages.replace('n', str(number))
         else:
             messages = u'你查询的是本公司产品数码，但是没有发生出入库！'
         return rest.render_json({"status": "yes", "message": ewm_code, "data": messages})
