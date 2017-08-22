@@ -33,6 +33,6 @@ def def_jiemi(str_num):
     if fw_time[:3] != '149':
         return '0000'
     return fw_time + str(code_num)
-a = def_jiemi('8488551333098906479304950')
-print a
+# a = def_jiemi('8488551333098906479304950')
+# print a
 

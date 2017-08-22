@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import rest
 import functools
 from psycopg2 import OperationalError

@@ -91,7 +91,7 @@ class OrderController(http.Controller):
                     bs_code = '000'+str(i)
                     bs_code = bs_code[-3:]
                     end_str ='000'+str(int(num_two))
-                    xh_code = batch_code[:9] + bs_code +    batch_code[12:-2] + '00'
+                    xh_code = batch_code[:9] + bs_code + batch_code[12:-2] + '00'
                     start_code = batch_code[:9] + bs_code + batch_code[12:-2] + '01'
                     end_code = batch_code[:9] + bs_code + batch_code[12:-2] + end_str[-2:]
                     values = {

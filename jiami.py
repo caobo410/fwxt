@@ -43,8 +43,8 @@ def def_jiami(str_num):
             print_out = print_out + code[i][flag_int]
     return print_out
 #
-a = def_jiami('14935633300100000101')
-print a
+# a = def_jiami('14935633300100000101')
+# print a
 
 # 8299962169999975687397556
 # 82912 26933 99748 78318 765
