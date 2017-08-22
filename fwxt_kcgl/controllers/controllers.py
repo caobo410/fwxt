@@ -2,7 +2,7 @@
 from openerp import http, fields
 import authorizer
 import rest
-from datetime import datetime
+import datetime
 # import timedelta
 import random
 import jiemi
@@ -11,10 +11,7 @@ try:
     import cStringIO as StringIO
 except ImportError:
     import StringIO
-
-
-date_ref = datetime.now().strftime('%Y-%m-%d')
-date_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+date_ref = datetime.datetime.now().strftime('%Y-%m-%d')
 # _logger = logging.getLogger(__name__)
 
 class OrderController(http.Controller):
@@ -406,6 +403,9 @@ class OrderController(http.Controller):
         if warehouse_line_obj:
             batch_list_obj = self.current_env['batch.list'].search([('code', '=', code)])
             if not batch_list_obj:
+                now = datetime.datetime.now()
+                date_hours = now + datetime.timedelta(hours=8)
+                date_time = date_hours.strftime('%Y-%m-%d %H:%M:%S')
                 values = {
                     'code': code,
                     'name': code,
