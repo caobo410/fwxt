@@ -91,8 +91,14 @@ class OrderController(http.Controller):
         jm_code = jiemi.def_jiemi(code)
         if jm_code == '0000':
             return rest.render_json({"status": "no", "message": code, "data": ''})
-        rk_obj = self.current_env['warehouse.line'].search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
-        ck_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
+        if jm_code[9:12] == '000':
+            warehouse_obj = self.current_env['warehouse.one']
+        elif jm_code[9:12] != '000' and jm_code[-2:] == '00':
+            warehouse_obj = self.current_env['warehouse.two']
+        else:
+            warehouse_obj = self.current_env['warehouse.line']
+        rk_obj = warehouse_obj.search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
+        ck_obj = warehouse_obj.search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not password_objs:
             return rest.render_json({"status": "no", "message": password, "data": 'Password Error!'})
         batch_objs = self.current_env['batch.list'].search([('name', '=', code)])
