@@ -393,7 +393,6 @@ class OrderController(http.Controller):
             else:
                 messages = u'请在其他信息中维护查询内容及二次查询内容！'
                 return rest.render_json({"status": "no", "message": ewm_code, "data": messages})
-        print code
         if code[9:12] == '000':
             warehouse_line_obj = self.current_env['warehouse.one'].search([('type', '=', 'out'), ('start_code', '<=', code), ('end_code', '>=', code)])
         elif code[9:12] != '000' and code[-2:] == '00':
