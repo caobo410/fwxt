@@ -91,9 +91,9 @@ class OrderController(http.Controller):
         jm_code = jiemi.def_jiemi(code)
         if jm_code == '0000':
             return rest.render_json({"status": "no", "message": code, "data": ''})
-        if jm_code[9:12] == '000':
+        if jm_code[15:18] == '000':
             warehouse_obj = self.current_env['warehouse.one']
-        elif jm_code[9:12] != '000' and jm_code[-2:] == '00':
+        elif jm_code[15:18] != '000' and jm_code[-2:] == '00':
             warehouse_obj = self.current_env['warehouse.two']
         else:
             warehouse_obj = self.current_env['warehouse.line']

@@ -43,7 +43,7 @@ class OrderController(http.Controller):
                 return rest.render_json({'status': 'no', "message": messages, "data": messages})
             #判断code的9-12位置是否000，如果为000 ，需要存储托盘
             # print type(batch_code)
-            if batch_code[9:12] == '000':
+            if batch_code[15:18] == '000':
                 warehouse_one_obj = self.current_env['warehouse.one']
                 batch_obj = warehouse_one_obj.search([('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'in')])
                 if batch_obj:
@@ -70,9 +70,9 @@ class OrderController(http.Controller):
                 warehouse_one_obj_id = warehouse_one_obj.create(values)
                 bs_code = '000'+str(int(num_one))
                 bs_code = bs_code[-3:]
-                start_code = batch_code[:9] + '001' + batch_code[12:]
-                end_code = batch_code[:9] + bs_code + batch_code[12:]
-                values ={
+                start_code = batch_code[:15] + '001' + batch_code[18:]
+                end_code = batch_code[:15] + bs_code + batch_code[18:]
+                values = {
                     'name': str(batch_code),
                     'type': 'in',
                     'start_code': start_code,
@@ -91,9 +91,9 @@ class OrderController(http.Controller):
                     bs_code = '000'+str(i)
                     bs_code = bs_code[-3:]
                     end_str ='000'+str(int(num_two))
-                    xh_code = batch_code[:9] + bs_code + batch_code[12:-2] + '00'
-                    start_code = batch_code[:9] + bs_code + batch_code[12:-2] + '01'
-                    end_code = batch_code[:9] + bs_code + batch_code[12:-2] + end_str[-2:]
+                    xh_code = batch_code[:15] + bs_code + batch_code[18:-2] + '00'
+                    start_code = batch_code[:15] + bs_code + batch_code[18:-2] + '01'
+                    end_code = batch_code[:15] + bs_code + batch_code[18:-2] + end_str[-2:]
                     values = {
                         'name': str(xh_code),
                         'type': 'in',
@@ -108,7 +108,7 @@ class OrderController(http.Controller):
                     if not batch_obj:
                         batch_list_obj.create(values)
                         rkd_obj_id.update({'number': int(rkd_obj_id.number) + 1})
-            elif batch_code[9:12] != '000' and batch_code[-2:] == '00':
+            elif batch_code[15:18] != '000' and batch_code[-2:] == '00':
                 warehouse_obj = self.current_env['warehouse.two']
                 batch_obj = warehouse_obj.search([('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'in')])
                 if batch_obj:
@@ -120,10 +120,10 @@ class OrderController(http.Controller):
                     messages = u'请先维护计量单位换算！'
                     return rest.render_json({'status': 'no', "message": messages, "data": messages})
                 num_one = unit_one_obj.convert
-                bs_code = '000'+str(num+int(batch_code[9:12]) - 1)
+                bs_code = '000'+str(num+int(batch_code[15:18]) - 1)
                 bs_code = bs_code[-3:]
                 start_code = batch_code
-                end_code = batch_code[:9] + bs_code + batch_code[12:]
+                end_code = batch_code[:15] + bs_code + batch_code[18:]
                 values={
                     'name': str(batch_code),
                     'type': 'in',
@@ -137,13 +137,13 @@ class OrderController(http.Controller):
                 warehouse_two_obj_id = warehouse_two_obj.create(values)
                 #插入箱号
                 for i in range(1, int(num) + 1):
-                    j = i + int(batch_code[9:12]) - 1
+                    j = i + int(batch_code[15:18]) - 1
                     bs_code = '000'+str(j)
                     bs_code = bs_code[-3:]
                     end_str ='000'+str(int(num_one))
-                    xh_code = batch_code[:9] + bs_code + batch_code[12:-2] + '00'
-                    start_code = batch_code[:9] + bs_code + batch_code[12:-2] + '01'
-                    end_code = batch_code[:9] + bs_code + batch_code[12:-2] + end_str[-2:]
+                    xh_code = batch_code[:15] + bs_code + batch_code[18:-2] + '00'
+                    start_code = batch_code[:15] + bs_code + batch_code[18:-2] + '01'
+                    end_code = batch_code[:15] + bs_code + batch_code[18:-2] + end_str[-2:]
                     values = {
                         'code': str(xh_code),
                         'name': str(xh_code),
@@ -186,16 +186,16 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/kcgl/del_kcrk/<code>', type='http', auth='none', methods=['GET'])
     def del_kcrk(self, code):
-        if code[9:12] == '000':
+        if code[15:18] == '000':
             warehouse_obj = self.current_env['warehouse.one'].search([('name', '=', code)])
-            str_one = code[:9]
+            str_one = code[:15]
             str_two = code[-8:]
-            self.current_env.cr.execute("delete from warehouse_line where where SUBSTR(name,1,9)= '%s' and SUBSTR(name,13,20)='%s'; delete from warehouse_one where name = '%s'; delete from warehouse_two where name = '%s'" % (str_one, str_two, code, code))
-        elif code[9:12] != '000' and batch_code[-2:] == '00':
-            str_one = code[:9]
+            self.current_env.cr.execute("delete from warehouse_line where where SUBSTR(name,1,15)= '%s'; delete from warehouse_one where name = '%s'; delete from warehouse_two where name = '%s'" % (str_one, code, code))
+        elif code[15:18] != '000' and code[-2:] == '00':
+            str_one = code[:15]
             str_two = code[-8:]
             warehouse_obj = self.current_env['warehouse.two'].search([('name', '=', code)])
-            self.current_env.cr.execute("delete from warehouse_line where where SUBSTR(name,1,9)= '%s' and SUBSTR(name,13,20)='%s'; delete from warehouse_two where name = '%s'" % (str_one, str_two,  code))
+            self.current_env.cr.execute("delete from warehouse_line where where SUBSTR(name,1,15)= '%s'; delete from warehouse_two where name = '%s'" % (str_one,  code))
         else:
             warehouse_obj = self.current_env['warehouse.line'].search([('code', '=', code)])
         if not warehouse_obj:
@@ -235,7 +235,7 @@ class OrderController(http.Controller):
                 return rest.render_json({'status': 'no', "message": messages, "data": messages})
             #判断code的9-12位置是否000，如果为000 ，需要存储托盘
             # print type(batch_code)
-            if batch_code[9:12] == '000':
+            if batch_code[15:18] == '000':
                 warehouse_one_obj = self.current_env['warehouse.one']
                 batch_obj = warehouse_one_obj.search([('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'out')])
                 if batch_obj:
@@ -262,8 +262,8 @@ class OrderController(http.Controller):
                 warehouse_one_obj_id = warehouse_one_obj.create(values)
                 bs_code = '000'+str(int(num_one))
                 bs_code =bs_code[-3:]
-                start_code = batch_code[:9] + '001' + batch_code[12:]
-                end_code = batch_code[:9] + bs_code + batch_code[12:]
+                start_code = batch_code[:15] + '001' + batch_code[18:]
+                end_code = batch_code[:15] + bs_code + batch_code[18:]
                 values ={
                     'name': str(batch_code),
                     'type': 'out',
@@ -283,9 +283,9 @@ class OrderController(http.Controller):
                     bs_code = '000'+str(i)
                     bs_code = bs_code[-3:]
                     end_str ='000'+str(int(num_two))
-                    xh_code = batch_code[:9] + bs_code + batch_code[12:-2] + '00'
-                    start_code = batch_code[:9] + bs_code + batch_code[12:-2] + '01'
-                    end_code = batch_code[:9] + bs_code + batch_code[12:-2] + end_str[-2:]
+                    xh_code = batch_code[:15] + bs_code + batch_code[18:-2] + '00'
+                    start_code = batch_code[:15] + bs_code + batch_code[18:-2] + '01'
+                    end_code = batch_code[:15] + bs_code + batch_code[18:-2] + end_str[-2:]
                     values = {
                         'name': str(xh_code),
                         'type': 'out',
@@ -300,7 +300,7 @@ class OrderController(http.Controller):
                     if not batch_obj:
                         batch_list_obj.create(values)
                         rkd_obj_id.update({'number': int(rkd_obj_id.number) + 1})
-            elif batch_code[9:12] != '000' and batch_code[-2:] == '00':
+            elif batch_code[15:18] != '000' and batch_code[-2:] == '00':
                 warehouse_obj = self.current_env['warehouse.two']
                 batch_obj = warehouse_obj.search([('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'out')])
                 if batch_obj:
@@ -312,10 +312,10 @@ class OrderController(http.Controller):
                     messages = u'请先维护计量单位换算！'
                     return rest.render_json({'status': 'no', "message": messages, "data": messages})
                 num_one = unit_one_obj.convert
-                bs_code = '000'+str(num+int(batch_code[9:12]) - 1)
+                bs_code = '000'+str(num+int(batch_code[15:18]) - 1)
                 bs_code = bs_code[-3:]
                 start_code = batch_code
-                end_code = batch_code[:9] + bs_code + batch_code[12:]
+                end_code = batch_code[:15] + bs_code + batch_code[18:]
                 values={
                     'name': str(batch_code),
                     'type': 'out',
@@ -329,13 +329,13 @@ class OrderController(http.Controller):
                 warehouse_two_obj_id = warehouse_two_obj.create(values)
                 #插入箱号
                 for i in range(1, int(num) + 1):
-                    j = i + int(batch_code[9:12]) - 1
+                    j = i + int(batch_code[15:18]) - 1
                     bs_code = '000'+str(j)
                     bs_code = bs_code[-3:]
                     end_str ='000'+str(int(num_one))
-                    xh_code = batch_code[:9] + bs_code + batch_code[12:-2] + '00'
-                    start_code = batch_code[:9] + bs_code + batch_code[12:-2] + '01'
-                    end_code = batch_code[:9] + bs_code + batch_code[12:-2] + end_str[-2:]
+                    xh_code = batch_code[:15] + bs_code + batch_code[18:-2] + '00'
+                    start_code = batch_code[:15] + bs_code + batch_code[18:-2] + '01'
+                    end_code = batch_code[:15] + bs_code + batch_code[18:-2] + end_str[-2:]
                     values = {
                         'code': str(xh_code),
                         'name': str(xh_code),
@@ -405,9 +405,9 @@ class OrderController(http.Controller):
             else:
                 messages = u'请在其他信息中维护查询内容及二次查询内容！'
                 return rest.render_json({"status": "no", "message": ewm_code, "data": messages})
-        if code[9:12] == '000':
+        if code[15:18] == '000':
             warehouse_line_obj = self.current_env['warehouse.one'].search([('type', '=', 'out'), ('start_code', '<=', code), ('end_code', '>=', code)])
-        elif code[9:12] != '000' and code[-2:] == '00':
+        elif code[15:18] != '000' and code[-2:] == '00':
             warehouse_line_obj = self.current_env['warehouse.two'].search([('type', '=', 'out'), ('start_code', '<=', code), ('end_code', '>=', code)])
         else:
             warehouse_line_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', code), ('end_code', '>=', code)])
