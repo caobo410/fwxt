@@ -61,27 +61,36 @@ class OrderController(http.Controller):
 
     #商品信息
     @authorizer.authorize
-    @http.route('/api/jcsj/get_commodity_list/<commodity>', type='http', auth='none', methods=['GET'])
-    def get_commodity_list(self, commodity):
-        commodity_objs = self.current_env['commodity.info'].search([])
-        if not commodity_objs:
-            return rest.render_json({"status": "no", "message": commodity, "data": ''})
+    @http.route('/api/jcsj/get_commodity_list/<code>', type='http', auth='none', methods=['GET'])
+    def get_commodity_list(self, code):
+        jm_code = jiemi.def_jiemi(code)
+        if jm_code == '0000':
+            return rest.render_json({"status": "no", "message": code, "data": ''})
+        if jm_code[15:18] == '000':
+            warehouse_obj = self.current_env['warehouse.one']
+        elif jm_code[15:18] != '000' and jm_code[-2:] == '00':
+            warehouse_obj = self.current_env['warehouse.two']
+        else:
+            warehouse_obj = self.current_env['warehouse.line']
+        # jm_code = '14917061200125316100'
+        ck_obj = warehouse_obj.search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
+        if not ck_obj:
+            return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_lists = []
-        for commodity_obj in commodity_objs:
-            commodity_list = {}
-            commodity_list['name'] = commodity_obj.name
-            commodity_list['image'] = commodity_obj.image
-            line_lists = []
-            if len(commodity_obj.line_id) > 0:
-                for line in commodity_obj.line_id:
-                    line_list = {}
-                    line_list['name'] = line.name + ':' + line.messages
-                    line_lists.append(line_list)
-                commodity_list['list'] = line_lists
-            else:
-                commodity_list['list'] = {}
-            commodity_lists.append(commodity_list)
-        return rest.render_json({"status": "yes", "message": commodity, "data": commodity_lists})
+        commodity_list = {}
+        commodity_list['name'] = ck_obj.line_id.commodity_id.name
+        commodity_list['image'] = ck_obj.line_id.commodity_id.image
+        line_lists = []
+        if len(ck_obj.line_id.commodity_id.line_id) > 0:
+            for line in ck_obj.line_id.commodity_id.line_id:
+                line_list = {}
+                line_list['name'] = line.name + ':' + line.messages
+                line_lists.append(line_list)
+            commodity_list['list'] = line_lists
+        else:
+            commodity_list['list'] = {}
+        commodity_lists.append(commodity_list)
+        return rest.render_json({"status": "yes", "message": code, "data": commodity_lists})
 
     #查看出入库信息
     @authorizer.authorize
