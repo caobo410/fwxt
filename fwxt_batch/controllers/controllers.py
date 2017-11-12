@@ -70,7 +70,7 @@ class OrderController(http.Controller):
         commodity_list['scjd'] = commodity_obj.line_id.batch_id.branch_id.name
         commodity_list['commodity'] = commodity_obj.line_id.commodity_id.name
         return rest.render_json({"status": "yes", "message": code, "data": commodity_list})
-    #原材料批次信息
+    #原材料批次信息123123
     @authorizer.authorize
     @http.route('/api/kcgl/get_material_batch/<code>', type='http', auth='none', methods=['GET'])
     def get_material_batch(self, code):
