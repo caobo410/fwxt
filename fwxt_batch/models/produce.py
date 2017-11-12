@@ -33,7 +33,7 @@ class commodity_produce(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'commodity.produce'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -53,7 +53,7 @@ class produce_line(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'produce.line'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -74,7 +74,7 @@ class commodity_making(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'commodity.making'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -94,7 +94,7 @@ class making_line(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'making.line'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -113,8 +113,8 @@ class commodity_check(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help="Date")
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'commodity.check'),
-        'check_date': date_ref,
-        'date_confirm': date_ref,
+        'check_date': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -137,8 +137,8 @@ class check_line(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'check.line'),
-        'check_date': date_ref,
-        'date_confirm': date_ref,
+        'check_date': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 class check_line_picture(models.Model):

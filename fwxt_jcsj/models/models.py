@@ -51,7 +51,7 @@ class company_info(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'company.info'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -72,7 +72,7 @@ class picture_management(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'picture.management'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -89,7 +89,7 @@ class base_unit(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'base.unit'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -110,7 +110,7 @@ class convert_info(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'convert.info'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -136,7 +136,7 @@ class other_info(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'other.info'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -172,7 +172,7 @@ class dict_info(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'dict.info'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -196,7 +196,7 @@ class branch_office_info(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'branch.office.info'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -215,7 +215,7 @@ class material_info(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'materia.info'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -236,7 +236,7 @@ class commodity_info(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'commodity.info'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 #产品说明
@@ -251,7 +251,7 @@ class commodity_line(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'commodity.line'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 #供应商
@@ -271,7 +271,7 @@ class supplier_info(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'supplier.info'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -293,7 +293,7 @@ class agent_info(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'agent.info'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -314,7 +314,7 @@ class express_info(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'express.info'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -335,7 +335,7 @@ class check_info(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'check.info'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 

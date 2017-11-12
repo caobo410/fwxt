@@ -45,8 +45,8 @@ class material_batch(models.Model):
         return result
 
     _defaults = {
-        'production_date': date_ref,
-        'date_confirm': date_ref,
+        'production_date': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -75,8 +75,8 @@ class commodity_batch(models.Model):
         return result
 
     _defaults = {
-        'production_date': date_ref,
-        'date_confirm': date_ref,
+        'production_date': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 class commodity_batch_line(models.Model):
@@ -96,7 +96,7 @@ class commodity_batch_line(models.Model):
         self.name = self.material_batch_id.name
 
     _defaults = {
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 

@@ -34,7 +34,7 @@ class warehouse_info(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'warehouse.info'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
         'sf_default': False
     }
@@ -69,7 +69,7 @@ class warehouse_doc(models.Model):
         self.commodity_id = self.batch_id.commodity_id
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'warehouse.doc'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
         'type': lambda obj, cr, uid, context: context['type'],
     }
@@ -94,7 +94,7 @@ class warehouse_line(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'warehouse.line'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
         'type': lambda obj, cr, uid, context: context['type'],
     }
@@ -154,8 +154,8 @@ class batch_list(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'batch.list'),
-        'date_confirm': date_ref,
-        'first_date': date_time,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
+        'first_date': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d %H:%M:%S")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -217,7 +217,7 @@ class manual_storage(models.Model):
         'number': 1,
         'to_batch': 0,
         'from_batch': 0,
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
     # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

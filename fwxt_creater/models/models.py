@@ -35,7 +35,7 @@ class fwxt_company(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'fwxt.company'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'state_number': 1,
         'user_id': lambda cr, uid, id, c={}: id,
     }
@@ -111,7 +111,7 @@ class fwxt_create(models.Model):
 
     _defaults = {
         'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'fwxt.create'),
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c = {}: id,
     }
 class fwxt_decrypt(models.Model):
@@ -131,7 +131,7 @@ class fwxt_decrypt(models.Model):
         b1 = jiemi.def_jiemi(code)
         self.decrypt_code = b1
     _defaults = {
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
