@@ -67,6 +67,7 @@ class OrderController(http.Controller):
         commodity_list['batch'] = commodity_obj.line_id.batch_id.batch
         commodity_list['scxh'] = commodity_obj.line_id.batch_id.messages
         commodity_list['scdate'] = commodity_obj.line_id.batch_id.production_date
+        commodity_list['scjd'] = commodity_obj.line_id.batch_id.branch_id.name
         commodity_list['commodity'] = commodity_obj.line_id.commodity_id.name
         return rest.render_json({"status": "yes", "message": code, "data": commodity_list})
     #原材料批次信息
