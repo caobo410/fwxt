@@ -121,7 +121,7 @@ class OrderController(http.Controller):
         agent_list['agent'] = ck_obj.line_id.agent_id.name
         agent_list['express'] = ck_obj.line_id.express_id.name
         agent_list['express_code'] = ck_obj.line_id.express_code
-        return rest.render_json({"status": "yes", "message": password, "data": agent_list})
+        return rest.render_json({"status": "yes", "message": code, "data": agent_list})
     #企业介绍
     @authorizer.authorize
     @http.route('/api/jcsj/get_company_list/<code>', type='http', auth='none', methods=['GET'])
