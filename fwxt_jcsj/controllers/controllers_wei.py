@@ -73,7 +73,7 @@ class OrderController(http.Controller):
         else:
             warehouse_obj = self.current_env['warehouse.line']
         # jm_code = '14917061200125316100'
-        ck_obj = warehouse_obj.search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
+        ck_obj = warehouse_obj.search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not ck_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_lists = []

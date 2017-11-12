@@ -58,7 +58,7 @@ class OrderController(http.Controller):
             warehouse_obj = self.current_env['warehouse.two']
         else:
             warehouse_obj = self.current_env['warehouse.line']
-        commodity_obj = warehouse_obj.search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
+        commodity_obj = warehouse_obj.search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_list = {}
@@ -83,7 +83,7 @@ class OrderController(http.Controller):
             warehouse_obj = self.current_env['warehouse.two']
         else:
             warehouse_obj = self.current_env['warehouse.line']
-        commodity_obj = warehouse_obj.search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
+        commodity_obj = warehouse_obj.search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         batch_objs = commodity_obj.line_id.batch_id.line_id
@@ -112,7 +112,7 @@ class OrderController(http.Controller):
             warehouse_obj = self.current_env['warehouse.two']
         else:
             warehouse_obj = self.current_env['warehouse.line']
-        commodity_obj = warehouse_obj.search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
+        commodity_obj = warehouse_obj.search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_id = commodity_obj.line_id.commodity_id.id
@@ -144,7 +144,7 @@ class OrderController(http.Controller):
             warehouse_obj = self.current_env['warehouse.two']
         else:
             warehouse_obj = self.current_env['warehouse.line']
-        commodity_obj = warehouse_obj.search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
+        commodity_obj = warehouse_obj.search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_id = commodity_obj.line_id.commodity_id.id
@@ -176,7 +176,7 @@ class OrderController(http.Controller):
             warehouse_obj = self.current_env['warehouse.two']
         else:
             warehouse_obj = self.current_env['warehouse.line']
-        commodity_obj = warehouse_obj.search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
+        commodity_obj = warehouse_obj.search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_id = commodity_obj.line_id.commodity_id.id
