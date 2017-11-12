@@ -96,6 +96,7 @@ class OrderController(http.Controller):
             batch_list['materia'] = batch_obj.material_batch_id.materia_id.name
             batch_list['supplier'] = batch_obj.material_batch_id.supplier_id.name
             batch_list['picture'] = batch_obj.material_batch_id.picture_id.image
+            batch_list['message'] = batch_obj.material_batch_id.messages
             batch_lists.append(batch_list)
         return rest.render_json({"status": "yes", "message": code, "data": batch_lists})
 
