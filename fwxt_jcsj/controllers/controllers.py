@@ -22,7 +22,7 @@ class OrderController(http.Controller):
     def login_in(self, database, login, password):
         uid = http.request.session.authenticate(database, login, password)
         if not uid:
-            return rest.render_json({"status": "yes", "message": "", "data": 'Password error'})
+            return rest.render_json({"status": "no", "message": "", "data": 'Password error'})
         return rest.render_json({"status": "yes", "message": "", "data": 'Welcome'})
     # 获取单位
     #http://localhost:8069/api/jcsj/get_unit/unit
