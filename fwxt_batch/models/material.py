@@ -12,8 +12,8 @@
 
 import logging
 from openerp import fields,models,api
-from datetime import datetime
-date_ref = datetime.now().strftime('%Y-%m-%d')
+import time
+
 _logger = logging.getLogger(__name__)
 
 class material_batch(models.Model):
@@ -28,7 +28,7 @@ class material_batch(models.Model):
     materia_id = fields.Many2one('materia.info', string='Materia Info')
     supplier_id = fields.Many2one('supplier.info', string='Supplier Info', help='Supplier')
     # material_batch_id = fields.Many2one('commodity.batch', string='Commodity Batch', help='Supplier')
-    production_date = fields.Date(string='Date', size=64, required=True, help='Date')
+    production_date = fields.Date(string='生产日期', size=64, required=True, help='生产日期')
     number = fields.Float(string='Num')
     unit_id = fields.Many2one('base.unit', string='Unit')
     messages = fields.Char(string='Messages', help='Messages')

@@ -13,7 +13,7 @@
 import logging
 from openerp import fields,models,api
 from datetime import datetime
-date_ref = datetime.now().strftime('%Y-%m-%d')
+import time
 _logger = logging.getLogger(__name__)
 
 #商品生产

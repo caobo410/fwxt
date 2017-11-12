@@ -11,11 +11,9 @@
 # &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 import logging
 from openerp import fields,models,api
-from datetime import datetime
+import time
 import random
 import jiemi
-date_ref = datetime.now().strftime('%Y-%m-%d')
-date_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 _logger = logging.getLogger(__name__)
 
 

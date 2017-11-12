@@ -94,8 +94,8 @@ class OrderController(http.Controller):
 
     #查看出入库信息
     @authorizer.authorize
-    @http.route('/api/jcsj/get_agent_list/<password>', type='http', auth='none', methods=['GET'])
-    def get_agent_list(self, password, code):
+    @http.route('/api/jcsj/get_agent_list/<code>', type='http', auth='none', methods=['GET'])
+    def get_agent_list(self, code):
         # password_objs = self.current_env['other.info'].search([('password', '=', password)])
         jm_code = jiemi.def_jiemi(code)
         if jm_code == '0000':
