@@ -434,7 +434,10 @@ class OrderController(http.Controller):
                 if (now-datetime.datetime.strptime(str(batch_list_obj.new_date)[:19], '%Y-%m-%d %H:%M:%S')).seconds > 120:
                     batch_list_obj.update({'number': batch_list_obj.number + 1, 'new_date': now})
                     number = number + 1
-                messages = messages.replace('n', str(number))
+                if number == 1:
+                    messages = messages_one
+                else:
+                    messages = messages.replace('n', str(number))
         else:
             messages = u'你查询的是本公司产品数码，但是没有发生出入库！'
         return rest.render_json({"status": "yes", "message": ewm_code, "data": messages})

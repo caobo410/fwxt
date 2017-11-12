@@ -61,7 +61,7 @@ class OrderController(http.Controller):
 
     #商品信息
     @authorizer.authorize
-    @http.route('/api/jcsj/get_commodity_list/<code>', type='http', auth='none', methods=['GET'])
+    @http.route('/api/jcsj/get_commodity_list/get_commodity_list/<code>', type='http', auth='none', methods=['GET'])
     def get_commodity_list(self, code):
         jm_code = jiemi.def_jiemi(code)
         if jm_code == '0000':
