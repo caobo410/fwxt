@@ -55,13 +55,13 @@ class commodity_batch(models.Model):
     _description = 'commodity.batch'
 
     code = fields.Char(string='Code', size=64, required=True, help='Code')
-    name = fields.Char(string='Name', size=64, required=True, help='Name')
+    name = fields.Char(string='酒罐名称', size=64, required=True, help='酒罐名称')
     batch = fields.Char(string='Batch', size=64, required=True, help='Batch')
     commodity_id = fields.Many2one('commodity.info', string='Commodity')
     line_id = fields.One2many('commodity.batch.line', 'line_id', string='join', copy=True)
     branch_id = fields.Many2one('branch.office.info', string='Branch Office', select=True, track_visibility='onchange')
     production_date = fields.Date(string='Date', size=64, required=True, help='Date')
-    messages = fields.Char(string='Messages', help='Messages')
+    messages = fields.Char(string='生产线号', help='生产线号')
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help='Date')
 

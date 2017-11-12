@@ -96,7 +96,7 @@ class OrderController(http.Controller):
     @authorizer.authorize
     @http.route('/api/jcsj/get_agent_list/<password>', type='http', auth='none', methods=['GET'])
     def get_agent_list(self, password, code):
-        password_objs = self.current_env['other.info'].search([('password', '=', password)])
+        # password_objs = self.current_env['other.info'].search([('password', '=', password)])
         jm_code = jiemi.def_jiemi(code)
         if jm_code == '0000':
             return rest.render_json({"status": "no", "message": code, "data": ''})
@@ -108,8 +108,8 @@ class OrderController(http.Controller):
             warehouse_obj = self.current_env['warehouse.line']
         rk_obj = warehouse_obj.search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         ck_obj = warehouse_obj.search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
-        if not password_objs:
-            return rest.render_json({"status": "no", "message": password, "data": 'Password Error!'})
+        # if not password_objs:
+        #     return rest.render_json({"status": "no", "message": password, "data": 'Password Error!'})
         batch_objs = self.current_env['batch.list'].search([('name', '=', code)])
         agent_list = {}
         agent_list['rk_code'] = rk_obj.line_id.code
@@ -117,6 +117,7 @@ class OrderController(http.Controller):
         agent_list['ck_code'] = ck_obj.line_id.code
         agent_list['ck_date'] = str(ck_obj.create_date)[:10]
         agent_list['area'] = ck_obj.line_id.agent_id.area
+        agent_list['agent'] = ck_obj.line_id.agent_id.name
         agent_list['agent'] = ck_obj.line_id.agent_id.name
         agent_list['express'] = ck_obj.line_id.express_id.name
         agent_list['express_code'] = ck_obj.line_id.express_code
