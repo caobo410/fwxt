@@ -195,8 +195,6 @@ msgstr "创建"
 #. module: fwxt_batch
 #: field:check.line,date_confirm:0 help:check.line,date_confirm:0
 #: field:commodity.batch,date_confirm:0 help:commodity.batch,date_confirm:0
-#: field:commodity.batch,production_date:0
-#: help:commodity.batch,production_date:0
 #: field:commodity.batch.line,date_confirm:0
 #: help:commodity.batch.line,date_confirm:0
 #: field:commodity.check,date_confirm:0 help:commodity.check,date_confirm:0
@@ -204,7 +202,6 @@ msgstr "创建"
 #: field:commodity.produce,date_confirm:0 help:commodity.produce,date_confirm:0
 #: field:making.line,date_confirm:0 help:making.line,date_confirm:0
 #: field:material.batch,date_confirm:0 help:material.batch,date_confirm:0
-#: field:material.batch,production_date:0 help:material.batch,production_date:0
 #: field:produce.line,date_confirm:0 help:produce.line,date_confirm:0
 msgid "Date"
 msgstr "日期"
@@ -266,7 +263,6 @@ msgstr "原材料批次"
 
 #. module: fwxt_batch
 #: field:check.line,messages:0 help:check.line,messages:0
-#: field:commodity.batch,messages:0 help:commodity.batch,messages:0
 #: field:commodity.batch.line,messages:0 help:commodity.batch.line,messages:0
 #: field:commodity.check,messages:0 help:commodity.check,messages:0
 #: field:commodity.making,messages:0 help:commodity.making,messages:0
@@ -280,7 +276,6 @@ msgstr "备注"
 #. module: fwxt_batch
 #: field:check.line,name:0 help:check.line,name:0
 #: view:commodity.batch:fwxt_batch.view_filter_commodity_batch
-#: field:commodity.batch,name:0 help:commodity.batch,name:0
 #: field:commodity.batch.line,name:0 help:commodity.batch.line,name:0
 #: view:commodity.check:fwxt_batch.view_filter_commodity_check
 #: field:commodity.check,name:0 help:commodity.check,name:0

@@ -163,11 +163,12 @@ class OrderController(http.Controller):
             video_obj = file_obj.video_id
         if not video_obj:
             return rest.render_json({"status": "no", "message": code, "data": u'code的单据没有维护视频信息，请联系管理员'})
-        path = video_obj.store_fname
+        path = video_obj.description
+        return rest.render_json({"status": "yes", "message": path, "data": path})
         # filepath = '/home/xinyi/.local/share/Odoo/filestore/fwxt/' +path
-        filepath = '/usr/lhd/.local/share/Odoo/filestore/fwxt/' +path
-        filename = video_obj.datas_fname
-        return rest.sendfile(filepath, filename)
+        # filepath = '/usr/lhd/.local/share/Odoo/filestore/fwxt/' +path
+        # filename = video_obj.datas_fname
+        # return rest.sendfile(filepath, filename)
 
 # def def_decrypt(code):
 #     code = str(code)

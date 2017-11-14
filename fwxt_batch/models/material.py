@@ -60,7 +60,7 @@ class commodity_batch(models.Model):
     commodity_id = fields.Many2one('commodity.info', string='Commodity')
     line_id = fields.One2many('commodity.batch.line', 'line_id', string='join', copy=True)
     branch_id = fields.Many2one('branch.office.info', string='Branch Office', select=True, track_visibility='onchange')
-    production_date = fields.Date(string='Date', size=64, required=True, help='Date')
+    production_date = fields.Date(string='生产日期', size=64, required=True, help='生产日期')
     messages = fields.Char(string='生产线号', help='生产线号')
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help='Date')
