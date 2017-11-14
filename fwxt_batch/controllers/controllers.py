@@ -96,6 +96,7 @@ class OrderController(http.Controller):
             batch_list['materia'] = batch_obj.material_batch_id.materia_id.name
             batch_list['supplier'] = batch_obj.material_batch_id.supplier_id.name
             batch_list['picture'] = batch_obj.material_batch_id.picture_id.image
+            batch_list['video'] = batch_obj.material_batch_id.file_id.description
             batch_list['message'] = batch_obj.material_batch_id.messages
             batch_lists.append(batch_list)
         return rest.render_json({"status": "yes", "message": code, "data": batch_lists})
@@ -127,6 +128,7 @@ class OrderController(http.Controller):
             making_list['code'] = making_list_obj.id
             making_list['name'] = making_list_obj.name
             making_list['type'] = making_list_obj.type.name
+            making_list['video'] = making_list_obj.video_id.description
             making_list['messages'] = making_list_obj.messages
             making_list['picture'] = making_list_obj.picture_id.image
             making_lists.append(making_list)
@@ -160,6 +162,7 @@ class OrderController(http.Controller):
             produce_list['name'] = produce_list_obj.name
             produce_list['type'] = produce_list_obj.type.name
             produce_list['messages'] = produce_list_obj.messages
+            produce_list['video'] = produce_list_obj.video_id.description
             produce_list['picture'] = produce_list_obj.picture_id.image
             produce_lists.append(produce_list)
         return rest.render_json({"status": "yes", "message": code, "data": produce_lists})
