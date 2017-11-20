@@ -90,8 +90,11 @@
                                 <field name="messages"/>
                             </group>
                             <group>
-                                <field name="commodity_id"/>
-                                <!--<field name="video_id"/>-->
+                                <field name="commodity_id" widget="many2one_list">
+                                    <tree string="" editable="bottom">
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
                             </group>
                         </group>
                         <notebook colspan="4">
@@ -157,8 +160,11 @@
                                 <field name="messages"/>
                             </group>
                             <group>
-                                <field name="commodity_id"/>
-                                <!--<field name="video_id"/>-->
+                                <field name="commodity_id" widget="many2one_list">
+                                    <tree string="" editable="bottom">
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
                             </group>
                         </group>
                         <notebook colspan="4">
