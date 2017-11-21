@@ -143,19 +143,19 @@ class check_line(models.Model):
     }
 class check_line_picture(models.Model):
     _name = "check.line.picture"
-    _description = "commodity.check.line"
+    _description = "check.line.picture"
 
     name = fields.Many2one('picture.management', string='商品', select=True, track_visibility='onchange')
     picture_id = fields.Many2one('check.line', string='图片', select=True, track_visibility='onchange')
 
-class commodity_check_line(models.Model):
+class commodity_produce_line(models.Model):
     _name = "commodity.produce.line"
     _description = "commodity.produce.line"
 
     name = fields.Many2one('commodity.info', string='商品', select=True, track_visibility='onchange')
     commodity_id = fields.Many2one('commodity.produce', string='生产', select=True, track_visibility='onchange')
 
-class commodity_check_line(models.Model):
+class commodity_making_line(models.Model):
     _name = "commodity.making.line"
     _description = "commodity.making.line"
 
