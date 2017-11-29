@@ -118,7 +118,7 @@ class OrderController(http.Controller):
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_id = commodity_obj.line_id.commodity_id.id
-        making_obj = self.current_env['commodity.making.line'].search([('commodity_id', '=', commodity_id)])
+        making_obj = self.current_env['commodity.making.line'].search([('name', '=', commodity_id)])
         making_list_objs = making_obj.commodity_id.line_id
         if not making_list_objs:
             return rest.render_json({"status": "no", "message": code, "data": ''})
@@ -151,7 +151,7 @@ class OrderController(http.Controller):
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_id = commodity_obj.line_id.commodity_id.id
-        produce_obj = self.current_env['commodity.produce.line'].search([('commodity_id', '=', commodity_id)])
+        produce_obj = self.current_env['commodity.produce.line'].search([('name', '=', commodity_id)])
         produce_list_objs = produce_obj.commodity_id.line_id
         if not produce_list_objs:
             return rest.render_json({"status": "no", "message": code, "data": ''})

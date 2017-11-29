@@ -55,7 +55,7 @@ class commodity_batch(models.Model):
     _description = 'commodity.batch'
 
     code = fields.Char(string='Code', size=64, required=True, help='Code')
-    name = fields.Char(string='酒罐名称', size=64, required=True, help='酒罐名称')
+    name = fields.Char(string='酒罐编号', size=64, required=True, help='酒罐编号')
     batch = fields.Char(string='Batch', size=64, required=True, help='Batch')
     commodity_id = fields.Many2one('commodity.info', string='Commodity')
     line_id = fields.One2many('commodity.batch.line', 'line_id', string='join', copy=True)
