@@ -92,7 +92,7 @@ class warehouse_line(models.Model):
     date_confirm = fields.Date(string='Date', size=64, required=True, help='Date')
 
     _defaults = {
-        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'warehouse.line'),
+        # 'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'warehouse.line'),
         'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
         'type': lambda obj, cr, uid, context: context['type'],
@@ -102,6 +102,7 @@ class warehouse_one(models.Model):
     _name = 'warehouse.one'
     _description = 'warehouse.one'
 
+    code = fields.Char(string='Code', size=64, help='Code')
     name = fields.Char(string='托盘编号', size=64, help='托盘编号')
     line_id = fields.Many2one('warehouse.doc', string='入库编号')
     start_code = fields.Char(string='开始编号', size=64, help='开始编号')
@@ -113,13 +114,14 @@ class warehouse_one(models.Model):
     number = fields.Float(string='数量')
 
     _defaults = {
-        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'warehouse.one'),
+        # 'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'warehouse.one'),
         'type': lambda obj, cr, uid, context: context['type'],
     }
 class warehouse_two(models.Model):
     _name = 'warehouse.two'
     _description = 'warehouse.two'
 
+    code = fields.Char(string='Code', size=64, help='Code')
     name = fields.Char(string='箱编号', size=64, help='箱编号')
     line_id = fields.Many2one('warehouse.doc', string='入库编号')
     warehouse_one_id = fields.Many2one('warehouse.one', string='托盘id')
@@ -132,7 +134,7 @@ class warehouse_two(models.Model):
     number = fields.Float(string='数量')
 
     _defaults = {
-        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'warehouse.two'),
+        # 'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'warehouse.two'),
         'type': lambda obj, cr, uid, context: context['type'],
     }
 
