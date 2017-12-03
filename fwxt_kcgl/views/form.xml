@@ -174,7 +174,7 @@
                     </group>
                     <group>
                         <group>
-                            <field name="state_code" style="width: 30%"/>
+                            <field name="state_code"/>
                             <field name="user_id"/>
                         </group>
                         <group>
