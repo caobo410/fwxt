@@ -246,7 +246,7 @@ class manual_storage(models.Model):
             unit_two_obj = unit_obj.search([('one_unit', '=', int(unit_one_obj.two_unit.id))])
             num_two = unit_two_obj.convert
             # 插入托盘表
-            end_code = batch_code[:9] + (u'000000' + str(int(batch_code[9:15]) + number - 1)) + batch_code[-5:]
+            end_code = batch_code[:9] + (u'0000000' + str(int(batch_code[9:15]) + number - 1))[-6:] + batch_code[-5:]
             values = {
                 'code': str(self.state_code),
                 'name': str(batch_code),
@@ -258,7 +258,7 @@ class manual_storage(models.Model):
             }
             warehouse_one_obj_id = warehouse_one_obj.create(values)
             for number in range(1, int(self.number) + 1):
-                tp_code = batch_code[:9] + (u'000000' + str(int(batch_code[9:15]) + number - 1)) + batch_code[-5:]
+                tp_code = batch_code[:9] + (u'0000000' + str(int(batch_code[9:15]) + number - 1))[-6:] + batch_code[-5:]
                 bs_code = '000' + str(int(num_one))
                 bs_code = bs_code[-3:]
                 start_code = tp_code[:15] + u'001' + tp_code[18:]
