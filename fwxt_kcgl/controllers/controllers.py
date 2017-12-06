@@ -290,13 +290,13 @@ class OrderController(http.Controller):
                         'end_code': end_code,
                         'line_id': str(rkd_obj_id.id),
                         'warehouse_two_id': warehouse_two_obj_id.id,
-                        'number': num,
+                        'number': num_two,
                         }
                     batch_list_obj = self.current_env['warehouse.line']
                     batch_obj = batch_list_obj.search([('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'out')])
                     if not batch_obj:
                         batch_list_obj.create(values)
-                        rkd_obj_id.update({'number': int(rkd_obj_id.number) + 1})
+                        rkd_obj_id.update({'number': int(rkd_obj_id.number) + num_two})
             elif batch_code[15:18] != '000' and batch_code[-2:] == '00':
                 warehouse_obj = self.current_env['warehouse.two']
                 batch_obj = warehouse_obj.search([('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'out')])
@@ -342,13 +342,13 @@ class OrderController(http.Controller):
                         'end_code': end_code,
                         'line_id': str(rkd_obj_id.id),
                         'warehouse_two_id': warehouse_two_obj_id.id,
-                        'number': num,
+                        'number': num_one,
                         }
                     batch_list_obj = self.current_env['warehouse.line']
                     batch_obj = batch_list_obj.search([('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'out')])
                     if not batch_obj:
                         batch_list_obj.create(values)
-                        rkd_obj_id.update({'number': int(rkd_obj_id.number) + 1})
+                        rkd_obj_id.update({'number': int(rkd_obj_id.number) + num_one})
             else:
                 warehouse_obj = self.current_env['warehouse.line']
                 batch_obj = warehouse_obj.search([('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'out')])
@@ -360,9 +360,9 @@ class OrderController(http.Controller):
                             'name': str(batch_code),
                             'type': 'out',
                             'start_code': batch_code,
-                            'end_code': batch_code[:-2] + bs_code[-2:],
+                            'end_code': batch_code[:-2] + ('000' + bs_code[-2:] + number - 1)[-2:],
                             'line_id': str(rkd_obj_id.id),
-                            'number': 1,
+                            'number': num,
                             }
                     warehouse_obj.create(values)
                     rkd_obj_id.update({'number': int(rkd_obj_id.number) + int(num)})
