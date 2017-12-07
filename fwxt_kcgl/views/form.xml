@@ -54,8 +54,14 @@
                         </group>
                     </group>
                     <notebook colspan="4">
-                        <page string="Batch">
+                        <page string="瓶">
                             <field name="line_id"/>
+                        </page>
+                        <page string="箱">
+                            <field name="two_id"/>
+                        </page>
+                        <page string="托">
+                            <field name="one_id"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -93,8 +99,14 @@
                         </group>
                     </group>
                     <notebook colspan="4">
-                        <page string="Batch">
+                        <page string="瓶">
                             <field name="line_id"/>
+                        </page>
+                        <page string="箱">
+                            <field name="two_id"/>
+                        </page>
+                        <page string="托">
+                            <field name="one_id"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -170,6 +182,18 @@
                         <group>
                             <field name="warehouse_id" />
                             <field name="unit_id" />
+                        </group>
+                    </group>
+                    <h1>出入库信息
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="type"/>
+                            <field name="express_id"/>
+                        </group>
+                        <group>
+                            <field name="agent_id" />
+                            <field name="express_code"/>
                         </group>
                     </group>
                     <group>

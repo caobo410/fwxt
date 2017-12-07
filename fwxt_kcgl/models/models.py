@@ -53,7 +53,9 @@ class warehouse_doc(models.Model):
     commodity_id = fields.Many2one('commodity.info', string='Commodity', help='Commodity')
     warehouse_id = fields.Many2one('warehouse.info', string='Warehouse', help='Warehouse')
     unit_id = fields.Many2one('base.unit', string='Unit')
-    line_id = fields.One2many('warehouse.line', 'line_id', string='明细', copy=True)
+    line_id = fields.One2many('warehouse.line', 'line_id', string='瓶', copy=True)
+    one_id = fields.One2many('warehouse.one', 'line_id', string='托', copy=True)
+    two_id = fields.One2many('warehouse.two', 'line_id', string='箱', copy=True)
     agent_id = fields.Many2one('agent.info', string='Agent', help='Agent')
     express_id = fields.Many2one('express.info', string='Express', help='Express')
     express_code = fields.Char(string='Express Code', help='Express Code')
@@ -171,6 +173,11 @@ class manual_storage(models.Model):
     commodity_id = fields.Many2one('commodity.info', string='商品', help='商品')
     warehouse_id = fields.Many2one('warehouse.info', string='仓库', help='仓库')
     unit_id = fields.Many2one('base.unit', string='单位')
+    type = fields.Selection([('in', '入库'),
+                             ('out', '出库')], '类型', required=True, help='类型')
+    agent_id = fields.Many2one('agent.info', string='经销商', help='经销商')
+    express_id = fields.Many2one('express.info', string='快递', help='快递')
+    express_code = fields.Char(string='快递号', help='快递号')
     number = fields.Float(string='Num', digits=(16, 0), help='数量')
     messages = fields.Char(string='备注', help='备注')
     user_id = fields.Many2one('res.users', string='操作人')
@@ -184,20 +191,42 @@ class manual_storage(models.Model):
 
     @api.multi
     def manual_storage(self):
-        values = {
-            'code': self.code,
-            'name': self.name,
-            'type': 'in',
-            'batch_id': str(self.batch_id.id),
-            'commodity_id': str(self.commodity_id.id),
-            'warehouse_id': str(self.warehouse_id.id),
-            'unit_id': str(self.unit_id.id),
-            'number': 0,
-            'messages': u'手动入库',
-        }
+        type = self.type
+        if type == u'in':
+            values = {
+                'code': self.code,
+                'name': self.name,
+                'type': type,
+                'batch_id': int(self.batch_id.id),
+                'commodity_id': int(self.commodity_id.id),
+                'warehouse_id': int(self.warehouse_id.id),
+                'unit_id': int(self.unit_id.id),
+                'number': str(self.number),
+                'messages': u'手动入库',
+            }
+        else:
+            values = {
+                'code': self.code,
+                'name': self.name,
+                'type': type,
+                'batch_id': int(self.batch_id.id),
+                'agent_id': int(self.agent_id.id),
+                'express_id': int(self.express_id.id),
+                'express_code': str(self.express_code),
+                'commodity_id': int(self.commodity_id.id),
+                'unit_id': int(self.unit_id.id),
+                'number': str(self.number),
+                'messages': u'手动出库',
+            }
         rk_code = ''
         code = self.code
         rkd_obj = self.env['warehouse.doc']
+        rkd_list_obj = self.env['warehouse.line']
+        rkd_list_obj = rkd_list_obj.search(
+            [('code', '=', str(self.state_code)), ('type', '=', type)])
+        if rkd_list_obj:
+            messages = u'非法条码，不能进行扫码入库，请联系管理员！'
+            return messages
         rkd_obj_id = rkd_obj.create(values)
         try:
             xztm_code = jiemi.def_jiemi(str(self.state_code))
@@ -205,14 +234,14 @@ class manual_storage(models.Model):
             messages = u'非法条码，不能进行扫码入库，请联系管理员！'
             return messages
         batch_code = str(xztm_code)
-        if batch_code[3:9] == u'123456':
+        if batch_code[3:9] == u'012345':
             start_int = int(batch_code[9:])
-            start_code = ('00000000000' + str(start_int))[-10:]
-            end_code = ('00000000000' + str(start_int + int(self.number) - 1))[-10:]
+            start_code = batch_code[:9] + (u'000000000000000' + str(start_int))[-11:]
+            end_code = batch_code[:9] + (u'00000000000000' + str(start_int + int(self.number) - 1))[-11:]
             values = {
-                'code': str(xztm_code),
+                'code': str(self.state_code),
                 'name': str(batch_code),
-                'type': 'in',
+                'type': type,
                 'start_code': start_code,
                 'end_code': end_code,
                 'line_id': str(rkd_obj_id.id),
@@ -221,7 +250,7 @@ class manual_storage(models.Model):
             }
             batch_list_obj = self.env['warehouse.line']
             batch_obj = batch_list_obj.search(
-                [('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'in')])
+                [('code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', type)])
             if not batch_obj:
                 batch_list_obj.create(values)
             return {'type': 'ir.actions.act_window_close'}
@@ -232,7 +261,7 @@ class manual_storage(models.Model):
         if batch_code[15:18] == u'000':
             warehouse_one_obj = self.env['warehouse.one']
             batch_obj = warehouse_one_obj.search(
-                [('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'in')])
+                [('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', type)])
             if batch_obj:
                 messages = u'改条码已经入库！'
                 return messages
@@ -250,7 +279,7 @@ class manual_storage(models.Model):
             values = {
                 'code': str(self.state_code),
                 'name': str(batch_code),
-                'type': 'in',
+                'type': type,
                 'start_code': batch_code,
                 'end_code': end_code,
                 'line_id': str(rkd_obj_id.id),
@@ -266,7 +295,7 @@ class manual_storage(models.Model):
                 values = {
                     'code': str(self.state_code),
                     'name': str(tp_code),
-                    'type': 'in',
+                    'type': type,
                     'start_code': start_code,
                     'end_code': end_code,
                     'line_id': str(rkd_obj_id.id),
@@ -276,7 +305,7 @@ class manual_storage(models.Model):
                 # 插入箱表
                 warehouse_two_obj = self.env['warehouse.two']
                 batch_obj = warehouse_two_obj.search(
-                    [('start_code', '<=', tp_code), ('end_code', '>=', tp_code), ('type', '=', 'in')])
+                    [('start_code', '<=', tp_code), ('end_code', '>=', tp_code), ('type', '=', type)])
                 if not batch_obj:
                     warehouse_two_obj_id = warehouse_two_obj.create(values)
                 # 插入箱号
@@ -290,7 +319,7 @@ class manual_storage(models.Model):
                     values = {
                         'code': str(self.state_code),
                         'name': str(xh_code),
-                        'type': 'in',
+                        'type': type,
                         'start_code': start_code,
                         'end_code': end_code,
                         'line_id': str(rkd_obj_id.id),
@@ -299,14 +328,14 @@ class manual_storage(models.Model):
                     }
                     batch_list_obj = self.env['warehouse.line']
                     batch_obj = batch_list_obj.search(
-                        [('start_code', '<=', start_code), ('end_code', '>=', start_code), ('type', '=', 'in')])
+                        [('start_code', '<=', start_code), ('end_code', '>=', start_code), ('type', '=', type)])
                     if not batch_obj:
                         batch_list_obj.create(values)
                         rkd_obj_id.update({'number': int(rkd_obj_id.number) + num_two})
         elif batch_code[15:18] != '000' and batch_code[-2:] == '00':
             warehouse_obj = self.env['warehouse.two']
             batch_obj = warehouse_obj.search(
-                [('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'in')])
+                [('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', type)])
             if batch_obj:
                 messages = u'改条码已经入库！'
                 return messages
@@ -323,7 +352,7 @@ class manual_storage(models.Model):
             values = {
                 'code': str(self.state_code),
                 'name': str(batch_code),
-                'type': 'in',
+                'type': type,
                 'start_code': start_code,
                 'end_code': end_code,
                 'line_id': str(rkd_obj_id.id),
@@ -344,7 +373,7 @@ class manual_storage(models.Model):
                 values = {
                     'code': str(self.state_code),
                     'name': str(xh_code),
-                    'type': 'in',
+                    'type': type,
                     'start_code': start_code,
                     'end_code': end_code,
                     'line_id': str(rkd_obj_id.id),
@@ -353,21 +382,21 @@ class manual_storage(models.Model):
                 }
                 batch_list_obj = self.env['warehouse.line']
                 batch_obj = batch_list_obj.search(
-                    [('start_code', '<=', start_code), ('end_code', '>=', start_code), ('type', '=', 'in')])
+                    [('start_code', '<=', start_code), ('end_code', '>=', start_code), ('type', '=', type)])
                 if not batch_obj:
                     batch_list_obj.create(values)
                     rkd_obj_id.update({'number': int(rkd_obj_id.number) + num_one})
         else:
             warehouse_obj = self.env['warehouse.line']
             batch_obj = warehouse_obj.search(
-                [('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'in')])
+                [('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', type)])
             if not batch_obj:
                 j = int(batch_code[-2:]) + int(number) - 1
                 bs_code = '00' + str(j)
                 values = {
                     'code': str(self.state_code),
                     'name': str(batch_code),
-                    'type': 'in',
+                    'type': type,
                     'start_code': batch_code,
                     'end_code': batch_code[:-2] + ('000' + bs_code[-2:] + number - 1)[-2:],
                     'line_id': str(rkd_obj_id.id),
@@ -390,4 +419,5 @@ class manual_storage(models.Model):
         'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
+
     # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

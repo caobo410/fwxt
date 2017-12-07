@@ -403,9 +403,9 @@ class OrderController(http.Controller):
             else:
                 messages = u'请在其他信息中维护查询内容及二次查询内容！'
                 return rest.render_json({"status": "no", "message": ewm_code, "data": messages})
-        if code[15:18] == '000':
+        if code[15:18] == '000' and code[3:9] != u'012345':
             warehouse_line_obj = self.current_env['warehouse.one'].search([('type', '=', 'in'), ('start_code', '<=', code), ('end_code', '>=', code)])
-        elif code[15:18] != '000' and code[-2:] == '00':
+        elif code[15:18] != '000' and code[-2:] == '00' and code[3:9] != u'012345':
             warehouse_line_obj = self.current_env['warehouse.two'].search([('type', '=', 'in'), ('start_code', '<=', code), ('end_code', '>=', code)])
         else:
             warehouse_line_obj = self.current_env['warehouse.line'].search([('type', '=', 'in'), ('start_code', '<=', code), ('end_code', '>=', code)])

@@ -49,10 +49,39 @@
                 <tree string="view">
                     <field name="code"/>
                     <field name="name"/>
+                    <field name="start_code"/>
+                    <field name="end_code"/>
                     <field name="number"/>
-                    <field name="line_id"/>
-                    <field name="user_id"/>
-                    <field name="date_confirm"/>
+                </tree>
+            </field>
+        </record>
+        <!--入库明细表-->
+        <record id="view_tree_warehouse_one" model="ir.ui.view">
+            <field name="name">Warehouse One</field>
+            <field name="model">warehouse.one</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="view">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="start_code"/>
+                    <field name="end_code"/>
+                    <field name="number"/>
+                </tree>
+            </field>
+        </record>
+        <!--入库明细表-->
+        <record id="view_tree_warehouse_two" model="ir.ui.view">
+            <field name="name">Warehouse Two</field>
+            <field name="model">warehouse.two</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="view">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="start_code"/>
+                    <field name="end_code"/>
+                    <field name="number"/>
                 </tree>
             </field>
         </record>
