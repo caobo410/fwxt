@@ -104,7 +104,7 @@ class warehouse_one(models.Model):
     _name = 'warehouse.one'
     _description = 'warehouse.one'
 
-    code = fields.Char(string='Code', size=64, help='Code')
+    code = fields.Char(string='编号', size=64, help='编号')
     name = fields.Char(string='托盘编号', size=64, help='托盘编号')
     line_id = fields.Many2one('warehouse.doc', string='入库编号')
     start_code = fields.Char(string='开始编号', size=64, help='开始编号')
@@ -123,7 +123,7 @@ class warehouse_two(models.Model):
     _name = 'warehouse.two'
     _description = 'warehouse.two'
 
-    code = fields.Char(string='Code', size=64, help='Code')
+    code = fields.Char(string='编号', size=64, help='编号')
     name = fields.Char(string='箱编号', size=64, help='箱编号')
     line_id = fields.Many2one('warehouse.doc', string='入库编号')
     warehouse_one_id = fields.Many2one('warehouse.one', string='托盘id')
