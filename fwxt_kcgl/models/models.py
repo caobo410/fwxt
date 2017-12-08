@@ -250,7 +250,7 @@ class manual_storage(models.Model):
             }
             batch_list_obj = self.env['warehouse.line']
             batch_obj = batch_list_obj.search(
-                [('code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', type)])
+                [('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', type)])
             if not batch_obj:
                 batch_list_obj.create(values)
             return {'type': 'ir.actions.act_window_close'}
