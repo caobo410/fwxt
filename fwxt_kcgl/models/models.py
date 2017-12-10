@@ -193,6 +193,8 @@ class manual_storage(models.Model):
     @api.multi
     def manual_storage(self):
         type = self.type
+        fw_code = str(self.state_code)
+        fw_code = fw_code[-25:]
         if type == u'in':
             values = {
                 'code': self.code,
@@ -202,7 +204,7 @@ class manual_storage(models.Model):
                 'commodity_id': int(self.commodity_id.id),
                 'warehouse_id': int(self.warehouse_id.id),
                 'unit_id': int(self.unit_id.id),
-                'number': str(self.number),
+                'number': 0,
                 'messages': u'手动入库',
             }
         else:
@@ -217,7 +219,7 @@ class manual_storage(models.Model):
                 'commodity_id': int(self.commodity_id.id),
                 'warehouse_id': int(self.warehouse_id.id),
                 'unit_id': int(self.unit_id.id),
-                'number': str(self.number),
+                'number': 0,
                 'messages': u'手动出库',
             }
         rk_code = ''
@@ -225,13 +227,13 @@ class manual_storage(models.Model):
         rkd_obj = self.env['warehouse.doc']
         rkd_list_obj = self.env['warehouse.line']
         rkd_list_obj = rkd_list_obj.search(
-            [('code', '=', str(self.state_code)), ('type', '=', type)])
+            [('code', '=', str(state_code)), ('type', '=', type)])
         if rkd_list_obj:
             raise osv.except_osv(('Error!'), ("已经入库，请检查入库信息!"))
             return False
         # rkd_obj_id = rkd_obj.create(values)
         try:
-            xztm_code = jiemi.def_jiemi(str(self.state_code))
+            xztm_code = jiemi.def_jiemi(str(fw_code))
         except:
             # messages = u'非法条码，不能进行扫码入库，请联系管理员！'
             raise osv.except_osv(('Error!'), ("数据错误!"))
@@ -246,7 +248,7 @@ class manual_storage(models.Model):
             start_code = batch_code[:9] + (u'000000000000000' + str(start_int))[-11:]
             end_code = batch_code[:9] + (u'00000000000000' + str(start_int + int(self.number) - 1))[-11:]
             values = {
-                'code': str(self.state_code),
+                'code': str(fw_code),
                 'name': str(batch_code),
                 'type': type,
                 'start_code': start_code,
@@ -296,7 +298,7 @@ class manual_storage(models.Model):
                 raise osv.except_osv(('Error!'), (u'该条码号段含已入库数据！'))
                 return False
             values = {
-                'code': str(self.state_code),
+                'code': str(fw_code),
                 'name': str(batch_code),
                 'type': type,
                 'start_code': batch_code,
@@ -312,7 +314,7 @@ class manual_storage(models.Model):
                 start_code = tp_code[:15] + u'001' + tp_code[18:]
                 end_code = tp_code[:15] + bs_code + tp_code[18:]
                 values = {
-                    'code': str(self.state_code),
+                    'code': str(fw_code),
                     'name': str(tp_code),
                     'type': type,
                     'start_code': start_code,
@@ -338,7 +340,7 @@ class manual_storage(models.Model):
                     start_code = tp_code[:15] + bs_code + tp_code[18:-2] + u'01'
                     end_code = tp_code[:15] + bs_code + tp_code[18:-2] + end_str[-2:]
                     values = {
-                        'code': str(self.state_code),
+                        'code': str(fw_code),
                         'name': str(xh_code),
                         'type': type,
                         'start_code': start_code,
@@ -377,7 +379,7 @@ class manual_storage(models.Model):
                 raise osv.except_osv(('Error!'), (u'该条码号码段已经出入库！'))
                 return False
             values = {
-                'code': str(self.state_code),
+                'code': str(fw_code),
                 'name': str(batch_code),
                 'type': type,
                 'start_code': start_code,
@@ -398,7 +400,7 @@ class manual_storage(models.Model):
                 start_code = batch_code[:15] + bs_code + batch_code[18:-2] + '01'
                 end_code = batch_code[:15] + bs_code + batch_code[18:-2] + end_str[-2:]
                 values = {
-                    'code': str(self.state_code),
+                    'code': str(fw_code),
                     'name': str(xh_code),
                     'type': type,
                     'start_code': start_code,
@@ -426,7 +428,7 @@ class manual_storage(models.Model):
                 j = int(batch_code[-2:]) + int(number) - 1
                 bs_code = '00' + str(j)
                 values = {
-                    'code': str(self.state_code),
+                    'code': str(fw_code),
                     'name': str(batch_code),
                     'type': type,
                     'start_code': batch_code,
