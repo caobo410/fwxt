@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-16 13:09+0000\n"
-"PO-Revision-Date: 2016-12-16 21:10+0800\n"
+"POT-Creation-Date: 2017-12-10 01:18+0000\n"
+"PO-Revision-Date: 2017-12-10 09:22+0800\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 "Language: zh_CN\n"
-"X-Generator: Poedit 1.8.10\n"
+"X-Generator: Poedit 2.0.2\n"
 
 #. module: fwxt_kcgl
 #: model:ir.actions.act_window,help:fwxt_kcgl.action_batch_list
@@ -65,8 +65,6 @@ msgstr "经销商"
 #. module: fwxt_kcgl
 #: view:report.stock.kcye:fwxt_kcgl.report_stock_kcye_search
 #: field:report.stock.kcye,batch:0 help:report.stock.kcye,batch:0
-#: view:warehouse.doc:fwxt_kcgl.view_form_warehouse_doc
-#: view:warehouse.doc:fwxt_kcgl.view_form_warehouse_doc_ck
 msgid "Batch"
 msgstr "批次"
 
@@ -87,18 +85,18 @@ msgstr "退出"
 
 #. module: fwxt_kcgl
 #: view:batch.list:fwxt_kcgl.view_filter_batch_list field:batch.list,code:0
-#: help:batch.list,code:0 field:manual.storage,code:0
-#: help:manual.storage,code:0
+#: help:batch.list,code:0
 #: view:warehouse.doc:fwxt_kcgl.view_filter_warehouse_doc
 #: field:warehouse.doc,code:0 help:warehouse.doc,code:0
 #: view:warehouse.info:fwxt_kcgl.view_filter_warehouse_info
 #: field:warehouse.info,code:0 help:warehouse.info,code:0
 #: field:warehouse.line,code:0 help:warehouse.line,code:0
+#: field:warehouse.line,end_code:0 help:warehouse.line,end_code:0
+#: field:warehouse.line,start_code:0 help:warehouse.line,start_code:0
 msgid "Code"
 msgstr "编号"
 
 #. module: fwxt_kcgl
-#: field:manual.storage,commodity_id:0 help:manual.storage,commodity_id:0
 #: view:report.stock.kcye:fwxt_kcgl.report_stock_kcye_search
 #: field:report.stock.kcye,commodity:0 help:report.stock.kcye,commodity:0
 #: field:report.stock.kcye,commodity_id:0 field:warehouse.doc,commodity_id:0
@@ -107,7 +105,6 @@ msgid "Commodity"
 msgstr "商品"
 
 #. module: fwxt_kcgl
-#: field:manual.storage,batch_id:0 help:manual.storage,batch_id:0
 #: field:warehouse.doc,batch_id:0 help:warehouse.doc,batch_id:0
 msgid "Commodity Batch"
 msgstr "商品批次"
@@ -115,23 +112,26 @@ msgstr "商品批次"
 #. module: fwxt_kcgl
 #: field:batch.list,create_uid:0 field:manual.storage,create_uid:0
 #: field:warehouse.doc,create_uid:0 field:warehouse.info,create_uid:0
-#: field:warehouse.line,create_uid:0
+#: field:warehouse.line,create_uid:0 field:warehouse.one,create_uid:0
+#: field:warehouse.two,create_uid:0
 msgid "Created by"
 msgstr "Created by"
 
 #. module: fwxt_kcgl
 #: field:batch.list,create_date:0 field:manual.storage,create_date:0
 #: field:warehouse.doc,create_date:0 field:warehouse.info,create_date:0
-#: field:warehouse.line,create_date:0
+#: field:warehouse.line,create_date:0 field:warehouse.one,create_date:0
+#: field:warehouse.two,create_date:0
 msgid "Created on"
 msgstr "Created on"
 
 #. module: fwxt_kcgl
 #: field:batch.list,date_confirm:0 help:batch.list,date_confirm:0
-#: field:manual.storage,date_confirm:0 help:manual.storage,date_confirm:0
-#: field:warehouse.doc,date_confirm:0 help:warehouse.doc,date_confirm:0
-#: field:warehouse.info,date_confirm:0 help:warehouse.info,date_confirm:0
-#: field:warehouse.line,date_confirm:0 help:warehouse.line,date_confirm:0
+#: field:batch.list,first_date:0 help:batch.list,first_date:0
+#: field:manual.storage,date_confirm:0 field:warehouse.doc,date_confirm:0
+#: help:warehouse.doc,date_confirm:0 field:warehouse.info,date_confirm:0
+#: help:warehouse.info,date_confirm:0 field:warehouse.line,date_confirm:0
+#: help:warehouse.line,date_confirm:0
 msgid "Date"
 msgstr "日期"
 
@@ -157,12 +157,6 @@ msgid "Express Code"
 msgstr "快递单号"
 
 #. module: fwxt_kcgl
-#: view:manual.storage:fwxt_kcgl.view_form_manual_storage
-#: field:manual.storage,fixed_code:0 help:manual.storage,fixed_code:0
-msgid "Fixed Code"
-msgstr "固定位数"
-
-#. module: fwxt_kcgl
 #: view:warehouse.doc:fwxt_kcgl.view_filter_warehouse_doc
 msgid "Group"
 msgstr "分组"
@@ -175,47 +169,51 @@ msgstr "分组"
 #. module: fwxt_kcgl
 #: field:batch.list,id:0 field:manual.storage,id:0 field:report.stock.kcye,id:0
 #: field:warehouse.doc,id:0 field:warehouse.info,id:0 field:warehouse.line,id:0
+#: field:warehouse.one,id:0 field:warehouse.two,id:0
 msgid "ID"
 msgstr "ID"
 
 #. module: fwxt_kcgl
-#: selection:warehouse.doc,type:0
+#: selection:warehouse.doc,type:0 selection:warehouse.line,type:0
+#: selection:warehouse.one,type:0 selection:warehouse.two,type:0
 msgid "In"
 msgstr "入库"
 
 #. module: fwxt_kcgl
 #: field:batch.list,write_uid:0 field:manual.storage,write_uid:0
 #: field:warehouse.doc,write_uid:0 field:warehouse.info,write_uid:0
-#: field:warehouse.line,write_uid:0
+#: field:warehouse.line,write_uid:0 field:warehouse.one,write_uid:0
+#: field:warehouse.two,write_uid:0
 msgid "Last Updated by"
 msgstr "Last Updated by"
 
 #. module: fwxt_kcgl
 #: field:batch.list,write_date:0 field:manual.storage,write_date:0
 #: field:warehouse.doc,write_date:0 field:warehouse.info,write_date:0
-#: field:warehouse.line,write_date:0
+#: field:warehouse.line,write_date:0 field:warehouse.one,write_date:0
+#: field:warehouse.two,write_date:0
 msgid "Last Updated on"
 msgstr "Last Updated on"
 
 #. module: fwxt_kcgl
-#: selection:warehouse.doc,type:0
+#: selection:warehouse.doc,type:0 selection:warehouse.line,type:0
+#: selection:warehouse.one,type:0 selection:warehouse.two,type:0
 msgid "Manual"
 msgstr "手动"
 
 #. module: fwxt_kcgl
 #: model:ir.ui.menu,name:fwxt_kcgl.menu_three_manual_stock
 msgid "Manual Stock"
-msgstr "手动入库"
+msgstr "手动出入库"
 
 #. module: fwxt_kcgl
 #: model:ir.actions.act_window,name:fwxt_kcgl.action_manual_storage
 #: view:manual.storage:fwxt_kcgl.view_form_manual_storage
 msgid "Manual Storage"
-msgstr "手动入库"
+msgstr "手动出入库"
 
 #. module: fwxt_kcgl
 #: field:batch.list,messages:0 help:batch.list,messages:0
-#: field:manual.storage,messages:0 help:manual.storage,messages:0
 #: help:report.stock.kcye,commodity_id:0 field:warehouse.doc,messages:0
 #: help:warehouse.doc,messages:0 field:warehouse.info,messages:0
 #: help:warehouse.info,messages:0
@@ -223,13 +221,13 @@ msgid "Messages"
 msgstr "备注"
 
 #. module: fwxt_kcgl
-#: selection:warehouse.doc,type:0
+#: selection:warehouse.doc,type:0 selection:warehouse.line,type:0
+#: selection:warehouse.one,type:0 selection:warehouse.two,type:0
 msgid "Move"
 msgstr "转移"
 
 #. module: fwxt_kcgl
-#: view:batch.list:fwxt_kcgl.view_filter_batch_list field:manual.storage,name:0
-#: help:manual.storage,name:0
+#: view:batch.list:fwxt_kcgl.view_filter_batch_list
 #: view:warehouse.doc:fwxt_kcgl.view_filter_warehouse_doc
 #: field:warehouse.doc,name:0 help:warehouse.doc,name:0
 #: view:warehouse.info:fwxt_kcgl.view_filter_warehouse_info
@@ -255,21 +253,20 @@ msgid "Num"
 msgstr "数量"
 
 #. module: fwxt_kcgl
-#: help:manual.storage,number:0
 #: view:warehouse.doc:fwxt_kcgl.view_filter_warehouse_doc
 #: field:warehouse.line,number:0
 msgid "Number"
 msgstr "数量"
 
 #. module: fwxt_kcgl
-#: field:batch.list,user_id:0 field:manual.storage,user_id:0
-#: field:warehouse.doc,user_id:0 field:warehouse.info,user_id:0
-#: field:warehouse.line,user_id:0
+#: field:batch.list,user_id:0 field:warehouse.doc,user_id:0
+#: field:warehouse.info,user_id:0 field:warehouse.line,user_id:0
 msgid "Operator"
 msgstr "操作人"
 
 #. module: fwxt_kcgl
-#: selection:warehouse.doc,type:0
+#: selection:warehouse.doc,type:0 selection:warehouse.line,type:0
+#: selection:warehouse.one,type:0 selection:warehouse.two,type:0
 msgid "Out"
 msgstr "出库"
 
@@ -321,17 +318,22 @@ msgid "Stock Out"
 msgstr "出库"
 
 #. module: fwxt_kcgl
+#: view:manual.storage:fwxt_kcgl.view_form_manual_storage
+msgid "Submit"
+msgstr "提交 "
+
+#. module: fwxt_kcgl
 #: view:warehouse.doc:fwxt_kcgl.view_tree_warehouse_doc
 msgid "Total"
 msgstr "合计"
 
 #. module: fwxt_kcgl
-#: field:warehouse.doc,type:0
+#: field:warehouse.doc,type:0 field:warehouse.line,type:0
+#: field:warehouse.one,type:0
 msgid "Type"
 msgstr "类型"
 
 #. module: fwxt_kcgl
-#: field:manual.storage,unit_id:0
 #: view:report.stock.kcye:fwxt_kcgl.report_stock_kcye_search
 #: field:report.stock.kcye,unit:0 help:report.stock.kcye,unit:0
 #: field:warehouse.doc,unit_id:0
@@ -339,7 +341,6 @@ msgid "Unit"
 msgstr "单位"
 
 #. module: fwxt_kcgl
-#: field:manual.storage,warehouse_id:0 help:manual.storage,warehouse_id:0
 #: view:report.stock.kcye:fwxt_kcgl.report_stock_kcye_search
 #: field:report.stock.kcye,warehouse:0 help:report.stock.kcye,warehouse:0
 #: field:warehouse.doc,warehouse_id:0 help:warehouse.doc,warehouse_id:0
@@ -347,7 +348,7 @@ msgid "Warehouse"
 msgstr "仓库管理"
 
 #. module: fwxt_kcgl
-#: field:batch.list,line_id:0
+#: field:batch.list,line_id:0 field:batch.list,out_id:0
 #: model:ir.actions.act_window,name:fwxt_kcgl.action_warehouse_doc_in
 #: model:ir.actions.act_window,name:fwxt_kcgl.action_warehouse_doc_out
 #: field:warehouse.line,line_id:0
@@ -409,7 +410,8 @@ msgid "search"
 msgstr "查询"
 
 #. module: fwxt_kcgl
-#: help:warehouse.doc,type:0
+#: help:warehouse.doc,type:0 help:warehouse.line,type:0
+#: help:warehouse.one,type:0 help:warehouse.two,type:0
 msgid "type"
 msgstr "类型"
 
@@ -423,6 +425,8 @@ msgstr "单位"
 #: view:warehouse.doc:fwxt_kcgl.view_tree_warehouse_doc
 #: view:warehouse.info:fwxt_kcgl.view_tree_warehouse_info
 #: view:warehouse.line:fwxt_kcgl.view_tree_warehouse_line
+#: view:warehouse.one:fwxt_kcgl.view_tree_warehouse_one
+#: view:warehouse.two:fwxt_kcgl.view_tree_warehouse_two
 msgid "view"
 msgstr "列表"
 
@@ -432,6 +436,152 @@ msgid "warehouse_id"
 msgstr "仓库"
 
 #. module: fwxt_kcgl
+#: field:manual.storage,warehouse_id:0 help:manual.storage,warehouse_id:0
+msgid "仓库"
+msgstr "仓库"
+
+#. module: fwxt_kcgl
+#: selection:manual.storage,type:0
+msgid "入库"
+msgstr "入库"
+
+#. module: fwxt_kcgl
+#: field:warehouse.one,line_id:0 field:warehouse.two,line_id:0
+msgid "入库编号"
+msgstr "入库编号"
+
+#. module: fwxt_kcgl
+#: view:manual.storage:fwxt_kcgl.view_form_manual_storage
+msgid "出入库信息"
+msgstr "出入库信息"
+
+#. module: fwxt_kcgl
+#: selection:manual.storage,type:0
+msgid "出库"
+msgstr "出库"
+
+#. module: fwxt_kcgl
+#: field:manual.storage,unit_id:0
+msgid "单位"
+msgstr "单位"
+
+#. module: fwxt_kcgl
+#: field:manual.storage,name:0 help:manual.storage,name:0
+msgid "名称"
+msgstr "名称"
+
+#. module: fwxt_kcgl
+#: field:manual.storage,commodity_id:0 help:manual.storage,commodity_id:0
+msgid "商品"
+msgstr "商品"
+
+#. module: fwxt_kcgl
+#: field:manual.storage,batch_id:0 help:manual.storage,batch_id:0
+msgid "商品批次"
+msgstr "商品批次"
+
+#. module: fwxt_kcgl
+#: field:manual.storage,messages:0 help:manual.storage,messages:0
+msgid "备注"
+msgstr "备注"
+
+#. module: fwxt_kcgl
+#: field:warehouse.one,start_code:0 help:warehouse.one,start_code:0
+#: field:warehouse.two,start_code:0 help:warehouse.two,start_code:0
+msgid "开始编号"
+msgstr "开始编号"
+
+#. module: fwxt_kcgl
+#: field:manual.storage,express_id:0 help:manual.storage,express_id:0
+msgid "快递"
+msgstr "快递"
+
+#. module: fwxt_kcgl
+#: field:manual.storage,express_code:0 help:manual.storage,express_code:0
+msgid "快递号"
+msgstr "快递号"
+
+#. module: fwxt_kcgl
+#: field:warehouse.doc,one_id:0
+msgid "托"
+msgstr "托"
+
+#. module: fwxt_kcgl
+#: field:warehouse.two,warehouse_one_id:0
+msgid "托盘id"
+msgstr "托盘id"
+
+#. module: fwxt_kcgl
+#: field:warehouse.one,name:0 help:warehouse.one,name:0
+msgid "托盘编号"
+msgstr "托盘编号"
+
+#. module: fwxt_kcgl
+#: field:manual.storage,user_id:0
+msgid "操作人"
+msgstr "操作人"
+
+#. module: fwxt_kcgl
+#: help:manual.storage,number:0 field:warehouse.one,number:0
+#: field:warehouse.two,number:0
+msgid "数量"
+msgstr "数量"
+
+#. module: fwxt_kcgl
+#: help:manual.storage,date_confirm:0
+msgid "日期"
+msgstr "日期"
+
+#. module: fwxt_kcgl
+#: field:batch.list,new_date:0 help:batch.list,new_date:0
+msgid "最近时间"
+msgstr "最近时间"
+
+#. module: fwxt_kcgl
 #: field:warehouse.doc,line_id:0
-msgid "明细"
-msgstr "明细"
+msgid "瓶"
+msgstr "瓶"
+
+#. module: fwxt_kcgl
+#: field:warehouse.doc,two_id:0
+msgid "箱"
+msgstr "箱"
+
+#. module: fwxt_kcgl
+#: field:warehouse.line,warehouse_two_id:0
+msgid "箱号id"
+msgstr "箱号id"
+
+#. module: fwxt_kcgl
+#: field:warehouse.two,name:0 help:warehouse.two,name:0
+msgid "箱编号"
+msgstr "箱编号"
+
+#. module: fwxt_kcgl
+#: field:manual.storage,type:0 help:manual.storage,type:0
+#: field:warehouse.two,type:0
+msgid "类型"
+msgstr "类型"
+
+#. module: fwxt_kcgl
+#: field:manual.storage,agent_id:0 help:manual.storage,agent_id:0
+msgid "经销商"
+msgstr "经销商"
+
+#. module: fwxt_kcgl
+#: field:warehouse.one,end_code:0 help:warehouse.one,end_code:0
+#: field:warehouse.two,end_code:0 help:warehouse.two,end_code:0
+msgid "结束编号"
+msgstr "结束编号"
+
+#. module: fwxt_kcgl
+#: field:manual.storage,code:0 help:manual.storage,code:0
+#: field:warehouse.one,code:0 help:warehouse.one,code:0
+#: field:warehouse.two,code:0 help:warehouse.two,code:0
+msgid "编号"
+msgstr "编号"
+
+#. module: fwxt_kcgl
+#: field:manual.storage,state_code:0 help:manual.storage,state_code:0
+msgid "起始号"
+msgstr "起始号"

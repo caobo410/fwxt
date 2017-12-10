@@ -12,6 +12,7 @@
 import logging
 from openerp import fields,models,api
 import time
+from openerp.osv import osv
 import random
 import jiemi
 import storage
@@ -225,14 +226,19 @@ class manual_storage(models.Model):
         rkd_list_obj = rkd_list_obj.search(
             [('code', '=', str(self.state_code)), ('type', '=', type)])
         if rkd_list_obj:
-            messages = u'非法条码，不能进行扫码入库，请联系管理员！'
-            return messages
-        rkd_obj_id = rkd_obj.create(values)
+            raise osv.except_osv(('Error!'), ("Error!"))
+            return False
+        # rkd_obj_id = rkd_obj.create(values)
         try:
             xztm_code = jiemi.def_jiemi(str(self.state_code))
         except:
-            messages = u'非法条码，不能进行扫码入库，请联系管理员！'
-            return messages
+            # messages = u'非法条码，不能进行扫码入库，请联系管理员！'
+            raise osv.except_osv(('Error!'), ("Error!"))
+            return False
+        if xztm_code == u'0000':
+            raise osv.except_osv(('Error!'), ("Error!"))
+            return False
+        rkd_obj_id = rkd_obj.create(values)
         batch_code = str(xztm_code)
         if batch_code[3:9] == u'012345':
             start_int = int(batch_code[9:])
@@ -253,7 +259,9 @@ class manual_storage(models.Model):
                 [('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', type)])
             if not batch_obj:
                 batch_list_obj.create(values)
-            return {'type': 'ir.actions.act_window_close'}
+                return {'type': 'ir.actions.act_window_close'}
+            raise osv.except_osv((u'数据错误!'), (u"该起始数据已经入库请检查!"))
+            return False
         # for number in range(1, int(self.number)+1):
         number = int(self.number)
         # 判断code的9-12位置是否000，如果为000 ，需要存储托盘
@@ -263,14 +271,16 @@ class manual_storage(models.Model):
             batch_obj = warehouse_one_obj.search(
                 [('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', type)])
             if batch_obj:
-                messages = u'改条码已经入库！'
-                return messages
+                # messages = u'改条码已经入库！'
+                raise osv.except_osv(('Error!'), (u'改条码已经入库！'))
+                return False
             # warehouse_one_obj = self.env['warehouse.one']
             unit_obj = self.env['convert.info']
             unit_one_obj = unit_obj.search([('one_unit', '=', int(self.unit_id))])
             if not unit_one_obj:
-                messages = u'请先维护计量单位换算！'
-                return messages
+                # messages = u'请先维护计量单位换算！'
+                raise osv.except_osv(('Error!'), (u'请先维护计量单位换算！'))
+                return False
             num_one = unit_one_obj.convert
             unit_two_obj = unit_obj.search([('one_unit', '=', int(unit_one_obj.two_unit.id))])
             num_two = unit_two_obj.convert
@@ -337,13 +347,15 @@ class manual_storage(models.Model):
             batch_obj = warehouse_obj.search(
                 [('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', type)])
             if batch_obj:
-                messages = u'改条码已经入库！'
-                return messages
+                # messages = u'改条码已经入库！'
+                raise osv.except_osv(('Error!'), (u'改条码已经入库！'))
+                return False
             unit_obj = self.env['convert.info']
             unit_one_obj = unit_obj.search([('one_unit', '=', int(self.unit_id))])
             if not unit_one_obj:
-                messages = u'请先维护计量单位换算！'
-                return messages
+                # messages = u'请先维护计量单位换算！'
+                raise osv.except_osv(('Error!'), (u'请先维护计量单位换算！'))
+                return False
             num_one = unit_one_obj.convert
             bs_code = '000' + str(number + int(batch_code[15:18]) - 1)
             bs_code = bs_code[-3:]
@@ -406,9 +418,15 @@ class manual_storage(models.Model):
                 rkd_obj_id.update({'number': int(rkd_obj_id.number) + int(number)})
         if len(rk_code) > 1:
             rk_code = rk_code[1:]
-            messages = u'入库完成，请检查条码号为' + rk_code + u'的条码已入库!'
+            if type == 'in':
+                messages = u'入库完成，请检查条码号为' + rk_code + u'的条码已入库!'
+            else:
+                messages = u'出库完成，请检查条码号为' + rk_code + u'的条码是否出库!'
         else:
-            messages = u'入库完成!'
+            if type == 'in':
+                messages = u'入库完成!'
+            else:
+                messages = u'出库完成!'
         return {'type': 'ir.actions.act_window_close'}
 
     _defaults = {
