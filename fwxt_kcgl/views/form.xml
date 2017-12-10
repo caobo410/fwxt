@@ -209,10 +209,10 @@
                     <footer>
                         <button string="ubmit" name="manual_storage" type="object" default_focus="1" class="oe_highlight"/>
                         <!--<button string="Manual Storage" class="oe_link" special="cancel"/>-->
-                        orS
+                        or
                         <button string="Cancel" class="oe_link" special="cancel"/>
                     </footer>
-                </form>
+                </form>S
             </field>
         </record>
 
