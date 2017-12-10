@@ -227,7 +227,7 @@ class manual_storage(models.Model):
         rkd_obj = self.env['warehouse.doc']
         rkd_list_obj = self.env['warehouse.line']
         rkd_list_obj = rkd_list_obj.search(
-            [('code', '=', str(state_code)), ('type', '=', type)])
+            [('start_code', '<=', fw_code), ('end_code', '>=', fw_code), ('type', '=', type)])
         if rkd_list_obj:
             raise osv.except_osv(('Error!'), ("已经入库，请检查入库信息!"))
             return False
@@ -238,7 +238,7 @@ class manual_storage(models.Model):
             # messages = u'非法条码，不能进行扫码入库，请联系管理员！'
             raise osv.except_osv(('Error!'), ("数据错误!"))
             return False
-        if xztm_code == u'0000':
+        if xztm_code == u'0000' and xztm_code[:3] != u'149':
             raise osv.except_osv(('Error!'), ("数据错误!"))
             return False
         rkd_obj_id = rkd_obj.create(values)
