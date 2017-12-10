@@ -45,6 +45,7 @@ class material_batch(models.Model):
         return result
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'material.batch'),
         'production_date': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
@@ -75,6 +76,7 @@ class commodity_batch(models.Model):
         return result
 
     _defaults = {
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'commodity.batch'),
         'production_date': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
