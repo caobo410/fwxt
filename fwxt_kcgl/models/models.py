@@ -215,6 +215,7 @@ class manual_storage(models.Model):
                 'express_id': int(self.express_id.id),
                 'express_code': str(self.express_code),
                 'commodity_id': int(self.commodity_id.id),
+                'warehouse_id': int(self.warehouse_id.id),
                 'unit_id': int(self.unit_id.id),
                 'number': str(self.number),
                 'messages': u'手动出库',
@@ -226,17 +227,17 @@ class manual_storage(models.Model):
         rkd_list_obj = rkd_list_obj.search(
             [('code', '=', str(self.state_code)), ('type', '=', type)])
         if rkd_list_obj:
-            raise osv.except_osv(('Error!'), ("Error!"))
+            raise osv.except_osv(('Error!'), ("已经入库，请检查入库信息!"))
             return False
         # rkd_obj_id = rkd_obj.create(values)
         try:
             xztm_code = jiemi.def_jiemi(str(self.state_code))
         except:
             # messages = u'非法条码，不能进行扫码入库，请联系管理员！'
-            raise osv.except_osv(('Error!'), ("Error!"))
+            raise osv.except_osv(('Error!'), ("数据错误!"))
             return False
         if xztm_code == u'0000':
-            raise osv.except_osv(('Error!'), ("Error!"))
+            raise osv.except_osv(('Error!'), ("数据错误!"))
             return False
         rkd_obj_id = rkd_obj.create(values)
         batch_code = str(xztm_code)
@@ -256,8 +257,10 @@ class manual_storage(models.Model):
             }
             batch_list_obj = self.env['warehouse.line']
             batch_obj = batch_list_obj.search(
-                [('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', type)])
-            if not batch_obj:
+                [('start_code', '<=', start_code), ('end_code', '>=', start_code), ('type', '=', type)])
+            batch_end_obj = batch_list_obj.search(
+                [('start_code', '<=', end_code), ('end_code', '>=', end_code), ('type', '=', type)])
+            if not batch_obj and not batch_end_obj:
                 batch_list_obj.create(values)
                 return {'type': 'ir.actions.act_window_close'}
             raise osv.except_osv((u'数据错误!'), (u"该起始数据已经入库请检查!"))
@@ -272,7 +275,7 @@ class manual_storage(models.Model):
                 [('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', type)])
             if batch_obj:
                 # messages = u'改条码已经入库！'
-                raise osv.except_osv(('Error!'), (u'改条码已经入库！'))
+                raise osv.except_osv(('Error!'), (u'该条码已经出入库！'))
                 return False
             # warehouse_one_obj = self.env['warehouse.one']
             unit_obj = self.env['convert.info']
@@ -286,6 +289,12 @@ class manual_storage(models.Model):
             num_two = unit_two_obj.convert
             # 插入托盘表
             end_code = batch_code[:9] + (u'0000000' + str(int(batch_code[9:15]) + number - 1))[-6:] + batch_code[-5:]
+            batch_end_obj = warehouse_one_obj.search(
+                [('start_code', '<=', end_code), ('end_code', '>=', end_code), ('type', '=', type)])
+            if batch_end_obj:
+                # messages = u'改条码已经入库！'
+                raise osv.except_osv(('Error!'), (u'该条码号段含已入库数据！'))
+                return False
             values = {
                 'code': str(self.state_code),
                 'name': str(batch_code),
@@ -315,8 +324,10 @@ class manual_storage(models.Model):
                 # 插入箱表
                 warehouse_two_obj = self.env['warehouse.two']
                 batch_obj = warehouse_two_obj.search(
-                    [('start_code', '<=', tp_code), ('end_code', '>=', tp_code), ('type', '=', type)])
-                if not batch_obj:
+                    [('start_code', '<=', start_code), ('end_code', '>=', start_code), ('type', '=', type)])
+                batch_end_obj = warehouse_two_obj.search(
+                    [('start_code', '<=', end_code), ('end_code', '>=', end_code), ('type', '=', type)])
+                if not batch_obj and not batch_end_obj:
                     warehouse_two_obj_id = warehouse_two_obj.create(values)
                 # 插入箱号
                 for i in range(1, int(num_one) + 1):
@@ -339,17 +350,12 @@ class manual_storage(models.Model):
                     batch_list_obj = self.env['warehouse.line']
                     batch_obj = batch_list_obj.search(
                         [('start_code', '<=', start_code), ('end_code', '>=', start_code), ('type', '=', type)])
-                    if not batch_obj:
+                    batch_end_obj = batch_list_obj.search(
+                        [('start_code', '<=', end_code), ('end_code', '>=', end_code), ('type', '=', type)])
+                    if not batch_obj and not batch_end_obj:
                         batch_list_obj.create(values)
                         rkd_obj_id.update({'number': int(rkd_obj_id.number) + num_two})
         elif batch_code[15:18] != '000' and batch_code[-2:] == '00':
-            warehouse_obj = self.env['warehouse.two']
-            batch_obj = warehouse_obj.search(
-                [('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', type)])
-            if batch_obj:
-                # messages = u'改条码已经入库！'
-                raise osv.except_osv(('Error!'), (u'改条码已经入库！'))
-                return False
             unit_obj = self.env['convert.info']
             unit_one_obj = unit_obj.search([('one_unit', '=', int(self.unit_id))])
             if not unit_one_obj:
@@ -361,6 +367,15 @@ class manual_storage(models.Model):
             bs_code = bs_code[-3:]
             start_code = batch_code
             end_code = batch_code[:15] + bs_code + batch_code[18:]
+            warehouse_obj = self.env['warehouse.two']
+            batch_obj = warehouse_obj.search(
+                [('start_code', '<=', start_code), ('end_code', '>=', start_code), ('type', '=', type)])
+            batch_end_obj = warehouse_obj.search(
+                [('start_code', '<=', end_code), ('end_code', '>=', end_code), ('type', '=', type)])
+            if batch_obj and batch_end_obj:
+                # messages = u'改条码已经入库！'
+                raise osv.except_osv(('Error!'), (u'该条码号码段已经出入库！'))
+                return False
             values = {
                 'code': str(self.state_code),
                 'name': str(batch_code),
@@ -395,14 +410,19 @@ class manual_storage(models.Model):
                 batch_list_obj = self.env['warehouse.line']
                 batch_obj = batch_list_obj.search(
                     [('start_code', '<=', start_code), ('end_code', '>=', start_code), ('type', '=', type)])
+                batch_end_obj = batch_list_obj.search(
+                    [('start_code', '<=', end_code), ('end_code', '>=', end_code), ('type', '=', type)])
                 if not batch_obj:
                     batch_list_obj.create(values)
                     rkd_obj_id.update({'number': int(rkd_obj_id.number) + num_one})
         else:
             warehouse_obj = self.env['warehouse.line']
+            end_code = batch_code[:-2] + ('000' + bs_code[-2:] + number - 1)[-2:],
             batch_obj = warehouse_obj.search(
                 [('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', type)])
-            if not batch_obj:
+            batch_end_obj = warehouse_obj.search(
+                [('start_code', '<=', end_code), ('end_code', '>=', end_code), ('type', '=', type)])
+            if not batch_obj and not batch_end_obj:
                 j = int(batch_code[-2:]) + int(number) - 1
                 bs_code = '00' + str(j)
                 values = {
@@ -410,7 +430,7 @@ class manual_storage(models.Model):
                     'name': str(batch_code),
                     'type': type,
                     'start_code': batch_code,
-                    'end_code': batch_code[:-2] + ('000' + bs_code[-2:] + number - 1)[-2:],
+                    'end_code': end_code,
                     'line_id': str(rkd_obj_id.id),
                     'number': number,
                 }
