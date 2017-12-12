@@ -238,7 +238,7 @@ class manual_storage(models.Model):
             # messages = u'非法条码，不能进行扫码入库，请联系管理员！'
             raise osv.except_osv(('Error!'), ("数据错误!"))
             return False
-        if xztm_code == u'0000' and xztm_code[:3] != u'149':
+        if xztm_code == u'0000' or xztm_code[:3] != u'149':
             raise osv.except_osv(('Error!'), ("数据错误!"))
             return False
         rkd_obj_id = rkd_obj.create(values)
@@ -264,6 +264,7 @@ class manual_storage(models.Model):
                 [('start_code', '<=', end_code), ('end_code', '>=', end_code), ('type', '=', type)])
             if not batch_obj and not batch_end_obj:
                 batch_list_obj.create(values)
+                rkd_obj_id.update({'number': int(self.number)})
                 return {'type': 'ir.actions.act_window_close'}
             raise osv.except_osv((u'数据错误!'), (u"该起始数据已经入库请检查!"))
             return False
