@@ -162,7 +162,6 @@ class batch_list(models.Model):
         'first_date': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d %H:%M:%S")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
-
 class manual_storage(models.Model):
     _name = 'manual.storage'
     _description = 'manual.storage'
@@ -333,31 +332,22 @@ class manual_storage(models.Model):
                 if not batch_obj and not batch_end_obj:
                     warehouse_two_obj_id = warehouse_two_obj.create(values)
                 # 插入箱号
-                for i in range(1, int(num_one) + 1):
-                    bs_code = '000' + str(i)
-                    bs_code = bs_code[-3:]
-                    end_str = '000' + str(int(num_two))
-                    xh_code = tp_code[:15] + bs_code + tp_code[18:-2] + u'00'
-                    start_code = tp_code[:15] + bs_code + tp_code[18:-2] + u'01'
-                    end_code = tp_code[:15] + bs_code + tp_code[18:-2] + end_str[-2:]
-                    values = {
-                        'code': str(fw_code),
-                        'name': str(xh_code),
-                        'type': type,
-                        'start_code': start_code,
-                        'end_code': end_code,
-                        'line_id': str(rkd_obj_id.id),
-                        'warehouse_two_id': warehouse_two_obj_id.id,
-                        'number': num_two,
-                    }
-                    batch_list_obj = self.env['warehouse.line']
-                    batch_obj = batch_list_obj.search(
-                        [('start_code', '<=', start_code), ('end_code', '>=', start_code), ('type', '=', type)])
-                    batch_end_obj = batch_list_obj.search(
-                        [('start_code', '<=', end_code), ('end_code', '>=', end_code), ('type', '=', type)])
-                    if not batch_obj and not batch_end_obj:
-                        batch_list_obj.create(values)
-                        rkd_obj_id.update({'number': int(rkd_obj_id.number) + num_two})
+                bs_code = '000'+str(int(num_one))
+                start_code = start_code
+                end_code = batch_code[:15] + bs_code[-3:] + str('00'+str(int(num_two)))[-2:]
+                values = {
+                    'code': str(fw_code),
+                    'name': str(tp_code),
+                    'type': type,
+                    'start_code': start_code,
+                    'end_code': end_code,
+                    'line_id': str(rkd_obj_id.id),
+                    'warehouse_two_id': warehouse_two_obj_id.id,
+                    'number': num_one*num_two,
+                }
+                batch_list_obj = self.env['warehouse.line']
+                batch_list_obj.create(values)
+                rkd_obj_id.update({'number': int(rkd_obj_id.number) + num_one*num_two})
         elif batch_code[15:18] != '000' and batch_code[-2:] == '00':
             unit_obj = self.env['convert.info']
             unit_one_obj = unit_obj.search([('one_unit', '=', int(self.unit_id))])
@@ -392,32 +382,21 @@ class manual_storage(models.Model):
             warehouse_two_obj = self.env['warehouse.two']
             warehouse_two_obj_id = warehouse_two_obj.create(values)
             # 插入箱号
-            for i in range(1, int(number) + 1):
-                j = i + int(batch_code[15:18]) - 1
-                bs_code = '000' + str(j)
-                bs_code = bs_code[-3:]
-                end_str = '000' + str(int(num_one))
-                xh_code = batch_code[:15] + bs_code + batch_code[18:-2] + '00'
-                start_code = batch_code[:15] + bs_code + batch_code[18:-2] + '01'
-                end_code = batch_code[:15] + bs_code + batch_code[18:-2] + end_str[-2:]
-                values = {
-                    'code': str(fw_code),
-                    'name': str(xh_code),
-                    'type': type,
-                    'start_code': start_code,
-                    'end_code': end_code,
-                    'line_id': str(rkd_obj_id.id),
-                    'warehouse_two_id': warehouse_two_obj_id.id,
-                    'number': num_one,
-                }
-                batch_list_obj = self.env['warehouse.line']
-                batch_obj = batch_list_obj.search(
-                    [('start_code', '<=', start_code), ('end_code', '>=', start_code), ('type', '=', type)])
-                batch_end_obj = batch_list_obj.search(
-                    [('start_code', '<=', end_code), ('end_code', '>=', end_code), ('type', '=', type)])
-                if not batch_obj:
-                    batch_list_obj.create(values)
-                    rkd_obj_id.update({'number': int(rkd_obj_id.number) + num_one})
+            start_code = start_code
+            end_code = batch_code[:18] + str('00'+str(int(num_one)))[-2:]
+            values = {
+                'code': str(fw_code),
+                'name': str(xh_code),
+                'type': type,
+                'start_code': start_code,
+                'end_code': end_code,
+                'line_id': str(rkd_obj_id.id),
+                'warehouse_two_id': warehouse_two_obj_id.id,
+                'number': str(num_one*number),
+            }
+            batch_list_obj = self.env['warehouse.line']
+            batch_list_obj.create(values)
+            rkd_obj_id.update({'number': int(rkd_obj_id.number) + num_one*number})
         else:
             warehouse_obj = self.env['warehouse.line']
             end_code = batch_code[:-2] + ('000' + bs_code[-2:] + number - 1)[-2:],

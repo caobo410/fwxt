@@ -24,7 +24,7 @@
             <field name="model">warehouse.doc</field>
             <field name="priority">1</field>
             <field name="arch" type="xml">
-                <tree string="view">
+                <tree string="view" default_order="date_confirm desc">
                     <field name="code"/>
                     <field name="name"/>
                     <field name="type"/>
