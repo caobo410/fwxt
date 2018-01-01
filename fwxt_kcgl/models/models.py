@@ -334,7 +334,7 @@ class manual_storage(models.Model):
                 # 插入箱号
                 bs_code = '000'+str(int(num_one))
                 start_code = start_code
-                end_code = batch_code[:15] + bs_code[-3:] + str('00'+str(int(num_two)))[-2:]
+                end_code = end_code[:18] + str('00'+str(int(num_two)))[-2:]
                 values = {
                     'code': str(fw_code),
                     'name': str(tp_code),
@@ -383,10 +383,10 @@ class manual_storage(models.Model):
             warehouse_two_obj_id = warehouse_two_obj.create(values)
             # 插入箱号
             start_code = start_code
-            end_code = batch_code[:18] + str('00'+str(int(num_one)))[-2:]
+            end_code = end_code[:18] + str('00'+str(int(num_one)))[-2:]
             values = {
                 'code': str(fw_code),
-                'name': str(xh_code),
+                'name': str(start_code),
                 'type': type,
                 'start_code': start_code,
                 'end_code': end_code,
@@ -399,7 +399,7 @@ class manual_storage(models.Model):
             rkd_obj_id.update({'number': int(rkd_obj_id.number) + num_one*number})
         else:
             warehouse_obj = self.env['warehouse.line']
-            end_code = batch_code[:-2] + ('000' + bs_code[-2:] + number - 1)[-2:],
+            end_code = batch_code[:-2] + ('000' + str(int(batch_code[-2:]) + number - 1))[-2:],
             batch_obj = warehouse_obj.search(
                 [('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', type)])
             batch_end_obj = warehouse_obj.search(
