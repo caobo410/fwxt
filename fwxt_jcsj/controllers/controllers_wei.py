@@ -113,9 +113,9 @@ class OrderController(http.Controller):
         batch_objs = self.current_env['batch.list'].search([('name', '=', code)])
         agent_list = {}
         agent_list['rk_code'] = rk_obj.line_id.code
-        agent_list['rk_date'] = str(rk_obj.date_confirm)
+        agent_list['rk_date'] = str(rk_obj.line_id.date_confirm)
         agent_list['ck_code'] = ck_obj.line_id.code
-        agent_list['ck_date'] = str(ck_obj.date_confirm)
+        agent_list['ck_date'] = str(ck_obj.line_id.date_confirm)
         agent_list['area'] = ck_obj.line_id.agent_id.area
         agent_list['agent'] = ck_obj.line_id.agent_id.name
         agent_list['agent'] = ck_obj.line_id.agent_id.name
