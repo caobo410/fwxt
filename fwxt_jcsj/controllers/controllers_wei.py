@@ -49,7 +49,8 @@ class OrderController(http.Controller):
         company_lists = []
         for company_obj in company_objs:
             company_list = {}
-            company_list['name'] = company_obj.contacts_people
+            company_list['name'] = company_obj.name
+            company_list['people'] = company_obj.contacts_people
             company_list['phone'] = company_obj.tel
             company_list['wetch'] = company_obj.wetch
             company_list['address'] = company_obj.address
@@ -60,51 +61,67 @@ class OrderController(http.Controller):
 
     #商品信息
     @authorizer.authorize
-    @http.route('/api/jcsj/get_commodity_list/<commodity>', type='http', auth='none', methods=['GET'])
-    def get_commodity_list(self, commodity):
-        commodity_objs = self.current_env['commodity.info'].search([])
-        if not commodity_objs:
-            return rest.render_json({"status": "no", "message": commodity, "data": ''})
-        commodity_lists = []
-        for commodity_obj in commodity_objs:
-            commodity_list = {}
-            commodity_list['name'] = commodity_obj.name
-            commodity_list['image'] = commodity_obj.image
-            line_lists = []
-            if len(commodity_obj.line_id) > 0:
-                for line in commodity_obj.line_id:
-                    line_list = {}
-                    line_list['name'] = line.name + ':' + line.messages
-                    line_lists.append(line_list)
-                commodity_list['list'] = line_lists
-            else:
-                commodity_list['list'] = {}
-            commodity_lists.append(commodity_list)
-        return rest.render_json({"status": "yes", "message": commodity, "data": commodity_lists})
-
-    #查看出入库信息
-    @authorizer.authorize
-    @http.route('/api/jcsj/get_agent_list/<password>', type='http', auth='none', methods=['GET'])
-    def get_agent_list(self, password, code):
-        password_objs = self.current_env['other.info'].search([('password', '=', password)])
+    @http.route('/api/jcsj/get_commodity_list/get_commodity_list/<code>', type='http', auth='none', methods=['GET'])
+    def get_commodity_list(self, code):
         jm_code = jiemi.def_jiemi(code)
         if jm_code == '0000':
             return rest.render_json({"status": "no", "message": code, "data": ''})
-        rk_obj = self.current_env['warehouse.line'].search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
-        ck_obj = self.current_env['warehouse.line'].search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
-        if not password_objs:
-            return rest.render_json({"status": "no", "message": password, "data": 'Password Error!'})
+        if jm_code[15:18] == '000' and jm_code[3:9] != u'012345':
+            warehouse_obj = self.current_env['warehouse.one']
+        elif jm_code[15:18] != '000' and jm_code[-2:] == '00' and jm_code[3:9] != u'012345':
+            warehouse_obj = self.current_env['warehouse.two']
+        else:
+            warehouse_obj = self.current_env['warehouse.line']
+        # jm_code = '14917061200125316100'
+        ck_obj = warehouse_obj.search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
+        if not ck_obj:
+            return rest.render_json({"status": "no", "message": code, "data": ''})
+        commodity_lists = []
+        commodity_list = {}
+        commodity_list['name'] = ck_obj.line_id.commodity_id.name
+        commodity_list['image'] = ck_obj.line_id.commodity_id.image
+        line_lists = []
+        if len(ck_obj.line_id.commodity_id.line_id) > 0:
+            for line in ck_obj.line_id.commodity_id.line_id:
+                line_list = {}
+                line_list['name'] = line.name + ':' + line.messages
+                line_lists.append(line_list)
+            commodity_list['list'] = line_lists
+        else:
+            commodity_list['list'] = {}
+        commodity_lists.append(commodity_list)
+        return rest.render_json({"status": "yes", "message": code, "data": commodity_lists})
+
+    #查看出入库信息
+    @authorizer.authorize
+    @http.route('/api/jcsj/get_agent_list/<code>', type='http', auth='none', methods=['GET'])
+    def get_agent_list(self, code):
+        # password_objs = self.current_env['other.info'].search([('password', '=', password)])
+        jm_code = jiemi.def_jiemi(code)
+        if jm_code == '0000':
+            return rest.render_json({"status": "no", "message": code, "data": ''})
+        if jm_code[15:18] == '000' and jm_code[3:9] != u'012345':
+            warehouse_obj = self.current_env['warehouse.one']
+        elif jm_code[15:18] != '000' and jm_code[-2:] == '00' and jm_code[3:9] != u'012345':
+            warehouse_obj = self.current_env['warehouse.two']
+        else:
+            warehouse_obj = self.current_env['warehouse.line']
+        rk_obj = warehouse_obj.search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
+        ck_obj = warehouse_obj.search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
+        # if not password_objs:
+        #     return rest.render_json({"status": "no", "message": password, "data": 'Password Error!'})
         batch_objs = self.current_env['batch.list'].search([('name', '=', code)])
         agent_list = {}
         agent_list['rk_code'] = rk_obj.line_id.code
-        agent_list['rk_date'] = rk_obj.line_id.date_confirm
+        agent_list['rk_date'] = str(rk_obj.line_id.date_confirm)
         agent_list['ck_code'] = ck_obj.line_id.code
-        agent_list['ck_date'] = ck_obj.line_id.date_confirm
+        agent_list['ck_date'] = str(ck_obj.line_id.date_confirm)
         agent_list['area'] = ck_obj.line_id.agent_id.area
+        agent_list['agent'] = ck_obj.line_id.agent_id.name
         agent_list['agent'] = ck_obj.line_id.agent_id.name
         agent_list['express'] = ck_obj.line_id.express_id.name
         agent_list['express_code'] = ck_obj.line_id.express_code
-        return rest.render_json({"status": "yes", "message": password, "data": agent_list})
+        return rest.render_json({"status": "yes", "message": code, "data": agent_list})
     #企业介绍
     @authorizer.authorize
     @http.route('/api/jcsj/get_company_list/<code>', type='http', auth='none', methods=['GET'])
@@ -146,11 +163,12 @@ class OrderController(http.Controller):
             video_obj = file_obj.video_id
         if not video_obj:
             return rest.render_json({"status": "no", "message": code, "data": u'code的单据没有维护视频信息，请联系管理员'})
-        path = video_obj.store_fname
+        path = video_obj.description
+        return rest.render_json({"status": "yes", "message": path, "data": path})
         # filepath = '/home/xinyi/.local/share/Odoo/filestore/fwxt/' +path
-        filepath = '/usr/lhd/.local/share/Odoo/filestore/fwxt/' +path
-        filename = video_obj.datas_fname
-        return rest.sendfile(filepath, filename)
+        # filepath = '/usr/lhd/.local/share/Odoo/filestore/fwxt/' +path
+        # filename = video_obj.datas_fname
+        # return rest.sendfile(filepath, filename)
 
 # def def_decrypt(code):
 #     code = str(code)

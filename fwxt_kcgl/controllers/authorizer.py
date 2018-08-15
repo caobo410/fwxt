@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import rest
 import functools
 from psycopg2 import OperationalError
@@ -9,7 +10,7 @@ def authorize(f):
     @functools.wraps(f)
     def wrap(controller, **kwargs):
         try:
-            env = rest.check_token('fwxt', 'admin', '1')
+            env = rest.check_token('fwxt', 'admin', 'hqfw18663799361')
             if not env:
                 return rest.unauthorized()
             else:

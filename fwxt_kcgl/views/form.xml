@@ -54,8 +54,14 @@
                         </group>
                     </group>
                     <notebook colspan="4">
-                        <page string="Batch">
+                        <page string="瓶">
                             <field name="line_id"/>
+                        </page>
+                        <page string="箱">
+                            <field name="two_id"/>
+                        </page>
+                        <page string="托">
+                            <field name="one_id"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -93,8 +99,14 @@
                         </group>
                     </group>
                     <notebook colspan="4">
-                        <page string="Batch">
+                        <page string="瓶">
                             <field name="line_id"/>
+                        </page>
+                        <page string="箱">
+                            <field name="two_id"/>
+                        </page>
+                        <page string="托">
+                            <field name="one_id"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -172,9 +184,21 @@
                             <field name="unit_id" />
                         </group>
                     </group>
+                    <h1>出入库信息
+                    </h1>
                     <group>
                         <group>
-                            <field name="state_code" style="width: 30%"/>
+                            <field name="type"/>
+                            <field name="express_id"/>
+                        </group>
+                        <group>
+                            <field name="agent_id" />
+                            <field name="express_code"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="state_code"/>
                             <field name="user_id"/>
                         </group>
                         <group>
@@ -183,7 +207,7 @@
                         </group>
                     </group>
                     <footer>
-                        <button string="Manual Storage" name="manual_storage" type="object" default_focus="1" class="oe_highlight"/>
+                        <button string="Submit" name="manual_storage" type="object" default_focus="1" class="oe_highlight"/>
                         <!--<button string="Manual Storage" class="oe_link" special="cancel"/>-->
                         or
                         <button string="Cancel" class="oe_link" special="cancel"/>

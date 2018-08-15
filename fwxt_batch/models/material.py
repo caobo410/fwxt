@@ -12,8 +12,8 @@
 
 import logging
 from openerp import fields,models,api
-from datetime import datetime
-date_ref = datetime.now().strftime('%Y-%m-%d')
+import time
+
 _logger = logging.getLogger(__name__)
 
 class material_batch(models.Model):
@@ -28,7 +28,7 @@ class material_batch(models.Model):
     materia_id = fields.Many2one('materia.info', string='Materia Info')
     supplier_id = fields.Many2one('supplier.info', string='Supplier Info', help='Supplier')
     # material_batch_id = fields.Many2one('commodity.batch', string='Commodity Batch', help='Supplier')
-    production_date = fields.Date(string='Date', size=64, required=True, help='Date')
+    production_date = fields.Date(string='生产日期', size=64, required=True, help='生产日期')
     number = fields.Float(string='Num')
     unit_id = fields.Many2one('base.unit', string='Unit')
     messages = fields.Char(string='Messages', help='Messages')
@@ -45,8 +45,9 @@ class material_batch(models.Model):
         return result
 
     _defaults = {
-        'production_date': date_ref,
-        'date_confirm': date_ref,
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'material.batch'),
+        'production_date': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 
@@ -55,13 +56,13 @@ class commodity_batch(models.Model):
     _description = 'commodity.batch'
 
     code = fields.Char(string='Code', size=64, required=True, help='Code')
-    name = fields.Char(string='Name', size=64, required=True, help='Name')
+    name = fields.Char(string='酒罐编号', size=64, required=True, help='酒罐编号')
     batch = fields.Char(string='Batch', size=64, required=True, help='Batch')
     commodity_id = fields.Many2one('commodity.info', string='Commodity')
     line_id = fields.One2many('commodity.batch.line', 'line_id', string='join', copy=True)
     branch_id = fields.Many2one('branch.office.info', string='Branch Office', select=True, track_visibility='onchange')
-    production_date = fields.Date(string='Date', size=64, required=True, help='Date')
-    messages = fields.Char(string='Messages', help='Messages')
+    production_date = fields.Date(string='生产日期', size=64, required=True, help='生产日期')
+    messages = fields.Char(string='生产线号', help='生产线号')
     user_id = fields.Many2one('res.users', string='Operator')
     date_confirm = fields.Date(string='Date', size=64, required=True, help='Date')
 
@@ -75,8 +76,9 @@ class commodity_batch(models.Model):
         return result
 
     _defaults = {
-        'production_date': date_ref,
-        'date_confirm': date_ref,
+        'code': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'commodity.batch'),
+        'production_date': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 class commodity_batch_line(models.Model):
@@ -96,7 +98,7 @@ class commodity_batch_line(models.Model):
         self.name = self.material_batch_id.name
 
     _defaults = {
-        'date_confirm': date_ref,
+        'date_confirm': lambda self, cr, uid, context={}: context.get('date', time.strftime("%Y-%m-%d")),
         'user_id': lambda cr, uid, id, c={}: id,
     }
 

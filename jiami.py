@@ -8,7 +8,7 @@ code[2] = ['9', '7', '2', '0', '5', '8', '1', '3', '4', '6']
 code[3] = ['7', '3', '9', '1', '0', '6', '5', '2', '4', '8']
 code[4] = ['6', '7', '0', '9', '3', '2', '1', '4', '8', '5']
 #str_num :最大位数的自负成如：00001， int_time 当前时间 转换成 int
-def def_jiami(str_num, int_time):
+def def_jiami(str_num):
     num = str_num
     a = int_time
     bit = len(str(num))
@@ -43,7 +43,7 @@ def def_jiami(str_num, int_time):
             print_out = print_out + code[i][flag_int]
     return print_out
 #
-# a = def_jiami('000001', 1493563337)
+# a = def_jiami('14935633300100000101')
 # print a
 
 # 8299962169999975687397556

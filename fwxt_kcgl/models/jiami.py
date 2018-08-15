@@ -13,6 +13,7 @@ def def_jiami(str_num, int_time):
     a = int_time
     bit = len(str(num))
     oct_str = str(oct(a))
+    oct_str = oct_str.replace('L', '')
     # oct_str = oct_str[:len(oct_str)]
     if len(str_num) == 6 :
         len_num = 21 - bit

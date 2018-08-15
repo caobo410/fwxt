@@ -104,11 +104,13 @@
                         <group>
                             <group>
                                 <field name="name" />
-                                <field name="number" />
+                                <field name="one_unit" />
+                                <field name="two_unit" />
                                 <field name="convert" />
-                                <field name="message" />
                             </group>
                             <group>
+                                <field name="number" />
+                                <field name="message" />
                                 <field name="user_id" />
                                 <field name="date_confirm" />
                             </group>

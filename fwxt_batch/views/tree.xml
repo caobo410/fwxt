@@ -29,9 +29,9 @@
             <field name="arch" type="xml">
                 <tree string="view">
                     <field name="code"/>
-                    <field name="name"/>
-                    <field name="batch"/>
                     <field name="commodity_id"/>
+                    <field name="batch"/>
+                    <field name="name"/>
                     <field name="line_id"/>
                     <field name="production_date"/>
                     <field name="user_id"/>
