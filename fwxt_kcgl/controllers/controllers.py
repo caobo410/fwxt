@@ -171,7 +171,7 @@ class OrderController(http.Controller):
     # @authorizer.authorize
     @http.route('/api/kcgl/del_kcrk/<code>', type='http', auth='none', methods=['GET'])
     def del_kcrk(self, code):
-        warehouse_obj = http.request.env['warehouse.line']sudo().search([('code', '=', code)])
+        warehouse_obj = http.request.env['warehouse.line'].sudo().search([('code', '=', code)])
         if not warehouse_obj:
             messages = u'该条码没有入库，不用删除，请直接入库！'
             return rest.render_json({"status": "no", "message": code, "data": messages})
@@ -364,7 +364,7 @@ class OrderController(http.Controller):
             except:
                 messages = u'该产品不是本公司产品请联系公司!'
                 return rest.render_json({'status': 'no', "message": ewm_code, "data": messages})
-            other_objs = http.request.env['other.info']sudo().search([])
+            other_objs = http.request.env['other.info'].sudo().search([])
             if other_objs:
                 for other_obj in other_objs:
                     messages_one = other_obj.Search
