@@ -16,12 +16,13 @@ date_ref = datetime.datetime.now().strftime('%Y-%m-%d')
 
 class OrderController(http.Controller):
     #扫码入库
-    @authorizer.authorize
+    #/api/kcgl/get_kcrk/unit_id?hgoods_id=99&batch_id=10&code_lists=00
+    # @authorizer.authorize
     @http.route('/api/kcgl/get_kcrk/<unit_id>', type='http', auth='none', methods=['GET'])
     def get_kcrk(self, unit_id, goods_id, batch_id, code_lists):
         #print code_lists
         rk_code = ''
-        unit_obj = self.current_env['convert.info']
+        unit_obj = http.request.env['convert.info'].sudo()
         unit_one_obj = unit_obj.search([('one_unit', '=', int(unit_id))])
         if not unit_one_obj:
             messages = u'请先维护计量单位换算！'
@@ -31,7 +32,7 @@ class OrderController(http.Controller):
         if unit_two_obj:
             num_two = unit_two_obj.convert
         code = 'RKD' + date_ref[:4] + date_ref[5:7] + str(random.randint(100, 999))
-        rkd_obj = self.current_env['warehouse.doc']
+        rkd_obj = http.request.env['warehouse.doc'].sudo()
         values = {
             'code': code,
             'name': code,
@@ -41,7 +42,7 @@ class OrderController(http.Controller):
             'unit_id': int(unit_id),
         }
         rkd_obj_id = rkd_obj.create(values)
-        batch_lists = eval(code_lists)
+        batch_lists = eval(code_lists) # [1,2,3]
         for batch_list in batch_lists:
             num = int(batch_list['number'])
             try:
@@ -85,7 +86,7 @@ class OrderController(http.Controller):
                     'number': num_one,
                 }
                 #插入箱表
-                warehouse_two_obj = self.current_env['warehouse.two']
+                warehouse_two_obj = http.request.env['warehouse.two'].sudo()
                 batch_obj = warehouse_two_obj.search([('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'in')])
                 if not batch_obj:
                     warehouse_two_obj_id = warehouse_two_obj.create(values)
@@ -107,7 +108,7 @@ class OrderController(http.Controller):
                 batch_list_obj.create(values)
                 rkd_obj_id.update({'number': int(rkd_obj_id.number) + num_one*num_two})
             elif batch_code[15:18] != '000' and batch_code[-2:] == '00':
-                warehouse_obj = self.current_env['warehouse.two']
+                warehouse_obj = http.request.env['warehouse.two'].sudo()
                 batch_obj = warehouse_obj.search([('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'in')])
                 if batch_obj:
                     rk_code = rk_code + ',' + ewm_code
@@ -126,7 +127,7 @@ class OrderController(http.Controller):
                     'number': num,
                 }
                 #插入箱表
-                warehouse_two_obj = self.current_env['warehouse.two']
+                warehouse_two_obj = http.request.env['warehouse.two'].sudo()
                 warehouse_two_obj_id = warehouse_two_obj.create(values)
                 start_code = start_code
                 end_code = batch_code[:18] + str('00'+str(int(num_one)))[-2:]
@@ -140,11 +141,11 @@ class OrderController(http.Controller):
                     'warehouse_two_id': warehouse_two_obj_id.id,
                     'number': str(num_one*num),
                     }
-                batch_list_obj = self.current_env['warehouse.line']
+                batch_list_obj = http.request.env['warehouse.line'].sudo()
                 batch_list_obj.create(values)
                 rkd_obj_id.update({'number': int(rkd_obj_id.number) + num_one*num})
             else:
-                warehouse_obj = self.current_env['warehouse.line']
+                warehouse_obj = http.request.env['warehouse.line'].sudo()
                 batch_obj = warehouse_obj.search([('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'in')])
                 if not batch_obj:
                     j = int(batch_code[-2:]) + int(num) - 1
@@ -167,25 +168,25 @@ class OrderController(http.Controller):
             messages = u'入库完成!'
         return rest.render_json({"status": "yes", "message": messages, "data": code_lists})
     #删除扫码入库
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/kcgl/del_kcrk/<code>', type='http', auth='none', methods=['GET'])
     def del_kcrk(self, code):
-        warehouse_obj = self.current_env['warehouse.line'].search([('code', '=', code)])
+        warehouse_obj = http.request.env['warehouse.line']sudo().search([('code', '=', code)])
         if not warehouse_obj:
             messages = u'该条码没有入库，不用删除，请直接入库！'
             return rest.render_json({"status": "no", "message": code, "data": messages})
         strsql = "delete from warehouse_line where code = '%s'; delete from warehouse_one where code = '%s'; delete from warehouse_two where code = '%s'" % (code, code, code)
         print strsql
-        self.current_env.cr.execute(strsql)
+        http.request.env.sudo().cr.execute(strsql)
         messages = u'已经删除！'
         return rest.render_json({"status": "yes", "message": code, "data": messages})
         # self.current_env.cr.execute('delete from ckgl_dddy;delete from dddy_line')
     #扫码出库
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/kcgl/get_kcck/<unit_id>', type='http', auth='none', methods=['GET'])
     def get_kcck(self, unit_id, goods_id, batch_id, agent_id, express_id, express_code,code_lists):
         code = 'CKD' + date_ref[:4] + date_ref[5:7] + str(random.randint(100, 999))
-        rkd_obj = self.current_env['warehouse.doc']
+        rkd_obj = http.request.env['warehouse.doc'].sudo()
         rk_code = ''
         values = {
             'code': code,
@@ -211,13 +212,13 @@ class OrderController(http.Controller):
             #判断code的9-12位置是否000，如果为000 ，需要存储托盘
             # print type(batch_code)
             if batch_code[15:18] == '000':
-                warehouse_one_obj = self.current_env['warehouse.one']
+                warehouse_one_obj = http.request.env['warehouse.one'].sudo()
                 batch_obj = warehouse_one_obj.search([('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'out')])
                 if batch_obj:
                     rk_code = rk_code + ',' + ewm_code
                     continue
                 # warehouse_one_obj = self.current_env['warehouse.one']
-                unit_obj = self.current_env['convert.info']
+                unit_obj = http.request.env['convert.info'].sudo()
                 unit_one_obj = unit_obj.search([('one_unit', '=', int(unit_id))])
                 if not unit_one_obj:
                     messages = u'请先维护计量单位换算！'
@@ -251,7 +252,7 @@ class OrderController(http.Controller):
                     'number': num_one,
                 }
                 #插入箱表
-                warehouse_two_obj = self.current_env['warehouse.two']
+                warehouse_two_obj = http.request.env['warehouse.two'].sudo()
                 batch_obj = warehouse_two_obj.search([('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'out')])
                 if not batch_obj:
                     # warehouse_two_obj.create(values)
@@ -270,16 +271,16 @@ class OrderController(http.Controller):
                     'warehouse_two_id': warehouse_two_obj_id.id,
                     'number': str(num_one*num_two),
                     }
-                batch_list_obj = self.current_env['warehouse.line']
+                batch_list_obj = http.request.env['warehouse.line'].sudo()
                 batch_list_obj.create(values)
                 rkd_obj_id.update({'number': int(rkd_obj_id.number) + num_one*num_two})
             elif batch_code[15:18] != '000' and batch_code[-2:] == '00':
-                warehouse_obj = self.current_env['warehouse.two']
+                warehouse_obj = http.request.env['warehouse.two'].sudo()
                 batch_obj = warehouse_obj.search([('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'out')])
                 if batch_obj:
                     rk_code = rk_code + ',' + ewm_code
                     continue
-                unit_obj = self.current_env['convert.info']
+                unit_obj = http.request.env['convert.info'].sudo()
                 unit_one_obj = unit_obj.search([('one_unit', '=', int(unit_id))])
                 if not unit_one_obj:
                     messages = u'请先维护计量单位换算！'
@@ -299,7 +300,7 @@ class OrderController(http.Controller):
                     'number': num,
                 }
                 #插入箱表
-                warehouse_two_obj = self.current_env['warehouse.two']
+                warehouse_two_obj = http.request.env['warehouse.two'].sudo()
                 warehouse_two_obj_id = warehouse_two_obj.create(values)
                 # #插入箱号
                 start_code = start_code
@@ -314,11 +315,11 @@ class OrderController(http.Controller):
                     'warehouse_two_id': warehouse_two_obj_id.id,
                     'number': str(num_one*num),
                     }
-                batch_list_obj = self.current_env['warehouse.line']
+                batch_list_obj = http.request.env['warehouse.line'].sudo()
                 batch_list_obj.create(values)
                 rkd_obj_id.update({'number': int(rkd_obj_id.number) + num_one*num})
             else:
-                warehouse_obj = self.current_env['warehouse.line']
+                warehouse_obj = http.request.env['warehouse.line'].sudo()
                 batch_obj = warehouse_obj.search([('start_code', '<=', batch_code), ('end_code', '>=', batch_code), ('type', '=', 'out')])
                 if not batch_obj:
                     j = int(batch_code[-2:]) + int(num) - 1
@@ -342,7 +343,7 @@ class OrderController(http.Controller):
         return rest.render_json({"status": "yes", "message": messages, "data": code_lists})
 
     #查询
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/kcgl/get_search/<code>', type='http', auth='none', methods=['GET'])
     def get_search(self, code):
         messages_one = ''
@@ -363,7 +364,7 @@ class OrderController(http.Controller):
             except:
                 messages = u'该产品不是本公司产品请联系公司!'
                 return rest.render_json({'status': 'no', "message": ewm_code, "data": messages})
-            other_objs = self.current_env['other.info'].search([])
+            other_objs = http.request.env['other.info']sudo().search([])
             if other_objs:
                 for other_obj in other_objs:
                     messages_one = other_obj.Search
@@ -372,13 +373,13 @@ class OrderController(http.Controller):
                 messages = u'请在其他信息中维护查询内容及二次查询内容！'
                 return rest.render_json({"status": "no", "message": ewm_code, "data": messages})
         if code[15:18] == '000' and code[3:9] != u'012345':
-            warehouse_line_obj = self.current_env['warehouse.one'].search([('type', '=', 'in'), ('start_code', '<=', code), ('end_code', '>=', code)])
+            warehouse_line_obj = http.request.env['warehouse.one'].sudo().search([('type', '=', 'in'), ('start_code', '<=', code), ('end_code', '>=', code)])
         elif code[15:18] != '000' and code[-2:] == '00' and code[3:9] != u'012345':
-            warehouse_line_obj = self.current_env['warehouse.two'].search([('type', '=', 'in'), ('start_code', '<=', code), ('end_code', '>=', code)])
+            warehouse_line_obj = http.request.env['warehouse.two'].sudo().search([('type', '=', 'in'), ('start_code', '<=', code), ('end_code', '>=', code)])
         else:
-            warehouse_line_obj = self.current_env['warehouse.line'].search([('type', '=', 'in'), ('start_code', '<=', code), ('end_code', '>=', code)])
+            warehouse_line_obj = http.request.env['warehouse.line'].sudo().search([('type', '=', 'in'), ('start_code', '<=', code), ('end_code', '>=', code)])
         if warehouse_line_obj:
-            batch_list_obj = self.current_env['batch.list'].search([('code', '=', code)])
+            batch_list_obj = http.request.env['batch.list'].sudo().search([('code', '=', code)])
             now = datetime.datetime.now()
             if not batch_list_obj:
                 # date_hours = now + datetime.timedelta(hours=8)

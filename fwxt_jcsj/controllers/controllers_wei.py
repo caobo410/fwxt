@@ -17,17 +17,17 @@ date_ref = datetime.now().strftime('%Y-%m-%d')
 
 class OrderController(http.Controller):
     # 获取图片
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/jcsj/get_picture/<type>', type='http', auth='none', methods=['GET'])
     def get_picture(self, type):
         if type == 'head':
-            picture_objs = self.current_env['picture.management'].search([('type', '=', 'head')])
+            picture_objs = http.request.env['picture.management'].sudo().search([('type', '=', 'head')])
         elif type == 'boby':
-            picture_objs = self.current_env['picture.management'].search([('type', '=', 'boby')])
+            picture_objs = http.request.env['picture.management'].sudo().search([('type', '=', 'boby')])
         elif type == 'other':
-            picture_objs = self.current_env['picture.management'].search([('type', '=', 'other')])
+            picture_objs = http.request.env['picture.management'.sudo()].search([('type', '=', 'other')])
         else:
-            picture_objs = self.current_env['picture.management'].search([('type', '=', 'head')])
+            picture_objs = http.request.env['picture.management'].sudo().search([('type', '=', 'head')])
         if not picture_objs:
             return rest.render_json({"status": "no", "message": type, "data": ''})
         picture_lists = []
@@ -40,10 +40,10 @@ class OrderController(http.Controller):
             picture_lists.append(picture_list)
         return rest.render_json({"status": "yes", "message": type, "data": picture_lists})
     # 联系我们
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/jcsj/get_company/<company>', type='http', auth='none', methods=['GET'])
     def get_company(self, company):
-        company_objs = self.current_env['company.info'].search([])
+        company_objs = http.request.env['company.info'].sudo().search([])
         if not company_objs:
             return rest.render_json({"status": "no", "message": company, "data": ''})
         company_lists = []
@@ -60,18 +60,18 @@ class OrderController(http.Controller):
         return rest.render_json({"status": "yes", "message": company, "data": company_lists})
 
     #商品信息
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/jcsj/get_commodity_list/get_commodity_list/<code>', type='http', auth='none', methods=['GET'])
     def get_commodity_list(self, code):
         jm_code = jiemi.def_jiemi(code)
         if jm_code == '0000':
             return rest.render_json({"status": "no", "message": code, "data": ''})
         if jm_code[15:18] == '000' and jm_code[3:9] != u'012345':
-            warehouse_obj = self.current_env['warehouse.one']
+            warehouse_obj = http.request.env['warehouse.one'].sudo()
         elif jm_code[15:18] != '000' and jm_code[-2:] == '00' and jm_code[3:9] != u'012345':
-            warehouse_obj = self.current_env['warehouse.two']
+            warehouse_obj = http.request.env['warehouse.two'].sudo()
         else:
-            warehouse_obj = self.current_env['warehouse.line']
+            warehouse_obj = http.request.env['warehouse.line'].sudo()
         # jm_code = '14917061200125316100'
         ck_obj = warehouse_obj.search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not ck_obj:
@@ -93,7 +93,7 @@ class OrderController(http.Controller):
         return rest.render_json({"status": "yes", "message": code, "data": commodity_lists})
 
     #查看出入库信息
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/jcsj/get_agent_list/<code>', type='http', auth='none', methods=['GET'])
     def get_agent_list(self, code):
         # password_objs = self.current_env['other.info'].search([('password', '=', password)])
@@ -103,14 +103,14 @@ class OrderController(http.Controller):
         if jm_code[15:18] == '000' and jm_code[3:9] != u'012345':
             warehouse_obj = self.current_env['warehouse.one']
         elif jm_code[15:18] != '000' and jm_code[-2:] == '00' and jm_code[3:9] != u'012345':
-            warehouse_obj = self.current_env['warehouse.two']
+            warehouse_obj = http.request.env['warehouse.two'].sudo()
         else:
-            warehouse_obj = self.current_env['warehouse.line']
+            warehouse_obj = http.request.env['warehouse.line'].sudo()
         rk_obj = warehouse_obj.search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         ck_obj = warehouse_obj.search([('type', '=', 'out'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         # if not password_objs:
         #     return rest.render_json({"status": "no", "message": password, "data": 'Password Error!'})
-        batch_objs = self.current_env['batch.list'].search([('name', '=', code)])
+        batch_objs = http.request.env['batch.list'].sudo().search([('name', '=', code)])
         agent_list = {}
         agent_list['rk_code'] = rk_obj.line_id.code
         agent_list['rk_date'] = str(rk_obj.line_id.date_confirm)
@@ -123,41 +123,41 @@ class OrderController(http.Controller):
         agent_list['express_code'] = ck_obj.line_id.express_code
         return rest.render_json({"status": "yes", "message": code, "data": agent_list})
     #企业介绍
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/jcsj/get_company_list/<code>', type='http', auth='none', methods=['GET'])
     def get_company_list(self, code):
-        company_objs = self.current_env['company.info'].search([])
+        company_objs = http.request.env['company.info'].sudo().search([])
         if not company_objs:
             return rest.render_json({"status": "no", "message": code, "data": 'Password Error!'})
         for company_obj in company_objs:
             company_list = company_obj.company_info
         return rest.render_json({"status": "yes", "message": code, "data": company_list})
     #获取公众号
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/jcsj/get_wechat/<wechat>', type='http', auth='none', methods=['GET'])
     def get_wechat(self, wechat):
-        wechat_objs = self.current_env['other.info'].search([])
+        wechat_objs = http.request.env['other.info'].sudo().search([])
         if not wechat_objs:
             return rest.render_json({"status": "no", "message": wechat, "data": u'请维护其他信息中心的微信公众号!'})
         for wechat_obj in wechat_objs:
             wechar_account = wechat_obj.wechat_account
         return rest.render_json({"status": "yes", "message": wechat, "data": wechar_account})
     #视频
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/jcsj/get_mp4/<type>', type='http', auth='none', methods=['GET'])
     def get_mp4(self, type, code):
         if type == 'ycl':
-            file_obj = self.current_env['material.batch'].search([('id', '=', int(code))])
+            file_obj = http.request.env['material.batch'].sudo().search([('id', '=', int(code))])
             if not file_obj:
                 return rest.render_json({"status": "no", "message": code, "data": u'code参数有问题，请联系管理员'})
             video_obj = file_obj.file_id
         elif type == 'sc':
-            file_obj = self.current_env['produce.line'].search([('id', '=', int(code))])
+            file_obj = http.request.env['produce.line'].sudo().search([('id', '=', int(code))])
             if not file_obj:
                 return rest.render_json({"status": "no", "message": code, "data": u'code参数有问题，请联系管理员'})
             video_obj = file_obj.video_id
         elif type == 'jg':
-            file_obj = self.current_env['making.line'].search([('id', '=', int(code))])
+            file_obj = http.request.env['making.line'].sudo().search([('id', '=', int(code))])
             if not file_obj:
                 return rest.render_json({"status": "no", "message": code, "data": u'code参数有问题，请联系管理员'})
             video_obj = file_obj.video_id

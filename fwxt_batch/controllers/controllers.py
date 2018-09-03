@@ -17,10 +17,10 @@ date_ref = datetime.now().strftime('%Y-%m-%d')
 class OrderController(http.Controller):
     # 获取批次
     #http://localhost:8069/api/jcsj/get_batch/batch
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/batch/get_commodity_batch/<batch>', type='http', auth='none', methods=['GET'])
     def get_commodity_batch(self, batch):
-        batch_objs = self.current_env['commodity.batch'].search([])
+        batch_objs = http.request.env['commodity.batch'].sudo().search([])
         if not batch_objs:
             return rest.render_json({"status": "no", "message": "", "data": ''})
         batch_lists = []
@@ -33,10 +33,10 @@ class OrderController(http.Controller):
         return rest.render_json({"status": "yes", "message": "", "data": batch_lists})
     # 获取批次
     #http://localhost:8069/api/jcsj/get_batch/batch
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/batch/get_commodity_batch_search/<batch>', type='http', auth='none', methods=['GET'])
     def get_commodity_batch_search(self, batch):
-        batch_objs = self.current_env['commodity.batch'].search([('batch', 'like', batch)])
+        batch_objs = http.request.env['commodity.batch'].sudo().search([('batch', 'like', batch)])
         if not batch_objs:
             return rest.render_json({"status": "no", "message": "", "data": ''})
         batch_lists = []
@@ -48,16 +48,16 @@ class OrderController(http.Controller):
             batch_lists.append(batch_list)
         return rest.render_json({"status": "yes", "message": "", "data": batch_lists})
     #商品批次信息
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/kcgl/get_batch_list/<code>', type='http', auth='none', methods=['GET'])
     def get_batch_list(self, code):
         jm_code = jiemi.def_jiemi(code)
         if jm_code[15:18] == '000' and jm_code[3:9] != u'012345':
-            warehouse_obj = self.current_env['warehouse.one']
+            warehouse_obj = http.request.env['warehouse.one'].sudo()
         elif jm_code[15:18] != '000' and jm_code[-2:] == '00' and jm_code[3:9] != u'012345':
-            warehouse_obj = self.current_env['warehouse.two']
+            warehouse_obj = http.request.env['warehouse.two'].sudo()
         else:
-            warehouse_obj = self.current_env['warehouse.line']
+            warehouse_obj = http.request.env['warehouse.line'].sudo()
         commodity_obj = warehouse_obj.search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
@@ -71,18 +71,18 @@ class OrderController(http.Controller):
         commodity_list['commodity'] = commodity_obj.line_id.commodity_id.name
         return rest.render_json({"status": "yes", "message": code, "data": commodity_list})
     #原材料批次信息123123
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/kcgl/get_material_batch/<code>', type='http', auth='none', methods=['GET'])
     def get_material_batch(self, code):
         jm_code = jiemi.def_jiemi(code)
         if jm_code == '0000':
             return rest.render_json({"status": "no", "message": code, "data": ''})
         if jm_code[15:18] == '000' and jm_code[3:9] != u'012345':
-            warehouse_obj = self.current_env['warehouse.one']
+            warehouse_obj = http.request.env['warehouse.one'].sudo()
         elif jm_code[15:18] != '000' and jm_code[-2:] == '00' and jm_code[3:9] != u'012345':
-            warehouse_obj = self.current_env['warehouse.two']
+            warehouse_obj = http.request.env['warehouse.two'].sudo()
         else:
-            warehouse_obj = self.current_env['warehouse.line']
+            warehouse_obj = http.request.env['warehouse.line'].sudo()
         commodity_obj = warehouse_obj.search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
@@ -102,23 +102,23 @@ class OrderController(http.Controller):
         return rest.render_json({"status": "yes", "message": code, "data": batch_lists})
 
     #加工过程
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/kcgl/get_commodity_making/<code>', type='http', auth='none', methods=['GET'])
     def get_commodity_making(self, code):
         jm_code = jiemi.def_jiemi(code)
         if jm_code == '0000':
             return rest.render_json({"status": "no", "message": code, "data": ''})
         if jm_code[15:18] == '000' and jm_code[3:9] != u'012345':
-            warehouse_obj = self.current_env['warehouse.one']
+            warehouse_obj = http.request.env['warehouse.one'].sudo()
         elif jm_code[15:18] != '000' and jm_code[-2:] == '00' and jm_code[3:9] != u'012345':
-            warehouse_obj = self.current_env['warehouse.two']
+            warehouse_obj = http.request.env['warehouse.two'].sudo()
         else:
-            warehouse_obj = self.current_env['warehouse.line']
+            warehouse_obj = http.request.env['warehouse.line'].sudo()
         commodity_obj = warehouse_obj.search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_id = commodity_obj.line_id.commodity_id.id
-        making_obj = self.current_env['commodity.making.line'].search([('name', '=', commodity_id)])
+        making_obj = http.request.env['commodity.making.line'].sudo().search([('name', '=', commodity_id)])
         making_list_objs = making_obj.commodity_id.line_id
         if not making_list_objs:
             return rest.render_json({"status": "no", "message": code, "data": ''})
@@ -135,23 +135,23 @@ class OrderController(http.Controller):
         return rest.render_json({"status": "yes", "message": code, "data": making_lists})
 
     #生产过程
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/kcgl/get_commodity_produce/<code>', type='http', auth='none', methods=['GET'])
     def get_commodity_produce(self, code):
         jm_code = jiemi.def_jiemi(code)
         if jm_code == '0000':
             return rest.render_json({"status": "no", "message": code, "data": ''})
         if jm_code[15:18] == '000' and jm_code[3:9] != u'012345':
-            warehouse_obj = self.current_env['warehouse.one']
+            warehouse_obj = http.request.env['warehouse.one'].sudo()
         elif jm_code[15:18] != '000' and jm_code[-2:] == '00' and jm_code[3:9] != u'012345':
-            warehouse_obj = self.current_env['warehouse.two']
+            warehouse_obj = http.request.env['warehouse.two'].sudo()
         else:
-            warehouse_obj = self.current_env['warehouse.line']
+            warehouse_obj = http.request.env['warehouse.line'].sudo()
         commodity_obj = warehouse_obj.search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_id = commodity_obj.line_id.commodity_id.id
-        produce_obj = self.current_env['commodity.produce.line'].search([('name', '=', commodity_id)])
+        produce_obj = http.request.env['commodity.produce.line'].sudo().search([('name', '=', commodity_id)])
         produce_list_objs = produce_obj.commodity_id.line_id
         if not produce_list_objs:
             return rest.render_json({"status": "no", "message": code, "data": ''})
@@ -168,23 +168,23 @@ class OrderController(http.Controller):
         return rest.render_json({"status": "yes", "message": code, "data": produce_lists})
 
     #质检公司
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/kcgl/get_commodity_check/<code>', type='http', auth='none', methods=['GET'])
     def get_commodity_check(self, code):
         jm_code = jiemi.def_jiemi(code)
         if jm_code == '0000':
             return rest.render_json({"status": "no", "message": code, "data": ''})
         if jm_code[15:18] == '000' and jm_code[3:9] != u'012345':
-            warehouse_obj = self.current_env['warehouse.one']
+            warehouse_obj = http.request.env['warehouse.one'].sudo()
         elif jm_code[15:18] != '000' and jm_code[-2:] == '00' and jm_code[3:9] != u'012345':
-            warehouse_obj = self.current_env['warehouse.two']
+            warehouse_obj = http.request.env['warehouse.two'].sudo()
         else:
-            warehouse_obj = self.current_env['warehouse.line']
+            warehouse_obj = http.request.env['warehouse.line'].sudo()
         commodity_obj = warehouse_obj.search([('type', '=', 'in'), ('start_code', '<=', jm_code), ('end_code', '>=', jm_code)])
         if not commodity_obj:
             return rest.render_json({"status": "no", "message": code, "data": ''})
         commodity_id = commodity_obj.line_id.commodity_id.id
-        check_obj = self.current_env['commodity.check.line'].search([('name', '=', commodity_id)])
+        check_obj = http.request.env['commodity.check.line'].sudo().search([('name', '=', commodity_id)])
         check_list_objs = check_obj.commodity_id.line_id
         if not check_list_objs:
             return rest.render_json({"status": "no", "message": code, "data": ''})
