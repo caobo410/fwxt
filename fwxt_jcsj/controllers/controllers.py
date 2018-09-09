@@ -26,10 +26,10 @@ class OrderController(http.Controller):
         return rest.render_json({"status": "yes", "message": "", "data": 'Welcome'})
     # 获取单位
     #http://localhost:8069/api/jcsj/get_unit/unit
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/jcsj/get_unit/<code>', type='http', auth='none', methods=['GET'])
     def get_unit(self, code):
-        unit_objs = self.current_env['base.unit'].search([])
+        unit_objs = http.request.env['base.unit'].sudo().search([])
         if not unit_objs:
             return rest.render_json({"status": "no", "message": "", "data": ''})
         unit_lists=[]
@@ -42,10 +42,10 @@ class OrderController(http.Controller):
         return rest.render_json({"status": "yes", "message": "", "data": unit_lists})
     # 获取单位
     #http://localhost:8069/api/jcsj/get_unit_search/unit
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/jcsj/get_unit_search/<code>', type='http', auth='none', methods=['GET'])
     def get_unit_search(self, code):
-        unit_objs = self.current_env['base.unit'].search([('name', 'like', code)])
+        unit_objs = http.request.env['base.unit'].sudo().search([('name', 'like', code)])
         if not unit_objs:
             return rest.render_json({"status": "no", "message": "", "data": ''})
         unit_lists=[]
@@ -58,10 +58,10 @@ class OrderController(http.Controller):
         return rest.render_json({"status": "yes", "message": "", "data": unit_lists})
     # 获取商品
     #http://localhost:8069/api/jcsj/get_unit/unit
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/jcsj/get_commodity/<commodity>', type='http', auth='none', methods=['GET'])
     def get_commodity(self, commodity):
-        commodity_objs = self.current_env['commodity.info'].search([])
+        commodity_objs = http.request.env['commodity.info'].sudo().search([])
         if not commodity_objs:
             return rest.render_json({"status": "no", "message": "", "data": ''})
         commodity_lists=[]
@@ -74,10 +74,10 @@ class OrderController(http.Controller):
         return rest.render_json({"status": "yes", "message": "", "data": commodity_lists})
     # 获取商品
     #http://localhost:8069/api/jcsj/get_unit/unit
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/jcsj/get_commodity_search/<commodity>', type='http', auth='none', methods=['GET'])
     def get_commodity_search(self, commodity):
-        commodity_objs = self.current_env['commodity.info'].search([('name', 'like', commodity)])
+        commodity_objs =http.request.env['commodity.info'].sudo().search([('name', 'like', commodity)])
         if not commodity_objs:
             return rest.render_json({"status": "no", "message": "", "data": ''})
         commodity_lists=[]
@@ -90,10 +90,10 @@ class OrderController(http.Controller):
         return rest.render_json({"status": "yes", "message": "", "data": commodity_lists})
     # 获取快递
     #http://localhost:8069/api/jcsj/get_unit/unit
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/jcsj/get_express_info/<express>', type='http', auth='none', methods=['GET'])
     def get_express_info(self, express):
-        express_objs = self.current_env['express.info'].search([])
+        express_objs = http.request.env['express.info'].sudo().search([])
         if not express_objs:
             return rest.render_json({"status": "no", "message": "", "data": ''})
         express_lists = []
@@ -105,10 +105,10 @@ class OrderController(http.Controller):
             express_lists.append(express_list)
         return rest.render_json({"status": "yes", "message": "", "data": express_lists})
     #http://localhost:8069/api/jcsj/get_unit/unit
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/jcsj/get_express_info_search/<express>', type='http', auth='none', methods=['GET'])
     def get_express_info_search(self, express):
-        express_objs = self.current_env['express.info'].search([('name', 'like', express)])
+        express_objs = http.request.env['express.info'].sudo().search([('name', 'like', express)])
         if not express_objs:
             return rest.render_json({"status": "no", "message": "", "data": ''})
         express_lists = []
@@ -121,10 +121,10 @@ class OrderController(http.Controller):
         return rest.render_json({"status": "yes", "message": "", "data": express_lists})
     # 获取经销商
     #http://localhost:8069/api/jcsj/get_agent_info/unit
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/jcsj/get_agent_info/<commodity>', type='http', auth='none', methods=['GET'])
     def get_agent_info(self, commodity):
-        agent_objs = self.current_env['agent.info'].search([])
+        agent_objs = http.request.env['agent.info'].sudo().search([])
         if not agent_objs:
             return rest.render_json({"status": "no", "message": "", "data": ''})
         agent_lists = []
@@ -135,10 +135,10 @@ class OrderController(http.Controller):
             agent_list['name'] = agent_obj.name
             agent_lists.append(agent_list)
         return rest.render_json({"status": "yes", "message": "", "data": agent_lists})
-    @authorizer.authorize
+    # @authorizer.authorize
     @http.route('/api/jcsj/get_agent_info_search/<commodity>', type='http', auth='none', methods=['GET'])
     def get_agent_info_search(self, commodity):
-        agent_objs = self.current_env['agent.info'].search([('name', 'like', commodity)])
+        agent_objs = http.request.env['agent.info'].sudo().search([('name', 'like', commodity)])
         if not agent_objs:
             return rest.render_json({"status": "no", "message": "", "data": ''})
         agent_lists = []
